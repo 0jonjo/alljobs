@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pages/index'
   get 'jobs/index'
   devise_for :headhunters
   devise_for :users
