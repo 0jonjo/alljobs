@@ -1,0 +1,20 @@
+<h2><%= @job.title %></h2>
+
+<ul>    
+  <li><%= @job.description %></li>
+  <li><%= @job.skills %></li>   
+  <li><%= @job.salary %></li>
+  <li><%= @job.company %></li>
+  <li><%= @job.level %></li>
+  <li><%= @job.place %></li>
+  <li><%= @job.date %></li>
+</ul>
+
+<ul>
+  <li><%= link_to "Edit", edit_job_path(@job) %></li>
+  <li><%= link_to "Delete", job_path(@job),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+</ul>
+
+<%= link_to "Return to Home", root_path %>

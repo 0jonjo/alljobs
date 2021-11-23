@@ -24,6 +24,8 @@
 
 <% if headhunter_signed_in? %>
   <ul>
+    <li><%= link_to "New Job Opening", new_job_path %></li> 
+    <br>
     <li><%= link_to "Logout Headhunter", destroy_headhunter_session_path, :method => :delete %></li>
   </ul> 
 <% end %>
