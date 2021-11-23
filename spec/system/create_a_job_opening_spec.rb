@@ -2,16 +2,18 @@ require 'rails_helper'
 
 describe 'Visit the homepage' do
 
-    it 'create The Headhunter and create a job opening' do
+    it 'create The Headhunter, login and create a job opening' do
     
+        Headhunter.create(email: 'herbiehancock@ndtheheadhunters.com',
+            password: 'watermelonman')
+
         visit root_path
-        click_on 'New Headhunter'
+        click_on 'Login Headhunter'
         fill_in 'Email', with: 'herbiehancock@ndtheheadhunters.com'
         fill_in 'Password', with: 'watermelonman'
-        fill_in 'Password confirmation', with: 'watermelonman'
-        click_on 'Sign up'
+        click_on 'Log in'
     
-        # Assert => Validar
+        
         expect(current_path).to eq root_path
         expect(page).to have_content 'All Jobs'
     
@@ -25,7 +27,6 @@ describe 'Visit the homepage' do
       fill_in 'Date', with: '21/11/2022'
       click_on 'Create Job'
     
-      
       expect(page).to have_content 'Job Opening Test 123'
-  end
+    end
 end
