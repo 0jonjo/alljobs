@@ -10,5 +10,5 @@
 Headhunter.create(email: 'herbiehancock@ndtheheadhunters.com',
              password: 'watermelonman')
 #Default User
-User.create(email: 'usuario@disco1995.com,br',
+User.create(email: 'usuario@disco1995.com.br',
              password: 'd2blackalien')
