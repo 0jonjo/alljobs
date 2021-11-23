@@ -14,7 +14,7 @@ before_action :authenticate_headhunter!, except: [:index]
     @job = Job.new(job_params)
     if  @job.save
       :new
-      redirect_to fallback_location: @jobs
+      redirect_to @job
     end
   end
 
