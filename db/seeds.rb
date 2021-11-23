@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Default Admin
-Admin.create(email: 'herbiehancock@ndtheheadhunters.com',
+Headhunter.create(email: 'herbiehancock@ndtheheadhunters.com',
              password: 'watermelonman')
 #Default User
 User.create(email: 'usuario@disco1995.com,br',
