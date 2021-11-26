@@ -1,0 +1,35 @@
+<%= form_with model: profile do |form| %>
+   <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :social_name %><br>
+    <%= form.text_field :social_name %>
+  </div>
+
+  <div>
+    <%= form.label :birthdate %><br>
+    <%= form.text_field :birthdate %>
+  </div>
+  
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </div>
+  
+  <div>
+    <%= form.label :educacional_background %><br>
+    <%= form.text_field :educacional_background %>
+  </div>
+  
+  <div>
+    <%= form.label :experience %><br>
+    <%= form.text_field :experience %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

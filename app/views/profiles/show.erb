@@ -1,0 +1,15 @@
+<h2><%= @profile.name %></h2>
+<h2><%= @profile.social_name %></h2>
+
+<ul>    
+  <li><%= @profile.birthdate %></li>
+  <li><%= @profile.description %></li>   
+  <li><%= @profile.educacional_background %></li>
+  <li><%= @profile.experience %></li>
+</ul>
+
+<ul>
+  <li><%= link_to "Edit", edit_profile_path(@profile) %></li>
+</ul>
+
+<%= link_to "Return to Home", root_path %>
