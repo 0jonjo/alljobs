@@ -11,6 +11,8 @@
 <% if user_signed_in? %>
   <ul>
     <li><%= link_to "Logout User", destroy_user_session_path, :method => :delete %></li>
+    <br>
+    <li><%= link_to "Create Profile", new_profile_path %></li>
   </ul> 
 <% end %>
 
