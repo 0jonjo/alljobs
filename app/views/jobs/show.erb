@@ -1,14 +1,15 @@
 <h2><%= @job.title %></h2>
 
-<ul>    
-  <li><%= @job.description %></li>
-  <li><%= @job.skills %></li>   
-  <li><%= @job.salary %></li>
-  <li><%= @job.company %></li>
-  <li><%= @job.level %></li>
-  <li><%= @job.place %></li>
-  <li><%= @job.date %></li>
-</ul>
+<h4>Deadline to apply: <%= @job.date %></h4>
+
+<p>
+Description: <%= @job.description %><br>
+Skills: <%= @job.skills %><br>
+Salary: <%= @job.salary %><br>
+Company: <%= @job.company %><br>
+Level: <%= @job.level %><br>
+Place: <li><%= @job.place %>
+</p>
 
 <ul>
   <li><%= link_to "Edit", edit_job_path(@job) %></li>
