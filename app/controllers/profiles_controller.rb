@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = current_user
     @profile = @user.profiles.create(profile_params)
     if  @profile.save
       :new
@@ -15,27 +15,26 @@ class ProfilesController < ApplicationController
     end
   end
 
- # def edit
- #   @profile = Profile.find(params[:id])
- # end
+  def edit
+   @profile = Profile.find(params[:id])
+  end
 
- # def update
- #   @profile = Profile.find(params[:id])
+  def update
+   @profile = Profile.find(params[:id])
 
- #   if  @profile.update(profile_params)
- #     redirect_to @profile
- #   else
- #     render :edit
- #   end
- # end
- #
- def show
+    if @profile.update(profile_params)
+      redirect_to @profile
+    else
+      render :edit
+    end
+  end
+ 
+  def show
     @profile = Profile.find(params[:id])
- end
+  end
 
   private
   def profile_params
     params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background, :experience)
   end
-
 end
