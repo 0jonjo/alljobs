@@ -31,3 +31,10 @@
     <li><%= link_to "Logout Headhunter", destroy_headhunter_session_path, :method => :delete %></li>
   </ul> 
 <% end %>
+
+<% if user_signed_in? || headgunter_signed_in %>
+  <h4>All Jobs Opening Today<h4>
+  <% Job.all.each do |job| %>
+    <p><%= link_to job.title, job %> - <%= job.date %></p> 
+  <% end %>
+<% end %>
