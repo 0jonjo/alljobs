@@ -1,9 +1,8 @@
 <h1>All Jobs</h1>
 
-<% unless user_signed_in? %>
+<% unless user_signed_in? && headhunter_signed_in? %>
   <ul>
     <li><%= link_to "Login User", new_user_session_path %></li>
-    <br>
     <li><%= link_to "New User", new_user_registration_path %></li>
   </ul>
 <% end %>
@@ -11,15 +10,13 @@
 <% if user_signed_in? %>
   <ul>
     <li><%= link_to "Logout User", destroy_user_session_path, :method => :delete %></li>
-    <br>
     <li><%= link_to "Create Profile", new_profile_path %></li>
   </ul> 
 <% end %>
 
-<% unless headhunter_signed_in? %>
+<% unless headhunter_signed_in? && user_signed_in? %>
     <ul>
       <li><%= link_to "Login Headhunter", new_headhunter_session_path %></li>
-      <br>
       <li><%= link_to "New Headhunter", new_headhunter_registration_path %></li>
     </ul>
 <% end %>
@@ -27,13 +24,12 @@
 <% if headhunter_signed_in? %>
   <ul>
     <li><%= link_to "New Job Opening", new_job_path %></li> 
-    <br>
     <li><%= link_to "Logout Headhunter", destroy_headhunter_session_path, :method => :delete %></li>
   </ul> 
 <% end %>
 
-<% if user_signed_in? || headgunter_signed_in %>
-  <h4>All Jobs Opening Today<h4>
+<% if user_signed_in? || headhunter_signed_in? %>
+  <h4>Jobs Openings Today<h4>
   <% Job.all.each do |job| %>
     <p><%= link_to job.title, job %> - <%= job.date %></p> 
   <% end %>
