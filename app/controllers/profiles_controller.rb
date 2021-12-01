@@ -2,8 +2,12 @@ class ProfilesController < ApplicationController
   
  before_action :authenticate_user!, except: [:index]
   
-  def new 
-    @profile = Profile.new
+  def new
+    if current_user.profiles.empty?
+      @profile = Profile.new
+    else
+      redirect_to edit_profile_path(current_user.id)
+    end
   end
 
   def create
@@ -16,7 +20,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-   @profile = Profile.find(params[:id])
+   @profile = current_user.profiles.find(params[:id])
   end
 
   def update
