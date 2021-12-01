@@ -3,8 +3,8 @@ class ProfilesController < ApplicationController
  before_action :authenticate_user!, except: [:index]
   
   def new
-    if current_user.profiles.empty?
-      @profile = Profile.new
+    if Profile.where("user_id = ?", current_user.id).blank?
+      @profile = current_user.profiles.build
     else
       redirect_to edit_profile_path(current_user.id)
     end
@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-   @profile = current_user.profiles.find(params[:id])
+    @profile = current_user.profiles.find_by(user_id: current_user.id)
   end
 
   def update

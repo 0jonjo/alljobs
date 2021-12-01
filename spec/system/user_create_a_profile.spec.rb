@@ -14,7 +14,7 @@ describe 'Visit the homepage' do
         expect(current_path).to eq root_path
         expect(page).to have_content 'All Jobs'
 
-        click_on 'Create Profile'
+        click_on 'Create/Edit Profile'
         fill_in 'Name', with: 'José Teste da Silva'
         fill_in 'Social name', with: 'Josefa Teste da Silva'
         fill_in 'Birthdate', with: '21/03/1977'
