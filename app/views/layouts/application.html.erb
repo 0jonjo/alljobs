@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Alljobs</title>
+    <title>All Jobs</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,28 @@
   </head>
 
   <body>
+  <nav>
+    <% if user_signed_in? %>
+      <%= link_to 'Logout User', destroy_user_session_path, method: :delete %> -
+      <%= link_to 'Create/Edit Profile', new_profile_path %>
+      <br>
+      <span>You are <%= current_user.email %></span> 
+    <% else %>
+      <% unless headhunter_signed_in? %>
+        <%= link_to 'Login User', new_user_session_path %> \ <%= link_to "New User", new_user_registration_path %> \
+      <% end %>
+    <% end %>
+    <% if headhunter_signed_in? %>
+      <%= link_to 'Logout Headhunter', destroy_headhunter_session_path, method: :delete %> -
+      <li><%= link_to "New Job Opening", new_job_path %></li>
+      <br>
+      <span>You are <%= current_headhunter.email %></span>
+    <% else %>
+      <% unless user_signed_in? %>
+        <%= link_to 'Login Headhunter', new_user_session_path %> \ <%= link_to "New Headhunter", new_headhunter_registration_path %>
+      <% end %>  
+    <% end %>
+  </nav>
     <%= yield %>
   </body>
 </html>
