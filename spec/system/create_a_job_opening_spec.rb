@@ -1,21 +1,12 @@
 require 'rails_helper'
 
-describe 'Visit the homepage' do
+describe 'Visit the homepage as Headhunter' do
 
-    it 'create The Headhunter, login and create a job opening' do
+    it 'create a job opening' do
     
-        Headhunter.create(email: 'herbiehancock@ndtheheadhunters.com',
-            password: 'watermelonman')
-
-        visit root_path
-        click_on 'Login Headhunter'
-        fill_in 'Email', with: 'herbiehancock@ndtheheadhunters.com'
-        fill_in 'Password', with: 'watermelonman'
-        click_on 'Log in'
-    
-        
-        expect(current_path).to eq root_path
-        expect(page).to have_content 'All Jobs'
+      headhunter = Headhunter.create!(:email => 'usuario@disco1995.com.br', :password => 'd2blackalien')
+      login_as(headhunter, :scope => :headhunter)
+      visit root_path
     
       click_on 'New Job Opening'
       fill_in 'Title', with: 'Job Opening Test 123'

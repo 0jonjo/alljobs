@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'Visit the homepage' do
+describe 'Visit the homepage ' do
 
-    it 'create a User and create a profile after edit profile' do
+    it 'create a User' do
         
         visit root_path
         click_on 'New User'
