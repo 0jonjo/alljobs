@@ -1,0 +1,2 @@
+class ApplicationToJob < ApplicationRecord
+end
