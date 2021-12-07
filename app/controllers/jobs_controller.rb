@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   
-  before_action :authenticate_headhunter!, except: [:index]
+  before_action :authenticate_headhunter!, except: [:index, :show]
   
   def index
     @jobs = Job.all

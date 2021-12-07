@@ -12,6 +12,10 @@ Place: <li><%= @job.place %>
 </p>
 
 <ul>
+  <li><%= link_to "Apply for this Job", batata_path %></li>
+</ul>
+
+<ul>
   <li><%= link_to "Edit", edit_job_path(@job) %></li>
   <li><%= link_to "Delete", job_path(@job),
                   method: :delete,
