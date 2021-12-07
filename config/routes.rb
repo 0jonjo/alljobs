@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'applies/index'
   devise_for :headhunters, :users
 
   resources :pages, :jobs
