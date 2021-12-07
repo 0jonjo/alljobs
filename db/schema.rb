@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_232824) do
+ActiveRecord::Schema.define(version: 2021_12_07_001502) do
+
+  create_table "applies", force: :cascade do |t|
+    t.integer "job_id", null: false
+    t.integer "user_id", null: false
+    t.boolean "application_user"
+    t.boolean "accepted_headhunter"
+    t.text "feedback_headhunter"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_applies_on_job_id"
+    t.index ["user_id"], name: "index_applies_on_user_id"
+  end
 
   create_table "headhunters", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -62,5 +74,7 @@ ActiveRecord::Schema.define(version: 2021_11_25_232824) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "applies", "jobs"
+  add_foreign_key "applies", "users"
   add_foreign_key "profiles", "users"
 end
