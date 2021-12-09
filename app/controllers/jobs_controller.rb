@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   
-  before_action :authenticate_headhunter!, except: [:index, :show]
+  before_action :authenticate_headhunter!, except: [:index, :show, :enroll]
   
   def index
     @jobs = Job.all
@@ -30,6 +30,7 @@ class JobsController < ApplicationController
     else
       render :edit
     end
+    
   end
 
   def destroy
@@ -41,6 +42,13 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+  end
+
+  def enroll
+    @subscription = Apply.new(job_id: params[:job_id], user_id: params[:user_id], application_user: true)
+    @subscription.save
+
+    redirect_to root_path
   end
 
   private

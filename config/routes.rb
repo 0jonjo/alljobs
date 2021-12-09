@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'applies/index'
   devise_for :headhunters, :users
 
-  resources :pages, :jobs
+  resources :pages, :profiles, :applies
 
-  resources :profiles
-  
+  resources :jobs do
+    post :enroll
+  end
+ 
   root to: 'pages#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

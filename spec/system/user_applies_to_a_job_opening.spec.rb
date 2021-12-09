@@ -14,7 +14,9 @@ describe 'Visit the homepage ' do
     visit root_path
     expect(page).to have_content('Job Opening Test 123')
     click_on 'Job Opening Test 123'
+    
     click_on 'Apply for this Job'
+    expect(page).to have_content("You're apllied for this job")
   end
 
 end
