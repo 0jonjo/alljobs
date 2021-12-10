@@ -1,4 +1,7 @@
 class AppliesController < ApplicationController
+  
+  before_action :authenticate_headhunter!, except: [:show]
+  
   def index
     @applies = Apply.all
   end

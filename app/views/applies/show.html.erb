@@ -1,0 +1,18 @@
+<h4><%= @apply.job.title %></h4>
+
+<p>
+<b>Applied User ID:</b> <%= @apply.user_id %><br>
+<b>Applied User Email:</b> <%= @apply.user.email %><br>
+</p>
+
+<p>
+<b>Deadline to apply:</b> <%= @apply.job.date %><br>
+<b>Description:</b> <%= @apply.job.description %><br>
+<b>Skills:</b> <%= @apply.job.skills %><br>
+<b>Salary:</b> <%= @apply.job.salary %><br>
+<b>Company:</b> <%= @apply.job.company %><br>
+<b>Level:</b> <%= @apply.job.level %><br>
+<b>Place:</b> <li><%= @apply.job.place %>
+</p>
+
+<%= link_to "Return to Home", root_path %>

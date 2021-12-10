@@ -1,2 +1,11 @@
-<h1>Applies#index</h1>
-<p>Find me in app/views/applies/index.html.erb</p>
+<h3>Applies to All Jobs </h3>
+
+<% if headhunter_signed_in? %>
+  <% Apply.all.each do |apply| %>
+    <p>
+    <b>Job ID</b>: <%= link_to apply.job_id, apply %><br>
+    <b>Job Opening Title</b>: <%= apply.job.title %><br>
+    <b>User E-mail</b>: <%= apply.user_email %>
+    </p> 
+  <% end %>
+<% end %>

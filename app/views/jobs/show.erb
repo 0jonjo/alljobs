@@ -1,25 +1,29 @@
-<h2><%= @job.title %></h2>
+<h3><%= @job.title %></h3>
 
-<h4>Deadline to apply: <%= @job.date %></h4>
+<b>Deadline to apply:</b> <%= @job.date %>
 
 <p>
-Description: <%= @job.description %><br>
-Skills: <%= @job.skills %><br>
-Salary: <%= @job.salary %><br>
-Company: <%= @job.company %><br>
-Level: <%= @job.level %><br>
-Place: <li><%= @job.place %>
+<b>Description</b>: <%= @job.description %><br>
+<b>Skills</b>: <%= @job.skills %><br>
+<b>Salary</b>: <%= @job.salary %><br>
+<b>Company</b>: <%= @job.company %><br>
+<b>Level</b>: <%= @job.level %><br>
+<b>Place</b>: <li><%= @job.place %>
 </p>
 
-<ul>
-  <li><%= link_to "Apply for this Job", job_enroll_path(@job, user_id: current_user.id), method: :post %></li>
-</ul>
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to "Apply for this Job", job_enroll_path(@job, user_id: current_user.id), method: :post %></li>
+  </ul>
+<% end %>
 
-<ul>
-  <li><%= link_to "Edit", edit_job_path(@job) %></li>
-  <li><%= link_to "Delete", job_path(@job),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
-</ul>
+<% if headhunter_signed_in? %>
+  <ul>
+    <li><%= link_to "Edit", edit_job_path(@job) %></li>
+    <li><%= link_to "Delete", job_path(@job),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %></li>
+  </ul>
+<% end %>
 
 <%= link_to "Return to Home", root_path %>

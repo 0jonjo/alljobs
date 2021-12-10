@@ -48,7 +48,7 @@ class JobsController < ApplicationController
     @subscription = Apply.new(job_id: params[:job_id], user_id: params[:user_id], application_user: true)
     @subscription.save
 
-    redirect_to root_path
+    redirect_to @subscription
   end
 
   private
