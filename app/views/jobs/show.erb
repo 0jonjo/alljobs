@@ -1,14 +1,14 @@
-<h3><%= @job.title %></h3>
+<h4><%= @job.title %></h4>
 
-<b>Deadline to apply:</b> <%= @job.date %>
+Deadline to apply: <%= @job.date %>
 
 <p>
-<b>Description</b>: <%= @job.description %><br>
-<b>Skills</b>: <%= @job.skills %><br>
-<b>Salary</b>: <%= @job.salary %><br>
-<b>Company</b>: <%= @job.company %><br>
-<b>Level</b>: <%= @job.level %><br>
-<b>Place</b>: <%= @job.place %>
+Description: <%= @job.description %><br>
+Skills: <%= @job.skills %><br>
+Salary: <%= @job.salary %><br>
+Company: <%= @job.company %><br>
+Level: <%= @job.level %><br>
+Place: <%= @job.place %>
 </p>
 
 <% if user_signed_in? %>

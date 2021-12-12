@@ -1,22 +1,10 @@
-<h2><%= @apply.job.title %></h2>
-
 <% if user_signed_in? || headhunter_signed_in? %>
+  <h3>Apply to: <%= link_to @apply.job.title, @apply.job %></h3>
   <p>
-  <h3>Apply</h3>
-  <b>ID:</b> <%= @apply.id %><br>
-  <b>User ID:</b> <%= @apply.user_id %><br>
-  <b>User Email:</b> <%= @apply.user.email %><br>
+  Apply ID:<%= @apply.id %><br>
+  User ID: <%= @apply.user_id %><br>
+  User Email: <%= @apply.user.email %><br>
   </p>
 <% end %>
-
-<p>
-<b>Deadline to apply:</b> <%= @apply.job.date %><br>
-<b>Description:</b> <%= @apply.job.description %><br>
-<b>Skills:</b> <%= @apply.job.skills %><br>
-<b>Salary:</b> <%= @apply.job.salary %><br>
-<b>Company:</b> <%= @apply.job.company %><br>
-<b>Level:</b> <%= @apply.job.level %><br>
-<b>Place:</b> <%= @apply.job.place %>
-</p>
 
 <%= link_to "Return to Home", root_path %>

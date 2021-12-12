@@ -1,18 +1,14 @@
-<h3>All Jobs </h3>
+<h3>Openings</h3>
 
 <% if headhunter_signed_in? || user_signed_in? %>
   <% @jobs.each do |job| %>
-    <h4><%= link_to job.title, job %></h4>
-    <p> 
-    Deadline to apply: <%= job.date %><br>
-    Description: <%= job.description %><br>
-    Skills</b: <%= job.skills %><br>
-    Salary: <%= job.salary %><br>
-    Company: <%= job.company %><br>
-    Level: <%= job.level %><br>
-    Place: <%= job.place %>
-    </p> 
-    <% end %>
+    <p>
+    <b><%= link_to job.title, job %></b> -
+    Deadline: <%= job.date %>
+    <br>
+    </p>
+  <% end %>
 <% end %>
+<%= paginate @jobs %>
 
-<%= paginate @jobs %><br>
+<%= link_to "Return to Home", root_path %>
