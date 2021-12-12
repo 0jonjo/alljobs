@@ -3,9 +3,9 @@
 <% if headhunter_signed_in? %>
   <% Apply.all.each do |apply| %>
     <p>
-    <b>Job ID</b>: <%= link_to apply.job_id, apply %><br>
-    <b>Job Opening Title</b>: <%= apply.job.title %><br>
-    <b>User E-mail</b>: <%= apply.user_email %>
+    <b>Apply ID:</b> <%= link_to apply.id, apply %><br>
+    <b>Job Opening Title:</b> <%= apply.job.title %><br>
+    <b>User E-mail:</b> <%= apply.user_email %>
     </p> 
   <% end %>
 <% end %>
