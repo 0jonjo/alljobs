@@ -6,6 +6,10 @@ class AppliesController < ApplicationController
     @applies = Apply.page(params[:page])
   end
  
+  def find
+    @apply = Apply.find(params[:id])
+  end
+  
   def destroy
     @apply = Apply.find(params[:id])
     @apply.destroy
