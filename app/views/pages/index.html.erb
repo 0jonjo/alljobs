@@ -1,11 +1,1 @@
-
-<% unless user_signed_in? || headhunter_signed_in? %>
-  <p> Welcome to All Jobs, choose your login or create your User/Headhunter </p>
-<% end %>
-
-<% if user_signed_in? || headhunter_signed_in? %>
-  <h4>Jobs Openings Today<h4>
-  <% Job.all.each do |job| %>
-    <p><%= link_to job.title, job %> - <%= job.date %></p> 
-  <% end %>
-<% end %>
+<p> Welcome to All Jobs, choose your login or create your User/Headhunter </p>

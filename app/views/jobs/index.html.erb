@@ -1,2 +1,17 @@
-<h1>Jobs#index</h1>
-<p>Find me in app/views/jobs/index.html.erb</p>
+<h3>All Jobs </h3>
+
+<% if headhunter_signed_in? || user_signed_in? %>
+  <% @jobs.each do |job| %>
+    <h4><%= job.title %></h4>
+    <b>Deadline to apply:</b> <%= job.date %><br>
+    <b>Description</b>: <%= job.description %><br>
+    <b>Skills</b>: <%= job.skills %><br>
+    <b>Salary</b>: <%= job.salary %><br>
+    <b>Company</b>: <%= job.company %><br>
+    <b>Level</b>: <%= job.level %><br>
+    <b>Place</b>: <%= job.place %>
+    </p> 
+    <% end %>
+<% end %>
+
+<%= paginate @jobs %><br>

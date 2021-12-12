@@ -15,7 +15,8 @@
   <nav>
     <% if user_signed_in? %>
       <%= link_to 'Logout User', destroy_user_session_path, method: :delete %> -
-      <%= link_to 'Create/Edit Profile', new_profile_path %>
+      <%= link_to 'Create/Edit Profile', new_profile_path %> -
+      <%= link_to "All Jobs Openings", jobs_path %><br>
       <br>
       <span>You are <%= current_user.email %></span> 
     <% else %>
@@ -26,7 +27,8 @@
     <% if headhunter_signed_in? %>
       <%= link_to 'Logout Headhunter', destroy_headhunter_session_path, method: :delete %> -
       <%= link_to "New Job Opening", new_job_path %> -
-      <%= link_to "All Job Applies", applies_path %><br>
+      <%= link_to "Applies", applies_path %> -
+      <%= link_to "All Jobs Openings", jobs_path %><br>
       <br>
       <span>You are <%= current_headhunter.email %></span>
     <% else %>
