@@ -3,7 +3,7 @@ class AppliesController < ApplicationController
   before_action :authenticate_headhunter!, except: [:show]
   
   def index
-    @applies = Apply.all
+    @applies = Apply.page(params[:page])
   end
  
   def destroy

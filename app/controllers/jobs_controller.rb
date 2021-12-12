@@ -3,7 +3,7 @@ class JobsController < ApplicationController
   before_action :authenticate_headhunter!, except: [:index, :show, :enroll]
   
   def index
-    @jobs = Job.all
+    @jobs = Job.page(params[:page])
   end
  
   def new 

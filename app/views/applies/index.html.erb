@@ -1,7 +1,7 @@
 <h3>Applies to All Jobs </h3>
 
 <% if headhunter_signed_in? %>
-  <% Apply.all.each do |apply| %>
+  <% @applies.each do |apply| %>
     <p>
     <b>Apply ID:</b> <%= link_to apply.id, apply %><br>
     <b>Job Opening Title:</b> <%= apply.job.title %><br>
@@ -9,3 +9,7 @@
     </p> 
   <% end %>
 <% end %>
+
+<%= paginate @applies %><br>
+
+<%= link_to "Return to Home", root_path %>
