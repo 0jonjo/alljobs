@@ -31,7 +31,6 @@ Place: <%= @job.place %>
   <% @job.applies.each do |apply| %>
     <p>
     ID: <%= link_to apply.id, apply %><br>
-    Job: <%= apply.job.title %><br>
     User E-mail: <%= apply.user_email %><br>
     <%= link_to "View", apply %>
     </p> 
