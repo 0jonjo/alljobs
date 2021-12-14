@@ -3,10 +3,10 @@
 <% if headhunter_signed_in? %>
   <% @profiles.each do |profile| %>
     <p>
-    <% unless profile.social_name.blank? %>
-      <%= link_to profile.social_name, profile %><br>
-    <% else %>
+    <% if profile.social_name.blank? %>
       <%= link_to profile.name, profile %><br>
+    <% else %>
+      <%= link_to profile.social_name, profile %><br>
     <% end %>
     User ID: <%= profile.user_id %><br>  
     </p>
