@@ -8,8 +8,10 @@ Educational Background: <%= @profile.educacional_background %><br>
 Experience: <%= @profile.experience %>
 </p>
 
-<ul>
-  <li><%= link_to "Edit", edit_profile_path(@profile) %></li>
-</ul>
+<% if user_signed_in? %>
+  <ul>
+    <li><%= link_to "Edit", edit_profile_path(@profile) %></li>
+  </ul>
+<% end %>
 
 <%= link_to "Return to Home", root_path %>

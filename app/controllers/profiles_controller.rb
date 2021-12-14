@@ -1,6 +1,10 @@
 class ProfilesController < ApplicationController
   
- before_action :authenticate_user!, except: [:index]
+ before_action :authenticate_user!, except: [:index, :show]
+
+  def index
+    @profiles = Profile.page(params[:page])
+  end
   
   def new
     if Profile.where("user_id = ?", current_user.id).blank?

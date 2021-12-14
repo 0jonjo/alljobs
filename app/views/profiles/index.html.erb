@@ -1,2 +1,15 @@
-<h1>Profiles#index</h1>
-<p>Find me in app/views/profiles/index.html.erb</p>
+<h3>Profiles</h3>
+
+<% if headhunter_signed_in? %>
+  <% @profiles.each do |profile| %>
+    <p>
+    <%= link_to profile.name, profile %><br>
+    Social Name: <%= profile.social_name %><br>
+    User ID: <%= profile.user_id %><br>
+    </p>
+  <% end %>
+<% end %>
+
+<%= paginate @profiles %>
+
+<%= link_to "Return to Home", root_path %>
