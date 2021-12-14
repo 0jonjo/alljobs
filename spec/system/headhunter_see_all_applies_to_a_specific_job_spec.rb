@@ -26,7 +26,6 @@ describe 'Visit the homepage as Headhunter' do
     expect(page).to have_content('Job Opening Test 123')
     click_on 'Job Opening Test 123'
     expect(page).to have_content('All applies to this job')
-    click_on 'All applies to this job'
     expect(page).to have_content('ID: 1') 
     expect(page).to have_content('User E-mail: usuario@disco1995.com.br ')
   end
