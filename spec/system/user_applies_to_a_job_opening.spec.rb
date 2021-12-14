@@ -12,6 +12,7 @@ describe 'Visit the homepage ' do
     login_as(user, :scope => :user)
     
     visit root_path
+    click_on 'Openings'
     expect(page).to have_content('Job Opening Test 123')
     click_on 'Job Opening Test 123'
     

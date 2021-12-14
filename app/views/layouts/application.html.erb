@@ -11,6 +11,12 @@
   </head>
 
   <body>
+  <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
   <h1>All Jobs</h1>
   <nav>
     <% if user_signed_in? %>

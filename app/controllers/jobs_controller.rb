@@ -50,8 +50,8 @@ class JobsController < ApplicationController
     else
       @subscription = Apply.new(job_id: params[:job_id], user_id: params[:user_id], application_user: true)
       @subscription.save
-      flash[:notice] = "You successfully applied to this job opening."
       redirect_to @subscription
+      flash[:notice] = "You successfully applied to this job opening."
     end
   end
 
