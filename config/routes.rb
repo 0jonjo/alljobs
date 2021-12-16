@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
   devise_for :headhunters, :users
 
-  resources :pages, :applies
+  resources :pages, :applies, :comments
+  
+  resources :profiles, only: [:new, :index, :create, :edit, :show, :update]
 
-  resources :jobs do
+  resources :jobs, only: [:new, :create, :edit, :show, :update] do
     post :enroll
-  end
-
-  resources :profiles do
-    resources :comments
   end
 
   root to: 'pages#index'

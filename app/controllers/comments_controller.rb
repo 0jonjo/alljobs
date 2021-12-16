@@ -1,43 +1,57 @@
 class CommentsController < ApplicationController
-    before_action :authenticate_headhunter!
+    
+  before_action :set_comment, only: %i[ show edit update destroy ]
 
   def index
-    @comments = Comment.page(params[:page])
+    @profile = Profile.find_by(user_id: current_user.id)
+    @comments = @profile.comments.all
   end
-  
+
+  def show
+    @comments = Comment.all
+  end
+
   def new
     @comment = Comment.new
   end
 
-  def create
-    @headhunter = current_headhunter
-    @comment = @headhunter.comments.create(comment_params)
-    if  @comment.save
-      :new
-      redirect_to @profile
-    end
+  def edit
   end
 
-  def edit
-    @comment = current_headhunter.comments.find_by(headhunter_id: current_headhunter.id)
+  def create
+    @headhunter = current_headhunter 
+    @comment = Comment.new(comment_params)
+    @comment.headhunter_id = @headhunter.id
+    
+    if @comment.save
+      redirect_to request.referrer, notice: "Comment created."
+    else
+      render :new
+    end
   end
 
   def update
-    @comment = Comment.find(params[:id])
-
-    if @comment.update(comment_params)
-      redirect_to @comment
-    else
-      render :edit
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to @comment, notice: "Comment updated." }
+        format.json { render :show, status: :ok, location: @comment }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
   end
- 
-  def show
-    @comment = Comment.find(params[:id])
+
+  def destroy
+    @comment.destroy
+    redirect_to request.referrer, notice: "Comment deleted." 
   end
 
   private
-  def comment_params
-    params.require(:comment).permit(:datetime, :body, :profile_id, :headhunter_id)
-  end
+    def set_comment
+      @comment = Comment.find(params[:id])
+    end 
+    def comment_params
+      params.require(:comment).permit(:profile_id, :headhunter_id, :body, :datetime)
+    end
 end
