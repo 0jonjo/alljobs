@@ -1,20 +1,28 @@
 <% if @profile.social_name.blank? %>
-  <h3><%= @profile.name %></h3>  
+  <h3>d<%= @profile.name %></h3>  
 <% else %>
   <h3><%= @profile.social_name %></h3>
 <% end %>
 
 <p>
-Birthday: <%= @profile.birthdate %><br>
-Description: <%= @profile.description %><br>
-Educational Background: <%= @profile.educacional_background %><br>
-Experience: <%= @profile.experience %>
+  Birthday: <%= @profile.birthdate %><br>
+  Description: <%= @profile.description %><br>
+  Educational Background: <%= @profile.educacional_background %><br>
+  Experience: <%= @profile.experience %>
 </p>
 
 <% if user_signed_in? %>
   <ul>
     <li><%= link_to "Edit", edit_profile_path(@profile) %></li>
   </ul>
+<% end %>
+
+<% if headhunter_signed_in? %>
+  <h3>Comments</h23>
+  <%= render @article.comments %>
+
+  <h3>Add a comment:</h3>
+  <%= render 'comments/form' %>
 <% end %>
 
 <%= link_to "Return to Home", root_path %>

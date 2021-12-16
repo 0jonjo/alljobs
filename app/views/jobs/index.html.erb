@@ -3,9 +3,9 @@
 <% if headhunter_signed_in? || user_signed_in? %>
   <% @jobs.each do |job| %>
     <p>
-    <b><%= link_to job.title, job %></b> -
-    Deadline: <%= job.date %>
-    <br>
+      <b><%= link_to job.title, job %></b> -
+      Deadline: <%= job.date %>
+      <br>
     </p>
   <% end %>
 <% end %>

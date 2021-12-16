@@ -1,0 +1,15 @@
+<%= form_with model: [ @profile, @profile.comments.build ] do |form| %>
+    <p>
+      <%= form.label :datetime %><br>
+      <%= form.text_field :datetime %>
+    </p>
+    <p>
+      <%= form.label :body %><br>
+      <%= form.text_area :body %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+    <%= form.hidden_field :headhunter_id %>
+  <% end %>
+  

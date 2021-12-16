@@ -3,12 +3,12 @@
 Deadline to apply: <%= @job.date %>
 
 <p>
-Description: <%= @job.description %><br>
-Skills: <%= @job.skills %><br>
-Salary: <%= @job.salary %><br>
-Company: <%= @job.company %><br>
-Level: <%= @job.level %><br>
-Place: <%= @job.place %>
+  Description: <%= @job.description %><br>
+  Skills: <%= @job.skills %><br>
+  Salary: <%= @job.salary %><br>
+  Company: <%= @job.company %><br>
+  Level: <%= @job.level %><br>
+  Place: <%= @job.place %>
 </p>
 
 <% if user_signed_in? %>
@@ -30,9 +30,9 @@ Place: <%= @job.place %>
   <h4>All applies to this job</h4>
   <% @job.applies.each do |apply| %>
     <p>
-    ID: <%= link_to apply.id, apply %><br>
-    User E-mail: <%= apply.user_email %><br>
-    <%= link_to "View", apply %>
+      ID: <%= link_to apply.id, apply %><br>
+      User E-mail: <%= apply.user_email %><br>
+      <%= link_to "View", apply %>
     </p> 
   <% end %>  
 <% end %>
