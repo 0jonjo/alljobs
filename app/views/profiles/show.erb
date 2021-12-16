@@ -17,18 +17,11 @@
   </ul>
 <% end %>
 
-<div>
-  <br>
-  <% @comments.each do |comment| %>
-    <% if comment.headhunter_id == current_headhunter.id %>    
-      <div>
-        <p><%= comment.datetime %></p>
-        <p><%= comment.body %></p>
-        <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-      </div>
-    <% end %>
-  <% end %>
-  <%= render partial: 'comments/form', locals: { comment: @comment } %>
-</div>
+<% if headhunter_signed_in? %>
+  <div>  
+    <%= render partial: 'comments/comment', locals: { comment: @comment } %>
+    <%= render partial: 'comments/form', locals: { comment: @comment } %>
+  </div>
+<% end %>
 
 <%= link_to "Return to Home", root_path %>
