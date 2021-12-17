@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   resources :profiles, only: [:new, :index, :create, :edit, :show, :update]
 
-  resources :jobs, only: [:new, :create, :edit, :show, :update] do
+  resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
     post :enroll
   end
 
