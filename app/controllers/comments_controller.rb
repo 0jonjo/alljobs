@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
     @headhunter = current_headhunter 
     @comment = Comment.new(comment_params)
     @comment.headhunter_id = @headhunter.id
+    @comment.datetime = Time.now
     
     if @comment.save
       redirect_to request.referrer, notice: "Comment created."

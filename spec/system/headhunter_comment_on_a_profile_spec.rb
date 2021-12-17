@@ -15,7 +15,6 @@ describe 'Visit the homepage as Headhunter' do
     click_on 'Super Tester'
 
     expect(page).to have_content('Birthday: 1999-09-09') 
-    fill_in 'Datetime', with: '06/06/2026'
     fill_in 'Body', with: 'Just a test comment'
     click_on 'Create Comment'
     expect(page).to have_content('Just a test comment')

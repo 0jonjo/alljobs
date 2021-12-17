@@ -1,9 +1,5 @@
 <%= form_with model: comment do |form| %>
     <p>
-      <%= form.label :datetime %><br>
-      <%= form.text_field :datetime %>
-    </p>
-    <p>
       <%= form.label :body %><br>
       <%= form.text_area :body %>
     </p>
@@ -12,5 +8,6 @@
     </p>
     <%= form.hidden_field :headhunter_id %>
     <%= form.hidden_field :profile_id %>
+    <%= form.hidden_field :datetime %>
   <% end %>
   
