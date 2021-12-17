@@ -4,4 +4,6 @@ class Profile < ApplicationRecord
 
   has_many :comments
   has_many :headhunters, through: :comments
+  has_many :stars
+  has_many :headhunters, through: :stars
 end

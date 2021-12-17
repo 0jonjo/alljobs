@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   
- before_action :authenticate_user!, except: [:index, :show]
+ before_action :authenticate_user!, except: [:index, :show, :star_select]
 
   def index
     @profiles = Profile.page(params[:page])
@@ -21,6 +21,17 @@ class ProfilesController < ApplicationController
       :new
       redirect_to @profile
     end
+  end
+
+  def star_select
+    if Star.where(headhunter_id: params[:headhunter_id], profile_id: params[:user_id]).exists?
+      flash[:alert] = "You're already starred this profile"
+    else
+      @star = Star.new(headhunter_id: params[:headhunter_id], profile_id: params[:user_id])
+      @star.save
+      flash[:notice] = "You successfully starred this profile."
+    end
+    redirect_to request.referrer
   end
 
   def edit

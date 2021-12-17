@@ -18,6 +18,10 @@
 <% end %>
 
 <% if headhunter_signed_in? %>
+  <div>
+    <%= link_to "Star this profile", profile_star_select_path(@profile, user_id: @profile.user_id, headhunter_id: current_headhunter.id), method: :post %>
+  </div>
+  <br>
   <div>  
     <%= render partial: 'comments/comment', locals: { comment: @comment } %>
     <%= render partial: 'comments/form', locals: { comment: @comment } %>

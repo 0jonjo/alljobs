@@ -4,6 +4,7 @@
   Apply ID:<%= @apply.id %><br>
   User ID: <%= @apply.user_id %><br>
   User Email: <%= @apply.user.email %><br>
+  <%= link_to "View Profile ", profile_path(@apply.user_id) %>
   </p>
 <% end %>
 
