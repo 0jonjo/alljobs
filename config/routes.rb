@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :headhunters, :users
 
-  resources :pages, :applies, :comments
+  resources :applies, :comments, :pages, :stars
   
   resources :profiles, only: [:new, :index, :create, :edit, :show, :update]
 
