@@ -13,14 +13,14 @@ This is a study project to a job opening website using Ruby on Rails.
 - [x] 5. Candidate applies for a job opening 
 - [x] 6. Headhunter sees everyone registered for a job opening
 - [x] 7. Headhunter writes comments on the applicant's profile for a job 
-- [x] 8. Headhunter stars a profile 
-- [] 9. Headhunter rejects applicant providing feedback
-- [] 10. Headhunter sends proposal to applicant
-- [] 11. Applicant receives feedback if rejected for a job
-- [] 12. Candidate receives proposal sent by headhunter
-- [] 13. Candidate accepts/rejects proposal
-- [] 14. Headhunter receives response from candidate
-- [] 15. Headhunter closes registration for a job 
+- [x] 8. Headhunter stars a profile - [x]
+9. Headhunter rejects applicant providing feedback
+10. Headhunter sends proposal to applicant
+11. Applicant receives feedback if rejected for a job
+12. Candidate receives proposal sent by headhunter
+13. Candidate accepts/rejects proposal
+14. Headhunter receives response from candidate
+15. Headhunter closes registration for a job 
 
 ## Install
 
