@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   
  before_action :authenticate_user!, except: [:index, :show, :star_select]
+ before_action :authenticate_headhunter!, only: [:star_select]
 
   def index
     @profiles = Profile.page(params[:page])
