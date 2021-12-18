@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
 
   def star_select
     if Star.where(headhunter_id: params[:headhunter_id], profile_id: params[:user_id]).exists?
-      flash[:alert] = "You're already starred this profile"
+      flash[:alert] = "You're already starred this profile."
     else
       @star = Star.new(headhunter_id: params[:headhunter_id], profile_id: params[:user_id])
       @star.save
