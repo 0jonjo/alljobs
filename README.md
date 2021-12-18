@@ -2,6 +2,8 @@
 
 This is a study project to a job opening website using Ruby on Rails.
 
+[Project Board (To do, In Progress, Done)](https://github.com/0jonjo/alljobs/projects/1)
+
 * Ruby: 3.0.0
 * Rails: 6.1.4.1 
 * Gems: devise (4.8.0), rspec-rails (5.0.2), kaminari (1.2.1)  
