@@ -1,24 +1,45 @@
-# README
+# ALLJOBS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a study project to a job opening website using Ruby on Rails.
 
-Things you may want to cover:
+* Ruby: 3.0.0
+* Rails: 6.1.4.1 
+* Gems: devise (4.8.0), rspec-rails (5.0.2), kaminari (1.2.1)  
 
-* Ruby version
+1. Headhunter creates an account [x]
+2. Headhunter registers a vacancy [x]
+3. Candidate creates an account [x]
+4. Candidate completes his profile [x]
+5. Candidate applies for a job opening [x]
+6. Headhunter sees everyone registered for a job opening [x]
+7. Headhunter writes comments on the applicant's profile for a job [x] 
+8. Headhunter stars a profile [x]
+9. Headhunter rejects applicant providing feedback []
+10. Headhunter sends proposal to applicant []
+11. Applicant receives feedback if rejected for a job []
+12. Candidate receives proposal sent by headhunter []
+13. Candidate accepts/rejects proposal []
+14. Headhunter receives response from candidate []
+15. Headhunter closes registration for a job [] 
 
-* System dependencies
+## Install
 
-* Configuration
+### Clone the repository
 
-* Database creation
+```shell
+git clone git@github.com:0jonjo/alljobs.git
+cd alljobs
+```
 
-* Database initialization
+### Install dependencies
 
-* How to run the test suite
+Using [Bundler](https://github.com/bundler/bundler)
 
-* Services (job queues, cache servers, search engines, etc.)
+```shell
+bundle install
+```
+## Serve
 
-* Deployment instructions
-
-* ...
+```shell
+rails s
+```
