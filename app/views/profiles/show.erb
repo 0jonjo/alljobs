@@ -1,3 +1,7 @@
+<% if Star.exists?(headhunter_id: current_headhunter.id, profile_id: @profile.id) %>
+  <p>⭐</p>
+<% end %>
+
 <% if @profile.social_name.blank? %>
   <h3><%= @profile.name %></h3>  
 <% else %>
