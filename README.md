@@ -40,6 +40,14 @@ Using [Bundler](https://github.com/bundler/bundler)
 ```shell
 bundle install
 ```
+
+## Create and migrate database
+
+```shell
+rails db:create 
+rails db:migrate
+```
+
 ## Serve
 
 ```shell
