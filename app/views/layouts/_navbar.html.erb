@@ -8,8 +8,7 @@
     <span>You are <%= current_user.email %></span> 
   <% else %>
     <% unless headhunter_signed_in? %>
-    <%= link_to 'Login User', new_user_session_path %> - 
-    <%= link_to "New User", new_user_registration_path %> -
+    <%= link_to 'Login User', new_user_session_path %>
   <% end %>
 
   <% if headhunter_signed_in? %>
@@ -23,8 +22,7 @@
     <span>You are <%= current_headhunter.email %></span>
   <% else %>
       <% unless user_signed_in? %>
-        <%= link_to 'Login Headhunter', new_headhunter_session_path %> -
-        <%= link_to "New Headhunter", new_headhunter_registration_path %>
+        <%= link_to 'Login Headhunter', new_headhunter_session_path %>
       <% end %>
     <% end %>  
   <% end %>
