@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   
  before_action :authenticate_user!, except: [:index, :show, :star_select]
  before_action :authenticate_headhunter!, only: [:star_select]
+ before_action :set_profile, only: [:update]
 
   def index
     @profiles = Profile.page(params[:page])
@@ -44,8 +45,6 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @profile = Profile.find(params[:id])
-
     if @profile.update(profile_params)
       redirect_to @profile
     else
@@ -64,6 +63,9 @@ class ProfilesController < ApplicationController
   end
 
   private
+  def set_profile
+    @profile = Profile.find(params[:id])
+  end  
   def profile_params
     params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background, :experience)
   end

@@ -1,16 +1,20 @@
 <h3>Profiles</h3>
 
-<% if headhunter_signed_in? %>
-  <% @profiles.each do |profile| %>
-    <p>
+<% if @profiles.any? %>
+    <% @profiles.each do |profile| %>
+      <dt>Name</dt>
+      <dd>
       <% if profile.social_name.blank? %>
-        <%= link_to profile.name, profile %><br>
+        <%= link_to profile.name, profile %>
       <% else %>
-        <%= link_to profile.social_name, profile %><br>
+        <%= link_to profile.social_name, profile %><
       <% end %>
-      User ID: <%= profile.user_id %><br>  
-    </p>
-  <% end %>
+      </dd>
+      <dt>ID</dt>
+      <dd><%= profile.user_id %></dd>  
+    <% end %>
+<% else %>
+    <p>There are no profiles registered</p>
 <% end %>
 
 <%= paginate @profiles %>

@@ -1,12 +1,11 @@
 require 'rails_helper'
 
-describe 'Visit the homepage as Headhunter' do
+describe 'Headhunter see all profiles and do/edit a comment' do
 
-  it 'see all profiles and do/edit a comment' do
+  it 'with sucess' do
     
     User.create!(:email => 'user@user.com.br', :password => 'd2blackalien')
-    Profile.new(name: 'Tester', social_name: 'Super Tester', birthdate: '1999/09/09', description: "Profissional Tester", educacional_background: "Tester University Class 2021", experience: "Test things everyday since I was born", user_id: 1).save 
-
+    Profile.create!(name: 'Tester', social_name: 'Super Tester', birthdate: '1999/09/09', description: "Profissional Tester", educacional_background: "Tester University Class 2021", experience: "Test things everyday since I was born", user_id: 1)
     headhunter = Headhunter.create!(:email => 'usuario@disco1995.com.br', :password => 'd2blackalien')
     login_as(headhunter, :scope => :headhunter)
     visit root_path
