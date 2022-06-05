@@ -1,6 +1,6 @@
 # ALLJOBS
 
-This is a study project to a job opening website using Ruby on Rails.
+This is a TDD study project to a job opening website using Ruby on Rails.
 
 [Project Board (To do, In Progress, Done)](https://github.com/0jonjo/alljobs/projects/1)
 
