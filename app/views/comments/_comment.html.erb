@@ -1,13 +1,17 @@
-<b>Your Comments</b>
-<% @comments.each do |comment| %>
-  <% if comment.headhunter_id == current_headhunter.id %>    
-    <div>
-      <p><b>When?</b> <%= comment.datetime %></p>
-      <p><b>Comment:</b> <%= comment.body %></p>
-      <p>
-        <%= link_to 'Edit', edit_comment_path(comment) %> -
-        <%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %>
-      </p>
-    </div>
-  <% end %>
-<% end %>
+  <% if headhunter_signed_in? %>
+    <b>Your Comments</b>
+    <% @comments.each do |comment| %>
+      <% if comment.headhunter_id == current_headhunter.id %>    
+        <div>
+          <dt>When?</dt> 
+          <dd><%= comment.datetime %></dd>
+          <dt>Comment</dt> 
+          <dd><%= comment.body %></dd>
+          <p>
+            <%= link_to 'Edit', edit_comment_path(comment) %> -
+            <%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>  

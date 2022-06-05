@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
     
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def index
-    @profile = Profile.find_by(user_id: current_user.id)
+    @profile = Profile.find(params[:id])
     @comments = @profile.comments.all
   end
 
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to request.referrer, notice: "Comment created."
     else
-      render :new
+      render @profile
     end
   end
 
@@ -52,6 +52,7 @@ class CommentsController < ApplicationController
     def set_comment
       @comment = Comment.find(params[:id])
     end 
+
     def comment_params
       params.require(:comment).permit(:profile_id, :headhunter_id, :body, :datetime)
     end

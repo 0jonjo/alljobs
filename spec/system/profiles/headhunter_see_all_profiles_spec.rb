@@ -16,6 +16,7 @@ describe 'Headhunter see all profiles' do
       click_on 'Profiles'
     end
 
+    expect(current_path).to eq profiles_path
     expect(page).to have_content('Profiles')
     expect(page).to have_content('1') 
     expect(page).to have_content('Tester') 
@@ -32,7 +33,8 @@ describe 'Headhunter see all profiles' do
       
     visit root_path
     click_on 'Profiles'
-
+    
+    expect(current_path).to eq profiles_path
     expect(page).to have_content('There are no profiles registered') 
   end  
 end
