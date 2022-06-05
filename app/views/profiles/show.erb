@@ -1,5 +1,5 @@
 <% if headhunter_signed_in? %>
-  <% if Star.exists?(headhunter_id, profile_id: @profile.id) %>
+  <% if Star.exists? %>
     <p>⭐</p>
   <% end %>
 <% end %>
@@ -10,12 +10,15 @@
   <h3><%= @profile.social_name %></h3>
 <% end %>
 
-<p>
-  Birthday: <%= @profile.birthdate %><br>
-  Description: <%= @profile.description %><br>
-  Educational Background: <%= @profile.educacional_background %><br>
-  Experience: <%= @profile.experience %>
-</p>
+<dt>Birthday</dt> 
+<dd><%= @profile.birthdate %></dd>
+<dt>Description</dt> 
+<dd><%= @profile.description %></dd>
+<dt>Educational Background</dt>
+<dd><%= @profile.educacional_background %></dd>
+<dt>Experience</dt> 
+<dd><%= @profile.experience %></dd>
+
 
 <% if user_signed_in? %>
   <ul>
