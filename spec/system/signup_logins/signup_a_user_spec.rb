@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'Visit the homepage' do
+describe 'Signup a User' do
 
-  it 'Signup a User' do
+  it 'with sucess' do
     visit root_path
     click_on 'Login User'
     click_on 'Sign up'

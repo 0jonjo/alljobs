@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'Visit the homepage' do
+describe 'Signup a Headhunter' do
 
-  it 'Signup a Headhunter' do
+  it 'with sucesso' do
     visit root_path
     click_on 'Login Headhunter'
     click_on 'Sign up'
