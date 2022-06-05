@@ -18,9 +18,12 @@ class ProfilesController < ApplicationController
   def create
     @user = current_user
     @profile = @user.profiles.create(profile_params)
-    if  @profile.save
+    if @profile.save
       :new
       redirect_to @profile
+    else
+      flash.now[:alert] = "Profile doesn't registered." 
+      render :new  
     end
   end
 
@@ -37,6 +40,7 @@ class ProfilesController < ApplicationController
 
   def edit
     @profile = current_user.profiles.find_by(user_id: current_user.id)
+    user_id = @profile.user_id
   end
 
   def update
@@ -45,11 +49,15 @@ class ProfilesController < ApplicationController
     if @profile.update(profile_params)
       redirect_to @profile
     else
+      flash.now[:alert] = "Profile doesn't edited."
       render :edit
     end
   end
  
   def show
+    if headhunter_signed_in?
+      headhunter_id = current_headhunter.id
+    end  
     @profile = Profile.find_by(user_id: params[:id])
     @comments = @profile.comments.all
     @comment = @profile.comments.build

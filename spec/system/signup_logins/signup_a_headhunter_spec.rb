@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Signup a Headhunter' do
-
   it 'with sucesso' do
     visit root_path
     click_on 'Login Headhunter'

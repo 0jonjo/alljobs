@@ -1,5 +1,7 @@
-<% if Star.exists?(headhunter_id: current_headhunter.id, profile_id: @profile.id) %>
-  <p>⭐</p>
+<% if headhunter_signed_in? %>
+  <% if Star.exists?(headhunter_id, profile_id: @profile.id) %>
+    <p>⭐</p>
+  <% end %>
 <% end %>
 
 <% if @profile.social_name.blank? %>
