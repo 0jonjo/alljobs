@@ -12,7 +12,7 @@ RSpec.describe Comment, type: :model do
       expect(comment.valid?).to eq false 
     end
 
-    it "body is mandatory" do
+    it "datetime is mandatory" do
       user = User.create!(:email => 'user@test.com', :password => 'test123')
       headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
       profile = Profile.create!(name: 'Teste', social_name: 'Just a test 2', 
