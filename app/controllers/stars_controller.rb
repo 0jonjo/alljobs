@@ -13,8 +13,8 @@ class StarsController < ApplicationController
   def destroy
     @star = Star.find(params[:id])
     @star.destroy
-
-    redirect_to root_path
+    flash[:alert] = 'You have removed the star from a profile'
+    redirect_to stars_path
   end
 
   def show

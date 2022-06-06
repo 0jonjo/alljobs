@@ -1,19 +1,31 @@
 <h3>Stars</h3>
 
 <% if headhunter_signed_in? %>
-  <% @stars.each do |star| %>
-    <p>
-      <% if star.profile.social_name.blank? %>
-        <%= link_to star.profile.name, profile_path(star.profile.user_id) %><br>
-      <% else %>
-        <%= link_to star.profile.social_name, profile_path(star.profile.user_id) %><br>
-      <% end %>
-      User ID: <%= star.profile.user_id %><br>
-      <%= link_to "Remove Star", star_path(star), 
-                                method: :delete,
-                                data: { confirm: "Are you sure?" } %><br>  
-    </p>
-  <% end %>
+    <% if @stars.any? %>
+      <% @stars.each do |star| %>
+        <% if star.headhunter_id == current_headhunter.id %>
+          <dt>Name</dt>
+          <dd>
+            <% if star.profile.social_name.blank? %>
+              <%= link_to star.profile.name, profile_path(star.profile.user_id) %><br>
+            <% else %>
+              <%= link_to star.profile.social_name, profile_path(star.profile.user_id) %><br>
+            <% end %>
+          </dd>
+          <dt>ID</dt> 
+          <dd><%= star.profile.user_id %></dd>
+          <p>
+            <%= link_to "Remove Star", star_path(star), 
+                                      method: :delete,
+                                      data: { confirm: "Are you sure?" } %><br>  
+          </p>
+        <% else %>
+          <p>There is no profile selected as a star.</p>      
+        <% end %>
+      <% end %>  
+    <% else %>
+      <p>There is no profile selected as a star.</p>  
+    <% end %>  
 <% end %>
 
 <%= paginate @stars %>
