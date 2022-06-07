@@ -1,4 +1,6 @@
-<h1>All Jobs</h1>
+<%= link_to root_path do %>
+  <h1>All Jobs</h1>
+<% end %>  
 <nav>
   <% if user_signed_in? %>
     <%= link_to 'Create/Edit Profile', new_profile_path %> -

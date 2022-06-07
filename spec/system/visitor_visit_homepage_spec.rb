@@ -4,9 +4,10 @@ describe 'Visitor visit homepage' do
   it 'and view title and menu content' do
     visit root_path
     expect(page).to have_content('All Jobs')
+    expect(page).to have_link('All Jobs', href: root_path)
     within('nav') do
-      expect(page).to have_content('Login User')
-      expect(page).to have_content('Login Headhunter')
+      expect(page).to have_link('Login User', href: new_user_session_path)
+      expect(page).to have_link('Login Headhunter', href: new_headhunter_session_path)
       expect(page).not_to have_content('Logout User')
       expect(page).not_to have_content('Logout Headhunter')
       expect(page).not_to have_content('Openings')
