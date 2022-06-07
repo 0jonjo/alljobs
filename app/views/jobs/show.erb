@@ -1,15 +1,19 @@
 <h4><%= @job.title %></h4>
 
-Deadline to apply: <%= @job.date %>
-
-<p>
-  Description: <%= @job.description %><br>
-  Skills: <%= @job.skills %><br>
-  Salary: <%= @job.salary %><br>
-  Company: <%= @job.company %><br>
-  Level: <%= @job.level %><br>
-  Place: <%= @job.place %>
-</p>
+<dt>Deadline to apply</dt> 
+<dd><%= @job.date %></dd>
+<dt>Description</dt>
+<dd><%= @job.description %></dd>
+<dt>Skills</dt>
+<dd><%= @job.skills %></dd>
+<dt>Salary</dt>
+<dd><%= @job.salary %></dd>
+<dt>Company</dt>
+<dd><%= @job.company %></dd>
+<dt>Level</dt>
+<dd><%= @job.level %></dd>
+<dt>Place</dt>
+<dd><%= @job.place %></dd>
 
 <% if user_signed_in? %>
   <ul>
@@ -18,23 +22,12 @@ Deadline to apply: <%= @job.date %>
 <% end %>
 
 <% if headhunter_signed_in? %>
-  <ul>
-    <li><%= link_to "Edit", edit_job_path(@job) %></li>
-    <li><%= link_to "Delete", job_path(@job),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" } %></li>
-  </ul>
+   <ul>
+      <li><%= link_to "Edit", edit_job_path(@job) %></li>
+      <li><%= link_to "Delete", job_path(@job),
+                                method: :delete,
+                                data: { confirm: "Are you sure?" } %></li>
+   </ul>
 <% end %>
 
-<% if headhunter_signed_in? %>
-  <h4>All applies to this job</h4>
-  <% @job.applies.each do |apply| %>
-    <p>
-      ID: <%= link_to apply.id, apply %><br>
-      User E-mail: <%= apply.user_email %><br>
-      <%= link_to "View", apply %>
-    </p> 
-  <% end %>  
-<% end %>
-
-<%= link_to "Return to Home", root_path %>
+<%= render 'jobs/applies' %>

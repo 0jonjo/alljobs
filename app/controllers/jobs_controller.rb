@@ -44,6 +44,10 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
 
+  def applies
+    @job = Job.find(params[:id])
+  end
+
   def enroll
     if Apply.exists?(job_id: params[:job_id], user_id: params[:user_id])
       flash[:alert] = "You're already applied to this job opening"

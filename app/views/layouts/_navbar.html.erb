@@ -5,12 +5,12 @@
   <% if user_signed_in? %>
     <%= link_to 'Create/Edit Profile', new_profile_path %> -
     <%= link_to 'Openings', jobs_path %> -
-    <%= link_to 'Logout User', destroy_user_session_path, method: :delete %><br>
-    <br>
+    <%= link_to 'Logout User', destroy_user_session_path, method: :delete %> |
     <span>You are <%= current_user.email %></span> 
   <% else %>
     <% unless headhunter_signed_in? %>
-    <%= link_to 'Login User', new_user_session_path %>
+      <%= link_to 'Login User', new_user_session_path %> |
+    <% end %>    
   <% end %>
 
   <% if headhunter_signed_in? %>
@@ -19,13 +19,11 @@
     <%= link_to 'Openings', jobs_path %> -
     <%= link_to 'Profiles', profiles_path %> -
     <%= link_to 'Stars', stars_path %> -
-    <%= link_to 'Logout Headhunter', destroy_headhunter_session_path, method: :delete %><br>
-    <br>
+    <%= link_to 'Logout Headhunter', destroy_headhunter_session_path, method: :delete %> |
     <span>You are <%= current_headhunter.email %></span>
   <% else %>
       <% unless user_signed_in? %>
         <%= link_to 'Login Headhunter', new_headhunter_session_path %>
       <% end %>
-    <% end %>  
   <% end %>
 </nav>  

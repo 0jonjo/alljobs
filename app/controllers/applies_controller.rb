@@ -5,6 +5,18 @@ class AppliesController < ApplicationController
   def index
     @applies = Apply.page(params[:page])
   end
+
+  def new 
+    @apply = Apply.new
+  end
+
+  def create 
+    @apply = Apply.new(apply_params)
+    if @apply.save
+      :new
+      redirect_to @apply
+    end
+  end
  
   def find
     @apply = Apply.find(params[:id])
@@ -13,7 +25,6 @@ class AppliesController < ApplicationController
   def destroy
     @apply = Apply.find(params[:id])
     @apply.destroy
-
     redirect_to root_path
   end
 
