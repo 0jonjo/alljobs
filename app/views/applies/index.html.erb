@@ -2,15 +2,16 @@
 
 <% if headhunter_signed_in? %>
   <% @applies.each do |apply| %>
-    <p>
-    ID: <%= link_to apply.id, apply %><br>
-    Job: <%= apply.job.title %><br>
-    User E-mail: <%= apply.user_email %><br>
-    <%= link_to "View", apply %>
-    </p> 
+    <%= link_to apply do %>
+      <dt>Apply ID<dt> 
+      <dd><%= apply.id %></dd>
+      <dt>Job Title</dt> 
+      <dd><%= apply.job.title %></dd>
+      <dt>User E-mail</dt> 
+      <dd><%= apply.user_email %></dd>
+    <% end %>
   <% end %>
 <% end %>
 
-<%= paginate @applies %><br>
+<%= paginate @applies %>
 
-<%= link_to "Return to Home", root_path %>

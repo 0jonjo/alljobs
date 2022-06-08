@@ -28,23 +28,20 @@ describe 'Headhunter view applies to a specific job' do
   end
 
   it 'without sucess' do
-    job1 = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
-                       skills: 'Nam mattis, felis ut adipiscing.', salary: '$99/m', company: 'Acme', level: 'Junior', 
-                       place: 'Remote Job')
+    job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
+                       skills: 'Nam mattis, felis ut adipiscing.', salary: '$89/m',
+                       company: 'Acme', level: 'Junior', place: 'Remote Job')
     job2 = Job.create!(title: 'Other Job Opening', description: 'Lorem ipsum dolor sit amet', 
-                        skills: 'Nam mattis, felis ut adipiscing.', salary: '$99/m', company: 'Acme', level: 'Junior', 
-                        place: 'Remote Job')
+                        skills: 'Nam mattis, felis ut adipiscing.', salary: '$999/m', 
+                        company: 'Acme', level: 'Junior', place: 'Remote Job')
     user1 = User.create!(:email => 'user1@test.com', :password => 'test123')
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     login_as(headhunter, :scope => :headhunter)
-
-    apply1 = Apply.create!(:job => job1, :user => user1)
-    apply2 = Apply.create!(:job => job1, :user => user2)
     
     visit root_path
     click_on 'Openings'
-    expect(page).to have_link('Job Opening Test 123', href: job_path(1))
+    expect(page).to have_link('Job Opening Test', href: job_path(1))
     expect(page).to have_link('Other Job Opening', href: job_path(2))
     click_on 'Other Job Opening'
     
