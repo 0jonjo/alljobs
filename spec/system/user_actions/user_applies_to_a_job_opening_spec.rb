@@ -3,8 +3,9 @@ require 'rails_helper'
 describe 'User apllies to a job opening' do
   it 'with sucess' do
     Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
-    skills: 'Nam mattis, felis ut adipiscing.', salary: '99', company: 'Acme', level: 'Junior', 
-    place: 'Remote Job')
+                skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                company: 'Acme', level: 'Junior', place: 'Remote Job',
+                date: 24/12/2099)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
     login_as(user, :scope => :user)
     

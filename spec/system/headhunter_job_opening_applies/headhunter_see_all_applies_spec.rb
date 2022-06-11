@@ -3,11 +3,13 @@ require 'rails_helper'
 describe 'Headhunter sees all applies' do
   it 'with sucess' do
    job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
-                       skills: 'Nam mattis, felis ut adipiscing.', salary: '$99/m',
-                       company: 'Acme', level: 'Junior', place: 'Remote Job')
+                       skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
+                       company: 'Acme', level: 'Junior', place: 'Remote Job',
+                       date: 24/12/2099)
     job2 = Job.create!(title: 'Other Job Opening', description: 'Lorem ipsum dolor sit amet', 
-                        skills: 'Nam mattis, felis ut adipiscing.', salary: '$109/m', 
-                        company: 'Acme', level: 'Junior', place: 'Remote Job')
+                        skills: 'Nam mattis, felis ut adipiscing.', salary: '109', 
+                        company: 'Acme', level: 'Junior', place: 'Remote Job',
+                        date: 24/12/2099)
     user1 = User.create!(:email => 'user1@test.com', :password => 'test123')
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     user_that_not_apply = User.create!(:email => 'user3@test.com', :password => 'test123')

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_17_124346) do
+ActiveRecord::Schema.define(version: 2022_06_08_131427) do
 
   create_table "applies", force: :cascade do |t|
     t.integer "job_id", null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_12_17_124346) do
     t.string "title"
     t.text "description"
     t.text "skills"
-    t.string "salary"
+    t.decimal "salary"
     t.string "company"
     t.string "level"
     t.string "place"

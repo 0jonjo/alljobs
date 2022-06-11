@@ -12,9 +12,12 @@ class JobsController < ApplicationController
 
   def create 
     @job = Job.new(job_params)
-    if  @job.save
-      :new
+    if @job.save
+      flash[:notice] = "You successfully registered a Job Opening."
       redirect_to @job
+    else
+      flash.now[:alert] = "Job Opening doesn't registered."
+      render :new  
     end
   end
 
