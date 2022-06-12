@@ -4,6 +4,7 @@ describe 'Headhunter create a job opening' do
     it 'with sucess' do
       headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
       login_as(headhunter, :scope => :headhunter)
+      allow(SecureRandom).to receive(:alphanumeric).and_return('12345678')
       visit root_path
       
       within('nav') do
@@ -18,13 +19,11 @@ describe 'Headhunter create a job opening' do
       fill_in 'Place', with: 'Remote Job'
       fill_in 'Date', with: '21/11/2022'
       click_on 'Create Job'
-      
-      #adjust expects, testes unitários, validates no model 
-      #- possivelmente ajuste com db:migrate em salary 
-      #mexer também em show, index, etc. dos jobs
+  
       expect(current_path).to eq job_path(1)
       expect(page).to have_content("You successfully registered a Job Opening.")
       expect(page).to have_content("Job Opening Test")
+      expect(page).to have_content("12345678")
       expect(page).to have_content("Test")
       expect(page).to have_content("Junior")
     end

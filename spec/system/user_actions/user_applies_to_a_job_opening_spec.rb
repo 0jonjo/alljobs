@@ -17,7 +17,7 @@ describe 'User apllies to a job opening' do
     click_on 'Job Opening Test 123'
     
     click_on 'Apply for this Job'
-    expect(page).to have_content('User Email: user@test.com')
+    expect(page).to have_content('user@test.com')
     expect(page).to have_content('Job Opening Test 123')
   end
 end

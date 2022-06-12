@@ -1,11 +1,12 @@
 <% if user_signed_in? || headhunter_signed_in? %>
   <h3>Apply to: <%= link_to @apply.job.title, @apply.job %></h3>
-  <p>
-  Apply ID:<%= @apply.id %><br>
-  User ID: <%= @apply.user_id %><br>
-  User Email: <%= @apply.user.email %><br>
+  <dt>Apply ID</dt>
+  <dd><%= @apply.id %></dd>
+  <dt>User ID</dt> 
+  <dd><%= @apply.user_id %></dd>
+  <dt>User Email</dt> 
+  <dd><%= @apply.user.email %></dd>
   <%= link_to "View Profile ", profile_path(@apply.user_id) %>
-  </p>
 <% end %>
 
 <%= link_to "Return to Home", root_path %>

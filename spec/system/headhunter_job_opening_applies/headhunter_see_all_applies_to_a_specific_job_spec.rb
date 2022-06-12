@@ -49,9 +49,7 @@ describe 'Headhunter view applies to a specific job' do
     click_on 'Other Job Opening'
     
     expect(page).to have_content('There is no apply for this job.')
-    expect(page).not_to have_content('All applies to this job')
-    expect(page).not_to have_content('1')
-    expect(page).not_to have_content('2') 
+    expect(page).not_to have_content('All applies to this job') 
     expect(page).not_to have_content('user1@test.com ')
     expect(page).not_to have_content('user2@test.com ')
   end
