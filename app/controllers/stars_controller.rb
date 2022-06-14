@@ -13,7 +13,7 @@ class StarsController < ApplicationController
   def destroy
     @star = Star.find(params[:id])
     @star.destroy
-    flash[:alert] = 'You have removed the star from a profile'
+    flash[:alert] = 'You have removed the star from the apply'
     redirect_to stars_path
   end
 
@@ -25,6 +25,6 @@ class StarsController < ApplicationController
 
   private
   def star_params
-    params.require(:star).permit(:user_id, headhunter_id)
+    params.require(:star).permit(:user_id, :headhunter_id, :apply_id)
   end
 end

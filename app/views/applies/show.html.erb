@@ -1,12 +1,17 @@
 <% if user_signed_in? || headhunter_signed_in? %>
-  <h3>Apply to: <%= link_to @apply.job.title, @apply.job %></h3>
-  <dt>Apply ID</dt>
-  <dd><%= @apply.id %></dd>
-  <dt>User ID</dt> 
-  <dd><%= @apply.user_id %></dd>
-  <dt>User Email</dt> 
-  <dd><%= @apply.user.email %></dd>
-  <%= link_to "View Profile ", profile_path(@apply.user_id) %>
+    <h3>Apply to: <%= link_to @apply.job.title, @apply.job %></h3>
+    <dt>Apply ID</dt>
+    <dd><%= @apply.id %></dd>
+    <dt>User ID</dt> 
+    <dd><%= @apply.user_id %></dd>
+    <dt>User Email</dt> 
+    <dd><%= @apply.user.email %></dd>
+    <br>
+    <%= link_to "View Profile ", profile_path(@apply.user_id) %>  
 <% end %>
 
-<%= link_to "Return to Home", root_path %>
+<% if headhunter_signed_in? %>
+    <div>
+      <%= link_to "Star This Apply", profile_star_select_path(apply_id: @apply.id, user_id: @apply.user_id, headhunter_id: current_headhunter.id, profile_id: @apply.user_id), method: :post %>
+    </div>
+<% end %>

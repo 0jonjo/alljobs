@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_12_000144) do
+ActiveRecord::Schema.define(version: 2022_06_12_235609) do
 
   create_table "applies", force: :cascade do |t|
     t.integer "job_id", null: false
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2022_06_12_000144) do
     t.integer "profile_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "apply_id", null: false
+    t.index ["apply_id"], name: "index_stars_on_apply_id"
     t.index ["headhunter_id"], name: "index_stars_on_headhunter_id"
     t.index ["profile_id"], name: "index_stars_on_profile_id"
   end
@@ -100,6 +102,7 @@ ActiveRecord::Schema.define(version: 2022_06_12_000144) do
   add_foreign_key "comments", "headhunters"
   add_foreign_key "comments", "profiles"
   add_foreign_key "profiles", "users"
+  add_foreign_key "stars", "applies"
   add_foreign_key "stars", "headhunters"
   add_foreign_key "stars", "profiles"
 end

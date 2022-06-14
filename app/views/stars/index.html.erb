@@ -12,22 +12,20 @@
               <%= link_to star.profile.social_name, profile_path(star.profile.user_id) %><br>
             <% end %>
           </dd>
-          <dt>ID</dt> 
-          <dd><%= star.profile.user_id %></dd>
+          <dt>Apply ID</dt> 
+          <dd><%= link_to star.apply_id, apply_path(star.apply_id) %></dd>
           <p>
             <%= link_to "Remove Star", star_path(star), 
                                       method: :delete,
                                       data: { confirm: "Are you sure?" } %><br>  
           </p>
         <% else %>
-          <p>There is no profile selected as a star.</p>      
+          <p>There is no apply selected as a star.</p>      
         <% end %>
       <% end %>  
     <% else %>
-      <p>There is no profile selected as a star.</p>  
+      <p>There is no apply selected as a star.</p>  
     <% end %>  
 <% end %>
 
 <%= paginate @stars %>
-
-<%= link_to "Return to Home", root_path %>

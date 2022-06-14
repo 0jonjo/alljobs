@@ -29,12 +29,14 @@ class ProfilesController < ApplicationController
   end
 
   def star_select
-    if Star.where(headhunter_id: params[:headhunter_id], profile_id: params[:user_id]).exists?
-      flash[:alert] = "You're already starred this profile."
-    else
-      @star = Star.new(headhunter_id: params[:headhunter_id], profile_id: params[:user_id])
+    if Star.where(headhunter_id: params[:headhunter_id], profile_id: params[:user_id], apply_id: params[:apply_id]).exists?
+      flash[:alert] = "You're already starred this apply."
+    elsif
+      @star = Star.new(headhunter_id: params[:headhunter_id], profile_id: params[:user_id], apply_id: params[:apply_id])
       @star.save
-      flash[:notice] = "You successfully starred this profile."
+      flash[:notice] = "You successfully starred this apply."
+    else  
+      flash[:alert] = "You can't starred this apply."
     end
     redirect_to request.referrer
   end
