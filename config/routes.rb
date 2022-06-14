@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   devise_for :headhunters, :users
 
-  resources :applies, :comments, :pages
+  resources :comments, :pages
+
+  resources :applies do
+    post :star_select
+  end
   
   resources :stars, only: [:index, :destroy]
-  
   resources :profiles, only: [:new, :index, :create, :edit, :show, :update] do
     post :star_select
   end
