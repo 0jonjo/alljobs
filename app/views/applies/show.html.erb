@@ -16,3 +16,9 @@
     </div>
 <% end %>
 
+<% if user_signed_in? %>
+    <%= link_to "Remove Apply", apply_path(@apply), 
+                                method: :delete,
+                                data: { confirm: "Are you sure?" } %>
+<% end %>
+

@@ -53,7 +53,9 @@ class JobsController < ApplicationController
 
   def enroll
     if Apply.exists?(job_id: params[:job_id], user_id: params[:user_id])
-      flash[:alert] = "You're already applied to this job opening"
+      @apply = Apply.where(job_id: params[:job_id], user_id: params[:user_id])
+      flash[:alert] = "You're already applied to this job opening."
+      redirect_to request.referrer
     else
       @subscription = Apply.new(job_id: params[:job_id], user_id: params[:user_id], application_user: true)
       @subscription.save

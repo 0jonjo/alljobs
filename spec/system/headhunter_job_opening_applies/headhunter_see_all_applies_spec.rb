@@ -33,4 +33,16 @@ describe 'Headhunter sees all applies' do
     expect(page).not_to have_content('3')
     expect(page).not_to have_content('user3@test.com')
   end
+
+  it 'without any apply' do
+    headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
+    login_as(headhunter, :scope => :headhunter)
+
+    visit root_path
+    within('nav') do
+      click_on 'Applies'
+    end
+    
+    expect(page).to have_content("There aren't any apply.")
+  end
 end

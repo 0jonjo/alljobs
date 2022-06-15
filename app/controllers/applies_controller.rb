@@ -1,6 +1,6 @@
 class AppliesController < ApplicationController
   
-  before_action :authenticate_headhunter!, except: [:show]
+  before_action :authenticate_headhunter!, except: [:index, :show, :destroy]
   
   def index
     @applies = Apply.page(params[:page])
@@ -10,12 +10,13 @@ class AppliesController < ApplicationController
     @apply = Apply.new
   end
 
-  def create 
+  def createe
     @apply = Apply.new(apply_params)
     if @apply.save
       :new
       redirect_to @apply
-    end
+      flash[:notice] = "You successfully applied to this job."
+    end  
   end
  
   def find
@@ -25,6 +26,7 @@ class AppliesController < ApplicationController
   def destroy
     @apply = Apply.find(params[:id])
     @apply.destroy
+    flash[:alert] = 'The application for this job has been removed.'
     redirect_to root_path
   end
 
