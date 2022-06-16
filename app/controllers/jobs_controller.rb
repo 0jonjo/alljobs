@@ -16,7 +16,7 @@ class JobsController < ApplicationController
       flash[:notice] = "You successfully registered a Job Opening."
       redirect_to @job
     else
-      flash.now[:alert] = "Job Opening doesn't registered."
+      flash.now[:alert] = "Job Opening was not registered."
       render :new  
     end
   end
@@ -27,10 +27,10 @@ class JobsController < ApplicationController
 
   def update
     @job = Job.find(params[:id])
-
     if  @job.update(job_params)
       redirect_to @job
     else
+      flash.now[:alert] = "Job Opening was not edited."
       render :edit
     end
     
