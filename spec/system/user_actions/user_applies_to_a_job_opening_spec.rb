@@ -5,7 +5,7 @@ describe 'User apllies to a job opening' do
     Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
                 skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
                 company: 'Acme', level: 'Junior', place: 'Remote Job',
-                date: 24/12/2099)
+                date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
     login_as(user, :scope => :user)
     
@@ -25,7 +25,7 @@ describe 'User apllies to a job opening' do
     job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
                   skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
                   company: 'Acme', level: 'Junior', place: 'Remote Job',
-                  date: 24/12/2099)
+                  date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
     Apply.create!(:job => job, :user => user)
     login_as(user, :scope => :user)
@@ -41,7 +41,7 @@ describe 'User apllies to a job opening' do
     job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
     skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
     company: 'Acme', level: 'Junior', place: 'Remote Job',
-    date: 24/12/2099)
+    date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)
     login_as(user, :scope => :user)

@@ -5,11 +5,11 @@ describe 'Headhunter sees all applies' do
    job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                        skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                        company: 'Acme', level: 'Junior', place: 'Remote Job',
-                       date: 24/12/2099)
+                       date: 1.month.from_now)
     job2 = Job.create!(title: 'Other Job Opening', description: 'Lorem ipsum dolor sit amet', 
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '109', 
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
-                        date: 24/12/2099)
+                        date: 1.month.from_now)
     user1 = User.create!(:email => 'user1@test.com', :password => 'test123')
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     user_that_not_apply = User.create!(:email => 'user3@test.com', :password => 'test123')

@@ -17,7 +17,7 @@ describe 'Headhunter create a job opening' do
       fill_in 'Company', with: 'Test'
       fill_in 'Level', with: 'Junior'
       fill_in 'Place', with: 'Remote Job'
-      fill_in 'Date', with: '21/11/2022'
+      fill_in 'Date', with: '21/11/2099'
       click_on 'Create Job'
   
       expect(current_path).to eq job_path(1)

@@ -6,7 +6,7 @@ describe 'Headhunter stars a apply' do
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                     skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                     company: 'Acme', level: 'Junior', place: 'Remote',
-                    date: '24/12/2099')
+                    date: 1.month.from_now)
     profile = Profile.create!(name: "Tester", birthdate: "1991-12-12", description: "Tester 3",
                     educacional_background: "Tester 3", experience: "Tester 3", 
                     user_id: user.id)
@@ -31,7 +31,7 @@ describe 'Headhunter stars a apply' do
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                     skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                     company: 'Acme', level: 'Junior', place: 'Remote',
-                    date: '24/12/2099')
+                    date: 1.month.from_now)
     profile = Profile.create!(name: "Tester", birthdate: "1991-12-12", description: "Tester 3",
                     educacional_background: "Tester 3", experience: "Tester 3", 
                     user_id: user.id)
@@ -66,7 +66,7 @@ describe 'Headhunter stars a apply' do
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                         company: 'Acme', level: 'Junior', place: 'Remote',
-                        date: '24/12/2099')
+                        date: 1.month.from_now)
     apply = Apply.create!(:job => job, :user => user1) 
     login_as(headhunter, :scope => :headhunter)
     Star.create!(profile_id: profile1.id, headhunter_id: headhunter.id, apply_id: apply.id)

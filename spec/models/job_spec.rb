@@ -90,4 +90,29 @@ RSpec.describe Job, type: :model do
         expect(job2.valid?).to eq false                  
       end
     end
+
+    describe "date" do
+      it "can't be in past" do
+        job =  Job.new(date: 10.day.ago)
+        job.valid?
+        result = job.errors.include?(:date)
+        expect(result).to be true 
+        expect(job.errors[:date]).to include(" date can't be in past or today.")              
+      end 
+
+      it "can't be today" do
+        job =  Job.new(date: Date.today)
+        job.valid?
+        result = job.errors.include?(:date)
+        expect(result).to be true 
+        expect(job.errors[:date]).to include(" date can't be in past or today.")              
+      end 
+
+      it "must be in future" do
+        job =  Job.new(date: 1.day.from_now)
+        job.valid?
+        result = job.errors.include?(:date)
+        expect(result).to be false 
+      end 
+    end   
 end

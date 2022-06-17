@@ -21,7 +21,7 @@ describe 'Headhunter edit a job opening' do
       fill_in 'Salary', with: '9999'
       fill_in 'Level', with: 'Junior'
       fill_in 'Place', with: 'Remote Job'
-      fill_in 'Date', with: '21/11/2022'
+      fill_in 'Date', with: '21/11/2099'
       click_on 'Update Job'
     
       expect(page).to have_content 'Job Opening Test 123'
@@ -33,7 +33,7 @@ describe 'Headhunter edit a job opening' do
       job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                           skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                           company: 'Acme', level: 'Junior', place: 'Remote Job',
-                          date: '24/12/2099')
+                          date: 1.month.from_now)
       headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
       login_as(headhunter, :scope => :headhunter)
       visit root_path
