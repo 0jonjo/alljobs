@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   
-  before_action :authenticate_headhunter!, except: [:index, :show, :enroll]
+  before_action :authenticate_headhunter!, except: [:index, :show, :enroll, :search]
   
   def index
     @jobs = Job.page(params[:page])
@@ -33,8 +33,12 @@ class JobsController < ApplicationController
       flash.now[:alert] = "Job Opening was not edited."
       render :edit
     end
-    
   end
+  
+  def search
+    @code = params['query']
+    @job = Job.find_by(code: params['query'])
+  end   
 
   def destroy
     @job = Job.find(params[:id])

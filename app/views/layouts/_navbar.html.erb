@@ -26,4 +26,12 @@
         <%= link_to 'Login Headhunter', new_headhunter_session_path %>
       <% end %>
   <% end %>
+  
+  <% if user_signed_in? || headhunter_signed_in? %>
+    <%= form_with(url: search_jobs_path, method: :get) do |f| %>
+      <%= f.label :query, 'Search Job' %>
+      <%= f.text_field :query %>
+      <%= f.submit 'Search' %>
+    <% end %>  
+  <% end %>
 </nav>  

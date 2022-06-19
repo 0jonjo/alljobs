@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
     post :enroll
+    get 'search', on: :collection 
   end
 
   root to: 'pages#index'
