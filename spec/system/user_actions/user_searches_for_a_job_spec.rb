@@ -70,4 +70,21 @@ describe 'User searches for a job' do
     expect(page).not_to have_content('ZZZZZZZZ')
     expect(page).not_to have_content('Last test')
   end
+
+  it "without any result" do
+    job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
+    skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+    company: 'Acme', level: 'Junior', place: 'Remote Job',
+    date: 1.month.from_now)
+    user = User.create!(email: 'user@test.com', password: 'test123')
+    login_as(user)
+
+    visit root_path
+    fill_in 'Search Job', with: "ZZZZZZZ"
+    click_on 'Search'
+
+    expect(page).to have_content('No jobs openings found.')
+    expect(page).not_to have_content('jobs found.')
+  end
+
 end      
