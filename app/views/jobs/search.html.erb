@@ -1,9 +1,13 @@
 <h3>All results for <%= @code %></h3>
 
-<% if @job.present? %>
-   <p>1 job found.</p>
-   <dt>Code</dt>
-   <dd><%= @job.code %></dd>
-   <dt>Title</dt>
-   <dd><%= @job.title %></dd>
-<% end %>
+<% if @jobs.any? %>
+    <p><%= @jobs.count %> jobs found.</p>
+    <% @jobs.each do |j|  %>
+      <dt>Code</dt>
+      <dd><%= j.code %></dd>
+      <dt>Title</dt>
+      <dd><%= j.title %></dd>
+    <% end %>
+  <% else %> 
+    <p>No jobs openings found.</p> 
+  <% end %>

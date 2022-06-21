@@ -37,7 +37,7 @@ class JobsController < ApplicationController
   
   def search
     @code = params['query']
-    @job = Job.find_by(code: params['query'])
+    @jobs = Job.where("code LIKE ?", "%#{@code}%")
   end   
 
   def destroy
