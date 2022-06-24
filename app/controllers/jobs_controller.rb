@@ -36,8 +36,8 @@ class JobsController < ApplicationController
   end
   
   def search
-    @code = params['query']
-    @jobs = Job.where("code LIKE ?", "%#{@code}%")
+    @word = params['query']
+    @jobs = Job.where("code LIKE :search OR title LIKE :search OR description LIKE :search", search: "%#{@word}%")
   end   
 
   def destroy
