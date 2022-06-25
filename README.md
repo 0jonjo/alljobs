@@ -9,7 +9,7 @@ This is a TDD study project to a job opening website using Ruby on Rails.
 * Gems: devise (4.8.0), rspec-rails (5.0.2), kaminari (1.2.1)  
 
 - [x] 1. Headhunter creates an account 
-- [x] 2. Headhunter registers a job opening 
+- [x] 2. Headhunter registers/searchs a job opening
 - [x] 3. Candidate creates an account
 - [x] 4. Candidate completes his profile
 - [x] 5. Candidate applies for a job opening 
