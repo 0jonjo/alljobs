@@ -46,7 +46,7 @@ describe 'User searches for a job' do
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC54321')
-    job2 = Job.create!(title: 'Another test ABC', description: 'Lorem ipsum dolor sit amet', 
+    job2 = Job.create!(title: 'Another test', description: 'Lorem ipsum dolor sit amet', 
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)
@@ -64,9 +64,9 @@ describe 'User searches for a job' do
 
     expect(page).to have_content("All results for ABC")
     expect(page).to have_content("Abc12345")
-    expect(page).to have_content('Job Opening Test')
+    expect(page).to have_link('Job Opening Test')
     expect(page).to have_content("Abc54321")
-    expect(page).to have_content('Another test')
+    expect(page).to have_link('Another test')
     expect(page).not_to have_content('ZZZZZZZZ')
     expect(page).not_to have_content('Last test')
   end

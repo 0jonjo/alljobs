@@ -2,14 +2,7 @@
 
 <% if headhunter_signed_in? || user_signed_in? %>
   <% @jobs.each do |job| %>
-      <%= link_to job do %> 
-        <dt>Job</dt>
-        <dd><%= job.title %> - <%= job.code %></dd> 
-      <% end %>  
-      <dt>Deadline</dt>
-      <dd><%= job.date %></dd>
-      <br>
-    </p>
+    <%= render job %>   
   <% end %>
 <% end %>
 <%= paginate @jobs %>

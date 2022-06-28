@@ -2,11 +2,8 @@
 
 <% if @jobs.any? %>
     <p><%= @jobs.count %> jobs found.</p>
-    <% @jobs.each do |j|  %>
-      <dt>Code</dt>
-      <dd><%= j.code %></dd>
-      <dt>Title</dt>
-      <dd><%= j.title %></dd>
+    <% @jobs.each do |job|  %>
+      <%= render job %>
     <% end %>
   <% else %> 
     <p>No jobs openings found.</p> 

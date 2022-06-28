@@ -2,12 +2,7 @@
     <% if @job.applies.any? %> 
       <h4>All applies to this job</h4>
       <% @job.applies.each do |apply| %>
-        <%= link_to apply do %>
-          <dt>ID</dt>
-          <dd><%= apply.id %></dd>
-          <dt>User E-mail</dt> 
-          <dd><%= apply.user_email %></dd>
-        <% end %> 
+        <%= render apply %> 
       <% end %>        
     <% else %>
       <p>There is no apply for this job.</p>
