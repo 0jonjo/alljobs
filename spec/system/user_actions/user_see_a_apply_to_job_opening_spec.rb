@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 describe 'User applied to job opening' do
+  it 'and cant see the apply because without login' do
+    job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
+                      skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                      company: 'Acme', level: 'Junior', place: 'Remote Job',
+                      date: 1.month.from_now)
+    user = User.create!(:email => 'user@test.com', :password => 'test123')
+    user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
+    apply = Apply.create!(:job => job, :user => user)
+    apply2 = Apply.create!(:job => job, :user => user2)
+    login_as(user, :scope => :user)
+
+    visit apply_path(apply)
+  end
+    
   it 'and see only your apply' do
     job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
                       skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
@@ -43,19 +57,4 @@ describe 'User applied to job opening' do
     expect(page).to have_content('Apply ID')
     expect(page).not_to have_content('3')
   end
-
-  it "remove the apply" do
-    job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
-    skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
-    company: 'Acme', level: 'Junior', place: 'Remote Job',
-    date: 1.month.from_now)
-    user = User.create!(:email => 'user@test.com', :password => 'test123')
-    apply = Apply.create!(:job => job, :user => user)
-    
-    login_as(user, :scope => :user)
-
-    visit apply_path(apply)
-    click_on 'Remove Apply'
-    expect(page).to have_content('The application for this job has been removed.')
-  end  
 end

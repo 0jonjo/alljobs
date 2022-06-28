@@ -1,37 +1,11 @@
 <h3>Applies</h3>
 
-<% if headhunter_signed_in? %>
-  <% unless @applies.empty? %>
-    <% @applies.each do |apply| %>
-      <%= link_to apply do %>
-        <dt>Apply ID<dt> 
-        <dd><%= apply.id %></dd>
-        <dt>Job Title</dt> 
-        <dd><%= apply.job.title %></dd>
-        <dt>User E-mail</dt> 
-        <dd><%= apply.user_email %></dd>
-      <% end %>
-    <% end %>
-  <% else %>  
-    <p>There aren't any apply.</p>
+<% if @applies.any? %>
+  <% @applies.each do |apply| %>
+     <%= render apply %>
   <% end %>  
-<% end %>
-
-<% if user_signed_in? %>
-  <% unless @applies.empty? %>
-    <% @applies.each do |apply| %>
-        <% if apply.user_id == current_user.id %>
-          <%= link_to apply do %>
-            <dt>Apply ID<dt> 
-            <dd><%= apply.id %></dd>
-            <dt>Job Title</dt> 
-            <dd><%= apply.job.title %></dd>
-          <% end %>
-        <% end %>  
-    <% end %>
-  <% else %>  
-    <p>There aren't any apply.</p>
-  <% end %>  
+<% else %>  
+  <p>There aren't any apply.</p>
 <% end %>
 
 <%= paginate @applies %>

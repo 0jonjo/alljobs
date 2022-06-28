@@ -3,7 +3,11 @@ class AppliesController < ApplicationController
   before_action :authenticate_headhunter!, except: [:index, :show, :destroy]
   
   def index
-    @applies = Apply.page(params[:page])
+    if user_signed_in?
+      @applies = current_user.applies.page(params[:page]) 
+    else
+      @applies = Apply.page(params[:page])
+    end
   end
 
   def new 
