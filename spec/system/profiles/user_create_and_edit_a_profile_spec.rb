@@ -6,7 +6,7 @@ describe 'User create a profile' do
       login_as(user, :scope => :user)
       visit root_path
       within('nav') do
-        click_on 'Create/Edit Profile'
+        click_on 'Profile'
       end 
       
       expect(current_path).to eq new_profile_path
@@ -33,7 +33,7 @@ describe 'User create a profile' do
       user = User.create!(:email => 'user@test.com', :password => 'test123')
       login_as(user, :scope => :user)
       visit root_path
-      click_on 'Create/Edit Profile'
+      click_on 'Profile'
     
       fill_in 'Name', with: ''
       fill_in 'Social name', with: ''
@@ -45,16 +45,18 @@ describe 'User create a profile' do
       
       expect(page).to have_content "Profile doesn't registered." 
       expect(current_path).to eq profiles_path
-    end  
+    end 
+end   
       
-  describe 'User edit a profile' do
+describe 'User edit a profile' do
     it 'with sucess' do
         user = User.create!(:email => 'user@test.com', :password => 'test123')
         login_as(user, :scope => :user)
         profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
                                   educacional_background: "Test 3", experience: 'test 4', user_id: user.id)
         visit root_path        
-        click_on 'Create/Edit Profile'
+        click_on 'Profile'
+        click_on 'Edit'
 
         expect(current_path).to eq edit_profile_path(user)
 
@@ -84,7 +86,8 @@ describe 'User create a profile' do
         profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
                                   educacional_background: "Test 3", experience: 'test 4', user_id: user.id)
         visit root_path        
-        click_on 'Create/Edit Profile'
+        click_on 'Profile'
+        click_on 'Edit'
 
         expect(current_path).to eq edit_profile_path(user)
 
@@ -98,6 +101,5 @@ describe 'User create a profile' do
 
         expect(current_path).to eq profile_path(user)
         expect(page).to have_content "Profile doesn't edited."
-      end
-    end  
+      end  
 end

@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
     if Profile.where("user_id = ?", current_user.id).blank?
       @profile = current_user.profiles.build
     else
-      redirect_to edit_profile_path(current_user.id)
+      redirect_to profile_path(current_user.id)
     end
   end
 
@@ -43,12 +43,19 @@ class ProfilesController < ApplicationController
   end
  
   def show
+    if user_signed_in? && Profile.where(user_id: current_user.id).blank?
+      @profile = current_user.profiles.build
+    end  
+    @profile = Profile.find(params[:id]) 
+    if user_signed_in? && @profile.user != current_user
+      flash[:alert] = 'You do not have access to this profile.'
+      redirect_to root_path
+    end 
     if headhunter_signed_in?
       headhunter_id = current_headhunter.id
     end  
-    @profile = Profile.find_by(user_id: params[:id])
     @comments = @profile.comments.all
-    @comment = @profile.comments.build
+    @comment = @profile.comments.build 
   end
 
   private

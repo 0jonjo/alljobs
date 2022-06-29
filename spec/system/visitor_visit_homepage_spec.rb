@@ -8,7 +8,7 @@ describe 'Visitor visit homepage' do
     within('nav') do
       expect(page).to have_link('Login User', href: new_user_session_path)
       expect(page).to have_link('Login Headhunter', href: new_headhunter_session_path)
-      expect(page).not_to have_link('Create/Edit Profile', href: new_profile_path)
+      expect(page).not_to have_link('Profile', href: new_profile_path)
       expect(page).not_to have_link('Logout User', href: destroy_user_session_path)
       expect(page).not_to have_link('Logout Headhunter', href: destroy_headhunter_session_path)
       expect(page).not_to have_link('Openings', href: jobs_path)
@@ -26,7 +26,7 @@ describe 'Visitor visit homepage' do
 
       expect(page).to have_link('All Jobs', href: root_path)
       within('nav') do
-        expect(page).to have_link('Create/Edit Profile', href: new_profile_path)
+        expect(page).to have_link('Profile', href: new_profile_path)
         expect(page).to have_link('Openings', href: jobs_path)
         expect(page).to have_link('Logout User', href: destroy_user_session_path)
         expect(page).not_to have_link('Applies', href: applies_path)
