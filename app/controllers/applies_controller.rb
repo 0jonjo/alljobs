@@ -14,7 +14,7 @@ class AppliesController < ApplicationController
     @apply = Apply.new
   end
 
-  def createe
+  def create
     @apply = Apply.new(apply_params)
     if @apply.save
       :new
@@ -36,7 +36,12 @@ class AppliesController < ApplicationController
 
   def show
     @apply = Apply.find(params[:id])
+    if user_signed_in? && @apply.user != current_user
+      flash[:alert] = 'You do not have access to this apply.'
+      redirect_to root_path
+    end     
   end
+
 
   def star_select
     headhunter = current_headhunter

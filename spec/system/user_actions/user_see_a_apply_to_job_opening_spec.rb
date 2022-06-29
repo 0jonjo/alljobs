@@ -13,6 +13,23 @@ describe 'User applied to job opening' do
     login_as(user, :scope => :user)
 
     visit apply_path(apply)
+    expect(current_path).to eq(apply_path(1))
+  end
+
+  it 'and cant see the other user apply' do
+    job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
+                      skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                      company: 'Acme', level: 'Junior', place: 'Remote Job',
+                      date: 1.month.from_now)
+    user = User.create!(:email => 'user@test.com', :password => 'test123')
+    user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
+    apply = Apply.create!(:job => job, :user => user)
+    apply2 = Apply.create!(:job => job, :user => user2)
+    login_as(user, :scope => :user)
+
+    visit apply_path(apply2)
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content('You do not have access to this apply.')
   end
     
   it 'and see only your apply' do
