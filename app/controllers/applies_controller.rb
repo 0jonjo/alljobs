@@ -1,6 +1,6 @@
 class AppliesController < ApplicationController
   
-  before_action :authenticate_headhunter!, except: [:index, :show, :destroy]
+  before_action :authenticate_headhunter!, except: [:index, :show, :destroy, :create]
   
   def index
     if user_signed_in?
@@ -15,11 +15,16 @@ class AppliesController < ApplicationController
   end
 
   def create
-    @apply = Apply.new(apply_params)
-    if @apply.save
-      :new
-      redirect_to @apply
-      flash[:notice] = "You successfully applied to this job."
+    if Apply.where(job_id: params[:job_id], user_id: current_user.id)
+      flash[:alert] = "You're already applied to this job opening."
+      redirect_to request.referrer
+    else
+      @apply = Apply.new(apply_params)
+      if @apply.save
+        :new
+        redirect_to @apply
+        flash[:notice] = "You successfully applied to this job."
+      end
     end  
   end
  

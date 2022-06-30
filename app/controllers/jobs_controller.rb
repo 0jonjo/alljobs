@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   
-  before_action :authenticate_headhunter!, except: [:index, :show, :enroll, :search]
+  before_action :authenticate_headhunter!, except: [:index, :show, :search]
   
   def index
     @jobs = Job.page(params[:page])
@@ -53,19 +53,6 @@ class JobsController < ApplicationController
 
   def applies
     @job = Job.find(params[:id])
-  end
-
-  def enroll
-    if Apply.exists?(job_id: params[:job_id], user_id: params[:user_id])
-      @apply = Apply.where(job_id: params[:job_id], user_id: params[:user_id])
-      flash[:alert] = "You're already applied to this job opening."
-      redirect_to request.referrer
-    else
-      @subscription = Apply.new(job_id: params[:job_id], user_id: params[:user_id], application_user: true)
-      @subscription.save
-      redirect_to @subscription
-      flash[:notice] = "You successfully applied to this job opening."
-    end
   end
 
   private

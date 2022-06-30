@@ -16,7 +16,7 @@ describe 'User apllies to a job opening' do
     expect(page).to have_content('Job Opening Test 123')
     click_on 'Job Opening Test 123'
     
-    click_on 'Apply for this Job'
+    click_on 'Apply'
     expect(page).to have_content('user@test.com')
     expect(page).to have_content('Job Opening Test 123')
   end
@@ -33,7 +33,7 @@ describe 'User apllies to a job opening' do
     visit root_path
     click_on 'Openings'
     click_on 'Job Opening Test 123'
-    click_on 'Apply for this Job'
+    click_on 'Apply'
     expect(page).to have_content("You're already applied to this job opening.")
   end  
 

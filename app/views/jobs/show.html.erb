@@ -19,7 +19,7 @@
 
 <% if user_signed_in? %>
   <ul>
-    <li><%= link_to "Apply for this Job", job_enroll_path(@job, user_id: current_user.id), method: :post %></li>
+    <li><%= link_to "Apply", applies_path(@job, user_id: current_user.id), method: :post %></li>
   </ul>
 <% end %>
 
