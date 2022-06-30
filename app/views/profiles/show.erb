@@ -1,9 +1,3 @@
-<% if headhunter_signed_in? %>
-  <% if Star.exists? %>
-    <p>⭐</p>
-  <% end %>
-<% end %>
-
 <% if @profile.social_name.blank? %>
   <h3><%= @profile.name %></h3>  
 <% else %>

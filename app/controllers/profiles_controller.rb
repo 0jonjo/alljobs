@@ -9,8 +9,8 @@ class ProfilesController < ApplicationController
   end
   
   def new
-    if Profile.where("user_id = ?", current_user.id).blank?
-      @profile = current_user.profiles.build
+    if Profile.where(user_id: current_user.id).blank?
+      @profile = Profile.new
     else
       redirect_to profile_path(current_user.id)
     end
@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
     @user = current_user
     @profile = @user.profiles.create(profile_params)
     if @profile.save
-      :new
+      flash[:notice] = "Profile registered."
       redirect_to @profile
     else
       flash.now[:alert] = "Profile doesn't registered." 
@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = current_user.profiles.find_by(user_id: current_user.id)
+    @profile = Profile.find_by(user_id: current_user.id)
     user_id = @profile.user_id
   end
 
@@ -63,6 +63,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
   end  
   def profile_params
-    params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background, :experience)
+    params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background, :experience, :user_id)
   end
 end

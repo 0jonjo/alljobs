@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'User create a profile' do   
-    it 'with sucess' do
+  it 'with sucess' do
       user = User.create!(:email => 'user@test.com', :password => 'test123')
       login_as(user, :scope => :user)
       visit root_path
@@ -21,15 +21,16 @@ describe 'User create a profile' do
 
       expect(current_path).to eq profile_path(user)
 
+      expect(page).to have_content "Profile registered."
       expect(page).not_to have_content 'User test name'
       expect(page).to have_content 'Social name test'
       expect(page).to have_content '1931-12-31'
       expect(page).to have_content 'Test 1'
       expect(page).to have_content 'Test 2'
       expect(page).to have_content 'Test 3'
-    end
+  end
 
-    it 'without sucess - forget some items' do
+  it 'without sucess - forget some items' do
       user = User.create!(:email => 'user@test.com', :password => 'test123')
       login_as(user, :scope => :user)
       visit root_path
@@ -45,11 +46,11 @@ describe 'User create a profile' do
       
       expect(page).to have_content "Profile doesn't registered." 
       expect(current_path).to eq profiles_path
-    end 
+  end 
 end   
       
 describe 'User edit a profile' do
-    it 'with sucess' do
+  it 'with sucess' do
         user = User.create!(:email => 'user@test.com', :password => 'test123')
         login_as(user, :scope => :user)
         profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
@@ -80,7 +81,7 @@ describe 'User edit a profile' do
         expect(page).to have_content 'Test3'
       end
 
-      it 'without sucess' do
+  it 'without sucess' do
         user = User.create!(:email => 'user@test.com', :password => 'test123')
         login_as(user, :scope => :user)
         profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',

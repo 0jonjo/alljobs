@@ -7,8 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Default Admin
-Headhunter.create(email: 'herbiehancock@ndtheheadhunters.com',
-             password: 'watermelonman')
-#Default User
-User.create(email: 'usuario@disco1995.com.br',
-             password: 'd2blackalien')
+Headhunter.create(email: 'admin@test.com',
+             password: 'test123')
+#Default User and Profile
+user = User.create(email: 'user@test.com',
+             password: 'test123')
+profile = Profile.create!(name: 'Tester', social_name: 'Tester Social Name', 
+                          birthdate: '21/03/1977', educacional_background: "High School", 
+                          experience: 'Dancer long time ago', user_id: user.id)
