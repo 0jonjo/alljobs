@@ -23,8 +23,22 @@ class StarsController < ApplicationController
     redirect_to @profile
   end
 
+  def create
+    if Star.where(headhunter_id: params[:headhunter_id], profile_id: params[:profile_id], apply_id: params[:apply_id]).exists?
+      flash[:alert] = "You're already starred this apply."
+    elsif
+      @star = Star.new(headhunter_id: params[:headhunter_id], profile_id: params[:profile_id], apply_id: params[:apply_id])
+      if @star.save
+        flash[:notice] = "You successfully starred this apply."
+      else  
+        flash[:alert] = "You can't starred this apply."
+      end
+    end
+    redirect_to request.referrer
+  end
+
   private
   def star_params
-    params.require(:star).permit(:user_id, :headhunter_id, :apply_id)
+    params.require(:star).permit(:profile_id, :headhunter_id, :apply_id)
   end
 end

@@ -47,7 +47,6 @@ class AppliesController < ApplicationController
     end     
   end
 
-
   def star_select
     headhunter = current_headhunter
     if Star.where(headhunter: headhunter, profile_id: params[:profile_id], apply_id: params[:apply_id]).exists?

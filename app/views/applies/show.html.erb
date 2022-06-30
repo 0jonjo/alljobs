@@ -12,7 +12,7 @@
 
 <% if headhunter_signed_in? %>
     <div>
-      <%= link_to "Star This Apply", apply_star_select_path(@apply, profile_id: @apply.user_id), method: :post %>
+      <%= link_to "Star This Apply", stars_path(apply_id: @apply.id, profile_id: @apply.user_id, headhunter_id: current_headhunter.id), method: :post %>
     </div>
 <% end %>
 
