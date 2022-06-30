@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   
- before_action :authenticate_user!, except: [:index, :show, :star_select]
- before_action :authenticate_headhunter!, only: [:star_select]
+ before_action :authenticate_user!, except: [:index, :show]
  before_action :set_profile, only: [:update]
 
   def index
@@ -43,9 +42,6 @@ class ProfilesController < ApplicationController
   end
  
   def show
-    if user_signed_in? && Profile.where(user_id: current_user.id).blank?
-      @profile = current_user.profiles.build
-    end  
     @profile = Profile.find(params[:id]) 
     if user_signed_in? && @profile.user != current_user
       flash[:alert] = 'You do not have access to this profile.'

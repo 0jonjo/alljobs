@@ -9,5 +9,5 @@ class User < ApplicationRecord
   has_many :applies
   has_many :jobs, through: :applies
   accepts_nested_attributes_for :profiles
-  validates :profiles, length: { in: 0..1 }
+  #validates :profiles, length: { in: 0..1 }
 end
