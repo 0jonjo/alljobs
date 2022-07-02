@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "User try to acess a profile" do
-  it "and are not his profile", :type => :request do
+  it "and are not his profile" do
     user = User.create!(:email => 'user@test.com', :password => 'test123')
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
