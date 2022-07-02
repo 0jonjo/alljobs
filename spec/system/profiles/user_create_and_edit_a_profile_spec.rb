@@ -81,7 +81,7 @@ describe 'User edit a profile' do
         expect(page).to have_content 'Test3'
       end
 
-  it 'without sucess' do
+  it 'without sucess - forget items' do
         user = User.create!(:email => 'user@test.com', :password => 'test123')
         login_as(user, :scope => :user)
         profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
@@ -103,4 +103,16 @@ describe 'User edit a profile' do
         expect(current_path).to eq profile_path(user)
         expect(page).to have_content "Profile doesn't edited."
       end  
+
+      it 'without sucess - is not his profile' do
+        user = User.create!(:email => 'user@test.com', :password => 'test123')
+        user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
+        profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
+                                  educacional_background: "Test 3", experience: 'test 4', user_id: user.id)
+        login_as(user2, :scope => :user)
+        visit edit_profile_path(user)
+
+        expect(current_path).to eq(root_path)
+        expect(page).to have_content 'You do not have access to this profile.'
+      end    
 end

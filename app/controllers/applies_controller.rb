@@ -46,21 +46,7 @@ class AppliesController < ApplicationController
       redirect_to root_path
     end     
   end
-
-  def star_select
-    headhunter = current_headhunter
-    if Star.where(headhunter: headhunter, profile_id: params[:profile_id], apply_id: params[:apply_id]).exists?
-      flash[:alert] = "You're already starred this apply."
-    elsif
-      @star = Star.new(headhunter: headhunter, profile_id: params[:profile_id], apply_id: params[:apply_id])
-      @star.save
-      flash[:notice] = "You successfully starred this apply."
-    else  
-      flash[:alert] = "You can't starred this apply."
-    end
-    redirect_to request.referrer
-  end
-
+  
   private
   def apply_params
     params.require(:apply).permit(:application_user, :accepted_headhunter, :feedback_headhunter, :user_id, :job_id)

@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   
  before_action :authenticate_user!, except: [:index, :show]
  before_action :set_profile, only: [:update]
+ before_action :set_profile_check_user, only: [:show, :edit, :update]
 
   def index
     @profiles = Profile.page(params[:page])
@@ -28,8 +29,6 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = Profile.find_by(user_id: current_user.id)
-    user_id = @profile.user_id
   end
 
   def update
@@ -42,11 +41,6 @@ class ProfilesController < ApplicationController
   end
  
   def show
-    @profile = Profile.find(params[:id]) 
-    if user_signed_in? && @profile.user != current_user
-      flash[:alert] = 'You do not have access to this profile.'
-      redirect_to root_path
-    end 
     if headhunter_signed_in?
       headhunter_id = current_headhunter.id
     end  
@@ -58,7 +52,16 @@ class ProfilesController < ApplicationController
   def set_profile
     @profile = Profile.find(params[:id])
   end  
+
   def profile_params
     params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background, :experience, :user_id)
+  end
+  
+  def set_profile_check_user
+    @profile = Profile.find(params[:id]) 
+    if user_signed_in? && @profile.user != current_user
+      flash[:alert] = 'You do not have access to this profile.'
+      redirect_to root_path
+    end
   end
 end
