@@ -1,8 +1,14 @@
 <h3>Openings</h3>
 
 <% if headhunter_signed_in? || user_signed_in? %>
-  <% @jobs.each do |job| %>
-    <%= render job %>   
-  <% end %>
+  <% if @jobs.any? %>  
+    <% @jobs.each do |job| %>
+      <% if job.published? %>
+        <%= render job %>
+      <% end %>       
+    <% end %>
+  <% else %>
+    <p>There are not any job opening published.</p>
+  <% end %>  
 <% end %>
 <%= paginate @jobs %>
