@@ -1,3 +1,9 @@
+<% if @job.errors.any? %>
+  <% @job.errors.full_messages.each do |message|%>
+    <p><%= message %></p>
+  <% end %>  
+<% end %>
+
 <%= form_with model: job do |form| %>
    <div>
     <%= form.label :title %>

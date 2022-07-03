@@ -53,6 +53,9 @@ describe 'Headhunter edit a job opening' do
       click_on 'Update Job'
     
       expect(page).to have_content "Job Opening was not edited."
+      expect(page).to have_content("Title can't be blank")
+      expect(page).to have_content("Skills can't be blank")
+      expect(page).to have_content("Salary can't be blank")
       expect(current_path).to eq job_path(1)
     end
 end

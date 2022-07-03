@@ -90,5 +90,8 @@ describe 'Headhunter create a job opening' do
       click_on 'Create Job'
   
       expect(page).to have_content("Job Opening was not registered.")
+      expect(page).to have_content("Title can't be blank")
+      expect(page).to have_content("Skills can't be blank")
+      expect(page).to have_content("Salary can't be blank")
     end
 end

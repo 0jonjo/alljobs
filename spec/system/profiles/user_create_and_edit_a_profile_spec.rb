@@ -44,7 +44,10 @@ describe 'User create a profile' do
       fill_in 'Experience', with: ''
       click_on 'Create Profile'
       
-      expect(page).to have_content "Profile doesn't registered." 
+      expect(page).to have_content "Profile doesn't registered."
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Birthdate can't be blank")
+      expect(page).to have_content("Experience can't be blank") 
       expect(current_path).to eq profiles_path
   end 
 end   
@@ -102,6 +105,9 @@ describe 'User edit a profile' do
 
         expect(current_path).to eq profile_path(user)
         expect(page).to have_content "Profile doesn't edited."
+        expect(page).to have_content("Name can't be blank")
+        expect(page).to have_content("Birthdate can't be blank")
+        expect(page).to have_content("Experience can't be blank")
       end  
 
       it 'without sucess - is not his profile' do
