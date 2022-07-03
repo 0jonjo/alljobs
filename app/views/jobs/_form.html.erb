@@ -40,6 +40,11 @@
   </div>
 
   <div>
+    <%= form.label :job_status %>
+    <%= form.select :job_status, Job.job_statuses.keys %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
