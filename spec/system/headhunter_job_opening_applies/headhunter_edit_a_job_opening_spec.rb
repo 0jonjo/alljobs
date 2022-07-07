@@ -5,7 +5,7 @@ describe 'Headhunter edit a job opening' do
       job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                           skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                           company: 'Acme', level: 'Junior', place: 'Remote Job',
-                          date: '24/12/2099')
+                          date: 1.month.from_now, job_status: :published)
       headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
       login_as(headhunter, :scope => :headhunter)
       visit root_path

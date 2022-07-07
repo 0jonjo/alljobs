@@ -8,7 +8,7 @@ class Job < ApplicationRecord
 
   before_validation :generate_code
 
-  enum job_status: { draft: 0, published: 1, archived: 2 }
+  enum job_status: { draft: 0, published: 1, archived: 9 }
   
   private
   def generate_code

@@ -13,11 +13,11 @@ describe 'User see job openings' do
     job3 = Job.create!(title: 'Test 789', description: 'Lorem ipsum dolor sit amet', 
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
-                        date: 1.month.from_now, job_status:2) 
+                        date: 1.month.from_now, job_status: :archived) 
     job4 = Job.create!(title: 'Test 101112', description: 'Lorem ipsum dolor sit amet', 
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
-                        date: 1.month.from_now, job_status:0)                                                           
+                        date: 1.month.from_now, job_status: :draft)                                                           
     headhunter = Headhunter.create!(:email => 'headhunter@test.com', :password => 'test123')
     login_as(headhunter, :scope => :headhunter)
     visit jobs_path

@@ -1,0 +1,12 @@
+<% if @job.published? %>
+  <%= button_to "Change to Draft", drafted_job_path(@job.id) %>
+  <%= button_to "Change to Archived", archived_job_path(@job.id) %>
+<% elsif @job.draft? %>
+  <%= button_to "Change to Published", published_job_path(@job.id) %>
+  <%= button_to "Change to Archived", archived_job_path(@job.id) %>   
+<% else %>
+  <%= button_to "Change to Draft", drafted_job_path(@job.id) %>
+  <%= button_to "Change to Published", published_job_path(@job.id) %>
+<% end %>
+
+

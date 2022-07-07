@@ -1,7 +1,8 @@
 class JobsController < ApplicationController
   
   before_action :authenticate_headhunter!, except: [:index, :show, :search]
-  
+  before_action :find_id_job, only: [:edit, :update, :destroy, :show, :applies, :drafted, :archived, :published]
+
   def index
     @jobs = Job.page(params[:page])
   end
@@ -22,7 +23,6 @@ class JobsController < ApplicationController
   end
 
   def edit
-    @job = Job.find(params[:id])
   end
 
   def update
@@ -41,23 +41,48 @@ class JobsController < ApplicationController
   end   
 
   def destroy
-    @job = Job.find(params[:id])
     @job.destroy
-
     redirect_to root_path
   end
 
   def show
-    @job = Job.find(params[:id])
+  end
+
+  def drafted
+    if @job.draft!
+      redirect_to @job
+    else
+      flash.now[:alert] = "Job Opening was not edited."
+      render :new 
+    end  
+  end  
+
+  def archived
+    if @job.archived!
+      redirect_to @job
+    else
+      flash.now[:alert] = "Job Opening was not edited."
+      render :new 
+    end  
+  end
+  
+  def published
+    if @job.published!
+      redirect_to @job
+    else
+      flash.now[:alert] = "Job Opening was not edited."
+      render :new 
+    end  
   end
 
   def applies
-    @job = Job.find(params[:id])
   end
 
   private
   def job_params
     params.require(:job).permit(:title, :code, :description, :skills, :salary, :company, :level, :place, :date, :job_status)
   end
-
+  def find_id_job
+    @job = Job.find(params[:id])
+  end
 end
