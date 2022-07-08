@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-#Ajustar o que acontece se o user que ainda não tem profile feito
-#e clica em Profile (a rota do show)
-
 describe 'User see his profile' do
   it 'with sucess' do
     user = User.create!(:email => 'user@test.com', :password => 'test123')
