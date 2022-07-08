@@ -1,8 +1,7 @@
-<%= link_to apply do %>
-  <dt>Apply ID<dt> 
-  <dd><%= apply.id %></dd>
-  <dt>Job Title</dt> 
-  <dd><%= apply.job.title %></dd>
-  <dt>User E-mail</dt> 
-  <dd><%= apply.user_email %></dd>
+<%= link_to apply do %>   
+  <p>
+    <%= apply.id %> - 
+    <%= apply.job.title %> - 
+    <%= apply.user_email %>
+  </p>
 <% end %>

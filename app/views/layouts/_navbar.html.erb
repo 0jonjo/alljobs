@@ -5,6 +5,7 @@
   <% if user_signed_in? %>
     <%= link_to 'Profile', new_profile_path %> -
     <%= link_to 'Openings', jobs_path %> -
+    <%= link_to 'My Applies', applies_path %> -
     <%= link_to 'Logout User', destroy_user_session_path, method: :delete %> |
     <span>You are <%= current_user.email %></span> 
   <% else %>

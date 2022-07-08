@@ -1,0 +1,17 @@
+<% if @apply.errors.any? %>
+  <% @apply.errors.full_messages.each do |message|%>
+    <p><%= message %></p>
+  <% end %>  
+<% end %>
+
+<%= form_with model: apply do |form| %>
+
+ <div>
+    <%= form.label :feedback_headhunter %>
+    <%= form.text_area :feedback_headhunter %>
+ </div>
+
+ <div>
+    <%= form.submit %>
+ </div>
+<% end %>

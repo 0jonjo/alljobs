@@ -19,6 +19,7 @@ describe 'User apllies to a job opening' do
     click_on 'Apply'
     expect(page).to have_content('user@test.com')
     expect(page).to have_content('Job Opening Test 123')
+    expect(page).to have_content("You successfully applied to this job.")
   end
 
   it 'without sucess' do

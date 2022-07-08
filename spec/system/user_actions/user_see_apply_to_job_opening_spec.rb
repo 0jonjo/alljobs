@@ -71,7 +71,6 @@ describe 'User applied to job opening' do
     visit applies_path
     expect(page).to have_content('Job Opening Test')
     expect(page).to have_content('Other Job Opening')
-    expect(page).to have_content('Apply ID')
     expect(page).not_to have_content('3')
   end
 end
