@@ -4,11 +4,11 @@
     <% @profiles.each do |profile| %>
       <dt>Name</dt>
       <dd>
-      <% if profile.social_name.blank? %>
-        <%= link_to profile.name, profile %>
-      <% else %>
-        <%= link_to profile.social_name, profile %>
-      <% end %>
+        <% if profile.social_name.blank? %>
+          <%= link_to profile.name, profile %>
+        <% else %>
+          <%= link_to profile.social_name, profile %>
+        <% end %>
       </dd>
       <dt>ID</dt>
       <dd><%= profile.user_id %></dd>  

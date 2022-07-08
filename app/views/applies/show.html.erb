@@ -21,7 +21,7 @@
       <%= link_to "Star This Apply", stars_path(apply_id: @apply.id, profile_id: @apply.user_id, headhunter_id: current_headhunter.id), method: :post %>
     </div>
     <div>
-      <%= link_to "Reject This Apply", edit_apply_path %>
+      <%= link_to "Reject/Feedback This Apply", edit_apply_path %>
     </div>
 <% end %>
 
