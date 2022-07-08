@@ -1,8 +1,8 @@
 class ProfilesController < ApplicationController
   
  before_action :authenticate_user!, except: [:index, :show]
- before_action :set_profile, only: [:update]
- before_action :set_profile_check_user, only: [:show, :edit, :update]
+ before_action :authenticate_headhunter!, only: [:index]  
+ before_action :set_profile_check_user, only: [:show, :update, :edit, :update]
 
   def index
     @profiles = Profile.page(params[:page])
