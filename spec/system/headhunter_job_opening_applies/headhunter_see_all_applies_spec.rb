@@ -24,10 +24,10 @@ describe 'Headhunter sees all applies' do
     end
 
     expect(page).to have_content('Applies')
-    expect(page).to have_link('Job Opening Test', href: apply_path(1))
-    expect(page).to have_link('Other Job Opening', href: apply_path(2))
-    expect(page).to have_content('1')
-    expect(page).to have_content('2')
+    expect(page).to have_link('1', href: apply_path(1))
+    expect(page).to have_link('2', href: apply_path(2))
+    expect(page).to have_content('Job Opening Test')
+    expect(page).to have_content('Other Job Opening')
     expect(page).to have_content('user1@test.com')
     expect(page).to have_content('user2@test.com')
     expect(page).not_to have_content('3')

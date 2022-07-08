@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Headhunter stars a apply' do
+describe 'Headhunter stars an apply' do
   it 'with sucess and try again' do
     user = User.create!(:email => 'user@test.com', :password => 'test123')
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
@@ -17,7 +17,7 @@ describe 'Headhunter stars a apply' do
 
     click_on 'Openings'
     click_on "Job Opening Test"
-    click_on "user@test.com"
+    click_on "1"
     click_on "Star This Apply"
 
     expect(page).to have_content("You successfully starred this apply.")

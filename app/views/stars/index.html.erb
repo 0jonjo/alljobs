@@ -1,31 +1,29 @@
 <h3>Stars</h3>
 
-<% if headhunter_signed_in? %>
-    <% if @stars.any? %>
-      <% @stars.each do |star| %>
-        <% if star.headhunter_id == current_headhunter.id %>
-          <dt>Name</dt>
-          <dd>
-            <% if star.profile.social_name.blank? %>
-              <%= link_to star.profile.name, profile_path(star.profile.user_id) %><br>
-            <% else %>
-              <%= link_to star.profile.social_name, profile_path(star.profile.user_id) %><br>
-            <% end %>
-          </dd>
-          <dt>Apply ID</dt> 
-          <dd><%= link_to star.apply_id, apply_path(star.apply_id) %></dd>
-          <p>
-            <%= link_to "Remove Star", star_path(star), 
-                                      method: :delete,
-                                      data: { confirm: "Are you sure?" } %> 
-          </p>
+<% if @stars.any? %>
+  <% @stars.each do |star| %>
+    <% if star.headhunter_id == current_headhunter.id %>
+      <dt>Name</dt>
+      <dd>
+        <% if star.profile.social_name.blank? %>
+          <%= link_to star.profile.name, profile_path(star.profile.user_id) %><br>
         <% else %>
-          <p>There is no apply selected as a star.</p>      
+          <%= link_to star.profile.social_name, profile_path(star.profile.user_id) %><br>
         <% end %>
-      <% end %>  
+      </dd>
+      <dt>Apply ID</dt> 
+      <dd><%= link_to star.apply_id, apply_path(star.apply_id) %></dd>
+      <p>
+        <%= link_to "Remove Star", star_path(star), 
+                                  method: :delete,
+                                  data: { confirm: "Are you sure?" } %> 
+          </p>
     <% else %>
-      <p>There is no apply selected as a star.</p>  
-    <% end %>  
-<% end %>
+      <p>There is no apply selected as a star.</p>      
+    <% end %>
+  <% end %>  
+<% else %>
+  <p>There is no apply selected as a star.</p>  
+<% end %>  
 
 <%= paginate @stars %>
