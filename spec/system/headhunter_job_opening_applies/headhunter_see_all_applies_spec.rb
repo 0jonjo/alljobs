@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Headhunter sees all applies' do
   it 'with sucess' do
-   job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
+    job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                        skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                        company: 'Acme', level: 'Junior', place: 'Remote Job',
                        date: 1.month.from_now)
@@ -15,8 +15,8 @@ describe 'Headhunter sees all applies' do
     user_that_not_apply = User.create!(:email => 'user3@test.com', :password => 'test123')
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     login_as(headhunter, :scope => :headhunter)
-    apply1 = Apply.create!(:job => job1, :user => user1)
-    apply2 = Apply.create!(:job => job2, :user => user2)
+    apply1 = Apply.create!(job: job1, user: user1)
+    apply2 = Apply.create!(job: job2, user: user2)
     visit root_path
 
     within('nav') do
