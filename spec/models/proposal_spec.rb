@@ -31,7 +31,5 @@ RSpec.describe Proposal, type: :model do
       proposal.valid?
       expect(proposal.errors.include?(:salary)).to be true                       
     end
-
-    #:expectations, :salary, :apply_id
   end    
 end

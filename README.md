@@ -17,7 +17,7 @@ This is a TDD study project to a job opening website using Ruby on Rails.
 - [x] 7. Headhunter writes comments on the applicant's profile for a job 
 - [x] 8. Headhunter stars a profile
 - [x] 9. Headhunter rejects applicant providing feedback
-10. Headhunter sends proposal to applicant
+- [x] 10. Headhunter sends proposal to applicant
 11. Applicant receives feedback if rejected for a job
 12. Candidate receives proposal sent by headhunter
 13. Candidate accepts/rejects proposal

@@ -1,8 +1,8 @@
 class ProposalsController < ApplicationController
 
   before_action :authenticate_headhunter!, except: [:show, :index]
-  before_action :find_proposal, only: [:show]
-  before_action :find_apply, only: [:show, :new, :create]
+  before_action :find_proposal, only: [:show, :edit, :update]
+  before_action :find_apply, only: [:show, :new, :create, :edit, :update]
   before_action :already_proposal, only: [:new, :create]
 
   def index
@@ -11,6 +11,19 @@ class ProposalsController < ApplicationController
 
   def new
     @proposal = Proposal.new
+  end
+
+  def edit
+  end
+
+  def update
+    if @proposal.update(proposal_params)
+      flash[:notice] = "You successfully edited this proposal."
+      redirect_to @apply
+    else
+      flash.now[:alert] = "You do not edit this proposal."
+      render :edit
+    end
   end
   
   def destroy
