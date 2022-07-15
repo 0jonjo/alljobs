@@ -1,43 +1,52 @@
 class ProposalsController < ApplicationController
 
-  #before_action :authenticate_headhunter!, only: [:show]
-  #before_action :authenticate_user!, only: [:show]
+  before_action :authenticate_headhunter!, except: [:show, :index]
+  before_action :find_proposal, only: [:show]
+  before_action :find_apply, only: [:show, :new, :create]
+  before_action :alreay_proposal, only: [:new, :create]
 
   def index
     @proposals = Proposal.page(params[:page])
   end
-  
-  def find
-    @proposal = Proposal.find(params[:id])
+
+  def new
+    @proposal = Proposal.new
   end
   
   def destroy
-    @proposal = Proposal.find(params[:id])
     @proposal.destroy
     flash[:alert] = 'You have removed the proposal from the apply'
     redirect_to root_path
   end
 
   def show
-    @proposal = Proposal.find(params[:id])
   end
 
   def create
-    if Proposal.where(headhunter_id: params[:headhunter_id], profile_id: params[:profile_id], apply_id: params[:apply_id]).exists?
-      flash[:alert] = "You're already starred this apply."
-    elsif
-      @star = Star.new(headhunter_id: params[:headhunter_id], profile_id: params[:profile_id], apply_id: params[:apply_id])
-      if @star.save
-        flash[:notice] = "You successfully starred this apply."
-      else  
-        flash[:alert] = "You can't starred this apply."
-      end
+    proposal = @apply.build_proposal(proposal_params)
+    if proposal.save
+      flash[:notice] = "You successfully create a proposal for this apply."
+      redirect_to @apply
+    else  
+      flash[:alert] = "You can't create a proposal for this apply."
+      redirect_to @apply
     end
-    redirect_to request.referrer
   end
 
   private
   def proposal_params
     params.require(:proposal).permit(:apply_id, :salary, :benefits, :expectations, :expected_start)
+  end
+  def find_proposal
+    @proposal = Proposal.find(params[:id])
+  end 
+  def find_apply
+    @apply = Apply.find(params[:apply_id])
+  end  
+  def alreay_proposal
+    if Proposal.where(apply_id: params[:apply_id]).exists?
+      flash[:alert] = "There is already a proposal for this apply."
+      redirect_to @apply
+    end  
   end
 end

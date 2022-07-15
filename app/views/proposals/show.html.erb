@@ -1,13 +1,17 @@
 <h3>Proposal <%= @proposal.id %></h3>
 
-<dt>Apply ID</dt> 
-<dd><%= link_to @proposal.apply_id, apply_path(@proposal.apply_id) %></dd>
+<%= link_to apply_path(@proposal.apply_id) do %> 
+  <dt>Apply ID</dt> 
+  <dd><%= @proposal.apply_id %></dd> 
+<% end %>
 <dt>Salary</dt> 
 <dd><%= @proposal.salary %></dd>
 <dt>Benefits</dt>
 <dd><%= @proposal.benefits %></dd>
 <dt>Expectations</dt> 
 <dd><%= @proposal.expectations %></dd>
+<dt>Expected start</dt> 
+<dd><%= @proposal.expected_start %></dd>
 
 <% if headhunter_signed_in? %>
   <ul>

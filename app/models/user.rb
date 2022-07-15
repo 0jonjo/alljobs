@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_one :profile   
   has_many :applies
   has_many :jobs, through: :applies
+  has_many :feedback, through: :applies 
 end

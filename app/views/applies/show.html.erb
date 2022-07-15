@@ -23,6 +23,9 @@
     <div>
       <%= link_to "Reject/Feedback This Apply", edit_apply_path %>
     </div>
+    <div>
+      <%= link_to "Make A Proposal", new_apply_proposal_path(apply_id = @apply.id) %>
+    </div>
 <% end %>
 
 <% if user_signed_in? || headhunter_signed_in? %>

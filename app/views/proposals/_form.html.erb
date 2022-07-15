@@ -1,0 +1,36 @@
+<% if @proposal.errors.any? %>
+  <% @proposal.errors.full_messages.each do |message|%>
+    <p><%= message %></p>
+  <% end %>  
+<% end %>
+
+<%= form_with(model: [@apply, @proposal]) do |form| %>
+  <div>
+    <%= form.label :salary %><br>
+    <%= form.number_field :salary %>
+  </div>
+
+  <div>
+    <%= form.label :benefits %><br>
+    <%= form.text_area :benefits %>
+  </div>
+
+  <div>
+    <%= form.label :expectations %><br>
+    <%= form.text_area :expectations %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </div>
+  
+  <div>
+    <%= form.label :expected_start %><br>
+    <%= form.date_field :expected_start %>
+  </div>
+  
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :headhunters, :users
 
-  resources :comments, :applies
+  resources :comments
   resources :pages, only: [:index]
-  resources :proposals, only: [:show]
   resources :stars, only: [:index, :destroy, :create]
   resources :profiles, only: [:new, :index, :create, :edit, :show, :update]
+  resources :applies do
+    resources :proposals, only: [:show, :new, :create, :edit, :update]
+  end 
   resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
     get 'search', on: :collection 
     post 'drafted', on: :member
