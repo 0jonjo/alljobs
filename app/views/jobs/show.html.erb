@@ -27,12 +27,12 @@
 
 <% if headhunter_signed_in? %>
   <%= render 'jobs/select_status' %>
-  <ul>
-    <li><%= link_to "Edit", edit_job_path(@job) %></li>
-    <li><%= link_to "Delete", job_path(@job),
+  <div>
+    <%= link_to "Edit", edit_job_path(@job) %>
+    <%= button_to "Delete", job_path(@job),
                               method: :delete,
-                              data: { confirm: "Are you sure?" } %></li>
-  </ul>
+                              data: { confirm: "Are you sure?" } %>
+  </div>
   <%= render 'jobs/applies' %>
 <% end %>
 

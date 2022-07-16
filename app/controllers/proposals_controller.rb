@@ -1,8 +1,8 @@
 class ProposalsController < ApplicationController
 
   before_action :authenticate_headhunter!, except: [:show, :index]
-  before_action :find_proposal, only: [:show, :edit, :update]
-  before_action :find_apply, only: [:show, :new, :create, :edit, :update]
+  before_action :find_proposal, only: [:show, :edit, :update, :destroy]
+  before_action :find_apply, only: [:show, :new, :create, :edit, :update, :destroy]
   before_action :already_proposal, only: [:new, :create]
 
   def index
@@ -27,9 +27,12 @@ class ProposalsController < ApplicationController
   end
   
   def destroy
-    @proposal.destroy
-    flash[:alert] = 'You have removed the proposal from the apply.'
-    redirect_to root_path
+    if @proposal.destroy
+      flash[:alert] = 'You removed the proposal from the apply.'
+      redirect_to @apply
+    else
+      flash[:alert] = 'You do not remove the proposal from the apply.'
+    end      
   end
 
   def show

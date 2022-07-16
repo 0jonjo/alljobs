@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :stars, only: [:index, :destroy, :create]
   resources :profiles, only: [:new, :index, :create, :edit, :show, :update]
   resources :applies do
-    resources :proposals, only: [:show, :new, :create, :edit, :update]
+    resources :proposals, only: [:show, :new, :create, :edit, :update, :destroy]
   end 
   resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
     get 'search', on: :collection 

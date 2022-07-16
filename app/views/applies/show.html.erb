@@ -30,7 +30,7 @@
 
 <% if user_signed_in? || headhunter_signed_in? %>
     <br>
-    <%= link_to "Remove Apply", apply_path(@apply), 
+    <%= button_to "Remove Apply", apply_path(@apply), 
                                 method: :delete,
                                 data: { confirm: "Are you sure?" } %>
 <% end %>

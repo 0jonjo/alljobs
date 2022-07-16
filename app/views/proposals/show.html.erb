@@ -17,5 +17,8 @@
   <ul>
     <li><%= link_to "Edit", edit_apply_proposal_path(@proposal) %></li>
   </ul>
+  <%= button_to "Delete", apply_proposal_path(@proposal),
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %> %>
 <% end %>
 
