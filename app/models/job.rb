@@ -6,7 +6,7 @@ class Job < ApplicationRecord
   validates :code, uniqueness: true
   validate :job_date_is_future
 
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
 
   enum job_status: { draft: 0, published: 1, archived: 9 }
   

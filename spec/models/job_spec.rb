@@ -55,7 +55,7 @@ RSpec.describe Job, type: :model do
       it "when create a job with sucess" do
         job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
-                        company: 'Acme', level: 'Junior', place: 'Test', date: '24/12/2099')
+                        company: 'Acme', level: 'Junior', place: 'Test', date: 1.month.from_now)
         result = job.code 
         expect(result).not_to be_empty
         expect(result.length).to eq 8               
@@ -66,13 +66,23 @@ RSpec.describe Job, type: :model do
         job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                             skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                             company: 'Acme', level: 'Junior', place: 'Test', 
-                            date: '24/12/2099')
+                            date: 1.month.from_now)
         job2 = Job.new(title: 'Test 2', description: 'Dolor sit amet', 
                             skills: 'Nam mattis.', salary: '299',
                             company: 'Tabajara', level: 'Senior', place: 'Test', 
-                            date: '24/12/2099')
+                            date: 1.month.from_now)
         expect(job2.valid?).to eq false                  
       end
+
+      it "and it can't change after an update" do
+        job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
+                        skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
+                        company: 'Acme', level: 'Junior', place: 'Test', date: 1.month.from_now)
+        result = job.code 
+        job.update!(company: "Test")
+        expect(result).not_to be_empty
+        expect(result).to eq job.code              
+      end  
     end
 
     describe "date" do
