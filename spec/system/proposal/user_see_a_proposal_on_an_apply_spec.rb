@@ -14,10 +14,8 @@ describe "User see a proposal on an apply" do
 
     visit apply_path(apply)
 
-    expect(page).to have_content('Proposal 1')
-    expect(page).to have_content('999')
-    expect(page).to have_content('some benefits')
-    expect(page).to have_content('some expectations')
+    expect(page).to have_content('See Proposal 1')
+    expect(page).to have_link('1', href: apply_proposal_path(apply, proposal))
   end
 end
 

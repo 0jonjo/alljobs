@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   before_action :find_id_job, only: [:edit, :update, :destroy, :show, :applies, :drafted, :archived, :published]
 
   def index
-    @jobs = Job.page(params[:page])
+    @jobs = Job.where(job_status: :published).page(params[:page])
   end
  
   def new 

@@ -3,9 +3,7 @@
 <% if headhunter_signed_in? || user_signed_in? %>
   <% if @jobs.any? %>  
     <% @jobs.each do |job| %>
-      <% if job.published? %>
-        <%= render job %>
-      <% end %>       
+      <%= render job %>       
     <% end %>
   <% else %>
     <p>There are not any job opening published.</p>

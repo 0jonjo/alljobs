@@ -29,9 +29,15 @@
 <% end %>
 
 <% if user_signed_in? || headhunter_signed_in? %>
-    <br>
-    <%= button_to "Remove Apply", apply_path(@apply), 
-                                method: :delete,
-                                data: { confirm: "Are you sure?" } %>
+    <div>
+      <%= button_to "Remove Apply", apply_path(@apply), 
+                                  method: :delete,
+                                  data: { confirm: "Are you sure?" } %>
+    </div>
+    <div>
+        <% if @apply.proposal %> 
+          <strong>See Proposal <%= link_to @apply.proposal.id, apply_proposal_path(@apply.proposal.id) %></strong>  
+        <% end %>  
+    </div>                           
 <% end %>
 
