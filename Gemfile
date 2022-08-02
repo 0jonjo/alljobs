@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+#Delayed Job
+gem 'delayed_job_active_record'
+gem "daemons"
 #Kaminari
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

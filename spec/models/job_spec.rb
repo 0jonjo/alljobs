@@ -105,5 +105,18 @@ RSpec.describe Job, type: :model do
         job.valid? 
         expect(job.errors.include?(:date)).to be false 
       end 
-    end   
+    end 
+    
+    describe "cleanup" do
+      it "with sucess" do
+        ActiveJob::Base.queue_adapter = :test
+        user = User.create!(:email => "user@test.com", :password => 'test123')
+        job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum', 
+                          skills: 'Nam mattis', salary: '99', 
+                          company: 'Acme', level: 'Junior', place: 'Remote',
+                          date: 1.month.from_now)
+        apply = Apply.create!(:job => job, :user => user)             
+        expect{job.draft!}.to have_enqueued_job(AppliesCleanupJob)     
+      end 
+    end  
 end

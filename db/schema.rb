@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_13_134837) do
+ActiveRecord::Schema.define(version: 2022_07_30_202342) do
 
   create_table "applies", force: :cascade do |t|
     t.integer "job_id", null: false
@@ -33,6 +33,21 @@ ActiveRecord::Schema.define(version: 2022_07_13_134837) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["headhunter_id"], name: "index_comments_on_headhunter_id"
     t.index ["profile_id"], name: "index_comments_on_profile_id"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "headhunters", force: :cascade do |t|

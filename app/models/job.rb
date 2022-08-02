@@ -7,7 +7,8 @@ class Job < ApplicationRecord
   validate :job_date_is_future
 
   before_validation :generate_code, on: :create
-
+  before_commit :clean_up, on: :update
+  
   enum job_status: { draft: 0, published: 1, archived: 9 }
   
   private
@@ -19,5 +20,12 @@ class Job < ApplicationRecord
     if self.date.present? && self.date <= Date.today
       self.errors.add(:date, " date can't be in past or today.")
     end    
-  end  
+  end 
+  
+  def clean_up
+    if self.draft?
+      AppliesCleanupJob.perform_later(self.id)
+    end  
+  end 
+  #handle_asynchronously :clean_up
 end
