@@ -7,7 +7,7 @@ class Job < ApplicationRecord
   validate :job_date_is_future
 
   before_validation :generate_code, on: :create
-  before_commit :clean_up, on: :update
+  after_update :clean_up
   
   enum job_status: { draft: 0, published: 1, archived: 9 }
   
@@ -27,5 +27,5 @@ class Job < ApplicationRecord
       AppliesCleanupJob.perform_later(self.id)
     end  
   end 
-  #handle_asynchronously :clean_up
+  handle_asynchronously :clean_up
 end
