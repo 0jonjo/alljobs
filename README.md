@@ -6,7 +6,13 @@ This is a TDD study project to a job opening website using Ruby on Rails.
 
 * Ruby: 3.0.0
 * Rails: 6.1.4.1 
-* Gems: devise (4.8.0), rspec-rails (5.0.2), kaminari (1.2.1)  
+* Gems:
+- Devise (4.8.0)
+- Rspec-rails (5.0.2)
+- Capybara (3.37.1)
+- Kaminari (1.2.1)  
+- Delayed Job (4.1.10)
+- Daemons (1.4.1
 
 - [x] 1. Headhunter creates an account 
 - [x] 2. Headhunter registers/searchs a job opening
