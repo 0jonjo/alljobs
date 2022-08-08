@@ -3,6 +3,9 @@ require 'rails_helper'
 describe 'User rejected to an apply' do
   it "and see feedback with sucess" do
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                     skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                     company: 'Acme', level: 'Junior', place: 'Remote',
@@ -19,6 +22,9 @@ describe 'User rejected to an apply' do
   it "and see feedback without sucess - not his apply" do
     user1 = User.create!(:email => 'user@test.com', :password => 'test123')
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
+    profile2 = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                                birthdate: '21/03/1977', educacional_background: "Test 3", 
+                                experience: 'test 4', user_id: user2.id)
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                     skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                     company: 'Acme', level: 'Junior', place: 'Remote',

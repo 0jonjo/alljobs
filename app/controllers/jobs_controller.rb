@@ -2,6 +2,7 @@ class JobsController < ApplicationController
   
   before_action :authenticate_headhunter!, except: [:index, :show, :search]
   before_action :find_id_job, only: [:edit, :update, :destroy, :show, :applies, :drafted, :archived, :published]
+  before_action :user_has_profile
 
   def index
     @jobs = Job.where(job_status: :published).page(params[:page])
@@ -83,5 +84,12 @@ class JobsController < ApplicationController
   end
   def find_id_job
     @job = Job.find(params[:id])
+  end
+  def user_has_profile
+    if user_signed_in?
+      if current_user.profile.blank?
+        redirect_to new_profile_path
+      end
+    end    
   end
 end

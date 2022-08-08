@@ -7,6 +7,9 @@ describe 'User apllies to a job opening' do
                 company: 'Acme', level: 'Junior', place: 'Remote Job',
                 date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     login_as(user, :scope => :user)
     
     visit root_path
@@ -28,6 +31,9 @@ describe 'User apllies to a job opening' do
                   company: 'Acme', level: 'Junior', place: 'Remote Job',
                   date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                                birthdate: '21/03/1977', educacional_background: "Test 3", 
+                                experience: 'test 4', user_id: user.id)
     Apply.create!(:job => job, :user => user)
     login_as(user, :scope => :user)
 
@@ -44,6 +50,9 @@ describe 'User apllies to a job opening' do
     company: 'Acme', level: 'Junior', place: 'Remote Job',
     date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     apply = Apply.create!(:job => job, :user => user)
     login_as(user, :scope => :user)
 

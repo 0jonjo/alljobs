@@ -2,7 +2,8 @@ class AppliesController < ApplicationController
   
   before_action :authenticate_headhunter!, except: [:index, :show, :destroy, :create]
   before_action :apply_find, only: [:find, :edit, :update, :destroy, :show]
-
+  before_action :user_has_profile
+  
   def index
     if user_signed_in?
       @applies = current_user.applies.page(params[:page]) 
@@ -65,5 +66,13 @@ class AppliesController < ApplicationController
 
   def apply_find
     @apply = Apply.find(params[:id])
+  end
+
+  def user_has_profile
+    if user_signed_in?
+      if current_user.profile.blank?
+        redirect_to new_profile_path
+      end
+    end    
   end
 end

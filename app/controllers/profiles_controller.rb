@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
   end
   
   def new
-    if Profile.where(user_id: current_user.id).blank?
+    if current_user.profile.blank?
       @profile = Profile.new
     else
       redirect_to profile_path(current_user.id)

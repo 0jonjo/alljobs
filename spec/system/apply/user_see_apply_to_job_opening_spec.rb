@@ -7,6 +7,9 @@ describe 'User applied to job opening' do
                       company: 'Acme', level: 'Junior', place: 'Remote Job',
                       date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                                birthdate: '21/03/1977', educacional_background: "Test 3", 
+                                experience: 'test 4', user_id: user.id)
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)
     apply2 = Apply.create!(:job => job, :user => user2)
@@ -22,6 +25,9 @@ describe 'User applied to job opening' do
                       company: 'Acme', level: 'Junior', place: 'Remote Job',
                       date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                                birthdate: '21/03/1977', educacional_background: "Test 3", 
+                                experience: 'test 4', user_id: user.id)
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)
     apply2 = Apply.create!(:job => job, :user => user2)
@@ -38,6 +44,9 @@ describe 'User applied to job opening' do
                       company: 'Acme', level: 'Junior', place: 'Remote Job',
                       date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)
     apply2 = Apply.create!(:job => job, :user => user2)
@@ -62,6 +71,9 @@ describe 'User applied to job opening' do
                       company: 'Acme', level: 'Junior', place: 'Remote Job',
                       date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     user2 = User.create!(:email => 'user2@test.com', :password => 'test123')
     apply1 = Apply.create!(:job => job1, :user => user)
     apply2 = Apply.create!(:job => job2, :user => user)

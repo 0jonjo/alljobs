@@ -19,6 +19,9 @@ describe 'User see job openings' do
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now, job_status: :draft)                                                           
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     login_as(user, :scope => :user)
     visit jobs_path
   
@@ -30,6 +33,9 @@ describe 'User see job openings' do
 
   it 'without sucess - no one job' do                                                           
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     login_as(user, :scope => :user)
     visit jobs_path   
     

@@ -15,6 +15,6 @@ describe "User try to acess a apply" do
 
     login_as(user2, :scope => :user)
     get(apply_path(apply))
-    expect(response).to redirect_to(root_path)
+    expect(response).to redirect_to(new_profile_path)
   end  
 end    
