@@ -67,12 +67,4 @@ class AppliesController < ApplicationController
   def apply_find
     @apply = Apply.find(params[:id])
   end
-
-  def user_has_profile
-    if user_signed_in?
-      if current_user.profile.blank?
-        redirect_to new_profile_path
-      end
-    end    
-  end
 end
