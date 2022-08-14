@@ -15,5 +15,12 @@ Rails.application.routes.draw do
     post 'published', on: :member  
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :jobs, only: [:show]
+    end  
+  end
+
+
   root to: 'pages#index'
 end
