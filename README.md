@@ -4,9 +4,9 @@ This is a TDD study project to a job opening website using Ruby on Rails.
 
 [Project Board (To do, In Progress, Done)](https://github.com/0jonjo/alljobs/projects/1)
 
-* Ruby: 3.0.0
-* Rails: 6.1.4.1 
-* Gems:
+Ruby: 3.0.0
+Rails: 6.1.4.1 
+Gems:
 - Devise (4.8.0)
 - Rspec-rails (5.0.2)
 - Capybara (3.37.1)
