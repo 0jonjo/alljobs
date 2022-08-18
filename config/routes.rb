@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :jobs, only: [:show, :index]
+      resources :jobs, only: [:show, :index, :create]
     end  
   end
 
