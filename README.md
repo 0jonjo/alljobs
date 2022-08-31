@@ -12,7 +12,8 @@ Gems:
 - Capybara (3.37.1)
 - Kaminari (1.2.1)  
 - Delayed Job (4.1.10)
-- Daemons (1.4.1
+- Daemons (1.4.1)
+- Faraday (2.5.2)
 
 - [x] 1. Headhunter creates an account 
 - [x] 2. Headhunter registers/searchs a job opening
@@ -29,6 +30,11 @@ Gems:
 13. Candidate accepts/rejects proposal
 14. Headhunter receives response from candidate
 15. Headhunter closes registration for a job 
+
+## Others:
+- [x] Use asynchronous processing to delete applications from archived job openings 
+- [x] Create a side repository to test API [(Seejobs)](https://github.com/0jonjo/seejobs/)
+- [] Translate Alljobs to Portuguese. 
 
 ## Install
 
