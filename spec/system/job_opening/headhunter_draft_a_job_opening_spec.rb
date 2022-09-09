@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Headhunter draft a job opening using Active Job' do
   it 'with sucess' do
+    ActiveJob::Base.queue_adapter = :delayed_job
     job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                           skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                           company: 'Acme', level: 'Junior', place: 'Remote Job',
@@ -17,7 +18,6 @@ describe 'Headhunter draft a job opening using Active Job' do
     expect(page).to have_content 'Status Draft'
     expect(page).not_to have_content 'Published'
     
-    ApplyListJob.perform_now(job.id)
     Delayed::Worker.new.work_off
     visit job_path(job.id)
 
