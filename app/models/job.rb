@@ -24,7 +24,7 @@ class Job < ApplicationRecord
   
   def clean_up
     if self.draft?
-      AppliesCleanupJob.perform_later(self.id)
+      ApplyListJob.perform_later(self.id)
     end  
   end 
   handle_asynchronously :clean_up

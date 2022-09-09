@@ -17,8 +17,8 @@ describe 'Headhunter draft a job opening using Active Job' do
     expect(page).to have_content 'Status Draft'
     expect(page).not_to have_content 'Published'
     
-    AppliesCleanupJob.perform_now(job.id)
-    #Delayed::Worker.new.work_off
+    ApplyListJob.perform_now(job.id)
+    Delayed::Worker.new.work_off
     visit job_path(job.id)
 
     expect(page).to have_content 'There is no apply for this job.'
