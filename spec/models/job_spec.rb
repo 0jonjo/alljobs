@@ -107,21 +107,6 @@ RSpec.describe Job, type: :model do
       end 
     end 
     
-    describe "cleanup all" do
-      it "job on queue with sucess" do
-        ActiveJob::Base.queue_adapter = :test
-        expect(Delayed::Job.count).to eq 0 
-        user = User.create!(:email => "user@test.com", :password => 'test123')
-        job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum', 
-                          skills: 'Nam mattis', salary: '99', 
-                          company: 'Acme', level: 'Junior', place: 'Remote',
-                          date: 1.month.from_now)
-        apply = Apply.create!(:job => job, :user => user) 
-        job.draft!
-        expect(Delayed::Job.count).to eq 1                
-      end 
-    end  
-
     describe "cleanup one job" do
       it "job on queue with sucess" do
         ActiveJob::Base.queue_adapter = :test
