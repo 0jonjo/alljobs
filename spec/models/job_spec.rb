@@ -133,7 +133,9 @@ RSpec.describe Job, type: :model do
                           date: 1.month.from_now)
         apply = Apply.create!(:job => job, :user => user) 
         job.draft!
-        expect(Delayed::Job.count).to eq 1                
+        expect(Delayed::Job.count).to eq 1
+        Delayed::Worker.new.work_off
+        expect(ApplyListJob).to have_been_enqueued 
       end 
     end  
 end
