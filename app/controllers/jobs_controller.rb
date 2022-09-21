@@ -7,6 +7,14 @@ class JobsController < ApplicationController
   def index
     @jobs = Job.where(job_status: :published).page(params[:page])
   end
+
+  def index_draft
+    @jobs = Job.where(job_status: :draft).page(params[:page])
+  end
+
+  def index_archived
+    @jobs = Job.where(job_status: :archived).page(params[:page])
+  end
  
   def new 
     @job = Job.new

@@ -1,8 +1,8 @@
-<h3>Openings</h3>
+<h3>Openings Archived</h3>
 
 <% if headhunter_signed_in? %>
+  <%= link_to 'Published', jobs_path %> -
   <%= link_to 'Draft', index_draft_jobs_path %>
-  <%= link_to 'Archived', index_archived_jobs_path %>
 <% end %>
 
 <% if headhunter_signed_in? || user_signed_in? %>
@@ -11,7 +11,7 @@
       <%= render job %>       
     <% end %>
   <% else %>
-    <p>There are not any job opening published.</p>
+    <p>There are not any job opening archived.</p>
   <% end %>  
 <% end %>
 <%= paginate @jobs %>
