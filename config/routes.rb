@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :proposals, only: [:show, :new, :create, :edit, :update, :destroy]
   end 
   resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
+    get 'index_draft', on: :collection
+    get 'index_archived', on: :collection
     get 'search', on: :collection 
     post 'drafted', on: :member
     post 'archived', on: :member 
