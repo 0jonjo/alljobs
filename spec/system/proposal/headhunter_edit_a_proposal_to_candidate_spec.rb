@@ -48,7 +48,7 @@ describe "Headhunter edit a proposal to a cadindidate" do
     click_on 'Update Proposal'
 
     expect(page).to have_content("You do not edit this proposal.")
-    expect(current_path).to eq(apply_proposal_path(apply, proposal))
+    expect(current_path).to eq(edit_apply_proposal_path(apply, proposal))
   end
 end
 

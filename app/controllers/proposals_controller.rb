@@ -21,8 +21,8 @@ class ProposalsController < ApplicationController
       flash[:notice] = "You successfully edited this proposal."
       redirect_to @apply
     else
-      flash.now[:alert] = "You do not edit this proposal."
-      render :edit
+      flash[:alert] = "You do not edit this proposal."
+      redirect_to edit_apply_proposal_path(@proposal)
     end
   end
   
@@ -49,7 +49,7 @@ class ProposalsController < ApplicationController
       redirect_to @apply
     else  
       flash[:alert] = "You can't create a proposal for this apply."
-      redirect_to @apply
+      redirect_to new_apply_proposal_path(@apply.id)
     end
   end
 

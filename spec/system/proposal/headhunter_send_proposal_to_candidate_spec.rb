@@ -45,11 +45,7 @@ describe "Headhunter create a proposal to a candidate" do
     click_on 'Create Proposal'
     
     expect(page).to have_content("You successfully create a proposal for this apply.")
-    #expect(page).to have_content('Proposal 1')
-    #expect(page).to have_content('999')
-    #expect(page).to have_content('some benefits')
-    #expect(page).to have_content('some expectations')
-    #expect(page).to have_content('2099-12-31')
+    expect(current_path).to eq(apply_path(apply))
   end
 
   it "without sucess - already have a proposal" do
@@ -92,6 +88,6 @@ describe "Headhunter create a proposal to a candidate" do
     click_on 'Create Proposal'
     
     expect(page).to have_content("You can't create a proposal for this apply.")
-    expect(current_path).to eq(apply_path(apply))
+    expect(current_path).to eq(new_apply_proposal_path(apply))
   end
 end
