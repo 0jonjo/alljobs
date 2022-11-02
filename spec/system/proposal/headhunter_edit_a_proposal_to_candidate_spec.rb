@@ -16,11 +16,11 @@ describe "Headhunter edit a proposal to a cadindidate" do
     visit apply_proposal_path(apply, proposal)
     click_on "Edit"
 
-    fill_in 'Salary', with: '66'
-    fill_in 'Benefits', with: 'add other benefits'
-    fill_in 'Expectations', with: 'add other expectations'
-    fill_in 'Expected start', with: '01/01/2099'
-    click_on 'Update Proposal'
+    fill_in 'Salário', with: '66'
+    fill_in 'Benefícios', with: 'add other benefits'
+    fill_in 'Expectativas', with: 'add other expectations'
+    fill_in 'Expectativa de Início', with: '01/01/2099'
+    click_on 'Atualizar Proposta'
 
     expect(page).to have_content("You successfully edited this proposal.")
     expect(current_path).to eq(apply_path(apply))
@@ -41,11 +41,11 @@ describe "Headhunter edit a proposal to a cadindidate" do
     visit apply_proposal_path(apply, proposal)
     click_on "Edit"
 
-    fill_in 'Salary', with: ''
-    fill_in 'Benefits', with: ''
-    fill_in 'Expectations', with: ''
-    fill_in 'Expected start', with: ''
-    click_on 'Update Proposal'
+    fill_in 'Salário', with: ''
+    fill_in 'Benefícios', with: ''
+    fill_in 'Expectativas', with: ''
+    fill_in 'Expectativa de Início', with: ''
+    click_on 'Atualizar Proposta'
 
     expect(page).to have_content("You do not edit this proposal.")
     expect(current_path).to eq(edit_apply_proposal_path(apply, proposal))

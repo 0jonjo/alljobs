@@ -26,6 +26,7 @@ describe 'Visitor visit homepage' do
 
       expect(page).to have_link('All Jobs', href: root_path)
       within('nav') do
+        expect(page).to have_content('You are user@test.com')
         expect(page).to have_link('Profile', href: new_profile_path)
         expect(page).to have_link('Openings', href: jobs_path)
         expect(page).to have_link('Logout User', href: destroy_user_session_path)
@@ -46,6 +47,7 @@ describe 'Visitor visit homepage' do
 
       expect(page).to have_link('All Jobs', href: root_path)
       within('nav') do
+        expect(page).to have_content('You are admin@test.com')
         expect(page).to have_link('Applies', href: applies_path)
         expect(page).to have_link('Logout Headhunter', href: destroy_headhunter_session_path)
         expect(page).to have_link('New Job Opening', href: new_job_path)

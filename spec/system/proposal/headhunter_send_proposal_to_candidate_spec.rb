@@ -38,11 +38,11 @@ describe "Headhunter create a proposal to a candidate" do
     click_on 'Make A Proposal'
     expect(current_path).to eq(new_apply_proposal_path(apply))
     
-    fill_in 'Salary', with: '999'
-    fill_in 'Benefits', with: 'some benefits'
-    fill_in 'Expectations', with: 'some expectations'
-    fill_in 'Expected start', with: '31/12/2099'
-    click_on 'Create Proposal'
+    fill_in 'Salário', with: '66'
+    fill_in 'Benefícios', with: 'add other benefits'
+    fill_in 'Expectativas', with: 'add other expectations'
+    fill_in 'Expectativa de Início', with: '01/01/2099'
+    click_on 'Criar Proposta'
     
     expect(page).to have_content("You successfully create a proposal for this apply.")
     expect(current_path).to eq(apply_path(apply))
@@ -81,11 +81,11 @@ describe "Headhunter create a proposal to a candidate" do
     click_on 'Make A Proposal'
     expect(current_path).to eq(new_apply_proposal_path(apply))
     
-    fill_in 'Salary', with: ''
-    fill_in 'Benefits', with: ''
-    fill_in 'Expectations', with: ''
-    fill_in 'Expected start', with: ''
-    click_on 'Create Proposal'
+    fill_in 'Salário', with: ''
+    fill_in 'Benefícios', with: ''
+    fill_in 'Expectativas', with: ''
+    fill_in 'Expectativa de Início', with: ''
+    click_on 'Criar Proposta'
     
     expect(page).to have_content("You can't create a proposal for this apply.")
     expect(current_path).to eq(new_apply_proposal_path(apply))

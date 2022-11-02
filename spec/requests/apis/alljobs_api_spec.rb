@@ -101,13 +101,13 @@ describe "Alljobs API" do
       expect(response).to have_http_status(412)
       expect(response.content_type).to eq("application/json; charset=utf-8") 
     
-      expect(response.body).not_to include("Title can't be blank")
-      expect(response.body).to include("Skills can't be blank")
-      expect(response.body).to include("Salary can't be blank")
-      expect(response.body).to include("Company can't be blank")
-      expect(response.body).to include("Level can't be blank")
-      expect(response.body).to include("Date can't be blank")
-      expect(response.body).to include("Salary is not a number")
+      expect(response.body).not_to include("Título não pode ficar em branco")
+      expect(response.body).to include("Habilidades não pode ficar em branco")
+      expect(response.body).to include("Salário não pode ficar em branco")
+      expect(response.body).to include("Empresa não pode ficar em branco")
+      expect(response.body).to include("Nível não pode ficar em branco")
+      expect(response.body).to include("Data não pode ficar em branco")
+      expect(response.body).to include("Salário não pode ficar em branco")
     end
 
     it "without sucess - internal error" do

@@ -14,14 +14,14 @@ describe 'Headhunter comment on a profile' do
     
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Body', with: 'Just a test comment'
-    click_on 'Create Comment'
+    fill_in 'Comentário', with: 'Just a test comment'
+    click_on 'Criar Comentário'
     expect(page).to have_content('Just a test comment')
     expect(page).to have_content("Comment created.")
 
     click_on 'Edit'
-    fill_in 'Body', with: 'Another test comment'
-    click_on 'Update Comment'
+    fill_in 'Comentário', with: 'Another test comment'
+    click_on 'Atualizar Comentário'
     expect(page).to have_content('Comment updated.')
     expect(page).to have_content('Another test comment')
   end
@@ -38,8 +38,8 @@ describe 'Headhunter comment on a profile' do
     
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Body', with: ''
-    click_on 'Create Comment'
+    fill_in 'Comentário', with: ''
+    click_on 'Criar Comentário'
 
     expect(page).to have_content("Comment can't be created.")
   end
@@ -56,13 +56,13 @@ describe 'Headhunter comment on a profile' do
     
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Body', with: 'Teste'
-    click_on 'Create Comment'
+    fill_in 'Comentário', with: 'Teste'
+    click_on 'Criar Comentário'
 
     click_on 'Edit'
-    fill_in 'Body', with: ''
-    click_on 'Update Comment'
-    expect(page).to have_content("Body can't be blank")
+    fill_in 'Comentário', with: ''
+    click_on 'Atualizar Comentário'
+    expect(page).to have_content("Comentário não pode ficar em branco")
   end
   
   it "and write a second comment" do
@@ -76,10 +76,10 @@ describe 'Headhunter comment on a profile' do
     click_on 'Tester'
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Body', with: 'Just a test comment'
-    click_on 'Create Comment'
-    fill_in 'Body', with: 'Second comment'
-    click_on 'Create Comment'
+    fill_in 'Comentário', with: 'Just a test comment'
+    click_on 'Criar Comentário'
+    fill_in 'Comentário', with: 'Second comment'
+    click_on 'Criar Comentário'
 
     expect(page).to have_content('Just a test comment')
     expect(page).to have_content('Second comment')
@@ -96,8 +96,8 @@ describe 'Headhunter comment on a profile' do
     click_on 'Tester'
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Body', with: 'Just a test comment'
-    click_on 'Create Comment'
+    fill_in 'Comentário', with: 'Just a test comment'
+    click_on 'Criar Comentário'
     expect(page).to have_content('Just a test comment')
 
     click_on 'Delete'

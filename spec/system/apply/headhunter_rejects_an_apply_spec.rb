@@ -13,8 +13,8 @@ describe 'Headhunter rejects an apply' do
     visit apply_path(apply)
 
     click_on "Reject/Feedback This Apply"
-    fill_in "Feedback headhunter", with: "You need more experience to this job."
-    click_on "Update Apply"
+    fill_in "Retorno do Recrutador", with: "You need more experience to this job."
+    click_on "Atualizar Inscrição"
     
     expect(current_path).to eq(apply_path(apply))
     expect(page).to have_content("You successfully rejected this apply.")
@@ -34,8 +34,8 @@ describe 'Headhunter rejects an apply' do
     visit apply_path(apply)
 
     click_on "Reject/Feedback This Apply"
-    fill_in "Feedback headhunter", with: "Test edit feedback."
-    click_on "Update Apply"
+    fill_in "Retorno do Recrutador", with: "Test edit feedback."
+    click_on "Atualizar Inscrição"
     
     expect(current_path).to eq(apply_path(apply))
     expect(page).to have_content("You successfully rejected this apply.")

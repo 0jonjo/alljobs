@@ -1,0 +1,46 @@
+pt-BR:
+  activerecord:
+    models:
+      job: 'Vaga'
+      profile: 'Perfil'
+      proposal: 'Proposta'
+      star: 'Favorito'
+      apply: 'Inscrição'
+      comment: 'Comentário'
+      headhunter: 'Recrutador'
+      user: 'Usuário'
+    attributes:
+      headhunter:
+        password: 'Senha'
+      job:
+        title: 'Título'
+        description: 'Descrição'
+        skills: 'Habilidades'
+        salary: 'Salário'
+        company: 'Empresa'
+        level: 'Nível'
+        place: 'Lugar'
+        date: 'Data'
+        code: 'Código'
+        job_status: 'Status da Vaga'
+      profile:
+        name: 'Nome'
+        social_name: 'Nome Social'
+        birthdate: 'Data de Nascimento'
+        description: 'Descrição'
+        educacional_background: 'Educação'
+        experience: 'Experiência'
+      proposal:
+        apply_id: 'Número da Inscrição'
+        salary: 'Salário'
+        benefits: 'Benefícios'
+        expectations: 'Expectativas'
+        expected_start: 'Expectativa de Início'
+      apply:
+        job_id: 'Vaga Número'
+        user_id: 'Usuário Número'
+        feedback_headhunter: 'Retorno do Recrutador'
+      comment:
+        body: 'Comentário'  
+     
+          

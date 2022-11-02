@@ -15,14 +15,14 @@ describe 'Headhunter edit a job opening' do
       click_on 'Edit'
 
       expect(current_path).to eq edit_job_path(1)
-      fill_in 'Title', with: 'Job Opening Test 123'
-      fill_in 'Description', with: 'Lorem ipsum dolor '
-      fill_in 'Skills', with: 'Lorem ipsuctus'
-      fill_in 'Salary', with: '9999'
-      fill_in 'Level', with: 'Junior'
-      fill_in 'Place', with: 'Remote Job'
-      fill_in 'Date', with: '21/11/2099'
-      click_on 'Update Job'
+      fill_in 'Título', with: 'Job Opening Test 123'
+      fill_in 'Descrição', with: 'Lorem ipsum dolor '
+      fill_in 'Habilidades', with: 'Lorem ipsuctus'
+      fill_in 'Salário', with: '9999'
+      fill_in 'Nível', with: 'Junior'
+      fill_in 'Lugar', with: 'Remote Job'
+      fill_in 'Data', with: '21/11/2099'
+      click_on 'Atualizar Vaga'
     
       expect(page).to have_content 'Job Opening Test 123'
       expect(page).to have_content '9999'
@@ -43,19 +43,19 @@ describe 'Headhunter edit a job opening' do
       click_on 'Edit'
 
       expect(current_path).to eq edit_job_path(1)
-      fill_in 'Title', with: ''
-      fill_in 'Description', with: ''
-      fill_in 'Skills', with: ''
-      fill_in 'Salary', with: ''
-      fill_in 'Level', with: ''
-      fill_in 'Place', with: ''
-      fill_in 'Date', with: ''
-      click_on 'Update Job'
+      fill_in 'Título', with: ''
+      fill_in 'Descrição', with: ''
+      fill_in 'Habilidades', with: ''
+      fill_in 'Salário', with: ''
+      fill_in 'Nível', with: ''
+      fill_in 'Lugar', with: ''
+      fill_in 'Data', with: ''
+      click_on 'Atualizar Vaga'
     
       expect(page).to have_content "Job Opening was not edited."
-      expect(page).to have_content("Title can't be blank")
-      expect(page).to have_content("Skills can't be blank")
-      expect(page).to have_content("Salary can't be blank")
+      expect(page).to have_content("Título não pode ficar em branco")
+      expect(page).to have_content("Habilidades não pode ficar em branco")
+      expect(page).to have_content("Salário não pode ficar em branco")
       expect(current_path).to eq job_path(1)
     end
 end
