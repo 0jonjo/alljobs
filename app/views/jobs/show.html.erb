@@ -5,7 +5,7 @@
 <dt>Status</dt>
 <dd><%= @job.job_status.capitalize %></dd>
 <dt>Deadline to apply</dt> 
-<dd><%= @job.date %></dd>
+<dd><%= I18n.localize(@job.date) %></dd>
 <dt>Description</dt>
 <dd><%= @job.description %></dd>
 <dt>Skills</dt>

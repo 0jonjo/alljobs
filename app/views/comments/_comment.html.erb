@@ -3,12 +3,10 @@
     <% @comments.each do |comment| %>
       <% if comment.headhunter_id == current_headhunter.id %>    
         <div>
-          <dt>When?</dt> 
-          <dd><%= comment.datetime %></dd>
-          <dt>Comment</dt> 
+          <dt><%= I18n.localize(comment.datetime, format: :short) %></dt> 
           <dd><%= comment.body %></dd>
           <p>
-            <%= link_to 'Edit', edit_comment_path(comment) %> -
+            <%= link_to 'Edit', edit_comment_path(comment) %>
             <%= button_to 'Delete', comment_path(comment), 
                                   method: :delete, 
                                   data: { confirm: 'Are you sure?' } %>

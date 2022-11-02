@@ -10,8 +10,8 @@
 <dd><%= @proposal.benefits %></dd>
 <dt>Expectations</dt> 
 <dd><%= @proposal.expectations %></dd>
-<dt>Expected start</dt> 
-<dd><%= @proposal.expected_start %></dd>
+<dt> Expected Start </dt> 
+<dd><%= I18n.localize(@proposal.expected_start) %></dd>
 
 <% if headhunter_signed_in? %>
   <ul>

@@ -36,7 +36,7 @@
     </div>
     <div>
         <% if @apply.proposal %> 
-          <strong>See Proposal <%= link_to @apply.proposal.id, apply_proposal_path(@apply.proposal.id) %></strong>  
+          <strong>See Proposal <%= link_to @apply.proposal.id, apply_proposal_path(@apply, @apply.proposal.id) %></strong>  
         <% end %>  
     </div>                           
 <% end %>
