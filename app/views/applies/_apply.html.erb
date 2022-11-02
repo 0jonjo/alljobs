@@ -1,8 +1,8 @@
 <p>
   <%= link_to apply do %> 
-    ID: <%= apply.id %> 
-  <% end %>
+    <%= Apply.human_attribute_name(:id) %> : <%= apply.id %> 
     - <%= apply.job.title %> 
     - <%= apply.user_email %>  
+  <% end %>  
 </p>
   

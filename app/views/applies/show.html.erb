@@ -1,43 +1,51 @@
 <% if user_signed_in? || headhunter_signed_in? %>
-    <h3>Apply to: <%= link_to @apply.job.title, @apply.job %></h3>
-    <dt>Apply ID</dt>
+    <p><%= I18n.t('apply_to') %> <%= link_to @apply.job.title, @apply.job %></p>
+    <dt><%= Apply.human_attribute_name(:id) %></dt>
     <dd><%= @apply.id %></dd>
-    <dt>User ID</dt> 
+    <dt><%= Apply.human_attribute_name(:user_id) %></dt> 
     <dd><%= @apply.user_id %></dd>
-    <dt>User Email</dt> 
+    <dt><%= User.human_attribute_name(:email) %></dt> 
     <dd><%= @apply.user.email %></dd>
-    <br>
-    <%= link_to "View Profile ", profile_path(@apply.user_id) %>  
 <% end %>
 
 <% if @apply.accepted_headhunter == false %>
   <p>This application for a job offer was rejected.</p>
-  <dt>Headhunter Feedback</dt> 
+  <dt><%= Apply.human_attribute_name(:feedback_headhunter) %></dt> 
   <dd><%= @apply.feedback_headhunter %></dd>
-<% end %>
-
-<% if headhunter_signed_in? %>
-    <div>
-      <%= link_to "Star This Apply", stars_path(apply_id: @apply.id, profile_id: @apply.user_id, headhunter_id: current_headhunter.id), method: :post %>
-    </div>
-    <div>
-      <%= link_to "Reject/Feedback This Apply", edit_apply_path %>
-    </div>
-    <div>
-      <%= link_to "Make A Proposal", new_apply_proposal_path(apply_id = @apply.id) %>
-    </div>
 <% end %>
 
 <% if user_signed_in? || headhunter_signed_in? %>
     <div>
-      <%= button_to "Remove Apply", apply_path(@apply), 
-                                  method: :delete,
-                                  data: { confirm: "Are you sure?" } %>
-    </div>
-    <div>
-        <% if @apply.proposal %> 
-          <strong>See Proposal <%= link_to @apply.proposal.id, apply_proposal_path(@apply, @apply.proposal.id) %></strong>  
-        <% end %>  
+      <div>
+        <%= button_to I18n.t('delete'), apply_path(@apply), 
+                                    method: :delete,
+                                    data: { confirm: I18n.t('sure') } %>
+      </div>
+      <div>
+          <% if @apply.proposal %> 
+            <strong><%= link_to I18n.t('view_proposal'), apply_proposal_path(@apply, @apply.proposal.id) %></strong>  
+          <% end %>  
+      </div>
     </div>                           
 <% end %>
+
+<br>
+
+<% if headhunter_signed_in? %>
+    <div>
+       <div>
+        <%= link_to I18n.t('view_profile'), profile_path(@apply.user_id) %>  
+       </div>
+      <div>
+        <%= link_to I18n.t('star_apply'), stars_path(apply_id: @apply.id, profile_id: @apply.user_id, headhunter_id: current_headhunter.id), method: :post %>
+      </div>
+      <div>
+        <%= link_to I18n.t('feedback'), edit_apply_path %>
+      </div>
+      <div>
+        <%= link_to I18n.t('send_proposal'), new_apply_proposal_path(apply_id = @apply.id) %>
+      </div>
+    </div>
+<% end %>
+
 

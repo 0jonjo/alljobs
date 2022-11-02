@@ -1,24 +1,24 @@
-<h3>Proposal <%= @proposal.id %></h3>
+<h3><%= Proposal.model_name.human %> <%= @proposal.id %></h3>
 
 <%= link_to apply_path(@proposal.apply_id) do %> 
-  <dt>Apply ID</dt> 
+  <dt><%= Apply.human_attribute_name(:id) %></dt> 
   <dd><%= @proposal.apply_id %></dd> 
 <% end %>
-<dt>Salary</dt> 
+<dt><%= Proposal.human_attribute_name(:salary) %></dt> 
 <dd><%= @proposal.salary %></dd>
-<dt>Benefits</dt>
+<dt><%= Proposal.human_attribute_name(:benefits) %></dt>
 <dd><%= @proposal.benefits %></dd>
-<dt>Expectations</dt> 
+<dt><%= Proposal.human_attribute_name(:expectations) %></dt> 
 <dd><%= @proposal.expectations %></dd>
-<dt> Expected Start </dt> 
+<dt><%= Proposal.human_attribute_name(:expected_start) %></dt> 
 <dd><%= I18n.localize(@proposal.expected_start) %></dd>
 
 <% if headhunter_signed_in? %>
   <ul>
-    <li><%= link_to "Edit", edit_apply_proposal_path(@proposal) %></li>
+    <li><%= link_to I18n.t('edit'), edit_apply_proposal_path(@proposal) %></li>
   </ul>
-  <%= button_to "Delete", apply_proposal_path(@proposal),
+  <%= button_to I18n.t('delete'), apply_proposal_path(@proposal),
                             method: :delete,
-                            data: { confirm: "Are you sure?" } %> %>
+                            data: { confirm: I18n.t('sure') } %>
 <% end %>
 

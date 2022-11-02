@@ -25,6 +25,7 @@ pt-BR:
         job_status: 'Status da Vaga'
       profile:
         name: 'Nome'
+        profile_id: 'Profile ID'
         social_name: 'Nome Social'
         birthdate: 'Data de Nascimento'
         description: 'Descrição'
@@ -37,8 +38,9 @@ pt-BR:
         expectations: 'Expectativas'
         expected_start: 'Expectativa de Início'
       apply:
-        job_id: 'Vaga Número'
-        user_id: 'Usuário Número'
+        id: 'Aplicação ID'
+        job_id: 'Vaga ID'
+        user_id: 'Usuário ID'
         feedback_headhunter: 'Retorno do Recrutador'
       comment:
         body: 'Comentário'  

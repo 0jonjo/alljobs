@@ -1,9 +1,9 @@
-<h3>Stars</h3>
+<h3><%= I18n.t('stars') %></h3>
 
 <% if @stars.any? %>
   <% @stars.each do |star| %>
     <% if star.headhunter_id == current_headhunter.id %>
-      <dt>Name</dt>
+      <dt><%= Profile.human_attribute_name(:name) %></dt>
       <dd>
         <% if star.profile.social_name.blank? %>
           <%= link_to star.profile.name, profile_path(star.profile.user_id) %><br>
@@ -11,12 +11,12 @@
           <%= link_to star.profile.social_name, profile_path(star.profile.user_id) %><br>
         <% end %>
       </dd>
-      <dt>Apply ID</dt> 
+      <dt><%= Apply.human_attribute_name(:id) %></dt> 
       <dd><%= link_to star.apply_id, apply_path(star.apply_id) %></dd>
       <p>
-        <%= link_to "Remove Star", star_path(star), 
+        <%= link_to I18n.t('delete'), star_path(star), 
                                   method: :delete,
-                                  data: { confirm: "Are you sure?" } %> 
+                                  data: { confirm: I18n.t('sure') } %> 
           </p>
     <% else %>
       <p>There is no apply selected as a star.</p>      

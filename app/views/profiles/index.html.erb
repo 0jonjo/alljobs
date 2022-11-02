@@ -1,8 +1,8 @@
-<h3>Profiles</h3>
+<h3><%= I18n.t('profiles') %></h3>
 
 <% if @profiles.any? %>
     <% @profiles.each do |profile| %>
-      <dt>Name</dt>
+      <dt><%= Profile.human_attribute_name(:name) %></dt>
       <dd>
         <% if profile.social_name.blank? %>
           <%= link_to profile.name, profile %>
@@ -10,13 +10,11 @@
           <%= link_to profile.social_name, profile %>
         <% end %>
       </dd>
-      <dt>ID</dt>
-      <dd><%= profile.user_id %></dd>  
+      <dt><%= Profile.human_attribute_name(:profile_id) %></dt>
+      <dd><%= profile.id %></dd>  
     <% end %>
 <% else %>
     <p>There are no profiles registered</p>
 <% end %>
 
 <%= paginate @profiles %>
-
-<%= link_to "Return to Home", root_path %>

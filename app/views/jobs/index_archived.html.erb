@@ -1,8 +1,8 @@
-<h3>Openings Archived</h3>
+<h3><%= I18n.t('all_archived') %></h3>
 
 <% if headhunter_signed_in? %>
-  <%= link_to 'Published', jobs_path %> -
-  <%= link_to 'Draft', index_draft_jobs_path %>
+  <%= link_to I18n.t('all_published'), jobs_path %> -
+  <%= link_to I18n.t('all_drafted'), index_draft_jobs_path %>
 <% end %>
 
 <% if headhunter_signed_in? || user_signed_in? %>
