@@ -8,17 +8,17 @@ describe 'Headhunter create a job opening' do
       visit root_path
       
       within('nav') do
-        click_on 'New Job Opening'
+        click_on I18n.t('new_opening')
       end
-      fill_in 'Título', with: 'Job Opening Test'
-      fill_in 'Descrição', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
-      fill_in 'Habilidades', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
-      fill_in 'Salário', with: '9999'
-      fill_in 'Empresa', with: 'Test'
-      fill_in 'Nível', with: 'Junior'
-      fill_in 'Lugar', with: 'Remote Job'
-      fill_in 'Data', with: '21/11/2099'
-      select 'published', from: 'Status da Vaga'
+      fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
+      fill_in Job.human_attribute_name(:description), with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+      fill_in Job.human_attribute_name(:skills), with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+      fill_in Job.human_attribute_name(:salary), with: '9999'
+      fill_in Job.human_attribute_name(:company), with: 'Test'
+      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      fill_in Job.human_attribute_name(:place), with: 'Remote Job'
+      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
+      select 'published', from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
       expect(current_path).to eq job_path(1)
@@ -36,15 +36,15 @@ describe 'Headhunter create a job opening' do
       login_as(headhunter, :scope => :headhunter)
       visit new_job_path
      
-      fill_in 'Título', with: 'Job Opening Test'
-      fill_in 'Descrição', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
-      fill_in 'Habilidades', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
-      fill_in 'Salário', with: '9999'
-      fill_in 'Empresa', with: 'Test'
-      fill_in 'Nível', with: 'Junior'
-      fill_in 'Lugar', with: 'Remote Job'
-      fill_in 'Data', with: '21/11/2099'
-      select 'archived', from: 'Status da Vaga'
+      fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
+      fill_in Job.human_attribute_name(:description), with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+      fill_in Job.human_attribute_name(:skills), with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+      fill_in Job.human_attribute_name(:salary), with: '9999'
+      fill_in Job.human_attribute_name(:company), with: 'Test'
+      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      fill_in Job.human_attribute_name(:place), with: 'Remote Job'
+      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
+      select 'archived', from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
       expect(current_path).to eq job_path(1)
@@ -56,15 +56,15 @@ describe 'Headhunter create a job opening' do
       login_as(headhunter, :scope => :headhunter)
       visit new_job_path
      
-      fill_in 'Título', with: 'Job Opening Test'
-      fill_in 'Descrição', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
-      fill_in 'Habilidades', with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
-      fill_in 'Salário', with: '9999'
-      fill_in 'Empresa', with: 'Test'
-      fill_in 'Nível', with: 'Junior'
-      fill_in 'Lugar', with: 'Remote Job'
-      fill_in 'Data', with: '21/11/2099'
-      select 'draft', from: 'Status da Vaga'
+      fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
+      fill_in Job.human_attribute_name(:description), with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+      fill_in Job.human_attribute_name(:skills), with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+      fill_in Job.human_attribute_name(:salary), with: '9999'
+      fill_in Job.human_attribute_name(:company), with: 'Test'
+      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      fill_in Job.human_attribute_name(:place), with: 'Remote Job'
+      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
+      select 'draft', from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
       expect(current_path).to eq job_path(1)
@@ -78,16 +78,17 @@ describe 'Headhunter create a job opening' do
       visit root_path
       
       within('nav') do
-        click_on 'New Job Opening'
+        click_on I18n.t('new_opening')
       end
-      fill_in 'Título', with: ''
-      fill_in 'Descrição', with: ''
-      fill_in 'Habilidades', with: ''
-      fill_in 'Salário', with: ''
-      fill_in 'Empresa', with: ''
-      fill_in 'Nível', with: ''
-      fill_in 'Lugar', with: ''
-      fill_in 'Data', with: ''
+      fill_in Job.human_attribute_name(:title), with: ''
+      fill_in Job.human_attribute_name(:description), with: ''
+      fill_in Job.human_attribute_name(:skills), with: ''
+      fill_in Job.human_attribute_name(:salary), with: ''
+      fill_in Job.human_attribute_name(:company), with: ''
+      fill_in Job.human_attribute_name(:level), with: ''
+      fill_in Job.human_attribute_name(:place), with: ''
+      fill_in Job.human_attribute_name(:date), with: ''
+      select 'published', from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
       expect(page).to have_content("Job Opening was not registered.")

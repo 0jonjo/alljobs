@@ -14,12 +14,12 @@ describe 'User apllies to a job opening' do
     
     visit root_path
     within('nav') do
-      click_on 'Openings'
+      click_on I18n.t('openings')
     end  
     expect(page).to have_content('Job Opening Test 123')
     click_on 'Job Opening Test 123'
     
-    click_on 'Apply'
+    click_on I18n.t('apply')
     expect(page).to have_content('user@test.com')
     expect(page).to have_content('Job Opening Test 123')
     expect(page).to have_content("You successfully applied to this job.")
@@ -38,9 +38,9 @@ describe 'User apllies to a job opening' do
     login_as(user, :scope => :user)
 
     visit root_path
-    click_on 'Openings'
+    click_on I18n.t('openings')
     click_on 'Job Opening Test 123'
-    click_on 'Apply'
+    click_on I18n.t('apply')
     expect(page).to have_content("You're already applied to this job opening.")
   end  
 
@@ -57,7 +57,7 @@ describe 'User apllies to a job opening' do
     login_as(user, :scope => :user)
 
     visit apply_path(apply)
-    click_on 'Remove Apply'
+    click_on I18n.t('delete')
     expect(page).to have_content('The application for this job has been removed.')
   end  
 end

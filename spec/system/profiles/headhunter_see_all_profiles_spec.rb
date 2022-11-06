@@ -13,11 +13,10 @@ describe 'Headhunter see all profiles' do
     
     visit root_path
     within('nav') do
-      click_on 'Profiles'
+      click_on I18n.t('profiles')
     end
 
     expect(current_path).to eq profiles_path
-    expect(page).to have_content('Profiles')
     expect(page).to have_content('1') 
     expect(page).to have_content('Tester') 
     expect(page).to have_content('2') 
@@ -32,7 +31,7 @@ describe 'Headhunter see all profiles' do
     login_as(headhunter, :scope => :headhunter)
       
     visit root_path
-    click_on 'Profiles'
+    click_on I18n.t('profiles')
     
     expect(current_path).to eq profiles_path
     expect(page).to have_content('There are no profiles registered') 

@@ -15,13 +15,13 @@ describe 'Headhunter stars an apply' do
     login_as(headhunter, :scope => :headhunter)
     visit root_path
 
-    click_on 'Openings'
+    click_on I18n.t('openings')
     click_on "Job Opening Test"
     click_on "1"
-    click_on "Star This Apply"
+    click_on I18n.t('star_apply')
 
     expect(page).to have_content("You successfully starred this apply.")
-    click_on "Star This Apply"
+    click_on I18n.t('star_apply')
     expect(page).to have_content("You're already starred this apply.")
   end
   
@@ -45,7 +45,7 @@ describe 'Headhunter stars an apply' do
     visit root_path
   
     within('nav') do
-      click_on 'Stars'
+      click_on I18n.t('stars')
     end
 
     expect(current_path).to eq stars_path
@@ -72,10 +72,10 @@ describe 'Headhunter stars an apply' do
     Star.create!(profile_id: profile1.id, headhunter_id: headhunter.id, apply_id: apply.id)
 
     visit root_path
-    click_on 'Stars'
-    click_on "Remove Star"
+    click_on I18n.t('stars')
+    click_on I18n.t('delete')
 
-    expect(page).to have_content('There is no apply selected as a star')
+    expect(page).to have_content(I18n.t('no_stars'))
     expect(page).not_to have_content('Tester')
   end  
 end

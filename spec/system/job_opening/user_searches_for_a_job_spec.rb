@@ -4,8 +4,8 @@ describe 'User searches for a job' do
   it 'have to signin to see the search' do
   visit root_path
   within('nav') do
-    expect(page).not_to have_field('Search Job')
-    expect(page).not_to have_button('Search')
+    expect(page).not_to have_field(I18n.t('search_job'))
+    expect(page).not_to have_button(I18n.t('search'))
   end   
 
   end
@@ -15,8 +15,8 @@ describe 'User searches for a job' do
     
     visit root_path
     within('nav') do
-      expect(page).to have_field('Search Job')
-      expect(page).to have_button('Search')
+      expect(page).to have_field(I18n.t('search_job'))
+      expect(page).to have_button(I18n.t('search'))
     end   
   end
 
@@ -29,11 +29,11 @@ describe 'User searches for a job' do
     login_as(user)
     
     visit root_path
-    fill_in 'Search Job', with: job.code
-    click_on 'Search'
+    fill_in I18n.t('search_job'), with: job.code
+    click_on I18n.t('search')
 
-    expect(page).to have_content("All results for #{job.code}")
-    expect(page).to have_content('1 jobs found.')
+    expect(page).to have_content("#{job.code}")
+    expect(page).to have_content("1 #{I18n.t('jobs_found')}")
     expect(page).to have_content("#{job.code}")
     expect(page).to have_content('Job Opening Test')
     #depois mudar para have_link e acessar qual o job por ai também.
@@ -59,10 +59,10 @@ describe 'User searches for a job' do
     login_as(user)
 
     visit root_path
-    fill_in 'Search Job', with: 'ABC'
-    click_on 'Search' 
+    fill_in I18n.t('search_job'), with: 'ABC'
+    click_on I18n.t('search')
 
-    expect(page).to have_content("All results for ABC")
+    expect(page).to have_content("ABC")
     expect(page).to have_content("Abc12345")
     expect(page).to have_link('Job Opening Test')
     expect(page).to have_content("Abc54321")
@@ -80,11 +80,11 @@ describe 'User searches for a job' do
     login_as(user)
 
     visit root_path
-    fill_in 'Search Job', with: "ZZZZZZZ"
-    click_on 'Search'
+    fill_in I18n.t('search_job'), with: "ZZZZZZZ"
+    click_on I18n.t('search')
 
-    expect(page).to have_content('No jobs openings found.')
-    expect(page).not_to have_content('jobs found.')
+    expect(page).to have_content(I18n.t('no_jobs'))
+    expect(page).not_to have_content(I18n.t('jobs_found'))
   end
 
 end      

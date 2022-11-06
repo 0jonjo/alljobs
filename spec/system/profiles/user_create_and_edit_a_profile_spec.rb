@@ -6,17 +6,17 @@ describe 'User create a profile' do
       login_as(user, :scope => :user)
       visit root_path
       within('nav') do
-        click_on 'Profile'
+        click_on Profile.model_name.human
       end 
       
       expect(current_path).to eq new_profile_path
 
-      fill_in 'Nome', with: 'User test name'
-      fill_in 'Nome Social', with: 'Social name test'
-      fill_in 'Data de Nascimento', with: '31/12/1931'
-      fill_in 'Descrição', with: 'Test 1'
-      fill_in 'Educação', with: 'Test 2'
-      fill_in 'Experiência', with: 'Test 3'
+      fill_in Profile.human_attribute_name(:name), with: 'User test name'
+      fill_in Profile.human_attribute_name(:social_name), with: 'Social name test'
+      fill_in Profile.human_attribute_name(:birthdate), with: '31/12/1931'
+      fill_in Profile.human_attribute_name(:description), with: 'Test 1'
+      fill_in Profile.human_attribute_name(:educacional_background), with: 'Test 2'
+      fill_in Profile.human_attribute_name(:experience), with: 'Test 3'
       click_on 'Criar Perfil'
 
       expect(current_path).to eq profile_path(user)
@@ -24,7 +24,7 @@ describe 'User create a profile' do
       expect(page).to have_content "Profile registered."
       expect(page).not_to have_content 'User test name'
       expect(page).to have_content 'Social name test'
-      expect(page).to have_content '1931-12-31'
+      expect(page).to have_content '31/12/1931'
       expect(page).to have_content 'Test 1'
       expect(page).to have_content 'Test 2'
       expect(page).to have_content 'Test 3'
@@ -34,14 +34,14 @@ describe 'User create a profile' do
       user = User.create!(:email => 'user@test.com', :password => 'test123')
       login_as(user, :scope => :user)
       visit root_path
-      click_on 'Profile'
+      click_on Profile.model_name.human
     
-      fill_in 'Nome', with: ''
-      fill_in 'Nome Social', with: ''
-      fill_in 'Data de Nascimento', with: ''
-      fill_in 'Descrição', with: ''
-      fill_in 'Educação', with: ''
-      fill_in 'Experiência', with: ''
+      fill_in Profile.human_attribute_name(:name), with: ''
+      fill_in Profile.human_attribute_name(:social_name), with: ''
+      fill_in Profile.human_attribute_name(:birthdate), with: ''
+      fill_in Profile.human_attribute_name(:description), with: ''
+      fill_in Profile.human_attribute_name(:educacional_background), with: ''
+      fill_in Profile.human_attribute_name(:experience), with: ''
       click_on 'Criar Perfil'
       
       expect(page).to have_content "Profile doesn't registered."
@@ -59,17 +59,17 @@ describe 'User edit a profile' do
         profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
                                   educacional_background: "Test 3", experience: 'test 4', user_id: user.id)
         visit root_path        
-        click_on 'Profile'
-        click_on 'Edit'
+        click_on Profile.model_name.human
+        click_on I18n.t('edit')
 
         expect(current_path).to eq edit_profile_path(user)
 
-        fill_in 'Nome', with: 'User test name'
-        fill_in 'Nome Social', with: 'Social name test'
-        fill_in 'Data de Nascimento', with: '01/01/1900'
-        fill_in 'Descrição', with: 'Test1'
-        fill_in 'Educação', with: 'Test2'
-        fill_in 'Experiência', with: 'Test3'
+        fill_in Profile.human_attribute_name(:name), with: 'User test name'
+        fill_in Profile.human_attribute_name(:social_name), with: 'Social name test'
+        fill_in Profile.human_attribute_name(:birthdate), with: '31/12/1931'
+        fill_in Profile.human_attribute_name(:description), with: 'Test 1'
+        fill_in Profile.human_attribute_name(:educacional_background), with: 'Test 2'
+        fill_in Profile.human_attribute_name(:experience), with: 'Test 3'
 
         click_on 'Atualizar Perfil'
         expect(current_path).to eq profile_path(user)
@@ -78,10 +78,10 @@ describe 'User edit a profile' do
         expect(page).not_to have_content 'Just a test 2'
 
         expect(page).to have_content 'Social name test'
-        expect(page).to have_content '1900-01-01'
-        expect(page).to have_content 'Test1'
-        expect(page).to have_content 'Test2'
-        expect(page).to have_content 'Test3'
+        expect(page).to have_content '31/12/1931'
+        expect(page).to have_content 'Test 1'
+        expect(page).to have_content 'Test 2'
+        expect(page).to have_content 'Test 3'
       end
 
   it 'without sucess - forget items' do
@@ -90,17 +90,17 @@ describe 'User edit a profile' do
         profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', birthdate: '21/03/1977',
                                   educacional_background: "Test 3", experience: 'test 4', user_id: user.id)
         visit root_path        
-        click_on 'Profile'
-        click_on 'Edit'
+        click_on Profile.model_name.human
+        click_on I18n.t('edit')
 
         expect(current_path).to eq edit_profile_path(user)
 
-        fill_in 'Nome', with: ''
-        fill_in 'Nome Social', with: ''
-        fill_in 'Data de Nascimento', with: ''
-        fill_in 'Descrição', with: ''
-        fill_in 'Educação', with: ''
-        fill_in 'Experiência', with: ''
+        fill_in Profile.human_attribute_name(:name), with: ''
+        fill_in Profile.human_attribute_name(:social_name), with: ''
+        fill_in Profile.human_attribute_name(:birthdate), with: ''
+        fill_in Profile.human_attribute_name(:description), with: ''
+        fill_in Profile.human_attribute_name(:educacional_background), with: ''
+        fill_in Profile.human_attribute_name(:experience), with: ''
         click_on 'Atualizar Perfil'
 
         expect(current_path).to eq profile_path(user)

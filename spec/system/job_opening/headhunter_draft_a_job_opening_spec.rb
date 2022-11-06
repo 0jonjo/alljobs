@@ -13,9 +13,8 @@ describe 'Headhunter draft a job opening using Active Job' do
     login_as(headhunter, :scope => :headhunter)
     visit job_path(job.id)
     
-    click_on 'Change to Draft'
-    expect(page).to have_content 'ID: 1'
-    expect(page).to have_content 'Status Draft'
+    click_on I18n.t('draft')
+    expect(page).to have_content 'Draft'
     expect(page).not_to have_content 'Published'
     
     Delayed::Worker.new.work_off

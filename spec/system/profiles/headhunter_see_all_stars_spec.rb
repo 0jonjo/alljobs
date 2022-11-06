@@ -20,9 +20,9 @@ describe 'Headhunter see all his stars' do
     Star.create!(profile_id: profile1.id, headhunter_id: headhunter.id, apply_id: apply.id)
 
     visit root_path
-    click_on 'Stars'
+    click_on I18n.t('stars')
 
-    expect(page).to have_content('Stars')
+    expect(page).to have_content(I18n.t('stars'))
     expect(page).to have_content('1') 
     expect(page).to have_content('Tester') 
     expect(page).not_to have_content('2')
@@ -36,9 +36,9 @@ describe 'Headhunter see all his stars' do
     login_as(headhunter, :scope => :headhunter)
   
     visit root_path
-    click_on 'Stars'
+    click_on I18n.t('stars')
 
-    expect(page).to have_content('There is no apply selected as a star')
+    expect(page).to have_content(I18n.t('no_stars'))
     expect(page).not_to have_content('Tester') 
   end
 
@@ -56,9 +56,9 @@ describe 'Headhunter see all his stars' do
     login_as(headhunter1, :scope => :headhunter)
   
     visit root_path
-    click_on 'Stars'
+    click_on I18n.t('stars')
 
-    expect(page).to have_content('There is no apply selected as a star')
+    expect(page).to have_content(I18n.t('no_stars'))
     expect(page).not_to have_content('Tester') 
   end
 end

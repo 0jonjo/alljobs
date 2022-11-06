@@ -1,10 +1,10 @@
-<h3>All results for <%= @word %></h3>
+<h3><%= I18n.t('all_results')%>: <%= @word %></h3>
 
 <% if @jobs.any? %>
-    <p><%= @jobs.count %> jobs found.</p>
+    <p><%= @jobs.count %>  <%= I18n.t('jobs_found') %></p>
     <% @jobs.each do |job|  %>
       <%= render job %>
     <% end %>
   <% else %> 
-    <p>No jobs openings found.</p> 
+    <p><%= I18n.t('no_jobs') %></p> 
   <% end %>

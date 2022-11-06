@@ -10,13 +10,13 @@ describe 'Headhunter change status to a job opening' do
       login_as(headhunter, :scope => :headhunter)
       visit root_path
       
-      click_on 'Openings'
+      click_on I18n.t('openings')
       click_on job.title
-      click_on 'Change to Draft'
+      click_on I18n.t('draft')
 
       expect(current_path).to eq job_path(job.id)
     
-      expect(page).to have_content 'Status Draft'
+      expect(page).to have_content Job.human_attribute_name(:job_status)
       expect(page).not_to have_content 'Published'
     end
 
@@ -29,14 +29,14 @@ describe 'Headhunter change status to a job opening' do
       login_as(headhunter, :scope => :headhunter)
       visit root_path
       
-      click_on 'Openings'
+      click_on I18n.t('openings')
       click_on job.title
-      expect(page).not_to have_button 'Change to Published'
-      click_on 'Change to Archived'
+      expect(page).not_to have_button I18n.t('published')
+      click_on I18n.t('archived')
 
       expect(current_path).to eq job_path(job.id)
     
-      expect(page).to have_content 'Status Archived'
+      expect(page).to have_content 'Archived'
       expect(page).not_to have_content 'Published'
     end
 
@@ -49,12 +49,12 @@ describe 'Headhunter change status to a job opening' do
       login_as(headhunter, :scope => :headhunter)
       visit root_path
       
-      click_on 'Openings'
+      click_on I18n.t('openings')
       click_on job.title
   
-      expect(page).to have_content 'Status Published'
-      expect(page).not_to have_button 'Change to Published'
-      expect(page).to have_button 'Change to Draft'
-      expect(page).to have_button 'Change to Archived'
+      expect(page).to have_content 'Published'
+      expect(page).not_to have_button I18n.t('published')
+      expect(page).to have_button I18n.t('draft')
+      expect(page).to have_button I18n.t('archived')
     end
 end

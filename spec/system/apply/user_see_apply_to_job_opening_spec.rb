@@ -56,9 +56,6 @@ describe 'User applied to job opening' do
     expect(page).to have_content('user@test.com')
     expect(page).not_to have_content('user2@test.com')
     expect(page).to have_content('Job Opening Test 123')
-    expect(page).to have_content('Apply ID')
-    expect(page).to have_content('User ID')
-    expect(page).to have_content('User Email')
   end
 
   it "and see only his multiply applies" do

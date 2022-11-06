@@ -4,6 +4,7 @@ pt-BR:
   applies: 'Inscrições'
   profiles: 'Perfis'
   stars: 'Favoritos'
+  no_stars: 'Nenhuma inscrição selecionada como favorita'
   you_are: 'Logado em'
   search_job: 'Pesquisar Vaga'
   search: 'Pesquisar'
@@ -28,5 +29,8 @@ pt-BR:
   feedback: 'Dar Feedback'
   send_proposal: 'Fazer Proposta'
   view_proposal: 'Ver Proposta'
+  all_results: 'Todos os resultados para'
+  jobs_found: 'vagas encontrada(s)'
+  no_jobs: 'Nenhuma vaga encontrada'
   
     

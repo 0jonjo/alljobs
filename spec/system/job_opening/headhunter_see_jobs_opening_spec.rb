@@ -27,8 +27,8 @@ describe 'Headhunter see job openings' do
       expect(page).not_to have_content('Test 2')
       expect(page).not_to have_content('Test 3')
 
-      expect(page).to have_link('Archived')
-      expect(page).to have_link('Draft')
+      expect(page).to have_link(I18n.t('archived'))
+      expect(page).to have_link(I18n.t('draft'))
     end
 
     it 'without sucess - no one job' do                                                           
@@ -61,7 +61,7 @@ describe 'Headhunter see job openings' do
       headhunter = Headhunter.create!(:email => 'headhunter@test.com', :password => 'test123')
       login_as(headhunter, :scope => :headhunter)
       visit jobs_path
-      click_on "Draft"
+      click_on I18n.t('draft')
     
       expect(page).not_to have_content('Test 0')
       expect(page).not_to have_content('Test 1')
@@ -73,7 +73,7 @@ describe 'Headhunter see job openings' do
       headhunter = Headhunter.create!(:email => 'headhunter@test.com', :password => 'test123')
       login_as(headhunter, :scope => :headhunter)
       visit jobs_path
-      click_on "Draft"
+      click_on I18n.t('draft')
         
       expect(page).to have_content('There are not any job opening drafted.')
     end  
@@ -100,26 +100,26 @@ describe 'Headhunter see job openings' do
       headhunter = Headhunter.create!(:email => 'headhunter@test.com', :password => 'test123')
       login_as(headhunter, :scope => :headhunter)
       visit jobs_path
-      click_on "Draft"
+      click_on I18n.t('draft')
     
       expect(page).not_to have_content('Test 0')
       expect(page).not_to have_content('Test 1')
       expect(page).to have_content('Test 2')
       expect(page).to have_content('Test 3')
 
-      expect(page).to have_link('Archived')
-      expect(page).to have_link('Published')
+      expect(page).to have_link(I18n.t('archived'))
+      expect(page).to have_link(I18n.t('published'))
     end
 
     it 'without sucess - no one job' do                                                           
       headhunter = Headhunter.create!(:email => 'headhunter@test.com', :password => 'test123')
       login_as(headhunter, :scope => :headhunter)
       visit jobs_path
-      click_on "Archived"
-        
+      click_on I18n.t('all_archived')
+      
       expect(page).to have_content('There are not any job opening archived.')
-      expect(page).to have_link('Draft')
-      expect(page).to have_link('Published')
+      expect(page).to have_link(I18n.t('all_drafted'))
+      expect(page).to have_link(I18n.t('all_published'))
     end  
   end
 end

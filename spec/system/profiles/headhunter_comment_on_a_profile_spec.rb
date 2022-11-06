@@ -9,18 +9,18 @@ describe 'Headhunter comment on a profile' do
     login_as(headhunter, :scope => :headhunter)
     
     visit root_path
-    click_on 'Profiles'
+    click_on I18n.t('profiles')
     click_on 'Tester'
     
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Comentário', with: 'Just a test comment'
+    fill_in Comment.human_attribute_name(:body), with: 'Just a test comment'
     click_on 'Criar Comentário'
     expect(page).to have_content('Just a test comment')
     expect(page).to have_content("Comment created.")
 
-    click_on 'Edit'
-    fill_in 'Comentário', with: 'Another test comment'
+    click_on I18n.t('edit')
+    fill_in Comment.human_attribute_name(:body), with: 'Another test comment'
     click_on 'Atualizar Comentário'
     expect(page).to have_content('Comment updated.')
     expect(page).to have_content('Another test comment')
@@ -33,12 +33,12 @@ describe 'Headhunter comment on a profile' do
     login_as(headhunter, :scope => :headhunter)
     
     visit root_path
-    click_on 'Profiles'
+    click_on I18n.t('profiles')
     click_on 'Tester'
     
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Comentário', with: ''
+    fill_in Comment.human_attribute_name(:body), with: ''
     click_on 'Criar Comentário'
 
     expect(page).to have_content("Comment can't be created.")
@@ -51,16 +51,16 @@ describe 'Headhunter comment on a profile' do
     login_as(headhunter, :scope => :headhunter)
     
     visit root_path
-    click_on 'Profiles'
+    click_on I18n.t('profiles') 
     click_on 'Tester'
     
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Comentário', with: 'Teste'
+    fill_in Comment.human_attribute_name(:body), with: 'Teste'
     click_on 'Criar Comentário'
 
-    click_on 'Edit'
-    fill_in 'Comentário', with: ''
+    click_on I18n.t('edit')
+    fill_in Comment.human_attribute_name(:body), with: ''
     click_on 'Atualizar Comentário'
     expect(page).to have_content("Comentário não pode ficar em branco")
   end
@@ -72,13 +72,13 @@ describe 'Headhunter comment on a profile' do
     login_as(headhunter, :scope => :headhunter)
     
     visit root_path
-    click_on 'Profiles'
+    click_on I18n.t('profiles')
     click_on 'Tester'
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Comentário', with: 'Just a test comment'
+    fill_in Comment.human_attribute_name(:body), with: 'Just a test comment'
     click_on 'Criar Comentário'
-    fill_in 'Comentário', with: 'Second comment'
+    fill_in Comment.human_attribute_name(:body), with: 'Second comment'
     click_on 'Criar Comentário'
 
     expect(page).to have_content('Just a test comment')
@@ -92,15 +92,15 @@ describe 'Headhunter comment on a profile' do
     login_as(headhunter, :scope => :headhunter)
     
     visit root_path
-    click_on 'Profiles'
+    click_on I18n.t('profiles')
     click_on 'Tester'
     expect(current_path).to eq profile_path(profile)
 
-    fill_in 'Comentário', with: 'Just a test comment'
+    fill_in Comment.human_attribute_name(:body), with: 'Just a test comment'
     click_on 'Criar Comentário'
     expect(page).to have_content('Just a test comment')
 
-    click_on 'Delete'
+    click_on I18n.t('delete')
     expect(page).not_to have_content('Just a test comment')
   end  
 end

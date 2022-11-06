@@ -10,18 +10,18 @@ describe 'Headhunter edit a job opening' do
       login_as(headhunter, :scope => :headhunter)
       visit root_path
       
-      click_on 'Openings'
+      click_on I18n.t('openings')
       click_on 'Job Opening Test'
-      click_on 'Edit'
+      click_on I18n.t('edit')
 
       expect(current_path).to eq edit_job_path(1)
-      fill_in 'Título', with: 'Job Opening Test 123'
-      fill_in 'Descrição', with: 'Lorem ipsum dolor '
-      fill_in 'Habilidades', with: 'Lorem ipsuctus'
-      fill_in 'Salário', with: '9999'
-      fill_in 'Nível', with: 'Junior'
-      fill_in 'Lugar', with: 'Remote Job'
-      fill_in 'Data', with: '21/11/2099'
+      fill_in Job.human_attribute_name(:title), with: 'Job Opening Test 123'
+      fill_in Job.human_attribute_name(:description), with: 'Lorem ipsum dolor '
+      fill_in Job.human_attribute_name(:skills), with: 'Lorem ipsuctus'
+      fill_in Job.human_attribute_name(:salary), with: '9999'
+      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      fill_in Job.human_attribute_name(:place), with: 'Remote Job'
+      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
       click_on 'Atualizar Vaga'
     
       expect(page).to have_content 'Job Opening Test 123'
@@ -38,18 +38,19 @@ describe 'Headhunter edit a job opening' do
       login_as(headhunter, :scope => :headhunter)
       visit root_path
       
-      click_on 'Openings'
+      click_on I18n.t('openings')
       click_on 'Job Opening Test'
-      click_on 'Edit'
+      click_on I18n.t('edit')
 
       expect(current_path).to eq edit_job_path(1)
-      fill_in 'Título', with: ''
-      fill_in 'Descrição', with: ''
-      fill_in 'Habilidades', with: ''
-      fill_in 'Salário', with: ''
-      fill_in 'Nível', with: ''
-      fill_in 'Lugar', with: ''
-      fill_in 'Data', with: ''
+      fill_in Job.human_attribute_name(:title), with: ''
+      fill_in Job.human_attribute_name(:description), with: ''
+      fill_in Job.human_attribute_name(:skills), with: ''
+      fill_in Job.human_attribute_name(:salary), with: ''
+      fill_in Job.human_attribute_name(:company), with: ''
+      fill_in Job.human_attribute_name(:level), with: ''
+      fill_in Job.human_attribute_name(:place), with: ''
+      fill_in Job.human_attribute_name(:date), with: ''
       click_on 'Atualizar Vaga'
     
       expect(page).to have_content "Job Opening was not edited."

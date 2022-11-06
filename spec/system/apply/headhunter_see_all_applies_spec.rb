@@ -20,10 +20,9 @@ describe 'Headhunter sees all applies' do
     visit root_path
 
     within('nav') do
-      click_on 'Applies'
+      click_on I18n.t('applies')
     end
 
-    expect(page).to have_content('Applies')
     expect(page).to have_link('1', href: apply_path(1))
     expect(page).to have_link('2', href: apply_path(2))
     expect(page).to have_content('Job Opening Test')
@@ -40,7 +39,7 @@ describe 'Headhunter sees all applies' do
 
     visit root_path
     within('nav') do
-      click_on 'Applies'
+      click_on I18n.t('applies')
     end
     
     expect(page).to have_content("There aren't any apply.")

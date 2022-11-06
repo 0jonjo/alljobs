@@ -16,7 +16,7 @@ describe 'Headhunter view applies to a specific job' do
     
     visit root_path
     within('nav') do
-      click_on 'Openings'
+      click_on I18n.t('openings')
     end
     expect(page).to have_link('Job Opening Test 123', href: job_path(1))
     click_on 'Job Opening Test 123'
@@ -43,7 +43,7 @@ describe 'Headhunter view applies to a specific job' do
     login_as(headhunter, :scope => :headhunter)
     
     visit root_path
-    click_on 'Openings'
+    click_on I18n.t('openings')
     expect(page).to have_link('Job Opening Test', href: job_path(1))
     expect(page).to have_link('Other Job Opening', href: job_path(2))
     click_on 'Other Job Opening'

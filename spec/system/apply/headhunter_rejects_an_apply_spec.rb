@@ -12,8 +12,8 @@ describe 'Headhunter rejects an apply' do
     login_as(headhunter, :scope => :headhunter)
     visit apply_path(apply)
 
-    click_on "Reject/Feedback This Apply"
-    fill_in "Retorno do Recrutador", with: "You need more experience to this job."
+    click_on I18n.t('feedback')
+    fill_in Apply.human_attribute_name(:feedback_headhunter), with: "You need more experience to this job."
     click_on "Atualizar Inscrição"
     
     expect(current_path).to eq(apply_path(apply))
@@ -33,8 +33,8 @@ describe 'Headhunter rejects an apply' do
     login_as(headhunter, :scope => :headhunter)
     visit apply_path(apply)
 
-    click_on "Reject/Feedback This Apply"
-    fill_in "Retorno do Recrutador", with: "Test edit feedback."
+    click_on I18n.t('feedback')
+    fill_in Apply.human_attribute_name(:feedback_headhunter), with: "Test edit feedback."
     click_on "Atualizar Inscrição"
     
     expect(current_path).to eq(apply_path(apply))
