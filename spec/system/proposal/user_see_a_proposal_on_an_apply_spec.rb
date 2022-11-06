@@ -17,8 +17,7 @@ describe "User see a proposal on an apply" do
 
     visit apply_path(apply)
 
-    expect(page).to have_content('See Proposal 1')
-    expect(page).to have_link('1', href: apply_proposal_path(apply, proposal))
+    expect(page).to have_link(I18n.t('view_proposal'), href: apply_proposal_path(apply, proposal))
   end
 end
 

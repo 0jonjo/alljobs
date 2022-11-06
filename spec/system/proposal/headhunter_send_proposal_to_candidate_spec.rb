@@ -15,11 +15,11 @@ describe "Headhunter see a proposal to a cadindidate" do
 
     visit apply_proposal_path(apply, proposal)
 
-    expect(page).to have_content('Proposal 1')
+    expect(page).to have_content("#{Proposal.model_name.human} 1")
     expect(page).to have_content('999')
     expect(page).to have_content('some benefits')
     expect(page).to have_content('some expectations')
-    expect(page).to have_link('Apply ID 1', href: apply_path(1))
+    expect(page).to have_link("#{Apply.human_attribute_name(:id)} 1", href: apply_path(1))
   end
 end
 
@@ -35,13 +35,13 @@ describe "Headhunter create a proposal to a candidate" do
     login_as(headhunter, :scope => :headhunter)
     
     visit apply_path(apply)
-    click_on 'Make A Proposal'
+    click_on I18n.t('send_proposal')
     expect(current_path).to eq(new_apply_proposal_path(apply))
     
-    fill_in 'Salário', with: '66'
-    fill_in 'Benefícios', with: 'add other benefits'
-    fill_in 'Expectativas', with: 'add other expectations'
-    fill_in 'Expectativa de Início', with: '01/01/2099'
+    fill_in Proposal.human_attribute_name(:salary), with: '66'
+    fill_in Proposal.human_attribute_name(:benefits), with: 'add other benefits'
+    fill_in Proposal.human_attribute_name(:expectations), with: 'add other expectations'
+    fill_in Proposal.human_attribute_name(:expected_start), with: '01/01/2099'
     click_on 'Criar Proposta'
     
     expect(page).to have_content("You successfully create a proposal for this apply.")
@@ -61,7 +61,7 @@ describe "Headhunter create a proposal to a candidate" do
     login_as(headhunter, :scope => :headhunter)
     
     visit apply_path(apply)
-    click_on 'Make A Proposal'
+    click_on I18n.t('send_proposal')
   
     expect(page).to have_content("There is already a proposal for this apply.")
     expect(current_path).to eq(apply_path(apply))
@@ -78,13 +78,13 @@ describe "Headhunter create a proposal to a candidate" do
     login_as(headhunter, :scope => :headhunter)
     
     visit apply_path(apply)
-    click_on 'Make A Proposal'
+    click_on I18n.t('send_proposal')
     expect(current_path).to eq(new_apply_proposal_path(apply))
     
-    fill_in 'Salário', with: ''
-    fill_in 'Benefícios', with: ''
-    fill_in 'Expectativas', with: ''
-    fill_in 'Expectativa de Início', with: ''
+    fill_in Proposal.human_attribute_name(:salary), with: ''
+    fill_in Proposal.human_attribute_name(:benefits), with: ''
+    fill_in Proposal.human_attribute_name(:expectations), with: ''
+    fill_in Proposal.human_attribute_name(:expected_start), with: ''
     click_on 'Criar Proposta'
     
     expect(page).to have_content("You can't create a proposal for this apply.")

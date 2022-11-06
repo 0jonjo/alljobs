@@ -9,7 +9,7 @@ describe 'User see his profile' do
     login_as(user, :scope => :user)  
     visit root_path    
     
-    click_on "Profile"
+    click_on Profile.model_name.human
     expect(current_path).to eq(profile_path(user.id))
   end
 
@@ -18,7 +18,7 @@ describe 'User see his profile' do
     login_as(user, :scope => :user)  
     visit root_path    
     
-    click_on "Profile"
+    click_on Profile.model_name.human
     expect(current_path).to eq(new_profile_path)
   end
 

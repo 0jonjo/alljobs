@@ -14,12 +14,12 @@ describe "Headhunter edit a proposal to a cadindidate" do
     login_as(headhunter, :scope => :headhunter)
 
     visit apply_proposal_path(apply, proposal)
-    click_on "Edit"
+    click_on I18n.t('edit')
 
-    fill_in 'Salário', with: '66'
-    fill_in 'Benefícios', with: 'add other benefits'
-    fill_in 'Expectativas', with: 'add other expectations'
-    fill_in 'Expectativa de Início', with: '01/01/2099'
+    fill_in Proposal.human_attribute_name(:salary), with: '66'
+    fill_in Proposal.human_attribute_name(:benefits), with: 'add other benefits'
+    fill_in Proposal.human_attribute_name(:expectations), with: 'add other expectations'
+    fill_in Proposal.human_attribute_name(:expected_start), with: '01/01/2099'
     click_on 'Atualizar Proposta'
 
     expect(page).to have_content("You successfully edited this proposal.")
@@ -39,12 +39,12 @@ describe "Headhunter edit a proposal to a cadindidate" do
     login_as(headhunter, :scope => :headhunter)
 
     visit apply_proposal_path(apply, proposal)
-    click_on "Edit"
+    click_on I18n.t('edit')
 
-    fill_in 'Salário', with: ''
-    fill_in 'Benefícios', with: ''
-    fill_in 'Expectativas', with: ''
-    fill_in 'Expectativa de Início', with: ''
+    fill_in Proposal.human_attribute_name(:salary), with: ''
+    fill_in Proposal.human_attribute_name(:benefits), with: ''
+    fill_in Proposal.human_attribute_name(:expectations), with: ''
+    fill_in Proposal.human_attribute_name(:expected_start), with: ''
     click_on 'Atualizar Proposta'
 
     expect(page).to have_content("You do not edit this proposal.")
@@ -66,7 +66,7 @@ describe "Headhunter delete a proposal to a cadindidate" do
     login_as(headhunter, :scope => :headhunter)
 
     visit apply_proposal_path(apply, proposal)
-    click_on "Delete"
+    click_on I18n.t('delete')
 
     expect(page).to have_content("You removed the proposal from the apply")
     expect(current_path).to eq(apply_path(apply))
