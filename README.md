@@ -35,7 +35,7 @@ Gems:
 - [x] Use asynchronous processing to delete applications from archived job openings 
 - [x] Create a side repository to test API [(Seejobs)](https://github.com/0jonjo/seejobs/)
 - [x] Translate Alljobs to Portuguese. 
-- [] Implement a cool design.
+- [ ] Implement a cool design.
 
 ## Install
 
