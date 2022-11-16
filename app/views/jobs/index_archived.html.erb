@@ -11,7 +11,7 @@
       <%= render job %>       
     <% end %>
   <% else %>
-    <p>There are not any job opening archived.</p>
+    <p><%= I18n.t('no_jobs') %></p>
   <% end %>  
 <% end %>
 <%= paginate @jobs %>

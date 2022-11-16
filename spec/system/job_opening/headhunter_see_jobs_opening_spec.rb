@@ -36,7 +36,7 @@ describe 'Headhunter see job openings' do
       login_as(headhunter, :scope => :headhunter)
       visit jobs_path
         
-      expect(page).to have_content('There are not any job opening published.')
+      expect(page).to have_content(I18n.t('no_jobs'))
     end  
   end 
   
@@ -75,7 +75,7 @@ describe 'Headhunter see job openings' do
       visit jobs_path
       click_on I18n.t('draft')
         
-      expect(page).to have_content('There are not any job opening drafted.')
+      expect(page).to have_content(I18n.t('no_jobs'))
     end  
   end
 
@@ -117,7 +117,7 @@ describe 'Headhunter see job openings' do
       visit jobs_path
       click_on I18n.t('all_archived')
       
-      expect(page).to have_content('There are not any job opening archived.')
+      expect(page).to have_content(I18n.t('no_jobs'))
       expect(page).to have_link(I18n.t('all_drafted'))
       expect(page).to have_link(I18n.t('all_published'))
     end  

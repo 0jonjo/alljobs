@@ -42,6 +42,6 @@ describe 'Headhunter sees all applies' do
       click_on I18n.t('applies')
     end
     
-    expect(page).to have_content("There aren't any apply.")
+    expect(page).to have_content(I18n.t('no_applies'))
   end
 end

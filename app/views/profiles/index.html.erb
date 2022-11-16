@@ -14,7 +14,7 @@
       <dd><%= profile.id %></dd>  
     <% end %>
 <% else %>
-    <p>There are no profiles registered</p>
+    <p><%= I18n.t('no_profiles') %></p>
 <% end %>
 
 <%= paginate @profiles %>

@@ -34,6 +34,6 @@ describe 'Headhunter see all profiles' do
     click_on I18n.t('profiles')
     
     expect(current_path).to eq profiles_path
-    expect(page).to have_content('There are no profiles registered') 
+    expect(page).to have_content(I18n.t('no_profiles')) 
   end  
 end

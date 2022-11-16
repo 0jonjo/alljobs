@@ -5,7 +5,7 @@
      <%= render apply %>
   <% end %>  
 <% else %>  
-  <p>There aren't any apply.</p>
+  <p><%= I18n.t('no_applies') %></p>
 <% end %>
 
 <%= paginate @applies %>

@@ -39,6 +39,6 @@ describe 'User see job openings' do
     login_as(user, :scope => :user)
     visit jobs_path   
     
-    expect(page).to have_content('There are not any job opening published.')
+    expect(page).to have_content(I18n.t('no_jobs'))
   end  
 end

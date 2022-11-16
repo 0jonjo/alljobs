@@ -5,6 +5,7 @@ describe 'Visitor visit homepage' do
     visit root_path
     expect(page).to have_content('All Jobs')
     expect(page).to have_link('All Jobs', href: root_path)
+    expect(page).to have_content(I18n.t('go_to_login'))
     within('nav') do
       expect(page).to have_link('Login User', href: new_user_session_path)
       expect(page).to have_link('Login Headhunter', href: new_headhunter_session_path)
@@ -23,7 +24,8 @@ describe 'Visitor visit homepage' do
       user = User.create!(:email => 'user@test.com', :password => 'test123')
       login_as(user, :scope => :user)
       visit root_path
-
+      
+      expect(page).to have_content(I18n.t('choose_option'))
       expect(page).to have_link('All Jobs', href: root_path)
       within('nav') do
         expect(page).to have_content("#{I18n.t('you_are')} user@test.com")
@@ -45,6 +47,7 @@ describe 'Visitor visit homepage' do
       login_as(headhunter, :scope => :headhunter)
       visit root_path
 
+      expect(page).to have_content(I18n.t('choose_option'))
       expect(page).to have_link('All Jobs', href: root_path)
       within('nav') do
         expect(page).to have_content("#{I18n.t('you_are')} admin@test.com")

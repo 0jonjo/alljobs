@@ -2,10 +2,10 @@
 
 <% unless headhunter_signed_in? || user_signed_in? %>
   <p>
-    Choose your login option or create your User/Headhunter.
+    <%= I18n.t('go_to_login') %>
   </p>
 <% else %>
   <p>
-    Choose an option above.
+    <%= I18n.t('choose_option') %>
   </p>
 <% end %>
