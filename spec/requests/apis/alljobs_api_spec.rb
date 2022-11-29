@@ -124,4 +124,94 @@ describe "Alljobs API" do
       expect(response.content_type).to eq("application/json; charset=utf-8") 
     end
   end
+
+  context "PUT /api/v1/jobs/1" do
+    it "with sucess" do
+      job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
+                          skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                          company: 'Acme', level: 'Junior', place: 'Remote Job',
+                          date: 1.month.from_now)
+      job_params = { job: { title: 'Test title', description: 'Test description', 
+                    skills: 'Test skills', salary: '66', 
+                    company: 'Test company', level: 'Test level', place: 'Test place',
+                    date: 1.month.from_now } }
+      put "/api/v1/jobs/#{job.id}", params: job_params
+      
+      expect(response).to have_http_status(200)
+      expect(response.content_type).to eq("application/json; charset=utf-8") 
+      
+      json_response = JSON.parse(response.body)
+    end
+
+    it "without sucess - imcomplete parameters" do
+      job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
+                          skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                          company: 'Acme', level: 'Junior', place: 'Remote Job',
+                          date: 1.month.from_now)
+      job_params = { job: { title: 'Test title', description: 'Test description', 
+              skills: '', salary: '', company: '', level: '', place: '',
+              date: '' } }
+      put "/api/v1/jobs/#{job.id}", params: job_params
+      
+      expect(response).to have_http_status(412)
+      expect(response.content_type).to eq("application/json; charset=utf-8") 
+    
+      expect(response.body).not_to include("Título não pode ficar em branco")
+      expect(response.body).to include("Habilidades não pode ficar em branco")
+      expect(response.body).to include("Salário não pode ficar em branco")
+      expect(response.body).to include("Empresa não pode ficar em branco")
+      expect(response.body).to include("Nível não pode ficar em branco")
+      expect(response.body).to include("Data não pode ficar em branco")
+      expect(response.body).to include("Salário não pode ficar em branco")
+    end
+
+    xit "without sucess - internal error" do
+      allow(Job).to receive(:update).and_raise(ActiveRecord::ActiveRecordError)
+
+      job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
+                          skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                          company: 'Acme', level: 'Junior', place: 'Remote Job',
+                          date: 1.month.from_now)
+      job_params = { job: { title: 'Test title', description: 'Test description', 
+                    skills: 'Test skills', salary: '66', 
+                    company: 'Test company', level: 'Test level', place: 'Test place',
+                    date: 1.month.from_now } }
+      put "/api/v1/jobs/#{job.id}", params: job_params
+      
+      expect(response).to have_http_status(500)
+      expect(response.content_type).to eq("application/json; charset=utf-8") 
+    end
+  end   
+  
+  context "DELETE /api/v1/jobs/1" do
+    it "with sucess" do
+      job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
+                      skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                      company: 'Acme', level: 'Junior', place: 'Remote Job',
+                      date: 1.month.from_now)
+      delete "/api/v1/jobs/#{job.id}"
+      
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq("application/json; charset=utf-8") 
+    end
+
+    it "without sucess - no job" do
+      delete "/api/v1/jobs/1"
+      
+      expect(response.status).to eq 404
+      expect(response.content_type).to eq("application/json; charset=utf-8") 
+    end
+
+    xit "without sucess - internal error" do
+      allow(Job).to receive(:destroy).and_raise(ActiveRecord::ActiveRecordError)
+      job = Job.create!(title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet', 
+                      skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                      company: 'Acme', level: 'Junior', place: 'Remote Job',
+                      date: 1.month.from_now)
+      delete "/api/v1/jobs/#{job.id}"
+      
+      expect(response.status).to eq 500
+      expect(response.content_type).to eq("application/json; charset=utf-8") 
+    end
+  end  
 end    
