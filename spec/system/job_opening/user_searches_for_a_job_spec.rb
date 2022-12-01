@@ -1,18 +1,22 @@
 require 'rails_helper'
 
-describe 'User searches for a job' do
+describe 'User try to search for a job' do
   it 'have to signin to see the search' do
-  visit root_path
-  within('nav') do
-    expect(page).not_to have_field(I18n.t('search_job'))
-    expect(page).not_to have_button(I18n.t('search'))
-  end   
-
+    visit root_path
+    within('nav') do
+      expect(page).not_to have_field(I18n.t('search_job'))
+      expect(page).not_to have_button(I18n.t('search'))
+    end   
   end
+end
+
+describe 'User searches for a job' do  
   it 'acess form on menu' do
     user = User.create!(email: 'user@test.com', password: 'test123')
-    login_as(user)
-    
+    Profile.create!(name: "Tester", birthdate: "1991-12-12", 
+                    description: "Tester 3", educacional_background: "Tester 3",
+                    experience: "Tester 3", user_id: user.id)
+    login_as(user, :scope => :user)
     visit root_path
     within('nav') do
       expect(page).to have_field(I18n.t('search_job'))
@@ -20,14 +24,16 @@ describe 'User searches for a job' do
     end   
   end
 
-  it 'with sucess, only a result'do
+  it 'with sucess, only a result' do
     job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
-                    skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
-                    company: 'Acme', level: 'Junior', place: 'Remote Job',
-                    date: 1.month.from_now)
+                        skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                        company: 'Acme', level: 'Junior', place: 'Remote Job',
+                        date: 1.month.from_now)
     user = User.create!(email: 'user@test.com', password: 'test123')
-    login_as(user)
-    
+    Profile.create!(name: "Tester", birthdate: "1991-12-12", 
+                    description: "Tester 3", educacional_background: "Tester 3",
+                    experience: "Tester 3", user_id: user.id)
+    login_as(user, :scope => :user)
     visit root_path
     fill_in I18n.t('search_job'), with: job.code
     click_on I18n.t('search')
@@ -40,6 +46,10 @@ describe 'User searches for a job' do
   end
 
   it "with sucess, many results" do
+    user = User.create!(email: 'user@test.com', password: 'test123')
+    Profile.create!(name: "Tester", birthdate: "1991-12-12", 
+                    description: "Tester 3", educacional_background: "Tester 3",
+                    experience: "Tester 3", user_id: user.id)
     allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC12345')
     job1 = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
@@ -55,9 +65,8 @@ describe 'User searches for a job' do
                         skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)                      
-    user = User.create!(email: 'user@test.com', password: 'test123')
-    login_as(user)
-
+    
+    login_as(user, :scope => :user)
     visit root_path
     fill_in I18n.t('search_job'), with: 'ABC'
     click_on I18n.t('search')
@@ -72,13 +81,16 @@ describe 'User searches for a job' do
   end
 
   it "without any result" do
-    job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
-    skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
-    company: 'Acme', level: 'Junior', place: 'Remote Job',
-    date: 1.month.from_now)
     user = User.create!(email: 'user@test.com', password: 'test123')
-    login_as(user)
+    Profile.create!(name: "Tester", birthdate: "1991-12-12", 
+                    description: "Tester 3", educacional_background: "Tester 3",
+                    experience: "Tester 3", user_id: user.id)
+    job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
+                      skills: 'Nam mattis, felis ut adipiscing.', salary: '99', 
+                      company: 'Acme', level: 'Junior', place: 'Remote Job',
+                      date: 1.month.from_now)
 
+    login_as(user, :scope => :user)
     visit root_path
     fill_in I18n.t('search_job'), with: "ZZZZZZZ"
     click_on I18n.t('search')
@@ -86,5 +98,4 @@ describe 'User searches for a job' do
     expect(page).to have_content(I18n.t('no_jobs'))
     expect(page).not_to have_content(I18n.t('jobs_found'))
   end
-
 end      
