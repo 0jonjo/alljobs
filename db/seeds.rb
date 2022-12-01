@@ -6,8 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 # Default Admin
-Headhunter.create(email: 'admin@test.com',
+Admin.create(email: 'admin@test.com',
+             password: 'test123')
+# Default Headhunter
+Headhunter.create(email: 'headhunter@test.com',
              password: 'test123')
 #Default User and Profile
 user = User.create(email: 'user@test.com',

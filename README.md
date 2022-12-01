@@ -14,6 +14,7 @@ Gems:
 - Delayed Job (4.1.10)
 - Daemons (1.4.1)
 - Faraday (2.5.2)
+- Rails_admin (3.1.0)
 
 - [x] 1. Headhunter creates an account 
 - [x] 2. Headhunter registers/searchs a job opening
@@ -35,6 +36,7 @@ Gems:
 - [x] Use asynchronous processing to delete applications from archived job openings 
 - [x] Create a side repository to test API [(Seejobs)](https://github.com/0jonjo/seejobs/)
 - [x] Translate Alljobs to Portuguese. 
+- [x] Create Admin role and page.
 - [ ] Implement a cool design.
 
 ## Install
