@@ -24,7 +24,7 @@ pt-BR:
     loading: "Carregando"
     toggle_navigation: Toggle navigation
     home:
-      name: "Página Admin"
+      name: "Home"
     pagination:
       previous: "&laquo; Anterior"
       next: "Próximo &raquo;"
