@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
+#Rails_Admin
+gem 'rails_admin', '~> 3.0'
 #Delayed Job
 gem 'delayed_job_active_record'
 gem "daemons"
