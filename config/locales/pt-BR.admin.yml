@@ -51,9 +51,9 @@ pt-BR:
       ago: "antes"
       more: "Mais %{count} de %{models_name}"
     flash:
-      successful: "%{name} com sucesso %{action}"
-      error: "%{name} falhou em %{action}"
-      noaction: "No actions were taken"
+      successful: "%{name} %{action} com sucesso"
+      error: "%{name} falhou em ser %{action}"
+      noaction: "Nenhuma ação foi realizada"
       model_not_found: "Model '%{model}' não foi encontrado"
       object_not_found: "%{model} com id '%{id}' não foi encontrado"
     table_headers:
