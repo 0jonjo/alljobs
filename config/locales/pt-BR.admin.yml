@@ -57,9 +57,9 @@ pt-BR:
       model_not_found: "Model '%{model}' não foi encontrado"
       object_not_found: "%{model} com id '%{id}' não foi encontrado"
     table_headers:
-      model_name: "Model nome"
+      model_name: "Nome do Model"
       last_created: "Criado pela última vez"
-      records: "Records"
+      records: "Contagem"
       username: "Usuário"
       changes: "Mudanças"
       created_at: "Data/Hora"
