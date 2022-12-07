@@ -98,7 +98,7 @@ pt-BR:
         menu: "Delete"
         breadcrumb: "Delete"
         link: "Delete '%{object_label}'"
-        done: "deleted"
+        done: "excluído"
       bulk_delete:
         title: "Delete %{model_label_plural}"
         menu: "Multiple delete"
