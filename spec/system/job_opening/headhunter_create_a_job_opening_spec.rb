@@ -22,7 +22,6 @@ describe 'Headhunter create a job opening' do
       click_on 'Criar Vaga'
   
       expect(current_path).to eq job_path(1)
-      expect(page).to have_content("You successfully registered a Job Opening.")
       expect(page).to have_content("Job Opening Test")
       expect(page).to have_content("12345678")
       expect(page).to have_content("Test")
@@ -91,7 +90,6 @@ describe 'Headhunter create a job opening' do
       select 'published', from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
-      expect(page).to have_content("Job Opening was not registered.")
       expect(page).to have_content("Título não pode ficar em branco")
       expect(page).to have_content("Habilidades não pode ficar em branco")
       expect(page).to have_content("Salário não pode ficar em branco")

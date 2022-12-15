@@ -23,10 +23,8 @@ class JobsController < ApplicationController
   def create 
     @job = Job.new(job_params)
     if @job.save
-      flash[:notice] = "You successfully registered a Job Opening."
       redirect_to @job
     else
-      flash.now[:alert] = "Job Opening was not registered."
       render :new  
     end
   end
@@ -38,7 +36,6 @@ class JobsController < ApplicationController
     if @job.update(job_params)
       redirect_to @job
     else
-      flash.now[:alert] = "Job Opening was not edited."
       render :edit
     end
   end
@@ -60,7 +57,6 @@ class JobsController < ApplicationController
     if @job.draft!
       redirect_to @job
     else
-      flash.now[:alert] = "Job Opening was not edited."
       render :new 
     end  
   end  
@@ -69,7 +65,6 @@ class JobsController < ApplicationController
     if @job.archived!
       redirect_to @job
     else
-      flash.now[:alert] = "Job Opening was not edited."
       render :new 
     end  
   end
@@ -78,7 +73,6 @@ class JobsController < ApplicationController
     if @job.published!
       redirect_to @job
     else
-      flash.now[:alert] = "Job Opening was not edited."
       render :new 
     end  
   end

@@ -20,7 +20,6 @@ describe 'Headhunter draft a job opening using Active Job' do
     Delayed::Worker.new.work_off
     visit job_path(job.id)
 
-    expect(page).to have_content 'There is no apply for this job.'
     expect(page).not_to have_content 'ID: 1'
   end
 end

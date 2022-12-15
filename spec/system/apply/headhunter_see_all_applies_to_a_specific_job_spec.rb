@@ -46,9 +46,8 @@ describe 'Headhunter view applies to a specific job' do
     click_on I18n.t('openings')
     expect(page).to have_link('Job Opening Test', href: job_path(1))
     expect(page).to have_link('Other Job Opening', href: job_path(2))
-    click_on 'Other Job Opening'
-    
-    expect(page).to have_content('There is no apply for this job.')
+    click_on 'Other Job Opening'    
+
     expect(page).not_to have_content('All applies to this job') 
     expect(page).not_to have_content('user1@test.com ')
     expect(page).not_to have_content('user2@test.com ')

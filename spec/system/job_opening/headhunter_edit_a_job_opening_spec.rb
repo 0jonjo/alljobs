@@ -53,7 +53,6 @@ describe 'Headhunter edit a job opening' do
       fill_in Job.human_attribute_name(:date), with: ''
       click_on 'Atualizar Vaga'
     
-      expect(page).to have_content "Job Opening was not edited."
       expect(page).to have_content("Título não pode ficar em branco")
       expect(page).to have_content("Habilidades não pode ficar em branco")
       expect(page).to have_content("Salário não pode ficar em branco")

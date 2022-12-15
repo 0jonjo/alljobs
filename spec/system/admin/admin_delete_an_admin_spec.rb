@@ -23,10 +23,9 @@ describe 'Admin acess admin page and edit an admin' do
     
     visit rails_admin.delete_path(model_name: 'admin', id: admin.id)
 
-    
     click_on I18n.t('admin.form.confirmation')
 
     expect(current_path).to eq(admin_session_path)
-    expect(page.find('.alert')).to have_content(I18n.t('devise.failure.unauthenticated'))
+    expect(page.find('.alert-danger')).to have_content(I18n.t('devise.failure.unauthenticated'))
   end
 end  
