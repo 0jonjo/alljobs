@@ -4,7 +4,6 @@
       <% @job.applies.each do |apply| %>
         <%= render apply %> 
       <% end %>        
-    <% else %>
-      <p><%= I18n.t('no_applies')%></p>
+      <%= I18n.t('no_applies') if @job.applies.empty? %>
     <% end %>   
 <% end %>  

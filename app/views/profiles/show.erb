@@ -1,9 +1,5 @@
-<% if @profile.social_name.blank? %>
-  <h3><%= @profile.name %></h3>  
-<% else %>
-  <h3><%= @profile.social_name %></h3>
-<% end %>
-
+<h3><%= @profile.social_name.blank? ? @profile.name : @profile.social_name %></h3>  
+  
 <dt><%= Profile.human_attribute_name(:birthdate) %></dt> 
 <dd><%= I18n.l(@profile.birthdate, format: :default) %></dd>
 <dt><%= Profile.human_attribute_name(:description) %></dt> 
@@ -13,11 +9,7 @@
 <dt><%= Profile.human_attribute_name(:experience) %></dt> 
 <dd><%= @profile.experience %></dd>
 
-<% if user_signed_in? %>
-  <ul>
-    <li><%= link_to I18n.t('edit'), edit_profile_path(@profile) %></li>
-  </ul>
-<% end %>
+<%= link_to I18n.t('edit'), edit_profile_path(@profile) if user_signed_in?%>
 
 <% if headhunter_signed_in? %>
   <br>

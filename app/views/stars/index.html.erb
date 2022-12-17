@@ -5,11 +5,8 @@
     <% if star.headhunter_id == current_headhunter.id %>
       <dt><%= Profile.human_attribute_name(:name) %></dt>
       <dd>
-        <% if star.profile.social_name.blank? %>
-          <%= link_to star.profile.name, profile_path(star.profile.user_id) %><br>
-        <% else %>
-          <%= link_to star.profile.social_name, profile_path(star.profile.user_id) %><br>
-        <% end %>
+        <% star.profile.social_name.blank? ? star_name = star.profile.name : star_name = star.profile.social_name %>
+        <%= link_to star_name, profile_path(star.profile.user_id) %><br>
       </dd>
       <dt><%= Apply.human_attribute_name(:id) %></dt> 
       <dd><%= link_to star.apply_id, apply_path(star.apply_id) %></dd>
@@ -17,13 +14,13 @@
         <%= link_to I18n.t('delete'), star_path(star), 
                                   method: :delete,
                                   data: { confirm: I18n.t('sure') } %> 
-          </p>
+      </p>
     <% else %>
-      <p><%= I18n.t('no_stars') %></p>      
+      <p><%= I18n.t('no_stars') %></p>   
     <% end %>
   <% end %>  
-<% else %>
-  <p><%= I18n.t('no_stars') %></p>  
 <% end %>  
+
+<p><%= I18n.t('no_stars') if @stars.empty? %></p>  
 
 <%= paginate @stars %>

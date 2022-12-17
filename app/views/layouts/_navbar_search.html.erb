@@ -1,0 +1,8 @@
+<% if user_signed_in? || headhunter_signed_in? %>
+  <%= form_with(url: search_jobs_path, method: :get) do |f| %>
+    <%= f.label :query, I18n.t('search_job') %>
+    <%= f.text_field :query %>
+    <%= f.submit I18n.t('search') %>
+  <% end %>  
+<% end %>
+  
