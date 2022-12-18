@@ -1,6 +1,6 @@
 <% if headhunter_signed_in? %>
     <% if @job.applies.any? %> 
-      <h4>All applies to this job</h4>
+      <h4><%= I18n.t('all_applies') %></h4>
       <% @job.applies.each do |apply| %>
         <%= render apply %> 
       <% end %>        
