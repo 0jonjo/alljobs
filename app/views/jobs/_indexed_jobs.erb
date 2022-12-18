@@ -1,8 +1,6 @@
-<% if headhunter_signed_in? || user_signed_in? %>
-  <% if @jobs.any? %>  
-    <% @jobs.each do |j| %>
-      <%= render j %>       
-    <% end %>
-  <% end %>  
-  <p><%= I18n.t('no_jobs') if @jobs.empty? %></p>
-<% end %>
+<% if @jobs.any? %>  
+  <% @jobs.each do |j| %>
+    <%= render j %>       
+  <% end %>
+<% end %>  
+<p><%= I18n.t('no_jobs') if @jobs.empty? %></p>
