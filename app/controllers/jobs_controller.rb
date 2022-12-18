@@ -22,22 +22,16 @@ class JobsController < ApplicationController
 
   def create 
     @job = Job.new(job_params)
-    if @job.save
-      redirect_to @job
-    else
-      render :new  
-    end
+    return redirect_to @job if @job.save
+    render :new  
   end
 
   def edit
   end
 
   def update
-    if @job.update(job_params)
-      redirect_to @job
-    else
-      render :edit
-    end
+    return redirect_to @job if @job.update(job_params)
+    render :edit
   end
   
   def search
@@ -54,27 +48,18 @@ class JobsController < ApplicationController
   end
 
   def drafted
-    if @job.draft!
-      redirect_to @job
-    else
-      render :new 
-    end  
+    return redirect_to @job if @job.draft!
+    render :new 
   end  
 
   def archived
-    if @job.archived!
-      redirect_to @job
-    else
-      render :new 
-    end  
+    return redirect_to @job if @job.archived!
+    render :new 
   end
   
   def published
-    if @job.published!
-      redirect_to @job
-    else
-      render :new 
-    end  
+    return redirect_to @job if @job.published!
+    render :new  
   end
 
   def applies

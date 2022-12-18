@@ -5,11 +5,7 @@ class AppliesController < ApplicationController
   before_action :user_has_profile
   
   def index
-    if user_signed_in?
-      @applies = current_user.applies.page(params[:page]) 
-    else
-      @applies = Apply.page(params[:page])
-    end
+    user_signed_in? ? @applies = current_user.applies.page(params[:page]) : @applies = Apply.page(params[:page])
   end
 
   def new 
@@ -21,26 +17,14 @@ class AppliesController < ApplicationController
 
   def update
     @apply.accepted_headhunter = false
-    if @apply.update(apply_params)
-      flash[:notice] = "You successfully rejected this apply."
-      redirect_to @apply
-    else
-      flash.now[:alert] = "You can't reject this apply."
-      render :edit
-    end
+    return redirect_to @apply if @apply.update(apply_params)
+    render :edit
   end
 
   def create
-    if Apply.where(job_id: params[:job_id], user_id: params[:user_id]).exists?
-      flash[:alert] = "You're already applied to this job opening."
-      redirect_to request.referrer
-    else
-      @apply = Apply.new(job_id: params[:job_id], user_id: params[:user_id])
-      if @apply.save
-        redirect_to @apply
-        flash[:notice] = "You successfully applied to this job."
-      end
-    end  
+    return redirect_to request.referrer if Apply.where(job_id: params[:job_id], user_id: params[:user_id]).exists?
+    @apply = Apply.new(job_id: params[:job_id], user_id: params[:user_id])
+    redirect_to @apply if @apply.save
   end
  
   def find
@@ -48,15 +32,11 @@ class AppliesController < ApplicationController
   
   def destroy
     @apply.destroy
-    flash[:alert] = 'The application for this job has been removed.'
     redirect_to root_path
   end
 
   def show
-    if user_signed_in? && @apply.user != current_user
-      flash[:alert] = 'You do not have access to this apply.'
-      redirect_to root_path
-    end     
+    return redirect_to root_path if user_signed_in? && @apply.user != current_user     
   end
   
   private
