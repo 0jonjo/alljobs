@@ -32,6 +32,5 @@ describe 'User see his profile' do
     visit profile_path(user.id)
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('You do not have access to this profile.')
   end
 end        
