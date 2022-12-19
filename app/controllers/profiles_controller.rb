@@ -9,27 +9,41 @@ class ProfilesController < ApplicationController
   end
   
   def new
-    return @profile = Profile.new if current_user.profile.blank?  
-    redirect_to profile_path(current_user.id)
+    if current_user.profile.blank?
+      @profile = Profile.new
+    else
+      redirect_to profile_path(current_user.id)
+    end
   end
 
   def create
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
-    return redirect_to @profile if @profile.save
-    render :new  
+    if @profile.save
+      flash[:notice] = "Profile registered."
+      redirect_to @profile
+    else
+      flash.now[:alert] = "Profile doesn't registered." 
+      render :new  
+    end
   end
 
   def edit
   end
 
   def update
-    return redirect_to @profile if @profile.update(profile_params)  
-    render :edit
+    if @profile.update(profile_params)
+      redirect_to @profile
+    else
+      flash.now[:alert] = "Profile doesn't edited."
+      render :edit
+    end
   end
  
   def show
-    headhunter_id = current_headhunter.id if headhunter_signed_in?
+    if headhunter_signed_in?
+      headhunter_id = current_headhunter.id
+    end  
     @comments = @profile.comments.all
     @comment = @profile.comments.build 
   end
@@ -45,6 +59,9 @@ class ProfilesController < ApplicationController
   
   def set_profile_check_user
     @profile = Profile.find(params[:id]) 
-    redirect_to root_path if user_signed_in? && @profile.user != current_user
+    if user_signed_in? && @profile.user != current_user
+      flash[:alert] = 'You do not have access to this profile.'
+      redirect_to root_path
+    end
   end
 end

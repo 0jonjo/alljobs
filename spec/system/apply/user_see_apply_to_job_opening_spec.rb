@@ -35,6 +35,7 @@ describe 'User applied to job opening' do
 
     visit apply_path(apply2)
     expect(current_path).to eq(root_path)
+    expect(page).to have_content('You do not have access to this apply.')
   end
     
   it 'and see only your apply' do

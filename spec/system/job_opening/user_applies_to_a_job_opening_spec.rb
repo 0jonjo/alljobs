@@ -22,6 +22,7 @@ describe 'User apllies to a job opening' do
     click_on I18n.t('apply')
     expect(page).to have_content('user@test.com')
     expect(page).to have_content('Job Opening Test 123')
+    expect(page).to have_content("You successfully applied to this job.")
   end
 
   it 'without sucess' do
@@ -33,14 +34,14 @@ describe 'User apllies to a job opening' do
     profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
                                 birthdate: '21/03/1977', educacional_background: "Test 3", 
                                 experience: 'test 4', user_id: user.id)
-    apply = Apply.create!(:job => job, :user => user)
+    Apply.create!(:job => job, :user => user)
     login_as(user, :scope => :user)
 
     visit root_path
     click_on I18n.t('openings')
     click_on 'Job Opening Test 123'
     click_on I18n.t('apply')
-    expect(current_path).to eq(job_path(apply.job_id))
+    expect(page).to have_content("You're already applied to this job opening.")
   end  
 
   it "remove the apply" do
@@ -57,6 +58,6 @@ describe 'User apllies to a job opening' do
 
     visit apply_path(apply)
     click_on I18n.t('delete')
-    expect(current_path).to eq(root_path)
+    expect(page).to have_content('The application for this job has been removed.')
   end  
 end
