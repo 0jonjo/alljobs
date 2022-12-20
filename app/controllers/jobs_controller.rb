@@ -5,15 +5,15 @@ class JobsController < ApplicationController
   before_action :user_has_profile
 
   def index
-    @jobs = Job.where(job_status: :published).page(params[:page])
+    which_index(:published)
   end
 
   def index_draft
-    @jobs = Job.where(job_status: :draft).page(params[:page])
+    which_index(:draft)
   end
 
   def index_archived
-    @jobs = Job.where(job_status: :archived).page(params[:page])
+    which_index(:archived)
   end
  
   def new 
@@ -58,7 +58,10 @@ class JobsController < ApplicationController
   end
   
   def published
-    return redirect_to @job if @job.published!
+    if @job.published!
+      #Adjust I18n text flash[:notice] = "You successfully starred this apply."
+      return redirect_to @job
+    end   
     render :new  
   end
 
@@ -71,5 +74,8 @@ class JobsController < ApplicationController
   end
   def find_id_job
     @job = Job.find(params[:id])
+  end
+  def which_index(status)
+    @jobs = Job.where(job_status: status).page(params[:page])
   end
 end
