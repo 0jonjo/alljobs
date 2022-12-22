@@ -5,11 +5,13 @@
 <% end %>
 
 <%= form_with model: comment do |form| %>
-    <p>
-      <%= form.label :body %><br>
-      <%= form.text_area :body %>
-      <%= form.submit %>
-    </p>
     <%= form.hidden_field :profile_id %>
-  <% end %>
+    <div>
+      <%= form.label :body %>
+      <%= form.text_area :body %>
+    </div>  
+    <div>
+      <%= form.submit %>
+    </div>
+<% end %>
   

@@ -1,9 +1,7 @@
-<% if headhunter_signed_in? %>
-    <% if @job.applies.any? %> 
-      <h4><%= I18n.t('all_applies') %></h4>
-      <% @job.applies.each do |apply| %>
-        <%= render apply %> 
-      <% end %>        
-      <%= I18n.t('no_applies') if @job.applies.empty? %>
-    <% end %>   
-<% end %>  
+<% if @job.applies.any? %> 
+  <b><%= I18n.t('all_applies') %></b>
+  <% @job.applies.each do |apply| %>
+    <%= render apply %> 
+  <% end %>        
+  <%= I18n.t('no_applies') if @job.applies.empty? %>
+<% end %>   

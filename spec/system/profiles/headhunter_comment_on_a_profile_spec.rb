@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Headhunter comment on a profile' do
-
   it 'and edit with sucess' do
     user = User.create!(:email => 'user@test.com', :password => 'test123')
     profile = Profile.create!(name: 'Tester', social_name: 'Tester', birthdate: '1999/09/09', description: "Profissional Tester", educacional_background: "Tester University Class 2021", experience: "Test things everyday since I was born", user_id: user.id)
