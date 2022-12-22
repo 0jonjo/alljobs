@@ -6,27 +6,27 @@
 
 <%= form_with(model: [@apply, @proposal]) do |form| %>
   <div>
-    <%= form.label :salary %><br>
+    <%= form.label :salary %>
     <%= form.number_field :salary %>
   </div>
 
   <div>
-    <%= form.label :benefits %><br>
+    <%= form.label :benefits %>
     <%= form.text_area :benefits %>
   </div>
 
   <div>
-    <%= form.label :expectations %><br>
+    <%= form.label :expectations %>
     <%= form.text_area :expectations %>
   </div>
 
   <div>
-    <%= form.label :description %><br>
+    <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
   
   <div>
-    <%= form.label :expected_start %><br>
+    <%= form.label :expected_start %>
     <%= form.date_field :expected_start %>
   </div>
   

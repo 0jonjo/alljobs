@@ -2,6 +2,8 @@ pt-BR:
   all_results: 'Todos os resultados para'
   jobs_found: 'vagas encontrada(s)'
   no_jobs: 'Nenhuma vaga encontrada'
+  all_applies: 'Todas as inscrições para esta vaga'
+  rejected_apply: 'A inscrição para esta vaga foi rejeitada'
   no_applies: 'Nenhuma inscrição encontrada'
   no_profiles: 'Nenhum perfil encontrado'
   no_stars: 'Nenhuma inscrição selecionada como favorita'

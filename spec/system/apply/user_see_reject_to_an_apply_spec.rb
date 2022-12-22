@@ -15,7 +15,6 @@ describe 'User rejected to an apply' do
     login_as(user, :scope => :user)
     visit apply_path(apply)
 
-    expect(page).to have_content("This application for a job offer was rejected.")
     expect(page).to have_content("Test feedback")
   end
   
@@ -35,8 +34,6 @@ describe 'User rejected to an apply' do
     visit apply_path(apply)
     
     expect(current_path).to eq(root_path)
-    expect(page).to have_content("You do not have access to this apply.")
-    expect(page).not_to have_content("This application for a job offer was rejected.")
     expect(page).not_to have_content("Test feedback")
   end  
 end

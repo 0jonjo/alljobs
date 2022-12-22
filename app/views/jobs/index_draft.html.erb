@@ -1,17 +1,6 @@
-<h3><%= I18n.t('all_drafted') %></h3>
+<h4><%= I18n.t('all_drafted') %></h4>
 
-<% if headhunter_signed_in? %>
-  <%= link_to I18n.t('all_published'), jobs_path %> -
-  <%= link_to I18n.t('all_archived'), index_archived_jobs_path %>
-<% end %>
+<%= render 'jobs/select_index' %>
+<%= render 'jobs/indexed_jobs' %>
 
-<% if headhunter_signed_in? || user_signed_in? %>
-  <% if @jobs.any? %>  
-    <% @jobs.each do |job| %>
-      <%= render job %>       
-    <% end %>
-  <% else %>
-    <p><%= I18n.t('no_jobs') %></p>
-  <% end %>  
-<% end %>
 <%= paginate @jobs %>

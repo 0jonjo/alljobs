@@ -18,17 +18,16 @@ describe 'Headhunter create a job opening' do
       fill_in Job.human_attribute_name(:level), with: 'Junior'
       fill_in Job.human_attribute_name(:place), with: 'Remote Job'
       fill_in Job.human_attribute_name(:date), with: '21/11/2099'
-      select 'published', from: Job.human_attribute_name(:job_status)
+      select I18n.t('published'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
       expect(current_path).to eq job_path(1)
-      expect(page).to have_content("You successfully registered a Job Opening.")
       expect(page).to have_content("Job Opening Test")
       expect(page).to have_content("12345678")
       expect(page).to have_content("Test")
       expect(page).to have_content("Junior")
       expect(page).to have_content("21/11/2099")
-      expect(page).to have_content("Published")
+      expect(page).to have_content(I18n.t('published'))
     end
 
     it 'with sucess - status archived' do
@@ -44,11 +43,11 @@ describe 'Headhunter create a job opening' do
       fill_in Job.human_attribute_name(:level), with: 'Junior'
       fill_in Job.human_attribute_name(:place), with: 'Remote Job'
       fill_in Job.human_attribute_name(:date), with: '21/11/2099'
-      select 'archived', from: Job.human_attribute_name(:job_status)
+      select I18n.t('archived'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
       expect(current_path).to eq job_path(1)
-      expect(page).to have_content("Archived")
+      expect(page).to have_content(I18n.t('archived'))
     end
 
     it 'with sucess - status archived' do
@@ -64,11 +63,11 @@ describe 'Headhunter create a job opening' do
       fill_in Job.human_attribute_name(:level), with: 'Junior'
       fill_in Job.human_attribute_name(:place), with: 'Remote Job'
       fill_in Job.human_attribute_name(:date), with: '21/11/2099'
-      select 'draft', from: Job.human_attribute_name(:job_status)
+      select I18n.t('draft'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
       expect(current_path).to eq job_path(1)
-      expect(page).to have_content("Draft")
+      expect(page).to have_content(I18n.t('draft'))
     end
 
     it 'without sucess' do
@@ -88,10 +87,9 @@ describe 'Headhunter create a job opening' do
       fill_in Job.human_attribute_name(:level), with: ''
       fill_in Job.human_attribute_name(:place), with: ''
       fill_in Job.human_attribute_name(:date), with: ''
-      select 'published', from: Job.human_attribute_name(:job_status)
+      select I18n.t('published'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
-      expect(page).to have_content("Job Opening was not registered.")
       expect(page).to have_content("Título não pode ficar em branco")
       expect(page).to have_content("Habilidades não pode ficar em branco")
       expect(page).to have_content("Salário não pode ficar em branco")

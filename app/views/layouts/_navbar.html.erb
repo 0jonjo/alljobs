@@ -1,38 +1,6 @@
-<%= link_to root_path do %>
-  <h1>All Jobs</h1>
-<% end %>  
+<h1><%= link_to 'All Jobs', root_path %></h1> 
 <nav>
-  <% if user_signed_in? %>
-    <%= link_to Profile.model_name.human, new_profile_path %> -
-    <%= link_to I18n.t('openings'), jobs_path %> -
-    <%= link_to I18n.t('applies'), applies_path %> -
-    <%= link_to 'Logout User', destroy_user_session_path, method: :delete %> |
-    <span><%= I18n.t('you_are') %> <%= current_user.email %></span> 
-  <% else %>
-    <% unless headhunter_signed_in? %>
-      <%= link_to 'Login User', new_user_session_path %> |
-    <% end %>    
-  <% end %>
-
-  <% if headhunter_signed_in? %>
-    <%= link_to I18n.t('new_opening'), new_job_path %> -
-    <%= link_to I18n.t('applies'), applies_path %> -
-    <%= link_to I18n.t('openings'), jobs_path %> -
-    <%= link_to I18n.t('profiles'), profiles_path %> -
-    <%= link_to I18n.t('stars'), stars_path %> -
-    <%= link_to 'Logout Headhunter', destroy_headhunter_session_path, method: :delete %> |
-    <span><%= I18n.t('you_are') %> <%= current_headhunter.email %></span>
-  <% else %>
-      <% unless user_signed_in? %>
-        <%= link_to 'Login Headhunter', new_headhunter_session_path %>
-      <% end %>
-  <% end %>
-  
-  <% if user_signed_in? || headhunter_signed_in? %>
-    <%= form_with(url: search_jobs_path, method: :get) do |f| %>
-      <%= f.label :query, I18n.t('search_job') %>
-      <%= f.text_field :query %>
-      <%= f.submit I18n.t('search') %>
-    <% end %>  
-  <% end %>
+  <%= render 'layouts/navbar_user' %>
+  <%= render 'layouts/navbar_headhunter' %>
+  <%= render 'layouts/navbar_search' %>
 </nav>  

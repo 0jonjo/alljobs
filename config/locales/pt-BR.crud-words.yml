@@ -1,5 +1,7 @@
 pt-BR:
+  new: 'Criar'
   edit: 'Editar'
+  reject: 'Rejeitar'
   delete: 'Apagar'
   update: 'Atualizar'
   sure: 'Tem certeza?'

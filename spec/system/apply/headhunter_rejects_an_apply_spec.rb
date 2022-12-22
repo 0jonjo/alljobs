@@ -17,8 +17,6 @@ describe 'Headhunter rejects an apply' do
     click_on "Atualizar Inscrição"
     
     expect(current_path).to eq(apply_path(apply))
-    expect(page).to have_content("You successfully rejected this apply.")
-    expect(page).to have_content("This application for a job offer was rejected.")
     expect(page).to have_content("You need more experience to this job.")
   end
   
@@ -38,8 +36,6 @@ describe 'Headhunter rejects an apply' do
     click_on "Atualizar Inscrição"
     
     expect(current_path).to eq(apply_path(apply))
-    expect(page).to have_content("You successfully rejected this apply.")
-    expect(page).to have_content("This application for a job offer was rejected.")
     expect(page).to have_content("Test edit feedback.")
   end  
 end

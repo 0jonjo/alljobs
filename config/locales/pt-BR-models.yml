@@ -23,6 +23,11 @@ pt-BR:
         date: 'Data'
         code: 'Código'
         job_status: 'Status da Vaga'
+        job_statuses:
+          keys:
+            published: 'Publicada'
+            draft: 'Rascunho'
+            archived: 'Arquivada'
       profile:
         name: 'Nome'
         profile_id: 'Profile ID'

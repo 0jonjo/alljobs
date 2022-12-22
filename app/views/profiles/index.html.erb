@@ -1,17 +1,13 @@
-<h3><%= I18n.t('profiles') %></h3>
+<h4><%= I18n.t('profiles') %></h4>
 
 <% if @profiles.any? %>
     <% @profiles.each do |profile| %>
-      <dt><%= Profile.human_attribute_name(:name) %></dt>
-      <dd>
-        <% if profile.social_name.blank? %>
-          <%= link_to profile.name, profile %>
-        <% else %>
-          <%= link_to profile.social_name, profile %>
+      <p>
+        <%= link_to profile do %>
+          <%= profile.id %>
+          <%= profile.social_name.blank? ? profile.name : profile.social_name %>  
         <% end %>
-      </dd>
-      <dt><%= Profile.human_attribute_name(:profile_id) %></dt>
-      <dd><%= profile.id %></dd>  
+      </p>
     <% end %>
 <% else %>
     <p><%= I18n.t('no_profiles') %></p>

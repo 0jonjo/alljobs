@@ -1,0 +1,5 @@
+<% if headhunter_signed_in? %>
+  <%= link_to I18n.t('all_published'), jobs_path %>
+  <%= link_to I18n.t('all_drafted'), index_draft_jobs_path %>
+  <%= link_to I18n.t('all_archived'), index_archived_jobs_path %>
+<% end %>

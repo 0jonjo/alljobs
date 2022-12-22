@@ -19,26 +19,18 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @headhunter = current_headhunter 
     @comment = Comment.new(comment_params)
-    @comment.headhunter_id = @headhunter.id
+    @comment.headhunter_id = current_headhunter.id 
     @comment.datetime = Time.now
-    if @comment.save
-      redirect_to request.referrer, notice: "Comment created."
-    else
-      redirect_to request.referrer, notice: "Comment can't be created."
-    end
+    return redirect_to request.referrer, notice: "Comment created." if @comment.save
+    redirect_to request.referrer, notice: "Comment can't be created."
   end
 
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: "Comment updated." }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.update(comment_params)
+      redirect_to @comment, notice: "Comment updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

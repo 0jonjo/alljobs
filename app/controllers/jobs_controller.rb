@@ -5,15 +5,15 @@ class JobsController < ApplicationController
   before_action :user_has_profile
 
   def index
-    @jobs = Job.where(job_status: :published).page(params[:page])
+    which_index(:published)
   end
 
   def index_draft
-    @jobs = Job.where(job_status: :draft).page(params[:page])
+    which_index(:draft)
   end
 
   def index_archived
-    @jobs = Job.where(job_status: :archived).page(params[:page])
+    which_index(:archived)
   end
  
   def new 
@@ -22,25 +22,16 @@ class JobsController < ApplicationController
 
   def create 
     @job = Job.new(job_params)
-    if @job.save
-      flash[:notice] = "You successfully registered a Job Opening."
-      redirect_to @job
-    else
-      flash.now[:alert] = "Job Opening was not registered."
-      render :new  
-    end
+    return redirect_to @job if @job.save
+    render :new  
   end
 
   def edit
   end
 
   def update
-    if @job.update(job_params)
-      redirect_to @job
-    else
-      flash.now[:alert] = "Job Opening was not edited."
-      render :edit
-    end
+    return redirect_to @job if @job.update(job_params)
+    render :edit
   end
   
   def search
@@ -57,30 +48,21 @@ class JobsController < ApplicationController
   end
 
   def drafted
-    if @job.draft!
-      redirect_to @job
-    else
-      flash.now[:alert] = "Job Opening was not edited."
-      render :new 
-    end  
+    return redirect_to @job if @job.draft!
+    render :new 
   end  
 
   def archived
-    if @job.archived!
-      redirect_to @job
-    else
-      flash.now[:alert] = "Job Opening was not edited."
-      render :new 
-    end  
+    return redirect_to @job if @job.archived!
+    render :new 
   end
   
   def published
     if @job.published!
-      redirect_to @job
-    else
-      flash.now[:alert] = "Job Opening was not edited."
-      render :new 
-    end  
+      #Adjust I18n text flash[:notice] = "You successfully starred this apply."
+      return redirect_to @job
+    end   
+    render :new  
   end
 
   def applies
@@ -92,5 +74,8 @@ class JobsController < ApplicationController
   end
   def find_id_job
     @job = Job.find(params[:id])
+  end
+  def which_index(status)
+    @jobs = Job.where(job_status: status).page(params[:page])
   end
 end
