@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
-  <%= link_to Profile.model_name.human, new_profile_path %> -
-  <%= link_to I18n.t('openings'), jobs_path %> -
-  <%= link_to I18n.t('applies'), applies_path %> -
-  <%= link_to 'Logout User', destroy_user_session_path, method: :delete %> |
+  <%= link_to Profile.model_name.human, new_profile_path %>
+  <%= link_to I18n.t('openings'), jobs_path %>
+  <%= link_to I18n.t('applies'), applies_path %>
+  <%= link_to 'Logout User', destroy_user_session_path, method: :delete %>
   <span><%= I18n.t('you_are') %> <%= current_user.email %></span> 
 <% else %>
-  <%= link_to 'Login User', new_user_session_path unless headhunter_signed_in? %> |   
+  <%= link_to 'Login User', new_user_session_path unless headhunter_signed_in? %>   
 <% end %>
 
