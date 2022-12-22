@@ -3,18 +3,12 @@
 <% if @stars.any? %>
   <% @stars.each do |star| %>
     <% if star.headhunter_id == current_headhunter.id %>
-      <dt><%= Profile.human_attribute_name(:name) %></dt>
-      <dd>
-        <% star.profile.social_name.blank? ? star_name = star.profile.name : star_name = star.profile.social_name %>
-        <%= link_to star_name, profile_path(star.profile.user_id) %><br>
-      </dd>
-      <dt><%= Apply.human_attribute_name(:id) %></dt> 
-      <dd><%= link_to star.apply_id, apply_path(star.apply_id) %></dd>
-      <p>
-        <%= link_to I18n.t('delete'), star_path(star), 
+      <% star.profile.social_name.blank? ? star_name = star.profile.name : star_name = star.profile.social_name %>
+      <%= link_to star_name, profile_path(star.profile.user_id) %><br>
+      <%= Apply.human_attribute_name(:id) %>: <%= link_to star.apply_id, apply_path(star.apply_id) %><br> 
+      <%= link_to I18n.t('delete'), star_path(star), 
                                   method: :delete,
-                                  data: { confirm: I18n.t('sure') } %> 
-      </p>
+                                  data: { confirm: I18n.t('sure') } %>
     <% else %>
       <p><%= I18n.t('no_stars') %></p>   
     <% end %>

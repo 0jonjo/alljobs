@@ -1,4 +1,4 @@
-<b><%= I18n.t('change_status') %></b>
+<h4><%= I18n.t('change_status') %></h4>
 
 <%= button_to I18n.t('published'), published_job_path(@job.id) unless @job.published? %>
 <%= button_to I18n.t('draft'), drafted_job_path(@job.id) unless @job.draft? %>

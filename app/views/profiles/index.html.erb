@@ -3,12 +3,10 @@
 <% if @profiles.any? %>
     <% @profiles.each do |profile| %>
       <p>
-        <% if profile.social_name.blank? %>
-          <%= link_to profile.name, profile %>
-        <% else %>
-          <%= link_to profile.social_name, profile %>
+        <%= link_to profile do %>
+          <%= profile.id %>
+          <%= profile.social_name.blank? ? profile.name : profile.social_name %>  
         <% end %>
-        <%= profile.id %>
       </p>
     <% end %>
 <% else %>
