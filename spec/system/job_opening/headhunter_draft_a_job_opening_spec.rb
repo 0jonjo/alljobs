@@ -14,8 +14,8 @@ describe 'Headhunter draft a job opening using Active Job' do
     visit job_path(job.id)
     
     click_on I18n.t('draft')
-    expect(page).to have_content 'Draft'
-    expect(page).not_to have_content 'Published'
+    expect(page).to have_content(I18n.t('draft'))
+    expect(page).not_to have_content(I18n.t('published'))
     
     Delayed::Worker.new.work_off
     visit job_path(job.id)

@@ -47,7 +47,7 @@
 
   <div>
     <%= form.label :job_status %>
-    <%= form.select :job_status, Job.job_statuses.keys %>
+    <%= form.select :job_status, Job.job_statuses.map { |j| [I18n.t(j[0]), j[0]] }  %>
   </div>
 
   <div>

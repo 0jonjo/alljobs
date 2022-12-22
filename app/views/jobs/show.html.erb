@@ -3,7 +3,7 @@
 <dt><%= Job.human_attribute_name(:code) %></dt> 
 <dd><%= @job.code %></dd>
 <dt><%= Job.human_attribute_name(:job_status) %></dt>
-<dd><%= @job.job_status.capitalize %></dd>
+<dd><%= I18n.t(@job.job_status) %></dd>
 <dt><%= Job.human_attribute_name(:date) %></dt> 
 <dd><%= I18n.localize(@job.date) %></dd>
 <dt><%= Job.human_attribute_name(:description) %></dt>
