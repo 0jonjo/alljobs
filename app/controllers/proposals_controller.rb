@@ -18,6 +18,7 @@ class ProposalsController < ApplicationController
   end
 
   def update
+    p @apply
     if @proposal.update(proposal_params)
       flash[:notice] = "You successfully edited this proposal."
       redirect_to @apply

@@ -40,6 +40,7 @@ pt-BR:
         apply_id: 'Número da Inscrição'
         salary: 'Salário'
         benefits: 'Benefícios'
+        description: 'Descrição'
         expectations: 'Expectativas'
         expected_start: 'Expectativa de Início'
       apply:

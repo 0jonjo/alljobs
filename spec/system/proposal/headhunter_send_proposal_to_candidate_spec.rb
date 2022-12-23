@@ -19,7 +19,7 @@ describe "Headhunter see a proposal to a cadindidate" do
     expect(page).to have_content('999')
     expect(page).to have_content('some benefits')
     expect(page).to have_content('some expectations')
-    expect(page).to have_link("#{Apply.human_attribute_name(:id)} 1", href: apply_path(1))
+    expect(page).to have_link("#{Apply.human_attribute_name(:id)}: 1", href: apply_path(1))
   end
 end
 
@@ -61,10 +61,8 @@ describe "Headhunter create a proposal to a candidate" do
     login_as(headhunter, :scope => :headhunter)
     
     visit apply_path(apply)
-    click_on I18n.t('send_proposal')
   
-    expect(page).to have_content("There is already a proposal for this apply.")
-    expect(current_path).to eq(apply_path(apply))
+    expect(page).not_to have_link(I18n.t('send_proposal'))
   end
 
   it "without sucess - imcomplete" do
