@@ -38,7 +38,9 @@ describe "Headhunter edit a proposal to a cadindidate" do
                                   expectations: "some expectations", expected_start: 1.month.from_now)
     
                                   login_as(headhunter, :scope => :headhunter)
-    #Apply.find(1).update!(:accepted_headhunter => false)
+    apply.accepted_headhunter = false
+    apply.save
+    
     visit apply_proposal_path(apply, proposal)
     click_on I18n.t('edit')
 
@@ -48,7 +50,7 @@ describe "Headhunter edit a proposal to a cadindidate" do
     fill_in Proposal.human_attribute_name(:expected_start), with: 1.month.from_now
     click_on 'Atualizar Proposta'
 
-    expect(page).to have_content("You can't create a proposal to a rejected apply.")
+    expect(page).to have_content("There is already a proposal for this apply.")
     expect(current_path).to eq(apply_path(apply))
   end
 
