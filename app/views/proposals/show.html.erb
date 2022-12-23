@@ -1,22 +1,23 @@
 <h4><%= Proposal.model_name.human %> <%= @proposal.id %></h4>
 
-<%= link_to apply_path(@proposal.apply_id) do %> 
-  <dt><%= Apply.human_attribute_name(:id) %></dt> 
-  <dd><%= @proposal.apply_id %></dd> 
-<% end %>
-<dt><%= Proposal.human_attribute_name(:salary) %></dt> 
-<dd><%= @proposal.salary %></dd>
-<dt><%= Proposal.human_attribute_name(:benefits) %></dt>
-<dd><%= @proposal.benefits %></dd>
-<dt><%= Proposal.human_attribute_name(:expectations) %></dt> 
-<dd><%= @proposal.expectations %></dd>
-<dt><%= Proposal.human_attribute_name(:expected_start) %></dt> 
-<dd><%= I18n.localize(@proposal.expected_start) %></dd>
+<div>
+  <p><%= link_to "#{Apply.human_attribute_name(:id)}: #{@proposal.apply_id}", apply_path(@proposal.apply_id) %></p> 
+  <dt><%= Proposal.human_attribute_name(:salary) %></dt> 
+  <dd><%= @proposal.salary %></dd>
+  <dt><%= Proposal.human_attribute_name(:benefits) %></dt>
+  <dd><%= @proposal.benefits %></dd>
+  <dt><%= Proposal.human_attribute_name(:expectations) %></dt> 
+  <dd><%= @proposal.expectations %></dd>
+  <dt><%= Proposal.human_attribute_name(:expected_start) %></dt> 
+  <dd><%= I18n.localize(@proposal.expected_start) %></dd>
+</div>
 
-<% if headhunter_signed_in? %>
-  <%= link_to I18n.t('edit'), edit_apply_proposal_path(@proposal) %>
-  <%= button_to I18n.t('delete'), apply_proposal_path(@proposal),
-                            method: :delete,
-                            data: { confirm: I18n.t('sure') } %>
-<% end %>
+<div>
+  <% if headhunter_signed_in? %>
+    <p><%= link_to I18n.t('edit'), edit_apply_proposal_path(@proposal) %></p>
+    <%= button_to I18n.t('delete'), apply_proposal_path(@proposal),
+                              method: :delete,
+                              data: { confirm: I18n.t('sure') } %>
+  <% end %>
+</div>
 

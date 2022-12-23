@@ -18,7 +18,7 @@ describe "User see a proposal to a cadindidate" do
     expect(page).to have_content('999')
     expect(page).to have_content('some benefits')
     expect(page).to have_content('some expectations')
-    expect(page).to have_link("#{Apply.human_attribute_name(:id)} 1", href: apply_path(1))
+    expect(page).to have_link("#{Apply.human_attribute_name(:id)}: 1", href: apply_path(1))
   end
 
   it "without sucess - not a proposal to him" do

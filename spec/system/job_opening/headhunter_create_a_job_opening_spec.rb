@@ -17,7 +17,7 @@ describe 'Headhunter create a job opening' do
       fill_in Job.human_attribute_name(:company), with: 'Test'
       fill_in Job.human_attribute_name(:level), with: 'Junior'
       fill_in Job.human_attribute_name(:place), with: 'Remote Job'
-      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
+      fill_in Job.human_attribute_name(:date), with: 1.month.from_now
       select I18n.t('published'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
@@ -26,7 +26,7 @@ describe 'Headhunter create a job opening' do
       expect(page).to have_content("12345678")
       expect(page).to have_content("Test")
       expect(page).to have_content("Junior")
-      expect(page).to have_content("21/11/2099")
+      expect(page).to have_content(I18n.l(Job.find(1).date))
       expect(page).to have_content(I18n.t('published'))
     end
 
@@ -42,7 +42,7 @@ describe 'Headhunter create a job opening' do
       fill_in Job.human_attribute_name(:company), with: 'Test'
       fill_in Job.human_attribute_name(:level), with: 'Junior'
       fill_in Job.human_attribute_name(:place), with: 'Remote Job'
-      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
+      fill_in Job.human_attribute_name(:date), with: 1.month.from_now
       select I18n.t('archived'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   
@@ -62,7 +62,7 @@ describe 'Headhunter create a job opening' do
       fill_in Job.human_attribute_name(:company), with: 'Test'
       fill_in Job.human_attribute_name(:level), with: 'Junior'
       fill_in Job.human_attribute_name(:place), with: 'Remote Job'
-      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
+      fill_in Job.human_attribute_name(:date), with: 1.month.from_now
       select I18n.t('draft'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
   

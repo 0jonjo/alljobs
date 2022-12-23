@@ -4,6 +4,7 @@ class ProposalsController < ApplicationController
   before_action :find_proposal, only: [:show, :edit, :update, :destroy]
   before_action :find_apply, only: [:show, :new, :create, :edit, :update, :destroy]
   before_action :already_proposal, only: [:new, :create]
+  before_action :check_apply_rejected, only: [:create, :update]
 
   def index
     @proposals = Proposal.page(params[:page])
@@ -43,7 +44,7 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    proposal = @apply.build_proposal(proposal_params)
+    proposal = @apply.build_proposal(proposal_params)  
     if proposal.save
       flash[:notice] = "You successfully create a proposal for this apply."
       redirect_to @apply
@@ -68,5 +69,11 @@ class ProposalsController < ApplicationController
       flash[:alert] = "There is already a proposal for this apply."
       redirect_to @apply
     end  
+  end
+  def check_apply_rejected
+    if @apply.accepted_headhunter == false
+      flash[:alert] = "You can't create a proposal to a rejected apply."
+      return redirect_to new_apply_proposal_path(@apply.id)
+    end
   end
 end

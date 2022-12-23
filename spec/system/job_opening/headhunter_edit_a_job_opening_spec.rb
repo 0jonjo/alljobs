@@ -21,7 +21,7 @@ describe 'Headhunter edit a job opening' do
       fill_in Job.human_attribute_name(:salary), with: '9999'
       fill_in Job.human_attribute_name(:level), with: 'Junior'
       fill_in Job.human_attribute_name(:place), with: 'Remote Job'
-      fill_in Job.human_attribute_name(:date), with: '21/11/2099'
+      fill_in Job.human_attribute_name(:date), with: 1.month.from_now
       click_on 'Atualizar Vaga'
     
       expect(page).to have_content 'Job Opening Test 123'
