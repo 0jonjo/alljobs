@@ -1,6 +1,7 @@
 class AppliesController < ApplicationController
   
   before_action :authenticate_headhunter!, except: [:index, :show, :destroy, :create]
+  before_action :authenticate_user!, only: [:index]
   before_action :apply_find, only: [:find, :edit, :update, :destroy, :show]
   before_action :user_has_profile
   
