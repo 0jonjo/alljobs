@@ -7,6 +7,9 @@ describe "Headhunter see a proposal to a cadindidate" do
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')  
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)   
     proposal = Proposal.create!(apply: apply, salary: 999, benefits: "some benefits", 
@@ -30,6 +33,9 @@ describe "Headhunter create a proposal to a candidate" do
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')  
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)   
     login_as(headhunter, :scope => :headhunter)
@@ -54,6 +60,9 @@ describe "Headhunter create a proposal to a candidate" do
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')  
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)  
     proposal = Proposal.create!(apply: apply, salary: 999, benefits: "some benefits", 
@@ -71,6 +80,9 @@ describe "Headhunter create a proposal to a candidate" do
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')  
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user)   
     login_as(headhunter, :scope => :headhunter)
@@ -95,6 +107,9 @@ describe "Headhunter create a proposal to a candidate" do
                         company: 'Acme', level: 'Junior', place: 'Remote Job',
                         date: 1.month.from_now)
     user = User.create!(:email => 'user@test.com', :password => 'test123')  
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     apply = Apply.create!(:job => job, :user => user, :accepted_headhunter => false)   
     login_as(headhunter, :scope => :headhunter)

@@ -8,16 +8,16 @@ describe 'Headhunter stars an apply' do
                     company: 'Acme', level: 'Junior', place: 'Remote',
                     date: 1.month.from_now)
     profile = Profile.create!(name: "Tester", birthdate: "1991-12-12", description: "Tester 3",
-                    educacional_background: "Tester 3", experience: "Tester 3", 
-                    user_id: user.id)
+                                educacional_background: "Tester 3", experience: "Tester 3", 
+                                user_id: user.id)
     apply = Apply.create!(:job => job, :user => user)             
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     login_as(headhunter, :scope => :headhunter)
     visit root_path
 
     click_on I18n.t('openings')
-    click_on "Job Opening Test"
-    click_on "1"
+    click_on job.title
+    click_on "#{apply.id}"
     click_on I18n.t('star_apply')
 
     expect(page).to have_content("You successfully starred this apply.")

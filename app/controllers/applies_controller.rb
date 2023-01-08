@@ -37,7 +37,8 @@ class AppliesController < ApplicationController
   end
 
   def show
-    return redirect_to root_path if user_signed_in? && @apply.user != current_user     
+    return redirect_to root_path if user_signed_in? && @apply.user != current_user
+    @profile = Profile.find(@apply.user_id)     
   end
   
   private
