@@ -51,12 +51,12 @@ describe 'Visitor visit homepage' do
       expect(page).to have_link('All Jobs', href: root_path)
       within('nav') do
         expect(page).to have_content("#{I18n.t('you_are')} admin@test.com")
-        expect(page).to have_link(I18n.t('applies'), href: applies_path)
         expect(page).to have_link('Logout Headhunter', href: destroy_headhunter_session_path)
         expect(page).to have_link(I18n.t('new_opening'), href: new_job_path)
         expect(page).to have_link(I18n.t('profiles'), href: profiles_path)
         expect(page).to have_link(I18n.t('stars'), href: stars_path)
         expect(page).to have_link(I18n.t('openings'), href: jobs_path)
+        expect(page).not_to have_link(I18n.t('applies'), href: applies_path)
         expect(page).not_to have_link(Profile.model_name.human, href: new_profile_path)
         expect(page).not_to have_link('Logout User', href: destroy_user_session_path)
         expect(page).not_to have_link('Login User', href: new_user_session_path)

@@ -1,0 +1,10 @@
+<div>
+  <% what_to_show.attributes.keys.each do |attribute| %>
+    <dt><%= what_to_show.class.human_attribute_name(attribute) %>:</dt>
+    <% if attribute == 'created_at' || attribute == 'updated_at'%>
+      <dd><%= what_to_show.attributes[attribute].to_formatted_s(:long) %></dd>
+    <% else %>
+      <dd><%= what_to_show.attributes[attribute].to_s %></dd>
+    <% end %>
+  <% end %>
+</div>

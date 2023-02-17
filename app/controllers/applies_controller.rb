@@ -1,11 +1,12 @@
 class AppliesController < ApplicationController
   
   before_action :authenticate_headhunter!, except: [:index, :show, :destroy, :create]
+  before_action :authenticate_user!, only: [:index]
   before_action :apply_find, only: [:find, :edit, :update, :destroy, :show]
   before_action :user_has_profile
   
   def index
-    user_signed_in? ? @applies = current_user.applies.page(params[:page]) : @applies = Apply.page(params[:page])
+    @applies = current_user.applies.page(params[:page])
   end
 
   def new 
@@ -36,7 +37,8 @@ class AppliesController < ApplicationController
   end
 
   def show
-    return redirect_to root_path if user_signed_in? && @apply.user != current_user     
+    return redirect_to root_path if user_signed_in? && @apply.user != current_user
+    @profile = Profile.find(@apply.user_id)     
   end
   
   private

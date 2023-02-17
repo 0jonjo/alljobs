@@ -7,6 +7,10 @@
 <div>
   <p><%= I18n.t('apply_to') %> <%= link_to @apply.job.title, @apply.job %></p>
   <p><%= Apply.human_attribute_name(:id) %>: <%= @apply.id %></p>
+  <p>
+    <%= Profile.human_attribute_name(:name) %>: 
+    <%= @profile.social_name.blank? ? @profile.name : @profile.social_name %>
+  </p>
 </div>
 
 <div>

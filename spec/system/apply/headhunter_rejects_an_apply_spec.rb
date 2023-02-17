@@ -3,6 +3,9 @@ require 'rails_helper'
 describe 'Headhunter rejects an apply' do
   it 'with sucess' do
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                     skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                     company: 'Acme', level: 'Junior', place: 'Remote',
@@ -22,6 +25,9 @@ describe 'Headhunter rejects an apply' do
   
   it "and edit with sucess" do
     user = User.create!(:email => 'user@test.com', :password => 'test123')
+    profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2', 
+                              birthdate: '21/03/1977', educacional_background: "Test 3", 
+                              experience: 'test 4', user_id: user.id)
     job =  Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
                     skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
                     company: 'Acme', level: 'Junior', place: 'Remote',
