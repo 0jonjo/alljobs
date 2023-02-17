@@ -2,15 +2,9 @@
 
 <div>
   <p><%= link_to "#{Apply.human_attribute_name(:id)}: #{@proposal.apply_id}", apply_path(@proposal.apply_id) %></p> 
-  <dt><%= Proposal.human_attribute_name(:salary) %></dt> 
-  <dd><%= @proposal.salary %></dd>
-  <dt><%= Proposal.human_attribute_name(:benefits) %></dt>
-  <dd><%= @proposal.benefits %></dd>
-  <dt><%= Proposal.human_attribute_name(:expectations) %></dt> 
-  <dd><%= @proposal.expectations %></dd>
-  <dt><%= Proposal.human_attribute_name(:expected_start) %></dt> 
-  <dd><%= I18n.localize(@proposal.expected_start) %></dd>
-</div>
+<div>
+
+<%= render partial: "layouts/show_atributtes", locals: {what_to_show: @proposal} %>
 
 <div>
   <% if headhunter_signed_in? %>

@@ -22,6 +22,8 @@ pt-BR:
         place: 'Lugar'
         date: 'Data'
         code: 'Código'
+        created_at: 'Criando em'
+        updated_at: 'Atualizado em'
         job_status: 'Status da Vaga'
         job_statuses:
           keys:
@@ -49,6 +51,4 @@ pt-BR:
         user_id: 'Usuário ID'
         feedback_headhunter: 'Retorno do Recrutador'
       comment:
-        body: 'Comentário'  
-     
-          
+        body: 'Comentário'
