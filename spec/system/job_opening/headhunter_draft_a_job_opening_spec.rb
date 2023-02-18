@@ -12,11 +12,11 @@ describe 'Headhunter draft a job opening using Active Job' do
     headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
     login_as(headhunter, :scope => :headhunter)
     visit job_path(job.id)
-    
+
     click_on I18n.t('draft')
-    expect(page).to have_content(I18n.t('draft'))
-    expect(page).not_to have_content(I18n.t('published'))
-    
+    expect(page).to have_content('draft')
+    expect(page).not_to have_content('published')
+
     Delayed::Worker.new.work_off
     visit job_path(job.id)
 

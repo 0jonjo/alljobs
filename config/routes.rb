@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:new, :index, :create, :edit, :show, :update]
   resources :applies do
     resources :proposals, only: [:show, :new, :create, :edit, :update, :destroy]
-  end 
+  end
   resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
     get 'index_draft', on: :collection
     get 'index_archived', on: :collection
