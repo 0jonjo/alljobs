@@ -1,6 +1,6 @@
 <p>
   <%= link_to profile do %>
     <%= profile.id %>
-    <%= profile.social_name.blank? ? profile.name : profile.social_name %>
+    <%= name_to_exibit(profile)%>
   <% end %>
 </p>
