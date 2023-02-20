@@ -1,12 +1,7 @@
 <h4><%= I18n.t('applies') %></h4>
 
-<% if @applies.any? %>
-  <% @applies.each do |apply| %>
-     <%= render apply %>
-  <% end %>  
-<% else %>  
-  <p><%= I18n.t('no_applies') %></p>
-<% end %>
+<%= render @applies if @applies.any? %>
+<p><%= I18n.t('no_applies') if @applies.empty? %></p>
 
 <%= paginate @applies %>
 
