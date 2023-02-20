@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  
+
   before_action :authenticate_headhunter!, except: [:index, :show, :search]
   before_action :find_id_job, only: [:edit, :update, :destroy, :show, :applies, :drafted, :archived, :published]
   before_action :user_has_profile
@@ -10,20 +10,22 @@ class JobsController < ApplicationController
 
   def index_draft
     which_index(:draft)
+    render "jobs/index"
   end
 
   def index_archived
     which_index(:archived)
+    render "jobs/index"
   end
- 
-  def new 
+
+  def new
     @job = Job.new
   end
 
-  def create 
+  def create
     @job = Job.new(job_params)
     return redirect_to @job if @job.save
-    render :new  
+    render :new
   end
 
   def edit
@@ -33,11 +35,11 @@ class JobsController < ApplicationController
     return redirect_to @job if @job.update(job_params)
     render :edit
   end
-  
+
   def search
     @word = params['query']
     @jobs = Job.where("code LIKE :search OR title LIKE :search OR description LIKE :search", search: "%#{@word}%")
-  end   
+  end
 
   def destroy
     @job.destroy
@@ -49,20 +51,20 @@ class JobsController < ApplicationController
 
   def drafted
     return redirect_to @job if @job.draft!
-    render :new 
-  end  
+    render :new
+  end
 
   def archived
     return redirect_to @job if @job.archived!
-    render :new 
+    render :new
   end
-  
+
   def published
     if @job.published!
       #Adjust I18n text flash[:notice] = "You successfully starred this apply."
       return redirect_to @job
-    end   
-    render :new  
+    end
+    render :new
   end
 
   def applies
