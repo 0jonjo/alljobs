@@ -2,9 +2,7 @@
 
 <% if @jobs.any? %>
     <p><%= @jobs.count %>  <%= I18n.t('jobs_found') %></p>
-    <% @jobs.each do |job|  %>
-      <%= render job %>
-    <% end %>
-  <% else %> 
+    <%= render @jobs %>
+<% else %>
     <p><%= I18n.t('no_jobs') %></p> 
-  <% end %>
+<% end %>

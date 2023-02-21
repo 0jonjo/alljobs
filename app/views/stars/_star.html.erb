@@ -1,13 +1,12 @@
 
 <% if star.headhunter_id == current_headhunter.id %>
   <p>
-    <% star.profile.social_name.blank? ? star_name = star.profile.name : star_name = star.profile.social_name %>
-    <%= link_to star_name, profile_path(star.profile.user_id) %><br>
-    <%= Apply.human_attribute_name(:id) %>: <%= link_to star.apply_id, apply_path(star.apply_id) %> 
+    <%= link_to name_to_exibit(star.profile), profile_path(star.profile.user_id) %><br>
+    <%= Apply.human_attribute_name(:id) %>: <%= link_to star.apply_id, apply_path(star.apply_id) %>
   </p>
-  <%= button_to I18n.t('delete'), star_path(star), 
+  <%= button_to I18n.t('delete'), star_path(star),
                               method: :delete,
                               data: { confirm: I18n.t('sure') } %>
 <% else %>
-  <p><%= I18n.t('no_stars') %></p>   
+  <p><%= I18n.t('no_stars') %></p>
 <% end %>

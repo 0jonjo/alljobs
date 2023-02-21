@@ -1,7 +1,7 @@
 <% if @job.errors.any? %>
   <% @job.errors.full_messages.each do |message|%>
     <p><%= message %></p>
-  <% end %>  
+  <% end %>
 <% end %>
 
 <%= form_with model: job do |form| %>
@@ -9,32 +9,32 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
-  
+
   <div>
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
-  
+
   <div>
     <%= form.label :skills %>
     <%= form.text_area :skills %>
   </div>
-  
+
   <div>
     <%= form.label :salary %>
     <%= form.number_field :salary %>
   </div>
-  
+
   <div>
     <%= form.label :company %>
     <%= form.text_field :company  %>
   </div>
-  
+
   <div>
     <%= form.label :level %>
     <%= form.text_field :level  %>
   </div>
-  
+
   <div>
     <%= form.label :place %>
     <%= form.text_field :place %>
