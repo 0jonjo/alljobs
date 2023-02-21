@@ -1,7 +1,9 @@
 <% if @apply.accepted_headhunter == false %>
   <p><%= I18n.t('rejected_apply') %></p>
-  <dt><%= Apply.human_attribute_name(:feedback_headhunter) %></dt> 
-  <dd><%= @apply.feedback_headhunter %></dd>
+  <p>
+    <b><%= Apply.human_attribute_name(:feedback_headhunter) %></b>:
+    <%= @apply.feedback_headhunter %>
+  </p>
 <% end %>
 
 <div>
@@ -20,7 +22,7 @@
       <%= link_to I18n.t('send_proposal'), new_apply_proposal_path(apply_id = @apply.id) unless @apply.proposal %>
       <%= link_to I18n.t('feedback'), edit_apply_path %>
       <%= link_to I18n.t('star_apply'), stars_path(apply_id: @apply.id, profile_id: @apply.user_id, headhunter_id: current_headhunter.id), method: :post %>
-      <%= link_to I18n.t('view_profile'), profile_path(@apply.user_id) %>    
+      <%= link_to I18n.t('view_profile'), profile_path(@apply.user_id) %>
     <% end %>
   </p>
 </div>
@@ -29,5 +31,5 @@
   <%= button_to I18n.t('delete'), apply_path(@apply), 
                                     method: :delete,
                                     data: { confirm: I18n.t('sure') } %>
-</div>                           
+</div>
 

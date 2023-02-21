@@ -1,7 +1,5 @@
-<% if @job.applies.any? %> 
+<% if @job.applies.any? %>
   <b><%= I18n.t('all_applies') %></b>
-  <% @job.applies.each do |apply| %>
-    <%= render apply %> 
-  <% end %>        
+  <%= render @job.applies %>
   <%= I18n.t('no_applies') if @job.applies.empty? %>
-<% end %>   
+<% end %>

@@ -1,7 +1,7 @@
 <% if @proposal.errors.any? %>
   <% @proposal.errors.full_messages.each do |message|%>
     <p><%= message %></p>
-  <% end %>  
+  <% end %>
 <% end %>
 
 <%= form_with(model: [@apply, @proposal]) do |form| %>
@@ -24,7 +24,7 @@
     <%= form.label :expected_start %>
     <%= form.date_field :expected_start %>
   </div>
-  
+
   <div>
     <%= form.submit %>
   </div>
