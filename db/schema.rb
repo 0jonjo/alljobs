@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_01_135826) do
+ActiveRecord::Schema.define(version: 2023_06_10_114909) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 2022_12_01_135826) do
   create_table "applies", force: :cascade do |t|
     t.integer "job_id", null: false
     t.integer "user_id", null: false
-    t.boolean "application_user"
-    t.boolean "accepted_headhunter"
     t.text "feedback_headhunter"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -47,6 +45,23 @@ ActiveRecord::Schema.define(version: 2022_12_01_135826) do
     t.index ["profile_id"], name: "index_comments_on_profile_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.string "website"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "acronym"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -60,6 +75,16 @@ ActiveRecord::Schema.define(version: 2022_12_01_135826) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "feedback_applies", force: :cascade do |t|
+    t.text "body"
+    t.integer "headhunter_id", null: false
+    t.integer "applies_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["applies_id"], name: "index_feedback_applies_on_applies_id"
+    t.index ["headhunter_id"], name: "index_feedback_applies_on_headhunter_id"
   end
 
   create_table "headhunters", force: :cascade do |t|
@@ -87,6 +112,8 @@ ActiveRecord::Schema.define(version: 2022_12_01_135826) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "code"
     t.integer "job_status", default: 1
+    t.integer "countries_id"
+    t.index ["countries_id"], name: "index_jobs_on_countries_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -99,7 +126,18 @@ ActiveRecord::Schema.define(version: 2022_12_01_135826) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "countries_id"
+    t.index ["countries_id"], name: "index_profiles_on_countries_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "proposal_comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "author"
+    t.integer "proposal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["proposal_id"], name: "index_proposal_comments_on_proposal_id"
   end
 
   create_table "proposals", force: :cascade do |t|
@@ -110,6 +148,7 @@ ActiveRecord::Schema.define(version: 2022_12_01_135826) do
     t.date "expected_start"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "user_accepted"
     t.index ["apply_id"], name: "index_proposals_on_apply_id"
   end
 
@@ -140,7 +179,12 @@ ActiveRecord::Schema.define(version: 2022_12_01_135826) do
   add_foreign_key "applies", "users"
   add_foreign_key "comments", "headhunters"
   add_foreign_key "comments", "profiles"
+  add_foreign_key "feedback_applies", "applies", column: "applies_id"
+  add_foreign_key "feedback_applies", "headhunters"
+  add_foreign_key "jobs", "countries", column: "countries_id"
+  add_foreign_key "profiles", "countries", column: "countries_id"
   add_foreign_key "profiles", "users"
+  add_foreign_key "proposal_comments", "proposals"
   add_foreign_key "proposals", "applies"
   add_foreign_key "stars", "applies"
   add_foreign_key "stars", "headhunters"
