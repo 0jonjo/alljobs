@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_10_114909) do
+ActiveRecord::Schema.define(version: 2023_06_10_125502) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2023_06_10_114909) do
     t.string "code"
     t.integer "job_status", default: 1
     t.integer "countries_id"
+    t.integer "companies_id"
+    t.index ["companies_id"], name: "index_jobs_on_companies_id"
     t.index ["countries_id"], name: "index_jobs_on_countries_id"
   end
 
@@ -181,6 +183,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_114909) do
   add_foreign_key "comments", "profiles"
   add_foreign_key "feedback_applies", "applies", column: "applies_id"
   add_foreign_key "feedback_applies", "headhunters"
+  add_foreign_key "jobs", "companies", column: "companies_id"
   add_foreign_key "jobs", "countries", column: "countries_id"
   add_foreign_key "profiles", "countries", column: "countries_id"
   add_foreign_key "profiles", "users"

@@ -1,4 +1,6 @@
 class Job < ApplicationRecord
+  belongs_to :country
+  belongs_to :company
   has_many :applies
   has_many :users, through: :applies
   validates :title, :code, :description, :skills, :salary, :company, :level, :place, :date, presence: true
