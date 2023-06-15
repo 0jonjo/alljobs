@@ -3,12 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
-#Rails_Admin
 gem 'rails_admin', '~> 3.0'
-#Delayed Job
 gem 'delayed_job_active_record'
 gem "daemons"
-#Kaminari
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
@@ -38,6 +35,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  gem 'faker'
+  gem 'factory_bot_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
@@ -55,6 +54,7 @@ group :development do
 end
 
 group :test do
+  gem 'shoulda-matchers', '~> 5.0'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
