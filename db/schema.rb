@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_10_125502) do
+ActiveRecord::Schema.define(version: 2023_06_15_000954) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 2023_06_10_125502) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.datetime "datetime"
     t.text "body"
     t.integer "profile_id", null: false
     t.integer "headhunter_id", null: false
@@ -80,10 +79,10 @@ ActiveRecord::Schema.define(version: 2023_06_10_125502) do
   create_table "feedback_applies", force: :cascade do |t|
     t.text "body"
     t.integer "headhunter_id", null: false
-    t.integer "applies_id", null: false
+    t.integer "apply_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["applies_id"], name: "index_feedback_applies_on_applies_id"
+    t.index ["apply_id"], name: "index_feedback_applies_on_apply_id"
     t.index ["headhunter_id"], name: "index_feedback_applies_on_headhunter_id"
   end
 
@@ -104,18 +103,17 @@ ActiveRecord::Schema.define(version: 2023_06_10_125502) do
     t.text "description"
     t.text "skills"
     t.decimal "salary"
-    t.string "company"
     t.string "level"
-    t.string "place"
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "code"
     t.integer "job_status", default: 1
-    t.integer "countries_id"
-    t.integer "companies_id"
-    t.index ["companies_id"], name: "index_jobs_on_companies_id"
-    t.index ["countries_id"], name: "index_jobs_on_countries_id"
+    t.integer "country_id"
+    t.integer "company_id"
+    t.string "city"
+    t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["country_id"], name: "index_jobs_on_country_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -128,8 +126,9 @@ ActiveRecord::Schema.define(version: 2023_06_10_125502) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "countries_id"
-    t.index ["countries_id"], name: "index_profiles_on_countries_id"
+    t.integer "country_id"
+    t.string "city"
+    t.index ["country_id"], name: "index_profiles_on_country_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -156,13 +155,11 @@ ActiveRecord::Schema.define(version: 2023_06_10_125502) do
 
   create_table "stars", force: :cascade do |t|
     t.integer "headhunter_id", null: false
-    t.integer "profile_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "apply_id", null: false
     t.index ["apply_id"], name: "index_stars_on_apply_id"
     t.index ["headhunter_id"], name: "index_stars_on_headhunter_id"
-    t.index ["profile_id"], name: "index_stars_on_profile_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -181,15 +178,14 @@ ActiveRecord::Schema.define(version: 2023_06_10_125502) do
   add_foreign_key "applies", "users"
   add_foreign_key "comments", "headhunters"
   add_foreign_key "comments", "profiles"
-  add_foreign_key "feedback_applies", "applies", column: "applies_id"
+  add_foreign_key "feedback_applies", "applies"
   add_foreign_key "feedback_applies", "headhunters"
-  add_foreign_key "jobs", "companies", column: "companies_id"
-  add_foreign_key "jobs", "countries", column: "countries_id"
-  add_foreign_key "profiles", "countries", column: "countries_id"
+  add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "countries"
+  add_foreign_key "profiles", "countries"
   add_foreign_key "profiles", "users"
   add_foreign_key "proposal_comments", "proposals"
   add_foreign_key "proposals", "applies"
   add_foreign_key "stars", "applies"
   add_foreign_key "stars", "headhunters"
-  add_foreign_key "stars", "profiles"
 end
