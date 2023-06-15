@@ -13,16 +13,16 @@ Rails.application.routes.draw do
   resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
     get 'index_draft', on: :collection
     get 'index_archived', on: :collection
-    get 'search', on: :collection 
+    get 'search', on: :collection
     post 'drafted', on: :member
-    post 'archived', on: :member 
-    post 'published', on: :member  
+    post 'archived', on: :member
+    post 'published', on: :member
   end
 
   namespace :api do
     namespace :v1 do
       resources :jobs, only: [:show, :index, :create, :update, :destroy]
-    end  
+    end
   end
 
 
