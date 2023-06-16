@@ -3,7 +3,7 @@ class Job < ApplicationRecord
   belongs_to :company
   has_many :applies
   has_many :users, through: :applies
-  validates :title, :code, :description, :skills, :salary, :company, :level, :city, :date, presence: true
+  validates :title, :description, :skills, :salary, :company, :level, :country, :city, :date, presence: true
   validates :salary, numericality: { only_decimal: true }
   validates :code, uniqueness: true
   validate :job_date_is_future
