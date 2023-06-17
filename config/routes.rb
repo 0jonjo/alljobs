@@ -3,10 +3,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :headhunters, :users
 
-  resources :comments
   resources :pages, only: [:index]
   resources :stars, only: [:index, :destroy, :create]
-  resources :profiles, only: [:new, :index, :create, :edit, :show, :update]
+  resources :profiles, only: [:new, :index, :create, :edit, :show, :update] do
+    resources :comments
+  end
   resources :applies do
     resources :proposals, only: [:show, :new, :create, :edit, :update, :destroy]
   end
