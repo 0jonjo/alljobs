@@ -25,6 +25,12 @@ RSpec.describe Profile, type: :model do
         profile.valid?
         expect(profile.errors.include?(:experience)).to be true
       end
+
+      it "country is mandatory" do
+        profile = Profile.new()
+        profile.valid?
+        expect(profile.errors.include?(:country)).to be true
+      end
       
       it "user_id is mandatory" do
         profile = Profile.new(user_id: '')
@@ -33,11 +39,12 @@ RSpec.describe Profile, type: :model do
       end
 
       it "user_id is uniquess" do
+        country = Country.create!(acronym: 'WK', name: 'Wakanda')
         user = User.create!(:email => 'user@test.com', :password => 'test123')
         profile = Profile.create!(name: 'Teste', social_name: 'Just a test 2', birthdate: '21/03/1977',
-                              educacional_background: "Test 3", experience: 'Test 4', user_id: 1)
+                              educacional_background: 'Test 3', experience: 'Test 4', user_id: 1, country: country)
         profile2 = Profile.new(name: 'Teste', social_name: 'Just a test 2', birthdate: '21/03/1977',
-                              educacional_background: "Test 3", experience: 'Test 4', user_id: 1)                      
+                              educacional_background: 'Test 3', experience: 'Test 4', user_id: 1, country: country)                      
         profile2.valid?
         expect(profile2.errors.include?(:user_id)).to be true
       end   

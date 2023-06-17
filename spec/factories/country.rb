@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :country do
-    acronym { 'WK' }
-    name { 'Wakanda' }
+    acronym { Faker::Address.country_code }
+    name { Faker::Address.country }
   end
 end

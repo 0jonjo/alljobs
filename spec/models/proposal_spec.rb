@@ -7,19 +7,19 @@ RSpec.describe Proposal, type: :model do
       proposal.valid?
       expect(proposal.errors.include?(:benefits)).to be true                       
     end
-    
+
     it "expectations is mandatory" do
       proposal = Proposal.new(expectations:'')
       proposal.valid?
       expect(proposal.errors.include?(:expectations)).to be true                       
     end
-    
+
     it "apply_id is mandatory" do
       proposal = Proposal.new(apply_id:'')
       proposal.valid?
       expect(proposal.errors.include?(:apply_id)).to be true                       
     end
-    
+
     it "salary is mandatory" do
       proposal = Proposal.new(salary:'')
       proposal.valid?
@@ -31,20 +31,20 @@ RSpec.describe Proposal, type: :model do
       proposal.valid?
       expect(proposal.errors.include?(:salary)).to be true                       
     end
-  end  
-  
+  end
+
   describe "expected_start" do
     it "can't be in past" do
       proposal = Proposal.new(expected_start: 10.day.ago)
       proposal.valid?
       expect(proposal.errors.include?(:expected_start)).to be true 
       expect(proposal.errors[:expected_start]).to include(" expected start can't be in past.")              
-    end 
-  
+    end
+
     it "must be in future" do
       proposal = Proposal.new(expected_start: 1.day.from_now)
-      proposal.valid? 
+      proposal.valid?
       expect(proposal.errors.include?(:expected_start)).to be false 
-    end 
-  end  
+    end
+  end
 end
