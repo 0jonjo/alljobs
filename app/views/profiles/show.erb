@@ -8,6 +8,10 @@
 <dd><%= @profile.educacional_background %></dd>
 <dt><%= Profile.human_attribute_name(:experience) %></dt>
 <dd><%= @profile.experience %></dd>
+<dt><%= Profile.human_attribute_name(:country) %></dt>
+<dd><%= @profile.country.name %></dd>
+<dt><%= Profile.human_attribute_name(:city) %></dt>
+<dd><%= @profile.city %></dd>
 
 <%= link_to I18n.t('edit'), edit_profile_path(@profile) if user_signed_in?%>
 

@@ -38,12 +38,14 @@ pt-BR:
         description: 'Descrição'
         educacional_background: 'Educação'
         experience: 'Experiência'
+        country_id: 'País'
+        city: 'Cidade'
       proposal:
         apply_id: 'Número da Inscrição'
         salary: 'Salário'
         benefits: 'Benefícios'
         description: 'Descrição'
-        expectations: 'Expectativas'
+        expectations: 'Expectativas da Vaga'
         expected_start: 'Expectativa de Início'
       apply:
         id: 'Aplicação ID'
