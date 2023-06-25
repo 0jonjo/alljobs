@@ -19,9 +19,9 @@ country = Country.create(acronym: 'US', name: 'United States')
 #Default User and Profile
 user = User.create(email: 'user@test.com',
              password: 'test123')
-profile = Profile.create!(name: 'Tester', social_name: 'Tester Social Name', 
-                          birthdate: '21/03/1977', educacional_background: "High School", 
-                          experience: 'Dancer long time ago', user_id: user.id, 
+profile = Profile.create!(name: 'Tester', social_name: 'Tester Social Name',
+                          birthdate: '21/03/1977', description: 'Nice person', educacional_background: "High School", 
+                          experience: 'Dancer long time ago', user_id: user.id,
                           country_id: country.id, city: 'Test City')
 #Default Comment on Profile
 Comment.create(body: 'Seed comment' , profile_id: profile.id,
