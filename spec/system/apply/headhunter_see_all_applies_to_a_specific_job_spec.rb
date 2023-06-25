@@ -31,6 +31,6 @@ describe 'Headhunter view applies to a specific job' do
 
   it 'without sucess - no applies to this job' do
     visit job_path(job.id.to_s)
-    expect(page).not_to have_content(I18n.t('all_applies')) 
+    expect(page).not_to have_content(I18n.t('all_applies'))
   end
 end
