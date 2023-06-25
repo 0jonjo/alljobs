@@ -3,7 +3,7 @@ class StarsController < ApplicationController
   before_action :authenticate_headhunter!
 
   def index
-    @stars = Star.page(params[:page])
+    @stars = Star.where(headhunter_id: current_headhunter.id).page(params[:page])
   end
 
   def find

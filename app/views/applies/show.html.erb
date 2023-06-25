@@ -1,5 +1,4 @@
-<% if @apply.accepted_headhunter == false %>
-  <p><%= I18n.t('rejected_apply') %></p>
+<% if @apply.feedback_headhunter.present? %>
   <p>
     <b><%= Apply.human_attribute_name(:feedback_headhunter) %></b>:
     <%= @apply.feedback_headhunter %>
@@ -8,27 +7,21 @@
 
 <div>
   <p><%= I18n.t('apply_to') %> <%= link_to @apply.job.title, @apply.job %></p>
-  <p><%= Apply.human_attribute_name(:id) %>: <%= @apply.id %></p>
-  <p>
-    <%= Profile.human_attribute_name(:name) %>: 
-    <%= name_to_exibit(@profile) %>
-  </p>
 </div>
 
 <div>
   <p>
-    <%= link_to I18n.t('view_proposal'), apply_proposal_path(@apply, @apply.proposal.id) if @apply.proposal %>  
+    <%= link_to I18n.t('view_proposal'), apply_proposal_path(@apply, @apply.proposal.id) if @apply.proposal %>
     <% if headhunter_signed_in? %>
       <%= link_to I18n.t('send_proposal'), new_apply_proposal_path(apply_id = @apply.id) unless @apply.proposal %>
       <%= link_to I18n.t('feedback'), edit_apply_path %>
-      <%= link_to I18n.t('star_apply'), stars_path(apply_id: @apply.id, profile_id: @apply.user_id, headhunter_id: current_headhunter.id), method: :post %>
-      <%= link_to I18n.t('view_profile'), profile_path(@apply.user_id) %>
+      <%= link_to I18n.t('star_apply'), stars_path(apply_id: @apply.id, headhunter_id: current_headhunter.id), method: :post %>
     <% end %>
   </p>
 </div>
 
 <div>
-  <%= button_to I18n.t('delete'), apply_path(@apply), 
+  <%= button_to I18n.t('delete'), apply_path(@apply),
                                     method: :delete,
                                     data: { confirm: I18n.t('sure') } %>
 </div>

@@ -1,20 +1,19 @@
 class AppliesController < ApplicationController
-  
+
   before_action :authenticate_headhunter!, except: [:index, :show, :destroy, :create]
   before_action :authenticate_user!, only: [:index]
   before_action :apply_find, only: [:find, :edit, :update, :destroy, :show]
   before_action :user_has_profile
-  
+
   def index
     @applies = current_user.applies.page(params[:page])
   end
 
-  def new 
+  def new
     @apply = Apply.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @apply.accepted_headhunter = false
@@ -27,10 +26,10 @@ class AppliesController < ApplicationController
     @apply = Apply.new(job_id: params[:job_id], user_id: params[:user_id])
     redirect_to @apply if @apply.save
   end
- 
+
   def find
   end
-  
+
   def destroy
     @apply.destroy
     redirect_to root_path
@@ -38,12 +37,11 @@ class AppliesController < ApplicationController
 
   def show
     return redirect_to root_path if user_signed_in? && @apply.user != current_user
-    @profile = Profile.find(@apply.user_id)     
   end
-  
+
   private
   def apply_params
-    params.require(:apply).permit(:application_user, :accepted_headhunter, :feedback_headhunter, :user_id, :job_id)
+    params.require(:apply).permit(:feedback_headhunter, :user_id, :job_id)
   end
 
   def apply_find
