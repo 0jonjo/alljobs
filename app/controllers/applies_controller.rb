@@ -16,7 +16,6 @@ class AppliesController < ApplicationController
   def edit; end
 
   def update
-    @apply.accepted_headhunter = false
     return redirect_to @apply if @apply.update(apply_params)
     render :edit
   end
