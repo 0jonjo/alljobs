@@ -2,7 +2,7 @@
 
 This is a TDD study project to a job opening website using Ruby on Rails.
 
-[Project Board (To do, In Progress, Done)](https://github.com/0jonjo/alljobs/projects/1)
+[Project Board (To do, In Progress, Done)](https://github.com/users/0jonjo/projects/3)
 
 Ruby: 3.0.0
 Rails: 6.1.4.1 
@@ -26,9 +26,9 @@ Gems:
 - [x] 8. Headhunter stars a profile
 - [x] 9. Headhunter rejects applicant providing feedback
 - [x] 10. Headhunter sends proposal to applicant
-11. Applicant receives feedback if rejected for a job
-12. Candidate receives proposal sent by headhunter
-13. Candidate accepts/rejects proposal
+- [x] Applicant receives feedback if rejected for a job
+- [x] Candidate receives proposal sent by headhunter
+- [x] Candidate accepts/rejects proposal
 14. Headhunter receives response from candidate
 15. Headhunter closes registration for a job 
 
