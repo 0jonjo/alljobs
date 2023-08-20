@@ -9,6 +9,7 @@ gem "daemons"
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'sqlite3', '~> 1.4'
+gem 'pg', '~> 1.2', '>= 1.2.3', group: :production
 gem 'devise'
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
