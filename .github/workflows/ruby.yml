@@ -54,4 +54,4 @@ jobs:
           yarn add @rails/webpacker
           bundle exec rails webpacker:install
           bundle exec rails db:schema:load
-          bundle exec rspec --format progress
+          NODE_OPTIONS='--openssl-legacy-provider' bundle exec rspec --format progress
