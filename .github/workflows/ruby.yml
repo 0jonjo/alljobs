@@ -57,6 +57,6 @@ jobs:
           NODE_OPTIONS='--openssl-legacy-provider' bundle exec rspec --format progress
 
       - name: Publish code coverage
-        uses: 0jonjo/codeclimate-action@v3.0.0
+        uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
