@@ -6,7 +6,7 @@
   <% if @user_applied.present? %>
     <%= link_to I18n.t('your_apply'), apply_path(@user_applied) %>
   <% else %>
-    <%= link_to I18n.t('apply'), applies_path(job_id: @job.id, user_id: current_user.id), method: :post %>
+    <%= link_to I18n.t('to_apply'), applies_path(job_id: @job.id, user_id: current_user.id), method: :post %>
   <% end %>
 <% end %>
 

@@ -19,7 +19,7 @@ describe 'User applied to job opening' do
   it 'and see link to your apply and not to aplly again' do
     visit job_path(apply.job_id)
     expect(page).to have_link(I18n.t('your_apply'))
-    expect(page).not_to have_link(I18n.t('apply'))
+    expect(page).not_to have_link(I18n.t('to_apply'))
   end
 
   it "and see only his multiply applies in index" do

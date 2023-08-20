@@ -5,7 +5,7 @@ pt-BR:
   delete: 'Apagar'
   update: 'Atualizar'
   sure: 'Tem certeza?'
-  apply: 'Fazer Inscrição'
+  to_apply: 'Fazer Inscrição'
   your_apply: 'Sua inscrição'
   change_status: 'Mudar Status'
   deadline: 'Prazo'
