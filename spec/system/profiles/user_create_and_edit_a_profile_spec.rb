@@ -19,7 +19,6 @@ describe 'User' do
       end
 
       expect(current_path).to eq new_profile_path
-      puts page.body
 
       fill_in Profile.human_attribute_name(:name), with: 'User test name'
       fill_in Profile.human_attribute_name(:social_name), with: 'Social name test'
