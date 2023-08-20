@@ -55,3 +55,8 @@ jobs:
           bundle exec rails webpacker:install
           bundle exec rails db:schema:load
           NODE_OPTIONS='--openssl-legacy-provider' bundle exec rspec --format progress
+
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
