@@ -1,4 +1,4 @@
-# ALLJOBS
+# ALLJOBS ![Tests](https://github.com/0jonjo/alljobs/actions/workflows/ruby.yml/badge.svg)
 
 This is a TDD study project to a job opening website using Ruby on Rails in a TDD way. Alljobs focuses on job search, management of applications, proposals and communication. It has 3 roles: admin (general management), headhunter (job creation, candidate, feedback, proposals) and user (profile creation, job search and application).
 
