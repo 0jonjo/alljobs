@@ -34,9 +34,7 @@ class AppliesController < ApplicationController
     redirect_to root_path
   end
 
-  def show
-    return redirect_to root_path if user_signed_in? && @apply.user != current_user
-  end
+  def show; end
 
   private
   def apply_params
