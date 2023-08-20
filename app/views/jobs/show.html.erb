@@ -2,7 +2,14 @@
 
 <%= render partial: "layouts/show_atributtes", locals: {what_to_show: @job} %>
 
-<%= link_to I18n.t('apply'), applies_path(job_id: @job.id, user_id: current_user.id), method: :post if user_signed_in? %>
+<% if user_signed_in? %>
+  <% if @user_applied.present? %>
+    <%= link_to I18n.t('your_apply'), apply_path(@user_applied) %>
+  <% else %>
+    <%= link_to I18n.t('apply'), applies_path(job_id: @job.id, user_id: current_user.id), method: :post %>
+  <% end %>
+<% end %>
+
 
 <br>
 
