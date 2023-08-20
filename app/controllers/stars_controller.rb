@@ -3,13 +3,13 @@ class StarsController < ApplicationController
   before_action :authenticate_headhunter!
 
   def index
-    @stars = Star.page(params[:page])
+    @stars = Star.where(headhunter_id: current_headhunter.id).page(params[:page])
   end
-  
+
   def find
     @star = Star.find(params[:id])
   end
-  
+
   def destroy
     @star = Star.find(params[:id])
     @star.destroy
@@ -17,20 +17,16 @@ class StarsController < ApplicationController
     redirect_to stars_path
   end
 
-  def show
-    profile_id = @star.profile_id
-    @profile = Profile.find(params[:profile_id])
-    redirect_to @profile
-  end
+  def show; end
 
   def create
-    if Star.where(headhunter_id: params[:headhunter_id], profile_id: params[:profile_id], apply_id: params[:apply_id]).exists?
+    if Star.where(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id]).exists?
       flash[:alert] = "You're already starred this apply."
     elsif
-      @star = Star.new(headhunter_id: params[:headhunter_id], profile_id: params[:profile_id], apply_id: params[:apply_id])
+      @star = Star.new(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id])
       if @star.save
         flash[:notice] = "You successfully starred this apply."
-      else  
+      else
         flash[:alert] = "You can't starred this apply."
       end
     end
@@ -39,6 +35,6 @@ class StarsController < ApplicationController
 
   private
   def star_params
-    params.require(:star).permit(:profile_id, :headhunter_id, :apply_id)
+    params.require(:star).permit(:headhunter_id, :apply_id)
   end
 end
