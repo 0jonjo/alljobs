@@ -51,5 +51,7 @@ jobs:
           DISABLE_SPRING: 1
         run: |
           cp config/database.ci.yml config/database.yml
+          yarn add @rails/webpacker
+          bundle exec rails webpacker:install
           bundle exec rails db:schema:load
-          bundle exec rspec --format progress
+          NODE_OPTIONS='--openssl-legacy-provider' bundle exec rspec --format progress
