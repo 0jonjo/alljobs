@@ -1,7 +1,7 @@
 class JobsController < ApplicationController
 
   before_action :authenticate_headhunter!, except: [:index, :show, :search]
-  before_action :find_id_job, only: [:edit, :update, :destroy, :show, :applies, :drafted, :archived, :published]
+  before_action :find_job, only: [:show, :edit, :update, :destroy, :applies, :drafted, :archived, :published]
   before_action :user_has_profile
 
   def index
@@ -28,8 +28,7 @@ class JobsController < ApplicationController
     render :new
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     return redirect_to @job if @job.update(job_params)
@@ -47,6 +46,7 @@ class JobsController < ApplicationController
   end
 
   def show
+    @user_applied = Apply.where(job_id: @job.id, user_id: current_user.id) if user_signed_in?
   end
 
   def drafted
@@ -67,16 +67,18 @@ class JobsController < ApplicationController
     render :new
   end
 
-  def applies
-  end
+  def applies; end
 
   private
+
   def job_params
     params.require(:job).permit(:title, :code, :description, :skills, :salary, :company, :level, :place, :date, :job_status)
   end
-  def find_id_job
+
+  def find_job
     @job = Job.find(params[:id])
   end
+
   def which_index(status)
     @jobs = Job.where(job_status: status).page(params[:page])
   end
