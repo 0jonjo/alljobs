@@ -1,13 +1,16 @@
 require 'rails_helper'
 
-describe 'Headhunter change status to a job opening' do
-    it 'with sucess - draft' do
-      job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
-                          skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
-                          company: 'Acme', level: 'Junior', place: 'Remote Job',
-                          date: 1.month.from_now, job_status: :published)
-      headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
-      login_as(headhunter, :scope => :headhunter)
+describe 'Headhunter' do
+
+  let(:headhunter) { create(:headhunter) }
+  let!(:job) { create(:job) }
+
+  before do
+    login_as(headhunter, :scope => :headhunter)
+  end
+
+  context 'when access the a job opening' do
+    it 'can change stauts to draft with sucess ' do
       visit root_path
 
       click_on I18n.t('openings')
@@ -20,17 +23,9 @@ describe 'Headhunter change status to a job opening' do
       expect(page).to have_content('draft')
     end
 
-    it 'with sucess - archived' do
-      job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
-                          skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
-                          company: 'Acme', level: 'Junior', place: 'Remote Job',
-                          date: 1.month.from_now, job_status: :published)
-      headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
-      login_as(headhunter, :scope => :headhunter)
-      visit root_path
+    it 'can change stauts to archived with sucess ' do
+      visit job_path(job)
 
-      click_on I18n.t('openings')
-      click_on job.title
       expect(page).not_to have_button I18n.t('published')
       click_on I18n.t('archived')
 
@@ -40,21 +35,13 @@ describe 'Headhunter change status to a job opening' do
       expect(page).not_to have_content('published')
     end
 
-    it 'without sucess - have not button published' do
-      job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet', 
-                          skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
-                          company: 'Acme', level: 'Junior', place: 'Remote Job',
-                          date: 1.month.from_now, job_status: :published)
-      headhunter = Headhunter.create!(:email => 'admin@test.com', :password => 'test123')
-      login_as(headhunter, :scope => :headhunter)
-      visit root_path
-
-      click_on I18n.t('openings')
-      click_on job.title
+    it 'can not change stauts to publish - do not can see the button' do
+      visit job_path(job)
 
       expect(page).to have_content('published')
       expect(page).not_to have_button(I18n.t('published'))
       expect(page).to have_button(I18n.t('draft'))
       expect(page).to have_button(I18n.t('archived'))
     end
+  end
 end

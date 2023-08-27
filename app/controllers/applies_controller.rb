@@ -26,12 +26,11 @@ class AppliesController < ApplicationController
     redirect_to @apply if @apply.save
   end
 
-  def find
-  end
+  def find; end
 
   def destroy
     @apply.destroy
-    redirect_to root_path
+    redirect_to job_path
   end
 
   def show
@@ -39,6 +38,7 @@ class AppliesController < ApplicationController
   end
 
   private
+
   def apply_params
     params.require(:apply).permit(:feedback_headhunter, :user_id, :job_id)
   end
