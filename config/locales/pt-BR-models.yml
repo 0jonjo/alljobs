@@ -48,6 +48,9 @@ pt-BR:
         description: 'Descrição'
         expectations: 'Expectativas da Vaga'
         expected_start: 'Expectativa de Início'
+        created_at: 'Criando em'
+        updated_at: 'Atualizado em'
+        user_accepted: 'Proposta aceita pelo usuário'
       apply:
         id: 'Aplicação ID'
         job_id: 'Vaga ID'
