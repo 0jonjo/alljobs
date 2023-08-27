@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 describe 'Headhunter' do
-
-  let(:headhunter) { create(:headhunter) }
-  let!(:apply) { create(:apply) }
-  let!(:proposal) { create(:proposal, apply: apply) }
-
   context 'edit a proposal to a cadindidate' do
+
+    let!(:headhunter) { create(:headhunter) }
+    let!(:apply) { create(:apply) }
+    let!(:proposal) { create(:proposal, apply: apply) }
 
     before do
       login_as(headhunter, :scope => :headhunter)
@@ -42,6 +41,10 @@ describe 'Headhunter' do
   end
 
   context 'delete a proposal to a cadindidate' do
+
+    let!(:headhunter) { create(:headhunter) }
+    let!(:apply) { create(:apply) }
+    let!(:proposal) { create(:proposal, apply: apply) }
 
     before do
       login_as(headhunter, :scope => :headhunter)

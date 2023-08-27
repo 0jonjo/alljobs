@@ -27,8 +27,10 @@ describe 'Headhunter' do
   end
 
   context 'edit a comment on a profile' do
+
+    let!(:comment) { create(:comment, profile: profile, headhunter: headhunter) }
+
     it 'with sucesss' do
-      comment = create(:comment, profile: profile, headhunter: headhunter)
       visit profile_path(profile.id)
       click_on 'Editar'
       fill_in Comment.human_attribute_name(:body), with: 'Just another test comment'
@@ -39,8 +41,10 @@ describe 'Headhunter' do
   end
 
   context 'delete a comment on a profile' do
+
+    let!(:comment) { create(:comment, profile: profile, headhunter: headhunter) }
+
     it 'with sucesss' do
-      comment = create(:comment, profile: profile, headhunter: headhunter)
       visit profile_path(profile.id)
       click_on 'Apagar'
       expect(page).not_to have_content(comment.body)

@@ -6,15 +6,24 @@ describe 'User' do
   let!(:country) { create(:country) }
 
   context 'see his profile' do
+
+    let!(:profile) { create(:profile, user: user) }
+
     before do
       login_as(user, :scope => :user)
     end
 
     it 'with sucess' do
-      profile = create(:profile, user: user)
       visit root_path
       click_on Profile.model_name.human
       expect(current_path).to eq(profile_path(user.id))
+    end
+  end
+
+  context 'see his profile' do
+
+    before do
+      login_as(user, :scope => :user)
     end
 
     it 'without sucess because do not have a profile' do

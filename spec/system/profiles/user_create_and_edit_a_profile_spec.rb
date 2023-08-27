@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'User' do
 
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
   let!(:country) { create(:country) }
 
   before do

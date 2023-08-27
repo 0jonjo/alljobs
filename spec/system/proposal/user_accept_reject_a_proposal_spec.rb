@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 describe 'User' do
-
-  let(:profile) { create(:profile) }
-  let!(:apply) { create(:apply, user: profile.user) }
-  let!(:proposal) { create(:proposal, apply: apply) }
-
   context 'access a proposal' do
+
+    let!(:profile) { create(:profile) }
+    let!(:apply) { create(:apply, user: profile.user) }
+    let!(:proposal) { create(:proposal, apply: apply) }
 
     before do
       login_as(profile.user, :scope => :user)
