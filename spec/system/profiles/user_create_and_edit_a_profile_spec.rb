@@ -3,8 +3,7 @@ require 'rails_helper'
 describe 'User' do
 
   let(:user) { create(:user) }
-  let(:country) { create(:country) }
-  let(:country2) { create(:country) }
+  let!(:country) { create(:country) }
 
   before do
     login_as(user, :scope => :user)
@@ -62,10 +61,9 @@ describe 'User' do
 
   context 'edit a profile' do
 
+    let!(:profile) { create(:profile, user: user) }
+
     it 'with sucess' do
-      profile = Profile.create!(name: 'Just a test', social_name: 'Just a test 2',
-                                birthdate: '21/03/1977', educacional_background: "Test 3",
-                                experience: 'test 5', country: country, city: 'Test 5', user: user)
       visit root_path
       click_on Profile.model_name.human
       click_on I18n.t('edit')
@@ -87,6 +85,21 @@ describe 'User' do
       expect(page).to have_content 'Test 6'
       expect(page).to have_content 'Test 7'
       expect(page).to have_content 'Test 8'
+    end
+
+    it 'without sucess - forget some items' do
+      visit edit_profile_path(user.id)
+
+      fill_in Profile.human_attribute_name(:name), with: ''
+      fill_in Profile.human_attribute_name(:social_name), with: ''
+      fill_in Profile.human_attribute_name(:birthdate), with: ''
+      fill_in Profile.human_attribute_name(:experience), with: ''
+      click_on 'Atualizar Perfil'
+
+      expect(page).to have_content("Nome não pode ficar em branco")
+      expect(page).to have_content("Data de Nascimento não pode ficar em branco")
+      expect(page).to have_content("Experiência não pode ficar em branco")
+      expect(current_path).to eq profile_path(user.id)
     end
   end
 end
