@@ -9,7 +9,10 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :applies do
-    resources :proposals, only: [:show, :new, :create, :edit, :update, :destroy]
+    resources :proposals, only: [:show, :new, :create, :edit, :update, :destroy] do
+      post 'accept', on: :member
+      post 'reject', on: :member
+    end
   end
   resources :jobs, only: [:new, :index, :create, :edit, :show, :update] do
     get 'index_draft', on: :collection

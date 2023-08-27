@@ -16,3 +16,5 @@ pt-BR:
   feedback: 'Rejeitar e dar feedback'
   send_proposal: 'Fazer Proposta'
   view_proposal: 'Ver Proposta'
+  to_accept_proposal: 'Aceitar Proposta'
+  to_reject_proposal: 'Rejeitar Proposta'
