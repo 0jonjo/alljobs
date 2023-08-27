@@ -26,8 +26,8 @@
   </div>
 
   <div>
-    <%= form.label :company %>
-    <%= form.text_field :company  %>
+    <%= form.label :company_id %>
+    <%= form.select :company_id, Company.all.map { |c| [c.name, c.id] }  %>
   </div>
 
   <div>
@@ -36,13 +36,18 @@
   </div>
 
   <div>
-    <%= form.label :place %>
-    <%= form.text_field :place %>
+    <%= form.label :date %>
+    <%= form.date_field :date, value: form.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %>
+  </div>
+
+   <div>
+    <%= form.label :country_id %>
+    <%= form.select :country_id, Country.all.map { |c| [c.acronym, c.id] }  %>
   </div>
 
   <div>
-    <%= form.label :date %>
-    <%= form.date_field :date %>
+    <%= form.label :city %>
+    <%= form.text_field :city %>
   </div>
 
   <div>

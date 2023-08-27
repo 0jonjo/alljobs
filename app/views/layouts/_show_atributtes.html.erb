@@ -3,6 +3,10 @@
     <dt><%= what_to_show.class.human_attribute_name(attribute) %>:</dt>
     <% if attribute == 'created_at' || attribute == 'updated_at'%>
       <dd><%= what_to_show.attributes[attribute].to_formatted_s(:long) %></dd>
+    <% elsif attribute == 'country_id' %>
+      <dd><%= Country.find(what_to_show.attributes[attribute]).acronym %></dd>
+    <% elsif attribute == 'company_id' %>
+      <dd><%= Company.find(what_to_show.attributes[attribute]).name %></dd>  
     <% else %>
       <dd><%= what_to_show.attributes[attribute].to_s %></dd>
     <% end %>
