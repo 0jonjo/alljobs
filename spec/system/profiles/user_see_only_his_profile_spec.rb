@@ -29,7 +29,7 @@ describe 'User' do
 
   context 'try to see another profile' do
 
-    let(:profile) { create(:profile) }
+    let!(:profile) { create(:profile) }
 
     before do
       login_as(user, :scope => :user)
