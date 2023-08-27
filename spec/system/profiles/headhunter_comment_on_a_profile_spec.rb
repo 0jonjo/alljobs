@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Headhunter' do
 
   let(:headhunter) { create(:headhunter) }
-  let(:profile) { create(:profile) }
+  let!(:profile) { create(:profile) }
 
   before do
     login_as(headhunter, :scope => :headhunter)
@@ -28,8 +28,8 @@ describe 'Headhunter' do
 
   context 'edit a comment on a profile' do
     it 'with sucesss' do
-      comment = Comment.create!(body: 'Test', profile: profile, headhunter: headhunter)
-      visit profile_path(profile)
+      comment = create(:comment, profile: profile, headhunter: headhunter)
+      visit profile_path(profile.id)
       click_on 'Editar'
       fill_in Comment.human_attribute_name(:body), with: 'Just another test comment'
       click_on 'Atualizar Comentário'
@@ -40,10 +40,10 @@ describe 'Headhunter' do
 
   context 'delete a comment on a profile' do
     it 'with sucesss' do
-      comment = Comment.create!(body: 'Test', profile: profile, headhunter: headhunter)
-      visit profile_path(profile)
+      comment = create(:comment, profile: profile, headhunter: headhunter)
+      visit profile_path(profile.id)
       click_on 'Apagar'
-      expect(page).not_to have_content('Test')
+      expect(page).not_to have_content(comment.body)
       expect(page).to have_content("Comment deleted.")
     end
   end

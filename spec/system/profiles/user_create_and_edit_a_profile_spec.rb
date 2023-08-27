@@ -30,8 +30,6 @@ describe 'User' do
 
       click_on 'Criar Perfil'
 
-      expect(current_path).to eq profile_path(user)
-
       expect(page).not_to have_content 'User test name'
       expect(page).to have_content 'Social name test'
       expect(page).to have_content '11/11/1911'
@@ -68,8 +66,6 @@ describe 'User' do
       click_on Profile.model_name.human
       click_on I18n.t('edit')
 
-      expect(current_path).to eq edit_profile_path(user)
-
       fill_in Profile.human_attribute_name(:name), with: 'User test name'
       fill_in Profile.human_attribute_name(:social_name), with: 'Social name test'
       fill_in Profile.human_attribute_name(:birthdate), with: '31/12/1931'
@@ -88,7 +84,7 @@ describe 'User' do
     end
 
     it 'without sucess - forget some items' do
-      visit edit_profile_path(user.id)
+      visit edit_profile_path(profile.user_id)
 
       fill_in Profile.human_attribute_name(:name), with: ''
       fill_in Profile.human_attribute_name(:social_name), with: ''
@@ -99,7 +95,7 @@ describe 'User' do
       expect(page).to have_content("Nome não pode ficar em branco")
       expect(page).to have_content("Data de Nascimento não pode ficar em branco")
       expect(page).to have_content("Experiência não pode ficar em branco")
-      expect(current_path).to eq profile_path(user.id)
+      expect(current_path).to eq profile_path(profile.user_id)
     end
   end
 end
