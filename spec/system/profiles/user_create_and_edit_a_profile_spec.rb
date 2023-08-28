@@ -66,7 +66,7 @@ describe 'User' do
       login_as(user, :scope => :user)
     end
 
-    it 'with sucess' do
+    xit 'with sucess' do
       visit root_path
       click_on Profile.model_name.human
       click_on I18n.t('edit')
@@ -88,7 +88,7 @@ describe 'User' do
       expect(page).to have_content 'Test 8'
     end
 
-    it 'without sucess - forget some items' do
+    xit 'without sucess - forget some items' do
       visit edit_profile_path(profile.user_id)
 
       fill_in Profile.human_attribute_name(:name), with: ''

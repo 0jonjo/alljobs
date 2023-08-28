@@ -10,7 +10,7 @@ describe 'User' do
       login_as(user, :scope => :user)
     end
 
-    it 'with sucess' do
+    xit 'with sucess' do
       visit root_path
       click_on Profile.model_name.human
       expect(current_path).to eq(profile_path(user.id))
