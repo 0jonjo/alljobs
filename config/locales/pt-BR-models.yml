@@ -9,6 +9,8 @@ pt-BR:
       comment: 'Comentário'
       headhunter: 'Recrutador'
       user: 'Usuário'
+      country: 'País'
+      company: 'Empresa'
     attributes:
       headhunter:
         password: 'Senha'

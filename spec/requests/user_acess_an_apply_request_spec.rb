@@ -5,16 +5,15 @@ describe 'User' do
   let(:profile) { create(:profile) }
   let(:profile2) { create(:profile) }
   let(:apply) { create(:apply, user: profile2.user) }
-  let(:proposal) { create(:proposal, apply: apply) }
 
-  context 'try to acess an proposal of other user' do
+  context 'try to acess an apply of other user' do
 
     before do
       login_as(profile.user, :scope => :user)
     end
 
-    it 'and is redirect to root path' do
-      get(apply_proposal_path(apply, proposal))
+    it 'and is redirect to create root path' do
+      get(apply_path(apply))
       expect(response).to redirect_to(root_path)
     end
   end

@@ -36,7 +36,7 @@ describe 'Headhunter' do
       expect(page).to have_content("Test")
       expect(page).to have_content("Junior")
       expect(page).to have_content('published')
-      expect(current_path).to eq job_path(1)
+      expect(current_path).to eq job_path(Job.last.id)
     end
 
     it 'with sucess - status archived' do
@@ -55,7 +55,7 @@ describe 'Headhunter' do
       click_on 'Criar Vaga'
 
       expect(page).to have_content('archived')
-      expect(current_path).to eq job_path(1)
+      expect(current_path).to eq job_path(Job.last.id)
     end
 
     it 'with sucess - status draft' do
@@ -74,7 +74,7 @@ describe 'Headhunter' do
       click_on 'Criar Vaga'
 
       expect(page).to have_content('draft')
-      expect(current_path).to eq job_path(1)
+      expect(current_path).to eq job_path(Job.last.id)
     end
 
     it 'without sucess' do
