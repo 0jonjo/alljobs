@@ -28,7 +28,13 @@ describe 'Headhunter' do
 
   context 'edit a comment on a profile' do
 
+    let(:headhunter) { create(:headhunter) }
+    let!(:profile) { create(:profile) }
     let!(:comment) { create(:comment, profile: profile, headhunter: headhunter) }
+
+    before do
+      login_as(headhunter, :scope => :headhunter)
+    end
 
     it 'with sucesss' do
       visit profile_path(profile.id)
@@ -42,7 +48,13 @@ describe 'Headhunter' do
 
   context 'delete a comment on a profile' do
 
+    let(:headhunter) { create(:headhunter) }
+    let!(:profile) { create(:profile) }
     let!(:comment) { create(:comment, profile: profile, headhunter: headhunter) }
+
+    before do
+      login_as(headhunter, :scope => :headhunter)
+    end
 
     it 'with sucesss' do
       visit profile_path(profile.id)

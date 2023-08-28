@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 describe 'User' do
-
-  let!(:user) { create(:user) }
-  let!(:country) { create(:country) }
-
   context 'see his profile' do
 
+    let!(:user) { create(:user) }
     let!(:profile) { create(:profile, user: user) }
 
     before do
@@ -22,6 +19,8 @@ describe 'User' do
 
   context 'see his profile' do
 
+    let!(:user) { create(:user) }
+
     before do
       login_as(user, :scope => :user)
     end
@@ -36,6 +35,7 @@ describe 'User' do
 
   context 'try to see another profile' do
 
+    let!(:user) { create(:user) }
     let!(:profile) { create(:profile) }
 
     before do

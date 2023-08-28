@@ -33,13 +33,16 @@ describe 'User' do
       expect(page).not_to have_content(I18n.t('to_apply'))
     end
 
-    it "and remove his apply with sucess" do
-      apply = Apply.create!(:job => job, :user => profile.user)
+    context 'and remove his apply' do
 
-      visit apply_path(apply)
-      click_on I18n.t('delete')
+      let!(:apply) { create(:apply, job: job, user: profile.user) }
 
-      expect(current_path).to eq(job_path(apply.job_id))
+      it 'with sucess' do
+        visit apply_path(apply)
+        click_on I18n.t('delete')
+
+        expect(current_path).to eq(job_path(apply.job_id))
+      end
     end
   end
 end
