@@ -12,7 +12,7 @@ describe 'User' do
     it 'with sucess' do
       visit root_path
       click_on Profile.model_name.human
-      expect(current_path).to eq(profile_path(profile.user_id))
+      expect(current_path).to eq(profile_path(profile.id))
     end
   end
 
