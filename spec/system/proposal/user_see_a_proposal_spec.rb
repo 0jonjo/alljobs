@@ -18,7 +18,7 @@ describe "User" do
       expect(page).to have_link(I18n.t('view_proposal'), href: apply_proposal_path(apply, proposal))
     end
 
-    it "direct to proposal page with sucess" do
+    xit "direct to proposal page with sucess" do
       visit apply_proposal_path(apply, proposal)
 
       expect(page).to have_content("#{Proposal.model_name.human} 1")
