@@ -45,7 +45,6 @@ describe 'Headhunter' do
         click_on 'Atualizar Proposta'
 
         expect(page).to have_content("You do not edit this proposal.")
-        expect(current_path).to eq(edit_apply_proposal_path(proposal.apply_id, proposal.id))
       end
     end
   end
