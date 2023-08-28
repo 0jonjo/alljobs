@@ -45,6 +45,7 @@ class CommentsController < ApplicationController
     end
 
     def set_comment
+      return @comment = Comment.find_by(profile_id: @comment.profile_id, headhunter_id: current_headhunter.id) unless @comment.nil?
       @comment = Comment.find(params[:id])
     end
 
