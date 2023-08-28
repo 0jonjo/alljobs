@@ -11,7 +11,7 @@ describe 'Headhunter' do
       login_as(headhunter, :scope => :headhunter)
     end
 
-    xit 'with sucess' do
+    it 'with sucess' do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('edit')
 
@@ -34,7 +34,7 @@ describe 'Headhunter' do
         login_as(headhunter, :scope => :headhunter)
       end
 
-      xit "- incomplete informations" do
+      it "- incomplete informations" do
         visit apply_proposal_path(apply, proposal)
         click_on I18n.t('edit')
 
@@ -60,7 +60,7 @@ describe 'Headhunter' do
       login_as(headhunter, :scope => :headhunter)
     end
 
-    xit 'with sucess' do
+    it 'with sucess' do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('delete')
 

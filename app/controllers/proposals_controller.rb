@@ -2,8 +2,7 @@ class ProposalsController < ApplicationController
 
   before_action :authenticate_headhunter!, except: [:show, :index, :accept, :reject]
   before_action :find_proposal, only: [:show, :edit, :update, :destroy, :accept, :reject]
-  before_action :find_apply_using_proposal, only: [:show, :new, :create, :edit, :update, :destroy, :accept, :reject]
-  #before_action :find_apply, only: [:show, ]
+  before_action :find_apply, only: [:show, :new, :create, :edit, :update, :destroy, :accept, :reject]
   before_action :already_proposal, only: [:new, :create]
 
   def index
@@ -86,10 +85,6 @@ class ProposalsController < ApplicationController
   end
 
   def find_apply
-    @apply = Apply.find(params[:apply_id])
-  end
-
-  def find_apply_using_proposal
     return @apply = Apply.find_by(id: @proposal.apply_id) unless @proposal.nil?
     @apply = Apply.find(params[:apply_id])
   end
