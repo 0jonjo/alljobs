@@ -21,26 +21,39 @@ describe 'User' do
       expect(page).to have_link(job.code)
       expect(page).to have_link(job.title)
     end
+  end
 
-    xit 'search with sucess, only correct results' do
+  context 'search and receive only correct results' do
+
+    before do
+      login_as(profile.user, :scope => :user)
       allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC12345')
-      job1 = create(:job)
+      create(:job)
       allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC54321')
-      job2 = create(:job)
+      create(:job)
       allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ZZZZZZZZ')
-      job_to_not_show = create(:job)
+      create(:job)
+    end
 
+    it 'with sucess' do
       visit root_path
       fill_in I18n.t('search_job'), with: 'ABC'
       click_on I18n.t('search')
 
       expect(page).to have_content("ABC")
-      expect(page).to have_content(job1.code)
-      expect(page).to have_content(job2.code)
+      expect(page).to have_content('Abc12345')
+      expect(page).to have_content('Abc54321')
       expect(page).not_to have_content('ZZZZZZZZ')
     end
+  end
 
-    it 'search with sucess, no one result' do
+  context 'search and receive no one result' do
+
+    before do
+      login_as(profile.user, :scope => :user)
+    end
+
+    it 'with sucess' do
       visit root_path
       fill_in I18n.t('search_job'), with: "ZZZZZZZ"
       click_on I18n.t('search')
