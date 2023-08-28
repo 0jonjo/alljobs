@@ -59,14 +59,13 @@ describe 'User' do
 
   context 'edit a profile' do
 
-    let!(:user) { create(:user) }
-    let!(:profile) { create(:profile, user: user) }
+    let!(:profile) { create(:profile) }
 
     before do
-      login_as(user, :scope => :user)
+      login_as(profile.user, :scope => :user)
     end
 
-    xit 'with sucess' do
+    it 'with sucess' do
       visit root_path
       click_on Profile.model_name.human
       click_on I18n.t('edit')
@@ -79,7 +78,7 @@ describe 'User' do
       fill_in Profile.human_attribute_name(:experience), with: 'Test 8'
 
       click_on 'Atualizar Perfil'
-      expect(current_path).to eq profile_path(user)
+      expect(current_path).to eq profile_path(profile.id)
 
       expect(page).to have_content 'Social name test'
       expect(page).to have_content '31/12/1931'
@@ -88,8 +87,8 @@ describe 'User' do
       expect(page).to have_content 'Test 8'
     end
 
-    xit 'without sucess - forget some items' do
-      visit edit_profile_path(profile.user_id)
+    it 'without sucess - forget some items' do
+      visit edit_profile_path(profile.id)
 
       fill_in Profile.human_attribute_name(:name), with: ''
       fill_in Profile.human_attribute_name(:social_name), with: ''
@@ -100,7 +99,7 @@ describe 'User' do
       expect(page).to have_content("Nome não pode ficar em branco")
       expect(page).to have_content("Data de Nascimento não pode ficar em branco")
       expect(page).to have_content("Experiência não pode ficar em branco")
-      expect(current_path).to eq profile_path(profile.user_id)
+      expect(current_path).to eq profile_path(profile.id)
     end
   end
 end

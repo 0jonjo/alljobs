@@ -3,17 +3,16 @@ require 'rails_helper'
 describe 'User' do
   context 'see his profile' do
 
-    let!(:user) { create(:user) }
-    let!(:profile) { create(:profile, user: user) }
+    let!(:profile) { create(:profile) }
 
     before do
-      login_as(user, :scope => :user)
+      login_as(profile.user, :scope => :user)
     end
 
-    xit 'with sucess' do
+    it 'with sucess' do
       visit root_path
       click_on Profile.model_name.human
-      expect(current_path).to eq(profile_path(user.id))
+      expect(current_path).to eq(profile_path(profile.id))
     end
   end
 

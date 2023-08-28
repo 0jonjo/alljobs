@@ -10,7 +10,8 @@ class ProfilesController < ApplicationController
 
   def new
     return @profile = Profile.new if current_user.profile.blank?
-    redirect_to profile_path(current_user.id)
+    @profile = Profile.find_by(user_id: current_user.id)
+    redirect_to @profile
   end
 
   def create

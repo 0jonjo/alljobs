@@ -42,6 +42,7 @@ pt-BR:
         educacional_background: 'Educação'
         experience: 'Experiência'
         country_id: 'País'
+        country: 'País'
         city: 'Cidade'
       proposal:
         apply_id: 'Número da Inscrição'

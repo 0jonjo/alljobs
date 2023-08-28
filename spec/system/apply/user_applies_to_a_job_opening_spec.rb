@@ -34,11 +34,11 @@ describe 'User' do
     end
 
     context 'and remove his apply' do
+      it 'with sucess' do
+        apply = Apply.create!(:job => job, :user => profile.user)
 
-      let!(:apply) { create(:apply, job: job, user: profile.user) }
-
-      xit 'with sucess' do
         visit apply_path(apply)
+
         click_on I18n.t('delete')
 
         expect(current_path).to eq(job_path(apply.job_id))

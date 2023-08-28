@@ -85,6 +85,7 @@ class ProposalsController < ApplicationController
   end
 
   def find_apply
+    return @apply = Apply.find_by(id: @proposal.apply_id) unless @proposal.nil?
     @apply = Apply.find(params[:apply_id])
   end
 

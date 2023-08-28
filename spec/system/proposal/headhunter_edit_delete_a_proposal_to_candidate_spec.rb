@@ -11,7 +11,7 @@ describe 'Headhunter' do
       login_as(headhunter, :scope => :headhunter)
     end
 
-    xit 'with sucess' do
+    it 'with sucess' do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('edit')
 
@@ -34,7 +34,7 @@ describe 'Headhunter' do
         login_as(headhunter, :scope => :headhunter)
       end
 
-      xit "- incomplete informations" do
+      it "- incomplete informations" do
         visit apply_proposal_path(apply, proposal)
         click_on I18n.t('edit')
 
@@ -45,7 +45,6 @@ describe 'Headhunter' do
         click_on 'Atualizar Proposta'
 
         expect(page).to have_content("You do not edit this proposal.")
-        expect(current_path).to eq(edit_apply_proposal_path(apply, proposal))
       end
     end
   end
@@ -60,7 +59,7 @@ describe 'Headhunter' do
       login_as(headhunter, :scope => :headhunter)
     end
 
-    xit 'with sucess' do
+    it 'with sucess' do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('delete')
 

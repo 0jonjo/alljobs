@@ -36,7 +36,7 @@ describe 'Headhunter' do
       login_as(headhunter, :scope => :headhunter)
     end
 
-    xit 'with sucesss' do
+    it 'with sucesss' do
       visit profile_path(profile.id)
       click_on 'Editar'
       fill_in Comment.human_attribute_name(:body), with: 'Just another test comment'
@@ -56,7 +56,7 @@ describe 'Headhunter' do
       login_as(headhunter, :scope => :headhunter)
     end
 
-    xit 'with sucesss' do
+    it 'with sucesss' do
       visit profile_path(profile.id)
       click_on 'Apagar'
       expect(page).not_to have_content(comment.body)

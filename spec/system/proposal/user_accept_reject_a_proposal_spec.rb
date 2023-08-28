@@ -11,7 +11,7 @@ describe 'User' do
       login_as(profile.user, :scope => :user)
     end
 
-    xit "and accept" do
+    it "and accept" do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('to_accept_proposal')
 
@@ -21,7 +21,7 @@ describe 'User' do
       expect(current_path).to eq(apply_proposal_path(apply, proposal))
     end
 
-    xit "and reject" do
+    it "and reject" do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('to_reject_proposal')
 
