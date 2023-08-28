@@ -30,7 +30,7 @@ class AppliesController < ApplicationController
 
   def destroy
     @apply.destroy
-    redirect_to job_path
+    redirect_to job_path(@apply.job_id)
   end
 
   def show
