@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveApplicationUserAcceptedHeadHunter < ActiveRecord::Migration[6.1]
   def change
     remove_column :applies, :application_user
