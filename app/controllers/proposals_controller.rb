@@ -1,9 +1,10 @@
-class ProposalsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :authenticate_headhunter!, except: [:show, :index, :accept, :reject]
-  before_action :find_proposal, only: [:show, :edit, :update, :destroy, :accept, :reject]
-  before_action :find_apply, only: [:show, :new, :create, :edit, :update, :destroy, :accept, :reject]
-  before_action :already_proposal, only: [:new, :create]
+class ProposalsController < ApplicationController
+  before_action :authenticate_headhunter!, except: %i[show index accept reject]
+  before_action :find_proposal, only: %i[show edit update destroy accept reject]
+  before_action :find_apply, only: %i[show new create edit update destroy accept reject]
+  before_action :already_proposal, only: %i[new create]
 
   def index
     @proposals = Proposal.page(params[:page])
@@ -17,10 +18,10 @@ class ProposalsController < ApplicationController
 
   def update
     if @proposal.update(proposal_params)
-      flash[:notice] = "You successfully edited this proposal."
+      flash[:notice] = 'You successfully edited this proposal.'
       redirect_to @apply
     else
-      flash[:alert] = "You do not edit this proposal."
+      flash[:alert] = 'You do not edit this proposal.'
       redirect_to edit_apply_proposal_path(@proposal)
     end
   end
@@ -35,16 +36,16 @@ class ProposalsController < ApplicationController
   end
 
   def show
-    if user_signed_in? && @proposal.apply.user != current_user
-      flash[:alert] = 'You do not have access to this proposal.'
-      redirect_to root_path
-    end
+    return unless user_signed_in? && @proposal.apply.user != current_user
+
+    flash[:alert] = 'You do not have access to this proposal.'
+    redirect_to root_path
   end
 
   def create
     proposal = @apply.build_proposal(proposal_params)
     if proposal.save
-      flash[:notice] = "You successfully create a proposal for this apply."
+      flash[:notice] = 'You successfully create a proposal for this apply.'
       redirect_to @apply
     else
       flash[:alert] = "You can't create a proposal for this apply."
@@ -55,23 +56,21 @@ class ProposalsController < ApplicationController
   def accept
     @proposal.user_accepted = true
     if @proposal.save
-      flash[:notice] = "You successfully accepted this proposal."
-      redirect_to apply_proposal_path(@apply, @proposal)
+      flash[:notice] = 'You successfully accepted this proposal.'
     else
       flash[:alert] = "You can't accept to this proposal."
-      redirect_to apply_proposal_path(@apply, @proposal)
     end
+    redirect_to apply_proposal_path(@apply, @proposal)
   end
 
   def reject
     @proposal.user_accepted = false
     if @proposal.save
-      flash[:notice] = "You successfully rejected this proposal."
-      redirect_to apply_proposal_path(@apply, @proposal)
+      flash[:notice] = 'You successfully rejected this proposal.'
     else
       flash[:alert] = "You can't reject to this proposal."
-      redirect_to apply_proposal_path(@apply, @proposal)
     end
+    redirect_to apply_proposal_path(@apply, @proposal)
   end
 
   private
@@ -86,13 +85,14 @@ class ProposalsController < ApplicationController
 
   def find_apply
     return @apply = Apply.find_by(id: @proposal.apply_id) unless @proposal.nil?
+
     @apply = Apply.find(params[:apply_id])
   end
 
   def already_proposal
-    if Proposal.where(apply_id: params[:apply_id]).exists?
-      flash[:alert] = "There is already a proposal for this apply."
-      redirect_to @apply
-    end
+    return unless Proposal.where(apply_id: params[:apply_id]).exists?
+
+    flash[:alert] = 'There is already a proposal for this apply.'
+    redirect_to @apply
   end
 end
