@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Headhunter' do
-
   let(:headhunter) { create(:headhunter) }
   let!(:job) { create(:job) }
   let!(:country) { create(:country) }
   let!(:company) { create(:company) }
 
   before do
-    login_as(headhunter, :scope => :headhunter)
+    login_as(headhunter, scope: :headhunter)
   end
 
   context 'edit a job opening' do
@@ -45,9 +46,9 @@ describe 'Headhunter' do
       fill_in Job.human_attribute_name(:salary), with: ''
       click_on 'Atualizar Vaga'
 
-      expect(page).to have_content("Título não pode ficar em branco")
-      expect(page).to have_content("Habilidades não pode ficar em branco")
-      expect(page).to have_content("Salário não pode ficar em branco")
+      expect(page).to have_content('Título não pode ficar em branco')
+      expect(page).to have_content('Habilidades não pode ficar em branco')
+      expect(page).to have_content('Salário não pode ficar em branco')
       expect(current_path).to eq job_path(job.id.to_s)
     end
   end

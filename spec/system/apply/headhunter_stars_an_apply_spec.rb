@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Headhunter stars an apply' do
-
   let(:headhunter) { create(:headhunter) }
   let(:apply) { create(:apply) }
 
   before do
-    login_as(headhunter, :scope => :headhunter)
+    login_as(headhunter, scope: :headhunter)
   end
 
   it 'with sucess and try again' do
@@ -15,7 +16,7 @@ describe 'Headhunter stars an apply' do
     click_on apply.id.to_s
     click_on I18n.t('star_apply')
 
-    expect(page).to have_content("You successfully starred this apply.")
+    expect(page).to have_content('You successfully starred this apply.')
     click_on I18n.t('star_apply')
     expect(page).to have_content("You're already starred this apply.")
   end
@@ -30,4 +31,3 @@ describe 'Headhunter stars an apply' do
     expect(page).to have_content(I18n.t('no_stars'))
   end
 end
-

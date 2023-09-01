@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Headhunter view applies to a specific job' do
-
   let(:headhunter) { create(:headhunter) }
   let(:job) { create(:job) }
 
   before do
-    login_as(headhunter, :scope => :headhunter)
+    login_as(headhunter, scope: :headhunter)
   end
 
   it 'with sucess' do

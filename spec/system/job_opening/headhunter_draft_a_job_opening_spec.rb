@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Headhunter' do
-
   let(:headhunter) { create(:headhunter) }
   let!(:apply) { create(:apply) }
 
   before do
-    login_as(headhunter, :scope => :headhunter)
+    login_as(headhunter, scope: :headhunter)
   end
 
   context 'remove an apply to job opening using Active Job' do
-
     it 'with sucess' do
       ActiveJob::Base.queue_adapter = :delayed_job
 

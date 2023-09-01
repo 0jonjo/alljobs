@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Headhunter' do
-
   let(:headhunter) { create(:headhunter) }
 
   before do
-    login_as(headhunter, :scope => :headhunter)
+    login_as(headhunter, scope: :headhunter)
   end
 
-  context "access job openings" do
+  context 'access job openings' do
     it 'see published jobs with sucess' do
       job_to_see_1 = create(:job)
       job_to_see_2 = create(:job)
@@ -30,7 +31,7 @@ describe 'Headhunter' do
     end
   end
 
-  context "access job openings" do
+  context 'access job openings' do
     it 'see draft jobs with sucess' do
       job_to_see_1 = create(:job, job_status: :draft)
       job_to_see_2 = create(:job, job_status: :draft)
@@ -54,7 +55,7 @@ describe 'Headhunter' do
     end
   end
 
-  context "access job openings" do
+  context 'access job openings' do
     it 'see archived jobs with sucess' do
       job_to_see_1 = create(:job, job_status: :archived)
       job_to_see_2 = create(:job, job_status: :archived)

@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Headhunter see his stars' do
-
   let(:headhunter1) { create(:headhunter) }
   let(:headhunter2) { create(:headhunter) }
   let(:apply1) { create(:apply) }
   let(:apply2) { create(:apply) }
 
   before do
-    login_as(headhunter1, :scope => :headhunter)
+    login_as(headhunter1, scope: :headhunter)
   end
 
   it 'with sucess' do

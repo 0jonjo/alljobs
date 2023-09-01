@@ -1,18 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Headhunter' do
-
   let(:headhunter) { create(:headhunter) }
   let(:apply) { create(:apply) }
 
   context 'send a proposal to a cadindidate' do
-
     before do
-      login_as(headhunter, :scope => :headhunter)
+      login_as(headhunter, scope: :headhunter)
     end
 
-    it "with sucess" do
-
+    it 'with sucess' do
       visit apply_path(apply)
       click_on I18n.t('send_proposal')
       expect(current_path).to eq(new_apply_proposal_path(apply))
@@ -23,12 +22,11 @@ describe 'Headhunter' do
       fill_in Proposal.human_attribute_name(:expected_start), with: '01/01/2099'
       click_on 'Criar Proposta'
 
-      expect(page).to have_content("You successfully create a proposal for this apply.")
+      expect(page).to have_content('You successfully create a proposal for this apply.')
       expect(current_path).to eq(apply_path(apply))
     end
 
-    it "without sucess - imcomplete" do
-
+    it 'without sucess - imcomplete' do
       visit new_apply_proposal_path(apply)
 
       fill_in Proposal.human_attribute_name(:salary), with: ''
@@ -43,14 +41,13 @@ describe 'Headhunter' do
   end
 
   context 'send a proposal to a cadindidate' do
-
-    let!(:proposal) { create(:proposal, apply:apply) }
+    let!(:proposal) { create(:proposal, apply: apply) }
 
     before do
-      login_as(headhunter, :scope => :headhunter)
+      login_as(headhunter, scope: :headhunter)
     end
 
-    it "without sucess - already have a proposal" do
+    it 'without sucess - already have a proposal' do
       visit apply_path(apply)
 
       expect(page).not_to have_link(I18n.t('send_proposal'))

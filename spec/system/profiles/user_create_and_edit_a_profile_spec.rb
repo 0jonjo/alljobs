@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'User' do
-
   let!(:user) { create(:user) }
   let!(:country) { create(:country) }
 
   before do
-    login_as(user, :scope => :user)
+    login_as(user, scope: :user)
   end
 
   context 'create a profile' do
-
     it 'with sucess' do
       visit root_path
       within('nav') do
@@ -50,19 +50,18 @@ describe 'User' do
       fill_in Profile.human_attribute_name(:experience), with: ''
       click_on 'Criar Perfil'
 
-      expect(page).to have_content("Nome não pode ficar em branco")
-      expect(page).to have_content("Data de Nascimento não pode ficar em branco")
-      expect(page).to have_content("Experiência não pode ficar em branco")
+      expect(page).to have_content('Nome não pode ficar em branco')
+      expect(page).to have_content('Data de Nascimento não pode ficar em branco')
+      expect(page).to have_content('Experiência não pode ficar em branco')
       expect(current_path).to eq profiles_path
     end
   end
 
   context 'edit a profile' do
-
     let!(:profile) { create(:profile) }
 
     before do
-      login_as(profile.user, :scope => :user)
+      login_as(profile.user, scope: :user)
     end
 
     it 'with sucess' do
@@ -96,9 +95,9 @@ describe 'User' do
       fill_in Profile.human_attribute_name(:experience), with: ''
       click_on 'Atualizar Perfil'
 
-      expect(page).to have_content("Nome não pode ficar em branco")
-      expect(page).to have_content("Data de Nascimento não pode ficar em branco")
-      expect(page).to have_content("Experiência não pode ficar em branco")
+      expect(page).to have_content('Nome não pode ficar em branco')
+      expect(page).to have_content('Data de Nascimento não pode ficar em branco')
+      expect(page).to have_content('Experiência não pode ficar em branco')
       expect(current_path).to eq profile_path(profile.id)
     end
   end

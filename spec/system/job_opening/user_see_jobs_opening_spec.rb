@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'User' do
-
   let(:profile) { create(:profile) }
 
   context 'see job openings' do
-
     before do
-      login_as(profile.user, :scope => :user)
+      login_as(profile.user, scope: :user)
     end
 
     it 'with sucess - only published' do

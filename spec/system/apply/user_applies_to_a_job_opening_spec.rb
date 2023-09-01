@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'User' do
-
   let(:profile) { create(:profile) }
   let!(:job) { create(:job) }
 
   context 'applies to a job opening' do
-
     before do
-      login_as(profile.user, :scope => :user)
+      login_as(profile.user, scope: :user)
     end
 
     it 'with sucess' do
@@ -25,7 +25,7 @@ describe 'User' do
     end
 
     it 'without sucess - already applied' do
-      apply = Apply.create!(:job => job, :user => profile.user)
+      Apply.create!(job: job, user: profile.user)
 
       visit job_path(job)
 
@@ -35,7 +35,7 @@ describe 'User' do
 
     context 'and remove his apply' do
       it 'with sucess' do
-        apply = Apply.create!(:job => job, :user => profile.user)
+        apply = Apply.create!(job: job, user: profile.user)
 
         visit apply_path(apply)
 
