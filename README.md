@@ -9,7 +9,7 @@ Side repository to test API: [Seejobs](https://github.com/0jonjo/seejobs/)
 
 - Ruby: 3.0.0
 - Rails: 6.1.4
-- Relevant Gems: Devise, Rspec, Capybara, Shoulda Matchers, SimpleCov, Kaminari, DelayedJob, Faraday and Rails Admin.
+- Relevant Gems: Devise, Rspec, Capybara, Shoulda Matchers, SimpleCov, Rubocop, Kaminari, DelayedJob, Faraday and Rails Admin.
 
 ## Install
 
