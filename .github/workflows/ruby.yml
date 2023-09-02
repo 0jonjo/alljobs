@@ -13,7 +13,7 @@ env:
 
 jobs:
   test:
-    name: Test
+    name: Run Tests and Rubocop
     environment: alljobs
     runs-on: ubuntu-latest
 
@@ -44,7 +44,10 @@ jobs:
           sudo apt-get update && sudo apt-get -yqq install libpq-dev
           bundle install --jobs 4 --retry 3
 
-      - name: Run tests
+          - name: Analyze code
+        run: bundle exec rubocop
+
+        - name: Run tests
         env:
           RAILS_ENV: test
           PGHOST: localhost
