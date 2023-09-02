@@ -1,0 +1,15 @@
+inherit_mode:
+  merge:
+    - Exclude
+AllCops:
+  Exclude:
+    - 'bin/bundle'
+    - 'db/migrate/*'
+    - 'config/initializers/devise.rb'
+  NewCops: disable
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

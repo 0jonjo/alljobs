@@ -22,9 +22,9 @@ describe 'Headhunter' do
 
       fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
       fill_in Job.human_attribute_name(:description),
-              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:skills),
-              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:salary), with: '9999'
       select company.name, from: Job.human_attribute_name(:company_id)
       fill_in Job.human_attribute_name(:level), with: 'Junior'
@@ -47,9 +47,9 @@ describe 'Headhunter' do
 
       fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
       fill_in Job.human_attribute_name(:description),
-              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:skills),
-              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:salary), with: '9999'
       select company.name, from: Job.human_attribute_name(:company_id)
       fill_in Job.human_attribute_name(:level), with: 'Junior'
@@ -68,9 +68,9 @@ describe 'Headhunter' do
 
       fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
       fill_in Job.human_attribute_name(:description),
-              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:skills),
-              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.'
+              with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:salary), with: '9999'
       select company.name, from: Job.human_attribute_name(:company_id)
       fill_in Job.human_attribute_name(:level), with: 'Junior'

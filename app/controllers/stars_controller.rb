@@ -21,9 +21,8 @@ class StarsController < ApplicationController
   def show; end
 
   def create
-    if Star.where(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id]).exists?
-      flash[:alert] = "You're already starred this apply."
-    elsif (@star = Star.new(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id]))
+    check_star
+    if (@star = Star.new(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id]))
       if @star.save
         flash[:notice] = 'You successfully starred this apply.'
       else
@@ -37,5 +36,10 @@ class StarsController < ApplicationController
 
   def star_params
     params.require(:star).permit(:headhunter_id, :apply_id)
+  end
+
+  def check_star
+    star = Star.where(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id])
+    flash[:alert] = "You're already starred this apply." if star.exists?
   end
 end

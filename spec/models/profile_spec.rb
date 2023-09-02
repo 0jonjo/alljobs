@@ -43,7 +43,8 @@ RSpec.describe Profile, type: :model do
     it 'user_id is uniquess' do
       profile = create(:profile)
       profile2 = Profile.new(name: 'Teste', social_name: 'Just a test 2', birthdate: '21/03/1977',
-                             educacional_background: 'Test 3', experience: 'Test 4', user_id: profile.user_id, country: profile.country)
+                             educacional_background: 'Test 3', experience: 'Test 4',
+                             user_id: profile.user_id, country: profile.country)
       profile2.valid?
       expect(profile2.errors.include?(:user_id)).to be true
     end

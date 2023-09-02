@@ -2,7 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
-  before_action :get_profile, only: %i[show edit update destroy]
+  before_action :profile, only: %i[show edit update destroy]
 
   def index
     @comments = @profile.comments.all
@@ -41,7 +41,7 @@ class CommentsController < ApplicationController
 
   private
 
-  def get_profile
+  def profile
     @profile = Profile.find(params[:profile_id])
   end
 
