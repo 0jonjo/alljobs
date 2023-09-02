@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'User' do
   context 'see his profile' do
-
     let!(:profile) { create(:profile) }
 
     before do
-      login_as(profile.user, :scope => :user)
+      login_as(profile.user, scope: :user)
     end
 
     it 'with sucess' do
@@ -17,11 +18,10 @@ describe 'User' do
   end
 
   context 'see his profile' do
-
     let!(:user) { create(:user) }
 
     before do
-      login_as(user, :scope => :user)
+      login_as(user, scope: :user)
     end
 
     it 'without sucess because do not have a profile' do
@@ -33,12 +33,11 @@ describe 'User' do
   end
 
   context 'try to see another profile' do
-
     let!(:user) { create(:user) }
     let!(:profile) { create(:profile) }
 
     before do
-      login_as(user, :scope => :user)
+      login_as(user, scope: :user)
     end
 
     it 'without sucess because is not his profile' do

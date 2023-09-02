@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Apply < ApplicationRecord
   belongs_to :job
   belongs_to :user
@@ -6,6 +8,6 @@ class Apply < ApplicationRecord
 
   def user_email
     @user = User.find(user_id)
-    "#{@user.email}"
+    @user.email.to_s
   end
 end

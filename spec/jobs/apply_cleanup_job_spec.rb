@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ApplyCleanupJob, type: :job do
-  describe "Clean apply to a job opening" do
-   it 'with sucess' do
+  describe 'Clean apply to a job opening' do
+    it 'with sucess' do
       job = create(:job)
       apply = create(:apply, job: job)
 

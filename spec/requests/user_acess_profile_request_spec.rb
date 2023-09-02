@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'User' do
-
   let(:profile) { create(:profile) }
   let!(:profile2) { create(:profile) }
 
   context 'try to acess a profile of other user' do
-
     before do
-      login_as(profile.user, :scope => :user)
+      login_as(profile.user, scope: :user)
     end
 
     it 'and is redirect to root path' do
@@ -18,9 +18,8 @@ describe 'User' do
   end
 
   context 'try to acess edit page of profile of other user' do
-
     before do
-      login_as(profile.user, :scope => :user)
+      login_as(profile.user, scope: :user)
     end
 
     it 'and is redirect to root path' do
@@ -30,9 +29,8 @@ describe 'User' do
   end
 
   context 'try to acess all profiles' do
-
     before do
-      login_as(profile.user, :scope => :user)
+      login_as(profile.user, scope: :user)
     end
 
     it 'and is redirect to login as headhunter ' do

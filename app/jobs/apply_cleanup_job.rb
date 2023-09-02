@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplyCleanupJob < ApplicationJob
   queue_as :default
 

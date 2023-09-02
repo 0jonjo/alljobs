@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'User applied to job opening' do
-
   let(:profile) { create(:profile) }
   let(:apply) { create(:apply, user_id: profile.user_id) }
 
   before do
-    login_as(profile.user, :scope => :user)
+    login_as(profile.user, scope: :user)
   end
 
   it 'and cant see other user apply' do
@@ -22,7 +23,7 @@ describe 'User applied to job opening' do
     expect(page).not_to have_link(I18n.t('to_apply'))
   end
 
-  it "and see only his multiply applies in index" do
+  it 'and see only his multiply applies in index' do
     apply
     another_apply_to_show = create(:apply, user_id: profile.user_id)
     apply_to_not_see = create(:apply)
