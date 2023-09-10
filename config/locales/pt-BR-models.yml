@@ -44,6 +44,7 @@ pt-BR:
         country_id: 'País'
         country: 'País'
         city: 'Cidade'
+        user_id: 'Usuário'
       proposal:
         apply_id: 'Número da Inscrição'
         salary: 'Salário'
