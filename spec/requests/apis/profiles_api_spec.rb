@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe 'Profile API' do
-
   let(:country) { create(:country) }
   let(:user) { create(:user) }
 
@@ -68,7 +67,6 @@ describe 'Profile API' do
   end
 
   context 'POST /api/v1/profiles/1' do
-
     it 'with sucess' do
       profile_params = { profile: { name: 'Profile Tester', social_name: 'Social Name Test',
                                     birthdate: '1970-01-01', description: 'Lorem ipsum dolor sit amet',
@@ -96,7 +94,7 @@ describe 'Profile API' do
     it 'without sucess - imcomplete parameters' do
       profile_params = { profile: { name: 'Profile Tester', social_name: '',
                                     birthdate: '', description: '', educacional_background: '',
-                                    experience: '', city: '', country_id: '', user_id: ''} }
+                                    experience: '', city: '', country_id: '', user_id: '' } }
       post '/api/v1/profiles/', params: profile_params
 
       expect(response).to have_http_status(412)
@@ -149,7 +147,7 @@ describe 'Profile API' do
     it 'without sucess - imcomplete parameters' do
       profile_params = { profile: { name: 'Profile Tester', social_name: '',
                                     birthdate: '', description: '', educacional_background: '',
-                                    experience: '', city: '', country_id: '', user_id: ''} }
+                                    experience: '', city: '', country_id: '', user_id: '' } }
       put "/api/v1/profiles/#{profile.id}", params: profile_params
 
       expect(response).to have_http_status(412)
@@ -169,9 +167,9 @@ describe 'Profile API' do
       allow(Profile).to receive(:update).and_raise(ActiveRecord::ActiveRecordError)
 
       profile_params = { profile: { title: 'Test title', description: 'Test description',
-                            skills: 'Test skills', salary: '66',
-                            company: 'Test company', level: 'Test level', place: 'Test place',
-                            date: 1.month.from_now } }
+                                    skills: 'Test skills', salary: '66',
+                                    company: 'Test company', level: 'Test level', place: 'Test place',
+                                    date: 1.month.from_now } }
       put "/api/v1/profiles/#{profile.id}", params: profile_params
 
       expect(response).to have_http_status(500)
