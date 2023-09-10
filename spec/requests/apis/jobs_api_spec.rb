@@ -132,6 +132,7 @@ describe 'Job API' do
       put "/api/v1/jobs/#{job.id}", params: job_params
 
       expect(response).to have_http_status(200)
+      expect(response.body).to include('Test title')
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
       JSON.parse(response.body)
