@@ -10,10 +10,9 @@ RSpec.describe ProfileMailer, type: :mailer do
     context 'have enqueued a job using the correct data' do
       let(:successful_action) { described_class.successful_action(profile, created_profile) }
       let(:mail_body) { successful_action.body.encoded }
-      let(:mail_subject) { successful_action.subject }
 
       it { expect { successful_action.deliver_later }.to have_enqueued_job }
-      it { expect(mail_subject).to match("Alljobs: You #{created_profile}") }
+      it { expect(successful_action.subject).to match("Alljobs: You #{created_profile}") }
       it { expect(mail_body).to match('Test Name') }
       it { expect(mail_body).to match(created_profile) }
     end
