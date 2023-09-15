@@ -12,6 +12,7 @@ describe 'User' do
 
   context 'create a profile' do
     it 'with sucess' do
+      ActiveJob::Base.queue_adapter = :test
       visit root_path
       within('nav') do
         click_on Profile.model_name.human
@@ -38,6 +39,7 @@ describe 'User' do
       expect(page).to have_content 'Test 3'
       expect(page).to have_content 'Test 4'
       expect(page).to have_content country.name
+      expect(SendMailSuccessUserJob).to have_been_enqueued
     end
 
     it 'without sucess - forget some items' do
@@ -65,6 +67,7 @@ describe 'User' do
     end
 
     it 'with sucess' do
+      ActiveJob::Base.queue_adapter = :test
       visit root_path
       click_on Profile.model_name.human
       click_on I18n.t('edit')
@@ -84,6 +87,7 @@ describe 'User' do
       expect(page).to have_content 'Test 6'
       expect(page).to have_content 'Test 7'
       expect(page).to have_content 'Test 8'
+      expect(SendMailSuccessUserJob).to have_been_enqueued
     end
 
     it 'without sucess - forget some items' do

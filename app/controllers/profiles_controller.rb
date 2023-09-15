@@ -19,17 +19,23 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
-    return redirect_to @profile if @profile.save
-
-    render :new
+    if @profile.save
+      SendMailSuccessUserJob.perform_later(@profile, 'created your profile', profile_path(@profile))
+      redirect_to @profile
+    else
+      render :new
+    end
   end
 
   def edit; end
 
   def update
-    return redirect_to @profile if @profile.update(profile_params)
-
-    render :edit
+    if @profile.update(profile_params)
+      SendMailSuccessUserJob.perform_later(@profile, 'updated your profile', profile_path(@profile))
+      redirect_to @profile
+    else
+      render :edit
+    end
   end
 
   def show
