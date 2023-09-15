@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      SendMailSuccessUserJob.perform_now(@profile, 'updated your profile', profile_path(@profile))
+      SendMailSuccessUserJob.perform_later(@profile, 'updated your profile', profile_path(@profile))
       redirect_to @profile
     else
       render :edit
