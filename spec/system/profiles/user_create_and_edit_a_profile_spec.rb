@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 describe 'User' do
+  ActiveJob::Base.queue_adapter = :test
   let!(:user) { create(:user) }
   let!(:country) { create(:country) }
 
@@ -38,6 +39,7 @@ describe 'User' do
       expect(page).to have_content 'Test 3'
       expect(page).to have_content 'Test 4'
       expect(page).to have_content country.name
+      expect(SendMailSuccessUserJob).to have_been_enqueued
     end
 
     it 'without sucess - forget some items' do
