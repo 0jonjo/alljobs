@@ -9,12 +9,11 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'devise'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
-gem 'pg', '~> 1.2', '>= 1.2.3', group: :production
+gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'rails_admin', '~> 3.0'
 gem 'sass-rails', '>= 6'
-gem 'sqlite3', '~> 1.4'
 gem 'webpacker', '~> 5.0'
 
 gem 'bootsnap', '>= 1.4.4', require: false
