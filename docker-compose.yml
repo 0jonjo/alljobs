@@ -1,7 +1,8 @@
 version: '3.9'
 services:
   app:
-    image: alljobsapp
+    build:
+      context: .
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWD: example
