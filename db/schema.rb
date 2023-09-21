@@ -12,11 +12,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_230_617_125_623) do
+ActiveRecord::Schema.define(version: 20_230_917_134_221) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension 'plpgsql'
+
   create_table 'admins', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
+    t.text 'email', default: '', null: false
+    t.text 'encrypted_password', default: '', null: false
+    t.text 'reset_password_token'
     t.datetime 'reset_password_sent_at'
     t.datetime 'remember_created_at'
     t.datetime 'created_at', precision: 6, null: false
@@ -26,8 +29,8 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
   end
 
   create_table 'applies', force: :cascade do |t|
-    t.integer 'job_id', null: false
-    t.integer 'user_id', null: false
+    t.bigint 'job_id', null: false
+    t.bigint 'user_id', null: false
     t.text 'feedback_headhunter'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
 
   create_table 'comments', force: :cascade do |t|
     t.text 'body'
-    t.integer 'profile_id', null: false
-    t.integer 'headhunter_id', null: false
+    t.bigint 'profile_id', null: false
+    t.bigint 'headhunter_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['headhunter_id'], name: 'index_comments_on_headhunter_id'
@@ -46,18 +49,18 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
   end
 
   create_table 'companies', force: :cascade do |t|
-    t.string 'name', null: false
-    t.string 'description'
-    t.string 'website'
-    t.string 'email'
-    t.string 'phone'
+    t.text 'name', null: false
+    t.text 'description'
+    t.text 'website'
+    t.text 'email'
+    t.text 'phone'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
 
   create_table 'countries', force: :cascade do |t|
-    t.string 'acronym'
-    t.string 'name'
+    t.text 'acronym'
+    t.text 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
@@ -79,8 +82,8 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
 
   create_table 'feedback_applies', force: :cascade do |t|
     t.text 'body'
-    t.integer 'headhunter_id', null: false
-    t.integer 'apply_id', null: false
+    t.bigint 'headhunter_id', null: false
+    t.bigint 'apply_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['apply_id'], name: 'index_feedback_applies_on_apply_id'
@@ -88,9 +91,9 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
   end
 
   create_table 'headhunters', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
+    t.text 'email', default: '', null: false
+    t.text 'encrypted_password', default: '', null: false
+    t.text 'reset_password_token'
     t.datetime 'reset_password_sent_at'
     t.datetime 'remember_created_at'
     t.datetime 'created_at', precision: 6, null: false
@@ -100,34 +103,34 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
   end
 
   create_table 'jobs', force: :cascade do |t|
-    t.string 'title'
+    t.text 'title'
     t.text 'description'
     t.text 'skills'
-    t.integer 'salary'
-    t.string 'level'
+    t.decimal 'salary'
+    t.text 'level'
     t.date 'date'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.string 'code'
     t.integer 'job_status', default: 1
-    t.integer 'country_id'
-    t.integer 'company_id'
+    t.bigint 'country_id'
+    t.bigint 'company_id'
     t.string 'city'
     t.index ['company_id'], name: 'index_jobs_on_company_id'
     t.index ['country_id'], name: 'index_jobs_on_country_id'
   end
 
   create_table 'profiles', force: :cascade do |t|
-    t.string 'name'
-    t.string 'social_name'
+    t.text 'name'
+    t.text 'social_name'
     t.date 'birthdate'
     t.text 'description'
     t.text 'educacional_background'
     t.text 'experience'
-    t.integer 'user_id', null: false
+    t.bigint 'user_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.integer 'country_id'
+    t.bigint 'country_id'
     t.string 'city'
     t.index ['country_id'], name: 'index_profiles_on_country_id'
     t.index ['user_id'], name: 'index_profiles_on_user_id'
@@ -136,17 +139,17 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
   create_table 'proposal_comments', force: :cascade do |t|
     t.text 'body'
     t.integer 'author'
-    t.integer 'proposal_id', null: false
+    t.bigint 'proposal_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.index ['proposal_id'], name: 'index_proposal_comments_on_proposal_id'
   end
 
   create_table 'proposals', force: :cascade do |t|
-    t.integer 'apply_id', null: false
+    t.bigint 'apply_id', null: false
     t.decimal 'salary'
-    t.string 'benefits'
-    t.string 'expectations'
+    t.text 'benefits'
+    t.text 'expectations'
     t.date 'expected_start'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
@@ -155,18 +158,18 @@ ActiveRecord::Schema.define(version: 20_230_617_125_623) do
   end
 
   create_table 'stars', force: :cascade do |t|
-    t.integer 'headhunter_id', null: false
+    t.bigint 'headhunter_id', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.integer 'apply_id', null: false
+    t.bigint 'apply_id', null: false
     t.index ['apply_id'], name: 'index_stars_on_apply_id'
     t.index ['headhunter_id'], name: 'index_stars_on_headhunter_id'
   end
 
   create_table 'users', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
+    t.text 'email', default: '', null: false
+    t.text 'encrypted_password', default: '', null: false
+    t.text 'reset_password_token'
     t.datetime 'reset_password_sent_at'
     t.datetime 'remember_created_at'
     t.datetime 'created_at', precision: 6, null: false

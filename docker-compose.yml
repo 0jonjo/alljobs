@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWD: example
+      POSTGRES_HOST: db
+    ports:
+      - 3000:3000
+  db:
+    image: postgres:alpine3.15
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5439:5432

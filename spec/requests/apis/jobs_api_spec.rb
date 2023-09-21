@@ -82,7 +82,7 @@ describe 'Job API' do
       expect(json_response['title']).to include('Job Opening Test 123')
       expect(json_response['description']).to include('Lorem ipsum dolor sit amet')
       expect(json_response['skills']).to include('Nam mattis, felis ut adipiscing.')
-      expect(json_response['salary']).to eq(99)
+      expect(json_response['salary']).to eq('99.0')
       expect(json_response['company_id']).to eq(company.id)
       expect(json_response['level']).to include('Junior')
       expect(json_response['country_id']).to eq(country.id)

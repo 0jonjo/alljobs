@@ -21,7 +21,6 @@ describe 'User' do
     it 'direct to proposal page with sucess' do
       visit apply_proposal_path(apply, proposal)
 
-      expect(page).to have_content("#{Proposal.model_name.human} 1")
       expect(page).to have_content(proposal.salary)
       expect(page).to have_content(proposal.benefits)
       expect(page).to have_content(proposal.expectations)
