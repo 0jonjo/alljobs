@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 
 module Alljobs
   class Application < Rails::Application
-    config.active_job.queue_adapter = :delayed_job
+    config.active_job.queue_adapter = :sidekiq
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     # Configuration for the application, engines, and railties goes here.

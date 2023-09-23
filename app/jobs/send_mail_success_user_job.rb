@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class SendMailSuccessUserJob < ApplicationJob
-  queue_as :default
+class SendMailSuccessUserJob
+  include Sidekiq::Job
 
-  def perform(profile, action, url)
-    ProfileMailer.successful_action(profile, action, url).deliver_now
+  def perform(profile_id, action, url)
+    ProfileMailer.successful_action(profile_id, action, url).deliver_now
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe SendMailSuccessUserJob, type: :job do
     let(:profile) { create(:profile) }
 
     it {
-      expect { SendMailSuccessUserJob.perform_now(profile, '', '') }.to change {
+      expect { SendMailSuccessUserJob.new.perform(profile.id, '', '') }.to change {
                                                                           ActionMailer::Base.deliveries.count
                                                                         }.by(1)
     }

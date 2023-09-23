@@ -8,7 +8,7 @@ RSpec.describe ProfileMailer, type: :mailer do
 
   describe '#successful_action' do
     context 'have enqueued a job using the correct data' do
-      let(:successful_action) { described_class.successful_action(profile, created_profile, 'http://localhost:3000/users/sign_in') }
+      let(:successful_action) { described_class.successful_action(profile.id, created_profile, 'http://localhost:3000/users/sign_in') }
       let(:mail_body) { successful_action.body.encoded }
 
       it { expect { successful_action.deliver_later }.to have_enqueued_job }

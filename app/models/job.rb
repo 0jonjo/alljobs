@@ -30,7 +30,6 @@ class Job < ApplicationRecord
   def clean_up
     return unless draft?
 
-    ApplyListJob.perform_later(id)
+    ApplyListJob.perform_async(id)
   end
-  handle_asynchronously :clean_up
 end

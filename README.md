@@ -9,7 +9,7 @@ Side repository to test API: [Seejobs](https://github.com/0jonjo/seejobs/)
 
 - Ruby: 3.0.5
 - Rails: 6.1.4
-- Relevant Gems: Devise, Rspec, Capybara, Shoulda Matchers, SimpleCov, Rubocop, Kaminari, DelayedJob, Faraday and Rails Admin.
+- Relevant technologies: Postgres, Docker, Devise, Rspec, Capybara, Shoulda Matchers, SimpleCov, Rubocop, Kaminari, Faraday and Rails Admin.
 
 ## Install
 
@@ -36,5 +36,5 @@ rails db:migrate
 ## Serve
 
 ```shell
-rails s
+rails server
 ```

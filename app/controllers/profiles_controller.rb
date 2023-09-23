@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
     if @profile.save
-      SendMailSuccessUserJob.perform_later(@profile, 'created your profile', profile_path(@profile))
+      SendMailSuccessUserJob.perform_async(@profile.id, 'created your profile', profile_path(@profile.id))
       redirect_to @profile
     else
       render :new
@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      SendMailSuccessUserJob.perform_later(@profile, 'updated your profile', profile_path(@profile))
+      SendMailSuccessUserJob.perform_async(@profile.id, 'updated your profile', profile_path(@profile.id))
       redirect_to @profile
     else
       render :edit

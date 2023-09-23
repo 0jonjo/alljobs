@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe Job, type: :model do
   it { is_expected.to validate_presence_of :title }
@@ -65,15 +66,12 @@ RSpec.describe Job, type: :model do
   end
 
   describe 'cleanup one job' do
-    it 'job on queue with sucess' do
-      ActiveJob::Base.queue_adapter = :test
-      expect(Delayed::Job.count).to eq 0
-      job = create(:job)
-      create(:apply)
+    it 'on queue with sucess' do
+      expect(ApplyListJob.jobs.size).to eq(0)
+      create(:job)
+      create(:apply, job: job)
       job.draft!
-      expect(Delayed::Job.count).to eq 1
-      Delayed::Worker.new.work_off
-      expect(ApplyListJob).to have_been_enqueued
+      expect(ApplyListJob.jobs.size).to eq(1)
     end
   end
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class ApplyListJob < ApplicationJob
-  queue_as :default
+class ApplyListJob
+  include Sidekiq::Job
 
-  def perform(to_list)
-    Apply.where(job_id: to_list).map { |apply| ApplyCleanupJob.perform_later(apply.id) }
+  def perform(job_id)
+    Apply.where(job_id: job_id).map { |apply| ApplyCleanupJob.perform_async(apply.id) }
   end
 end
