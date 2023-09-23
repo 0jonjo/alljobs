@@ -8,8 +8,8 @@ RSpec.describe SendMailSuccessUserJob, type: :job do
 
     it {
       expect { SendMailSuccessUserJob.new.perform(profile.id, '', '') }.to change {
-                                                                          ActionMailer::Base.deliveries.count
-                                                                        }.by(1)
+                                                                             ActionMailer::Base.deliveries.count
+                                                                           }.by(1)
     }
   end
 end

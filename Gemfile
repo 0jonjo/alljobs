@@ -16,8 +16,8 @@ gem 'rails_admin', '~> 3.0'
 gem 'rubocop', require: false
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
-gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
+gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
