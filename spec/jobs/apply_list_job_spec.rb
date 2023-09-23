@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe ApplyListJob, type: :job do
   describe 'Clean applies to a job opening' do
     it 'with sucess' do
-      ActiveJob::Base.queue_adapter = :test
-      expect(Delayed::Job.count).to eq 0
+      expect(ApplyCleanupJob.jobs.size).to eq(0)
 
       job_to_list = create(:job)
-      create(:apply, job: job_to_list)
-      create(:apply, job: job_to_list)
+      create(:apply, job_id: job_to_list.id)
+      create(:apply, job_id: job_to_list.id)
 
-      ApplyListJob.perform_now(job_to_list)
+      ApplyListJob.new.perform(job_to_list.id)
 
-      expect(ApplyCleanupJob).to(have_been_enqueued.at_least(:twice))
+      expect(ApplyCleanupJob.jobs.size).to eq(2)
     end
   end
 end
