@@ -8,10 +8,6 @@ development:
   <<: *default
   database: alljobs_development
 
-  # username: <%= ENV['POSTGRES_USER'] %>
-  # password: <%= ENV['POSTGRES_PASSWD'] %>
-  # host: <%= ENV['POSTGRES_HOST'] %>
-
 test:
   <<: *default
   database: alljobs_test
@@ -19,5 +15,3 @@ test:
 production:
   <<: *default
   database: alljobs_production
-  username: alljobs
-  password: <%= ENV['ALLJOBS_DATABASE_PASSWORD'] %>
