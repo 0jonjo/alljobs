@@ -19,7 +19,14 @@ RUN apt update \
 
 RUN gem install pg
 
+RUN gem install
+
 ADD . /home/app/web
 WORKDIR /home/app/web
 
 RUN bundle install --jobs 5 --retry 5
+
+COPY ./worker/entrypoint.sh /home/app/web/worker/entrypoint.sh
+RUN chmod +x /home/app/web/worker/entrypoint.sh
+
+CMD bash /home/app/web/worker/entrypoint.sh

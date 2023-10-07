@@ -5,16 +5,17 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.5'
 
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
-gem 'pg', '~> 1.2', '>= 1.2.3'
+gem 'pg', '~> 1.5'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'rails_admin', '~> 3.0'
+gem 'redis', '~> 4.0'
 gem 'rubocop', require: false
-gem 'sass-rails', '>= 6'
+gem 'sass-rails', '>= 6', require: false
 gem 'sidekiq'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
@@ -39,7 +40,7 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', '~> 0.22.0', require: false
   gem 'simplecov_json_formatter', '~> 0.1.4', require: false
-  gem 'webdrivers'
+  gem 'webdrivers', '= 5.3.0'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
