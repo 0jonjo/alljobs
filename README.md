@@ -8,7 +8,7 @@ This is a study project to a job opening website using Ruby on Rails in a TDD wa
 Side repository to test API: [Seejobs](https://github.com/0jonjo/seejobs/)
 
 - Ruby: 3.0.5
-- Rails: 6.1.4
+- Rails: 7.0
 - Relevant technologies: Postgres, Docker, Devise, Rspec, Capybara, Shoulda Matchers, SimpleCov, Rubocop, Kaminari, Faraday and Rails Admin.
 
 ## Install
