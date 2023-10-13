@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_230_917_134_221) do
+ActiveRecord::Schema[7.1].define(version: 20_231_012_195_853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'email', default: '', null: false
     t.text 'encrypted_password', default: '', null: false
     t.text 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'reset_password_sent_at', precision: nil
+    t.datetime 'remember_created_at', precision: nil
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.index ['email'], name: 'index_admins_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_admins_on_reset_password_token', unique: true
   end
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.bigint 'job_id', null: false
     t.bigint 'user_id', null: false
     t.text 'feedback_headhunter'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.index ['job_id'], name: 'index_applies_on_job_id'
     t.index ['user_id'], name: 'index_applies_on_user_id'
   end
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'body'
     t.bigint 'profile_id', null: false
     t.bigint 'headhunter_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.index ['headhunter_id'], name: 'index_comments_on_headhunter_id'
     t.index ['profile_id'], name: 'index_comments_on_profile_id'
   end
@@ -54,15 +54,15 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'website'
     t.text 'email'
     t.text 'phone'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
   create_table 'countries', force: :cascade do |t|
     t.text 'acronym'
     t.text 'name'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
   create_table 'delayed_jobs', force: :cascade do |t|
@@ -70,13 +70,13 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.integer 'attempts', default: 0, null: false
     t.text 'handler', null: false
     t.text 'last_error'
-    t.datetime 'run_at'
-    t.datetime 'locked_at'
-    t.datetime 'failed_at'
+    t.datetime 'run_at', precision: nil
+    t.datetime 'locked_at', precision: nil
+    t.datetime 'failed_at', precision: nil
     t.string 'locked_by'
     t.string 'queue'
-    t.datetime 'created_at', precision: 6
-    t.datetime 'updated_at', precision: 6
+    t.datetime 'created_at'
+    t.datetime 'updated_at'
     t.index %w[priority run_at], name: 'delayed_jobs_priority'
   end
 
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'body'
     t.bigint 'headhunter_id', null: false
     t.bigint 'apply_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.index ['apply_id'], name: 'index_feedback_applies_on_apply_id'
     t.index ['headhunter_id'], name: 'index_feedback_applies_on_headhunter_id'
   end
@@ -94,10 +94,10 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'email', default: '', null: false
     t.text 'encrypted_password', default: '', null: false
     t.text 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'reset_password_sent_at', precision: nil
+    t.datetime 'remember_created_at', precision: nil
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.index ['email'], name: 'index_headhunters_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_headhunters_on_reset_password_token', unique: true
   end
@@ -109,8 +109,8 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.decimal 'salary'
     t.text 'level'
     t.date 'date'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.string 'code'
     t.integer 'job_status', default: 1
     t.bigint 'country_id'
@@ -128,8 +128,8 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'educacional_background'
     t.text 'experience'
     t.bigint 'user_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.bigint 'country_id'
     t.string 'city'
     t.index ['country_id'], name: 'index_profiles_on_country_id'
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'body'
     t.integer 'author'
     t.bigint 'proposal_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.index ['proposal_id'], name: 'index_proposal_comments_on_proposal_id'
   end
 
@@ -151,16 +151,16 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'benefits'
     t.text 'expectations'
     t.date 'expected_start'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.boolean 'user_accepted'
     t.index ['apply_id'], name: 'index_proposals_on_apply_id'
   end
 
   create_table 'stars', force: :cascade do |t|
     t.bigint 'headhunter_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.bigint 'apply_id', null: false
     t.index ['apply_id'], name: 'index_stars_on_apply_id'
     t.index ['headhunter_id'], name: 'index_stars_on_headhunter_id'
@@ -170,10 +170,10 @@ ActiveRecord::Schema.define(version: 20_230_917_134_221) do
     t.text 'email', default: '', null: false
     t.text 'encrypted_password', default: '', null: false
     t.text 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+    t.datetime 'reset_password_sent_at', precision: nil
+    t.datetime 'remember_created_at', precision: nil
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end

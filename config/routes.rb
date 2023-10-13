@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :admins
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -33,4 +35,5 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#index'
+  mount Sidekiq::Web => '/sidekiq'
 end
