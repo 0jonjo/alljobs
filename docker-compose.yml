@@ -18,9 +18,9 @@ services:
       POSTGRES_USER: postgres
       TERM: xterm-256color
     ports:
-     - '5439:5432'
+     - '5432:5432'
     expose:
-     - '5439'
+     - '5432'
 
   web:
     build: .
