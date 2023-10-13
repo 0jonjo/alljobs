@@ -41,7 +41,7 @@ rails server
 
 # Containers
 
-To use the containerized version, uncomment line 5 (url) and comment line 6 (port) in database.yml. After that:
+To use the containerized version, uncomment line 5 (url) in database.yml. After that:
 
 ```shell
 docker compose up
