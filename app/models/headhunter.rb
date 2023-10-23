@@ -8,6 +8,7 @@ class Headhunter < ApplicationRecord
 
   has_many :comments
   has_many :profiles, through: :comments
+  has_many :proposal_comments, as: :author
   has_many :stars
   has_many :profiles, through: :stars
 end
