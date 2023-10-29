@@ -67,7 +67,7 @@ describe 'Headhunter' do
     context 'n edit to a comment on a proposal' do
       let!(:proposal_comment) { create(:proposal_comment, proposal_id: proposal.id) }
 
-      xit 'without sucess - not his comment' do
+      it 'without sucess - not his comment' do
         visit apply_proposal_proposal_comments_path(apply, proposal)
 
         expect(page).not_to have_content(I18n.t('edit').to_s)
@@ -84,7 +84,7 @@ describe 'Headhunter' do
       it 'with success' do
         visit apply_proposal_proposal_comments_path(apply, proposal)
 
-        click_on 'Apagar'
+        click_on I18n.t('delete')
 
         expect(page).to have_content('Comment deleted.')
         expect(current_path).to eq(apply_proposal_proposal_comments_path(apply.id, proposal.id))
