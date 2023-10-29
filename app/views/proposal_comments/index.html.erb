@@ -1,0 +1,6 @@
+<h4><%= ProposalComment.model_name.human %></h4>
+
+<%= render @proposal_comments if @proposal_comments.any? %>
+<p><%= I18n.t('no_proposal_comments') if @proposal_comments.empty? %></p>
+
+<%= paginate @proposal_comments %>

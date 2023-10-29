@@ -11,6 +11,7 @@ pt-BR:
       user: 'Usuário'
       country: 'País'
       company: 'Empresa'
+      proposal_comment: 'Comentário da Proposta'
     attributes:
       headhunter:
         password: 'Senha'
