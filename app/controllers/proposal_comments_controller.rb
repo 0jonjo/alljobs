@@ -28,15 +28,16 @@ class ProposalCommentsController < ApplicationController
 
   def update
     if @proposal_comment.update(proposal_comment_params)
-      redirect_to request.referrer, notice: 'Comment updated.'
+      redirect_to apply_proposal_proposal_comments_path, notice: 'Comment updated.'
     else
-      render :edit, status: :unprocessable_entity
+      flash[:alert] = "Comment can't be edited."
+      redirect_to edit_apply_proposal_proposal_comment_path(@proposal.apply_id, @proposal.id, @proposal_comment.id)
     end
   end
 
   def destroy
     @proposal_comment.destroy
-    redirect_to @proposal_comments, notice: 'Comment deleted.'
+    redirect_to apply_proposal_proposal_comments_path, notice: 'Comment deleted.'
   end
 
   private
