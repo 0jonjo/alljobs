@@ -9,7 +9,7 @@ Side repository to test API: [Seejobs](https://github.com/0jonjo/seejobs/)
 
 - Ruby: 3.0.5
 - Rails: 7.1
-- Relevant technologies: Postgres, Docker, Devise, Rspec, Capybara, Sidekiq, Shoulda Matchers, SimpleCov, Rubocop, Kaminari, Faraday and Rails Admin.
+- Relevant technologies: Postgres, Docker, Devise, Rspec, Capybara, Sidekiq, Shoulda Matchers, SimpleCov, Rubocop, Kaminari and Faraday.
 
 ## Install
 
