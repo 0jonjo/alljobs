@@ -5,7 +5,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :headhunters, :users
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  # mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   resources :pages, only: [:index]
   resources :stars, only: %i[index destroy create]
