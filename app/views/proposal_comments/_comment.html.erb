@@ -1,0 +1,15 @@
+<b><%= I18n.t('your_comments') if headhunter_signed_in? %></b>
+<% @comments.each do |comment| %>
+  <% if comment.headhunter_id == current_headhunter.id %>
+    <div>
+      <p><%= I18n.localize(comment.updated_at, format: :short) %></p>
+      <p><%= comment.body %></p>
+      <p><%= link_to I18n.t('edit'), edit_profile_comment_path(@profile.id, comment.id) %></p>
+      <div>
+        <%= button_to I18n.t('delete'), profile_comment_path(@profile.id, comment.id),
+                                    method: :delete,
+                                    data: { confirm: I18n.t('sure') } %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_231_012_195_853) do
+ActiveRecord::Schema[7.1].define(version: 20_231_022_190_716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -138,10 +138,12 @@ ActiveRecord::Schema[7.1].define(version: 20_231_012_195_853) do
 
   create_table 'proposal_comments', force: :cascade do |t|
     t.text 'body'
-    t.integer 'author'
     t.bigint 'proposal_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.string 'author_type'
+    t.bigint 'author_id'
+    t.index %w[author_type author_id], name: 'index_proposal_comments_on_author'
     t.index ['proposal_id'], name: 'index_proposal_comments_on_proposal_id'
   end
 

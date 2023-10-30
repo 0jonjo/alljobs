@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Headhunter' do
-  context 'edit a proposal to a cadindidate' do
+  context 'edit a proposal to a candidate' do
     let!(:headhunter) { create(:headhunter) }
     let!(:apply) { create(:apply) }
     let!(:proposal) { create(:proposal, apply: apply) }

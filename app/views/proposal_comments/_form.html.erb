@@ -1,0 +1,14 @@
+<% if @proposal_comment.errors.any? %>
+  <% @proposal_comment.errors.full_messages.each do |message|%>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
+<%= form_with(model: [@apply, @proposal, @proposal_comment]) do |form| %>
+    <div>
+      <%= form.text_area :body %>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
+<% end %>

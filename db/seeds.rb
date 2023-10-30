@@ -50,4 +50,5 @@ proposal = Proposal.create(apply: apply, salary: 999, benefits: 'some benefits',
                            user_accepted: true)
 
 # Default Proposal Comment
-ProposalComment.create(proposal_id: proposal.id, author: 0, body: 'Just a test comment')
+ProposalComment.create(proposal_id: proposal.id, author_id: headhunter.id, author_type: headhunter.class,
+                       body: 'Just a test comment')

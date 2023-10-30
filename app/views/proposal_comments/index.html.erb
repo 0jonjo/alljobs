@@ -1,0 +1,8 @@
+<h4><%= ProposalComment.model_name.human %></h4>
+
+<%= render @proposal_comments if @proposal_comments.any? %>
+<p><%= I18n.t('no_proposal_comments') if @proposal_comments.empty? %></p>
+
+<p><%= link_to I18n.t('create_comment'), new_apply_proposal_proposal_comment_path(@proposal.apply_id, @proposal.id) %></p>
+
+<%= paginate @proposal_comments %>

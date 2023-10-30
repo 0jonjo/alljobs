@@ -18,6 +18,10 @@
 <br>
 
 <div>
+  <p><%= link_to I18n.t('proposal_comments'), apply_proposal_proposal_comments_path(@proposal.apply_id, @proposal.id) %></p>
+<div>
+
+<div>
   <%= render 'proposals/user_accept_or_reject' %>
 </div>
 
