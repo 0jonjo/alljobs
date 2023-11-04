@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_231_022_190_716) do
+ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -107,7 +107,7 @@ ActiveRecord::Schema[7.1].define(version: 20_231_022_190_716) do
     t.text 'description'
     t.text 'skills'
     t.decimal 'salary'
-    t.text 'level'
+    t.integer 'level'
     t.date 'date'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
