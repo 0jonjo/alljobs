@@ -21,9 +21,6 @@ RSpec.describe Job, type: :model do
 
   describe 'generate a code' do
     it 'when create a job with sucess' do
-      # job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet',
-      # skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
-      # company: company, level: 'Junior', country: country, city: 'Test', date: 1.month.from_now)
       expect(job.code.length).to eq 8
     end
 

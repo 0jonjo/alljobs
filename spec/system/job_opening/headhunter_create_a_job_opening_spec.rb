@@ -27,7 +27,7 @@ describe 'Headhunter' do
               with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:salary), with: '9999'
       select company.name, from: Job.human_attribute_name(:company_id)
-      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      select 'Pleno', from: Job.human_attribute_name(:level)
       select country.acronym, from: Job.human_attribute_name(:country_id)
       fill_in Job.human_attribute_name(:city), with: 'City'
       fill_in Job.human_attribute_name(:date), with: 1.month.from_now
@@ -37,8 +37,8 @@ describe 'Headhunter' do
       expect(page).to have_content('Job Opening Test')
       expect(page).to have_content('12345678')
       expect(page).to have_content('Test')
-      expect(page).to have_content('Junior')
-      expect(page).to have_content('published')
+      expect(page).to have_content('Pleno')
+      expect(page).to have_content('Publicada')
       expect(current_path).to eq job_path(Job.last.id)
     end
 
@@ -52,14 +52,14 @@ describe 'Headhunter' do
               with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:salary), with: '9999'
       select company.name, from: Job.human_attribute_name(:company_id)
-      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      select 'Pleno', from: Job.human_attribute_name(:level)
       select country.acronym, from: Job.human_attribute_name(:country_id)
       fill_in Job.human_attribute_name(:city), with: 'City'
       fill_in Job.human_attribute_name(:date), with: 1.month.from_now
       select I18n.t('archived'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
 
-      expect(page).to have_content('archived')
+      expect(page).to have_content('Arquivada')
       expect(current_path).to eq job_path(Job.last.id)
     end
 
@@ -73,14 +73,14 @@ describe 'Headhunter' do
               with: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
       fill_in Job.human_attribute_name(:salary), with: '9999'
       select company.name, from: Job.human_attribute_name(:company_id)
-      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      select 'Pleno', from: Job.human_attribute_name(:level)
       select country.acronym, from: Job.human_attribute_name(:country_id)
       fill_in Job.human_attribute_name(:city), with: 'City'
       fill_in Job.human_attribute_name(:date), with: 1.month.from_now
       select I18n.t('draft'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'
 
-      expect(page).to have_content('draft')
+      expect(page).to have_content('Rascunho')
       expect(current_path).to eq job_path(Job.last.id)
     end
 
@@ -91,7 +91,6 @@ describe 'Headhunter' do
       fill_in Job.human_attribute_name(:description), with: ''
       fill_in Job.human_attribute_name(:skills), with: ''
       fill_in Job.human_attribute_name(:salary), with: ''
-      fill_in Job.human_attribute_name(:level), with: ''
       fill_in Job.human_attribute_name(:date), with: ''
       select I18n.t('published'), from: Job.human_attribute_name(:job_status)
       click_on 'Criar Vaga'

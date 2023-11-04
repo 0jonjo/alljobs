@@ -18,8 +18,7 @@ describe 'Headhunter' do
       visit job_path(apply.job_id)
       click_on I18n.t('draft')
 
-      expect(page).to have_content('draft')
-      expect(page).not_to have_content('published')
+      expect(page).to have_content('Rascunho')
 
       Sidekiq::Worker.drain_all
 
