@@ -66,7 +66,7 @@ class JobsController < ApplicationController
 
   def published
     if @job.published!
-      # Adjust I18n text flash[:notice] = "You successfully starred this apply."
+      # Adjust I18n text like this flash[:notice] = "You successfully published this job."
       return redirect_to @job
     end
 
@@ -77,13 +77,13 @@ class JobsController < ApplicationController
 
   private
 
+  def find_job
+    @job = Job.find(params[:id])
+  end
+
   def job_params
     params.require(:job).permit(:title, :code, :description, :skills, :salary, :company_id, :country_id, :city,
                                 :level, :date, :job_status)
-  end
-
-  def find_job
-    @job = Job.find(params[:id])
   end
 
   def which_index(status)

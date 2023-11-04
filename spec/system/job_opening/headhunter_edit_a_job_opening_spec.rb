@@ -25,14 +25,14 @@ describe 'Headhunter' do
       fill_in Job.human_attribute_name(:skills), with: 'Lorem ipsuctus'
       fill_in Job.human_attribute_name(:salary), with: '9999'
       select company.name, from: Job.human_attribute_name(:company_id)
-      fill_in Job.human_attribute_name(:level), with: 'Junior'
+      select 'Pleno', from: Job.human_attribute_name(:level)
       select country.acronym, from: Job.human_attribute_name(:country_id)
       fill_in Job.human_attribute_name(:date), with: 1.month.from_now
       click_on 'Atualizar Vaga'
 
       expect(page).to have_content 'Job Opening Test 123'
       expect(page).to have_content '9999'
-      expect(page).to have_content 'Junior'
+      expect(page).to have_content 'Pleno'
       expect(page).to have_content company.name
       expect(page).to have_content country.acronym
       expect(current_path).to eq job_path(job.id.to_s)

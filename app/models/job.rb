@@ -14,6 +14,7 @@ class Job < ApplicationRecord
   after_update :clean_up
 
   enum job_status: { draft: 0, published: 1, archived: 9 }
+  enum level: { junior: 0, mid_level: 1, senior: 7, specialist: 9 }
 
   private
 
