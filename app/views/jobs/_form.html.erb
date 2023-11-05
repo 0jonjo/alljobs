@@ -27,12 +27,12 @@
 
   <div>
     <%= form.label :company_id %>
-    <%= form.select :company_id, Company.all.map { |c| [c.name, c.id] }  %>
+    <%= form.select :company_id, companies %>
   </div>
 
   <div>
     <%= form.label :level %>
-    <%= form.text_field :level  %>
+    <%= form.select :level, levels %>
   </div>
 
   <div>
@@ -42,7 +42,7 @@
 
    <div>
     <%= form.label :country_id %>
-    <%= form.select :country_id, Country.all.map { |c| [c.acronym, c.id] }  %>
+    <%= form.select :country_id, countries %>
   </div>
 
   <div>
@@ -52,7 +52,7 @@
 
   <div>
     <%= form.label :job_status %>
-    <%= form.select :job_status, Job.job_statuses.map { |j| [I18n.t(j[0]), j[0]] }  %>
+    <%= form.select :job_status, statuses %>
   </div>
 
   <div>

@@ -11,7 +11,7 @@ describe 'Headhunter' do
   end
 
   context 'when access the a job opening' do
-    it 'can change stauts to draft with sucess ' do
+    it 'can change status to draft with sucess ' do
       visit root_path
 
       click_on I18n.t('openings')
@@ -21,7 +21,7 @@ describe 'Headhunter' do
       expect(current_path).to eq job_path(job.id)
 
       expect(page).to have_content(Job.human_attribute_name(:job_status))
-      expect(page).to have_content('draft')
+      expect(page).to have_content('Rascunho')
     end
 
     it 'can change stauts to archived with sucess ' do
@@ -32,14 +32,13 @@ describe 'Headhunter' do
 
       expect(current_path).to eq job_path(job.id)
 
-      expect(page).to have_content('archived')
-      expect(page).not_to have_content('published')
+      expect(page).to have_content('Arquivada')
     end
 
     it 'can not change stauts to publish - do not can see the button' do
       visit job_path(job)
 
-      expect(page).to have_content('published')
+      expect(page).to have_content('Publicada')
       expect(page).not_to have_button(I18n.t('published'))
       expect(page).to have_button(I18n.t('draft'))
       expect(page).to have_button(I18n.t('archived'))

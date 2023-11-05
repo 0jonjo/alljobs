@@ -22,7 +22,14 @@ pt-BR:
         salary: 'Salário'
         company_id: 'Empresa'
         level: 'Nível'
+        levels:
+          keys:
+            junior: 'Júnior'
+            mid_level: 'Pleno'
+            senior: 'Sênior'
+            specialist: 'Especialista'
         country_id: 'País'
+        country: 'País'
         city: 'Cidade'
         date: 'Data'
         code: 'Código'

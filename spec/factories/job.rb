@@ -6,7 +6,7 @@ FactoryBot.define do
     description { Faker::Job.field }
     skills { Faker::Job.key_skill }
     salary { Faker::Number.number(digits: 4) }
-    level { Faker::Job.seniority }
+    level { :junior }
     date { Faker::Date.forward(days: 30) }
     code { Faker::Alphanumeric.alpha(number: 8).upcase }
     job_status { 1 }

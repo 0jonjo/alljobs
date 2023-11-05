@@ -33,7 +33,7 @@ company = Company.create(name: 'Acme', description: 'Seeds Company',
                          phone: '999999999')
 # Default Job
 job = Job.create(title: 'Test 123', description: 'Lorem ipsum dolor sit amet',
-                 skills: 'Nam mattis, felis ut adipiscing.', salary: 99, level: 'Junior',
+                 skills: 'Nam mattis, felis ut adipiscing.', salary: 99, level: :junior,
                  company_id: company.id, country_id: country.id, city: 'Test City', date: 10.years.from_now)
 # Default Apply
 apply = Apply.create(job: job, user: user)

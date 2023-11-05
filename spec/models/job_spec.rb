@@ -14,8 +14,6 @@ RSpec.describe Job, type: :model do
   it { is_expected.to validate_presence_of :city }
   it { is_expected.to validate_presence_of :date }
 
-  # it { should validate_uniqueness_of :code }
-
   let(:country) { build(:country) }
   let(:company) { build(:company) }
   let(:job) { build(:job) }
@@ -23,9 +21,6 @@ RSpec.describe Job, type: :model do
 
   describe 'generate a code' do
     it 'when create a job with sucess' do
-      # job = Job.create!(title: 'Job Opening Test', description: 'Lorem ipsum dolor sit amet',
-      # skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
-      # company: company, level: 'Junior', country: country, city: 'Test', date: 1.month.from_now)
       expect(job.code.length).to eq 8
     end
 
@@ -33,11 +28,11 @@ RSpec.describe Job, type: :model do
       allow(SecureRandom).to receive(:alphanumeric).and_return('12345678')
       Job.create!(title: job.title, description: 'Lorem ipsum dolor sit amet',
                   skills: 'Nam mattis, felis ut adipiscing.', salary: '99',
-                  company: company, level: 'Senior', country: country, city: 'Test',
+                  company: company, level: 0, country: country, city: 'Test',
                   date: 1.month.from_now)
       job2 = Job.new(title: 'Test 2', description: 'Dolor sit amet',
                      skills: 'Nam mattis.', salary: '299',
-                     company: company, level: 'Senior', country: country, city: 'Test',
+                     company: company, level: 1, country: country, city: 'Test',
                      date: 1.month.from_now)
       expect(job2.valid?).to eq false
     end

@@ -70,7 +70,7 @@ describe 'Job API' do
     it 'with sucess' do
       job_params = { job: { title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet',
                             skills: 'Nam mattis, felis ut adipiscing.', salary: '99', company_id: company.id.to_s,
-                            level: 'Junior', country_id: country.id.to_s, city: 'Remote Job',
+                            level: :junior, country_id: country.id.to_s, city: 'Remote Job',
                             date: 1.month.from_now } }
       post '/api/v1/jobs/', params: job_params
 
@@ -84,7 +84,7 @@ describe 'Job API' do
       expect(json_response['skills']).to include('Nam mattis, felis ut adipiscing.')
       expect(json_response['salary']).to eq('99.0')
       expect(json_response['company_id']).to eq(company.id)
-      expect(json_response['level']).to include('Junior')
+      expect(json_response['level']).to include('junior')
       expect(json_response['country_id']).to eq(country.id)
       expect(json_response['city']).to include('Remote Job')
     end
@@ -101,7 +101,7 @@ describe 'Job API' do
       expect(response.body).not_to include('Título não pode ficar em branco')
       expect(response.body).to include('Habilidades não pode ficar em branco')
       expect(response.body).to include('Salário não pode ficar em branco')
-      expect(response.body).to include('Country é obrigatório')
+      expect(response.body).to include('País é obrigatório')
       expect(response.body).to include('Nível não pode ficar em branco')
       expect(response.body).to include('Data não pode ficar em branco')
       expect(response.body).to include('Salário não pode ficar em branco')
@@ -127,7 +127,7 @@ describe 'Job API' do
 
     it 'with sucess' do
       job_params = { job: { title: 'Test title', description: 'Test description',
-                            skills: 'Test skills', salary: '66', level: 'Test level', city: 'Test place',
+                            skills: 'Test skills', salary: '66', level: :junior, city: 'Test place',
                             date: 1.month.from_now } }
       put "/api/v1/jobs/#{job.id}", params: job_params
 
@@ -160,7 +160,7 @@ describe 'Job API' do
 
       job_params = { job: { title: 'Test title', description: 'Test description',
                             skills: 'Test skills', salary: '66',
-                            company: 'Test company', level: 'Test level', place: 'Test place',
+                            company: 'Test company', level: :junior, place: 'Test place',
                             date: 1.month.from_now } }
       put "/api/v1/jobs/#{job.id}", params: job_params
 
