@@ -11,6 +11,8 @@
       <dd><%= I18n.t("activerecord.attributes.job.job_statuses.keys.#{what_to_show.attributes[attribute].to_s}") %></dd>
     <% elsif attribute == 'level' %>
       <dd><%= I18n.t("activerecord.attributes.job.levels.keys.#{what_to_show.attributes[attribute].to_s}") %></dd>
+    <% elsif attribute == 'user_accepted' %>
+      <dd><%= I18n.t(what_to_show.attributes[attribute]) %></dd>
     <% else %>
       <dd><%= what_to_show.attributes[attribute].to_s %></dd>
     <% end %>

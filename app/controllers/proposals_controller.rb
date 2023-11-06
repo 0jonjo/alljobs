@@ -56,6 +56,9 @@ class ProposalsController < ApplicationController
   def accept
     @proposal.user_accepted = true
     if @proposal.save
+      profile = Profile.where(user_id: @apply.user_id).first
+      SendMailSuccessUserJob.perform_async(profile.id, 'accepted this proposal',
+                                           apply_proposal_path(@apply.id, @proposal.id))
       flash[:notice] = 'You successfully accepted this proposal.'
     else
       flash[:alert] = "You can't accept to this proposal."
