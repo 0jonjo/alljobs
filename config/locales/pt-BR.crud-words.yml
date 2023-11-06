@@ -19,3 +19,5 @@ pt-BR:
   view_proposal: 'Ver Proposta'
   to_accept_proposal: 'Aceitar Proposta'
   to_reject_proposal: 'Rejeitar Proposta'
+  true: 'Sim'
+  false: 'Não'

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'sidekiq/testing'
 
 describe 'User' do
   context 'access a proposal' do
@@ -13,6 +14,7 @@ describe 'User' do
     end
 
     it 'and accept' do
+      Sidekiq::Worker.clear_all
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('to_accept_proposal')
 
@@ -20,6 +22,7 @@ describe 'User' do
       expect(page).to have_button(I18n.t('to_reject_proposal'))
       expect(page).not_to have_button(I18n.t('to_accept_proposal'))
       expect(current_path).to eq(apply_proposal_path(apply, proposal))
+      expect(SendMailSuccessUserJob.jobs.size).to eq(1)
     end
 
     it 'and reject' do
