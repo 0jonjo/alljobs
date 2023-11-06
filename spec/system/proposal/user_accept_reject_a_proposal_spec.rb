@@ -14,6 +14,7 @@ describe 'User' do
     end
 
     it 'and accept' do
+      Sidekiq::Worker.clear_all
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('to_accept_proposal')
 
