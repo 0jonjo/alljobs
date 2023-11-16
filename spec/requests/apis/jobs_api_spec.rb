@@ -134,8 +134,6 @@ describe 'Job API' do
       expect(response).to have_http_status(200)
       expect(response.body).to include('Test title')
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      JSON.parse(response.body)
     end
 
     it 'without sucess - imcomplete parameters' do
@@ -154,19 +152,6 @@ describe 'Job API' do
       expect(response.body).to include('Data não pode ficar em branco')
       expect(response.body).to include('Salário não pode ficar em branco')
     end
-
-    xit 'without sucess - internal error' do
-      allow(Job).to receive(:update).and_raise(ActiveRecord::ActiveRecordError)
-
-      job_params = { job: { title: 'Test title', description: 'Test description',
-                            skills: 'Test skills', salary: '66',
-                            company: 'Test company', level: :junior, place: 'Test place',
-                            date: 1.month.from_now } }
-      put "/api/v1/jobs/#{job.id}", params: job_params
-
-      expect(response).to have_http_status(500)
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
   end
 
   context 'DELETE /api/v1/jobs/1' do
@@ -183,14 +168,6 @@ describe 'Job API' do
       delete '/api/v1/jobs/999999'
 
       expect(response.status).to eq 404
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-
-    xit 'without sucess - internal error' do
-      allow(Job).to receive(:destroy).and_raise(ActiveRecord::ActiveRecordError)
-      delete "/api/v1/jobs/#{job.id}"
-
-      expect(response.status).to eq 500
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
   end
