@@ -2,4 +2,6 @@
 
 class FeedbackApply < ApplicationRecord
   belongs_to :apply
+
+  validates :apply_id, presence: true
 end

@@ -162,19 +162,6 @@ describe 'Profile API' do
       expect(response.body).to include('País não pode ficar em branco')
       expect(response.body).to include('Usuário não pode ficar em branco')
     end
-
-    xit 'without sucess - internal error' do
-      allow(Profile).to receive(:update).and_raise(ActiveRecord::ActiveRecordError)
-
-      profile_params = { profile: { title: 'Test title', description: 'Test description',
-                                    skills: 'Test skills', salary: '66',
-                                    company: 'Test company', level: 'Test level', place: 'Test place',
-                                    date: 1.month.from_now } }
-      put "/api/v1/profiles/#{profile.id}", params: profile_params
-
-      expect(response).to have_http_status(500)
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
   end
 
   context 'DELETE /api/v1/profiles/1' do
@@ -191,14 +178,6 @@ describe 'Profile API' do
       delete '/api/v1/profiles/999999'
 
       expect(response.status).to eq 404
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-
-    xit 'without sucess - internal error' do
-      allow(Profile).to receive(:destroy).and_raise(ActiveRecord::ActiveRecordError)
-      delete "/api/v1/profiles/#{profile.id}"
-
-      expect(response.status).to eq 500
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
   end

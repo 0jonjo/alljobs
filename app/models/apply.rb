@@ -6,6 +6,8 @@ class Apply < ApplicationRecord
   has_one :proposal
   has_one :star
 
+  validates :job_id, :user_id, presence: true
+
   def user_email
     @user = User.find(user_id)
     @user.email.to_s
