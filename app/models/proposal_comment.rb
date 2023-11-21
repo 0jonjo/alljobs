@@ -2,5 +2,6 @@
 
 class ProposalComment < ApplicationRecord
   belongs_to :proposal
-  validates :body, presence: true
+
+  validates :body, :proposal_id, presence: true
 end

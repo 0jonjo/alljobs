@@ -63,7 +63,7 @@ RSpec.describe Job, type: :model do
   describe 'cleanup one job' do
     it 'on queue with sucess' do
       expect(ApplyListJob.jobs.size).to eq(0)
-      create(:job)
+      job = create(:job)
       create(:apply, job: job)
       job.draft!
       expect(ApplyListJob.jobs.size).to eq(1)
