@@ -7,7 +7,7 @@ class AppliesController < ApplicationController
   before_action :user_has_profile
 
   def index
-    @applies = current_user.applies.page(params[:page])
+    @applies = current_user.applies.sorted_id.page(params[:page])
   end
 
   def new
