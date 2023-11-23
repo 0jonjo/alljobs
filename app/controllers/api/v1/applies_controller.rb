@@ -15,8 +15,8 @@ module Api
       end
 
       def index
-        @applys = Apply.all
-        render status: 200, json: @applys.as_json(except: %i[created_at updated_at])
+        @applies = Apply.all.sorted_id
+        render status: 200, json: @applies
       end
 
       def create
@@ -38,7 +38,7 @@ module Api
 
       def destroy
         if @apply.destroy
-          render status: 200, json: @apply
+          render status: 200, json: {}
         else
           render status: 412, json: { errors: @apply.errors.full_messages }
         end
