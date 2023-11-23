@@ -160,8 +160,7 @@ describe 'Job API' do
     it 'with sucess' do
       delete "/api/v1/jobs/#{job.id}"
 
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq('application/json; charset=utf-8')
+      expect(response.status).to eq 204
     end
 
     it 'without sucess - no job' do

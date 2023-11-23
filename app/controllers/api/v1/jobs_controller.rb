@@ -4,18 +4,17 @@ module Api
   module V1
     # JobController of API
     class JobsController < Api::V1::ApiController
-      before_action :find_id_job, only: %i[update destroy]
+      before_action :set_job, only: %i[show update destroy]
 
       def show
-        @job = Job.find(params[:id])
-        render status: 200, json: @job.as_json(except: %i[created_at updated_at])
+        render status: 200, json: @job
       rescue StandardError
         render status: 404, json: @job
       end
 
       def index
-        @jobs = Job.all
-        render status: 200, json: @jobs.as_json(except: %i[created_at updated_at])
+        @jobs = Job.all.sorted_id
+        render status: 200, json: @jobs
       end
 
       def create
@@ -37,7 +36,7 @@ module Api
 
       def destroy
         if @job.destroy
-          render status: 200, json: @job
+          render status: 204, json: {}
         else
           render status: 412, json: { errors: @job.errors.full_messages }
         end
@@ -46,11 +45,11 @@ module Api
       private
 
       def job_params
-        params.require(:job).permit(:title, :code, :description, :skills, :salary, :company_id,
+        params.require(:job).permit(:title, :description, :skills, :salary, :company_id,
                                     :level, :country_id, :city, :date, :job_status)
       end
 
-      def find_id_job
+      def set_job
         @job = Job.find(params[:id])
       end
     end
