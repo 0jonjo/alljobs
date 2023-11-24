@@ -27,10 +27,10 @@ describe 'Job API' do
   end
 
   context 'GET /api/v1/jobs' do
-    it 'with sucess' do
-      job1 = create(:job)
-      job2 = create(:job)
+    let!(:job1) { create(:job, title: 'Job Opening Test 123') }
+    let!(:job2) { create(:job, title: 'Job Opening Test 456') }
 
+    it 'with sucess' do
       get '/api/v1/jobs/'
 
       expect(response.status).to eq 200
@@ -43,6 +43,20 @@ describe 'Job API' do
       expect(json_response.last['title']).to eq(job2.title)
     end
 
+    it 'with sucess - using search' do
+      get '/api/v1/jobs?term=123'
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq('application/json; charset=utf-8')
+
+      json_response = JSON.parse(response.body)
+
+      expect(json_response.length).to eq 1
+      expect(json_response.first['title']).to eq(job1.title)
+    end
+  end
+
+  context 'GET /api/v1/jobs' do
     it "return empty - there aren't jobs" do
       get '/api/v1/jobs/'
 
@@ -160,8 +174,7 @@ describe 'Job API' do
     it 'with sucess' do
       delete "/api/v1/jobs/#{job.id}"
 
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq('application/json; charset=utf-8')
+      expect(response.status).to eq 204
     end
 
     it 'without sucess - no job' do

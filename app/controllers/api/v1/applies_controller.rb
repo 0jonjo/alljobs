@@ -15,14 +15,14 @@ module Api
       end
 
       def index
-        @applys = Apply.all
-        render status: 200, json: @applys.as_json(except: %i[created_at updated_at])
+        @applies = Apply.all.sorted_id
+        render status: 200, json: @applies
       end
 
       def create
         @apply = Apply.new(apply_params)
         if @apply.save
-          render status: 201, json: @apply
+          render status: 201, json: @apply, location: api_v1_job_apply_path(@apply.job_id, @apply.id)
         else
           render status: 412, json: { errors: @apply.errors.full_messages }
         end
@@ -38,7 +38,7 @@ module Api
 
       def destroy
         if @apply.destroy
-          render status: 200, json: @apply
+          render status: 200, json: {}
         else
           render status: 412, json: { errors: @apply.errors.full_messages }
         end

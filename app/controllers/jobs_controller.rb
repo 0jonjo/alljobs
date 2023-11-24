@@ -87,6 +87,6 @@ class JobsController < ApplicationController
   end
 
   def which_index(status)
-    @jobs = Job.where(job_status: status).page(params[:page])
+    @jobs = Job.where(job_status: status).sorted_id.page(params[:page])
   end
 end
