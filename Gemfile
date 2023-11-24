@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.5'
 
-gem "active_model_serializers", "~> 0.10.14"
+gem 'active_model_serializers', '~> 0.10.14'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
@@ -43,4 +43,3 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-

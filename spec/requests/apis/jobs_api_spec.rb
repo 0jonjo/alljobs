@@ -31,7 +31,6 @@ describe 'Job API' do
     let!(:job2) { create(:job, title: 'Job Opening Test 456') }
 
     it 'with sucess' do
-
       get '/api/v1/jobs/'
 
       expect(response.status).to eq 200
@@ -45,7 +44,6 @@ describe 'Job API' do
     end
 
     it 'with sucess - using search' do
-
       get '/api/v1/jobs?term=123'
 
       expect(response.status).to eq 200
