@@ -22,7 +22,7 @@ module Api
       def create
         @apply = Apply.new(apply_params)
         if @apply.save
-          render status: 201, json: @apply
+          render status: 201, json: @apply, location: api_v1_job_apply_path(@apply.job_id, @apply.id)
         else
           render status: 412, json: { errors: @apply.errors.full_messages }
         end

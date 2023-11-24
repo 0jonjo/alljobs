@@ -16,6 +16,7 @@ class Job < ApplicationRecord
   enum job_status: { draft: 0, published: 1, archived: 9 }
   enum level: { junior: 0, mid_level: 1, senior: 7, specialist: 9 }
 
+  scope :search, -> (term) { where('LOWER(title) LIKE ?', "%#{term.downcase}%") if term.present? }
   scope :sorted_id, -> { order(:id) }
 
   private

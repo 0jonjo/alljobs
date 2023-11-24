@@ -13,14 +13,14 @@ module Api
       end
 
       def index
-        @jobs = Job.all.sorted_id
+        @jobs = Job.search(params[:term]).sorted_id
         render status: 200, json: @jobs
       end
 
       def create
         @job = Job.new(job_params)
         if @job.save
-          render status: 201, json: @job
+          render status: 201, json: @job, location: api_v1_job_path(@job)
         else
           render status: 412, json: { errors: @job.errors.full_messages }
         end
