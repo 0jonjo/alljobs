@@ -7,7 +7,7 @@ class ProposalCommentsController < ApplicationController
   before_action :author, only: %i[index create]
 
   def index
-    @proposal_comments = ProposalComment.where(proposal_id: @proposal.id).page(params[:page])
+    @proposal_comments = ProposalComment.by_proposal_id(@proposal.id).page(params[:page])
   end
 
   def show; end

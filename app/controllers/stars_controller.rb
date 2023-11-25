@@ -5,7 +5,7 @@ class StarsController < ApplicationController
   before_action :already_star, only: [:create]
 
   def index
-    @stars = Star.where(headhunter_id: current_headhunter.id).page(params[:page])
+    @stars = Star.filtered_by_headhunter(current_headhunter.id).page(params[:page])
   end
 
   def find
@@ -39,7 +39,7 @@ class StarsController < ApplicationController
   end
 
   def already_star
-    return unless Star.where(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id]).exists?
+    return unless Star.filtered_by_ids(params[:headhunter_id], params[:apply_id]).exists?
 
     flash[:alert] = "You're already starred this apply."
     redirect_to request.referrer

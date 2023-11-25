@@ -54,14 +54,12 @@ class ProposalsController < ApplicationController
   end
 
   def accept
-    @proposal.user_accepted = true
-    if @proposal.save
-      profile = Profile.where(user_id: @apply.user_id).first
-      SendMailSuccessUserJob.perform_async(profile.id, 'accepted this proposal',
-                                           apply_proposal_path(@apply.id, @proposal.id))
+    if @proposal.update(user_accepted: true)
+      @proposal.send_mail_success(Profile.find_by_user_id(current_user.id).first.id,
+                                  apply_proposal_path(@apply.id, @proposal.id))
       flash[:notice] = 'You successfully accepted this proposal.'
     else
-      flash[:alert] = "You can't accept to this proposal."
+      flash[:alert] = "You can't accept this proposal."
     end
     redirect_to apply_proposal_path(@apply, @proposal)
   end
@@ -93,7 +91,7 @@ class ProposalsController < ApplicationController
   end
 
   def already_proposal
-    return unless Proposal.where(apply_id: params[:apply_id]).exists?
+    return unless Proposal.by_apply_id(params[:apply_id]).exists?
 
     flash[:alert] = 'There is already a proposal for this apply.'
     redirect_to @apply
