@@ -39,8 +39,8 @@ class JobsController < ApplicationController
   end
 
   def search
-    @word = params['query']
-    @jobs = Job.where('code LIKE :search OR title LIKE :search OR description LIKE :search', search: "%#{@word}%")
+    @term = params['query']
+    @jobs = Job.search_web(@term)
   end
 
   def destroy
@@ -49,7 +49,7 @@ class JobsController < ApplicationController
   end
 
   def show
-    @user_applied = Apply.where(job_id: @job.id, user_id: current_user.id) if user_signed_in?
+    @user_applied = Apply.applied_by_user(@job.id, current_user.id) if user_signed_in?
   end
 
   def drafted
@@ -87,6 +87,6 @@ class JobsController < ApplicationController
   end
 
   def which_index(status)
-    @jobs = Job.where(job_status: status).sorted_id.page(params[:page])
+    @jobs = Job.indexed(status).page(params[:page])
   end
 end

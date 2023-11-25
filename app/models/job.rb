@@ -18,8 +18,11 @@ class Job < ApplicationRecord
 
   scope :search, ->(term) { where('LOWER(title) LIKE ?', "%#{term.downcase}%") if term.present? }
   scope :sorted_id, -> { order(:id) }
-
-  private
+  scope :indexed, ->(status) { where(job_status: status).sorted_id }
+  scope :search_web, lambda { |term|
+                       where('LOWER(code) LIKE :search OR LOWER(title) LIKE :search OR LOWER(description)
+                                 LIKE :search', search: "%#{term.downcase}%")
+                     }
 
   def generate_code
     self.code = SecureRandom.alphanumeric(8).capitalize
