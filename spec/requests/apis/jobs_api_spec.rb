@@ -3,11 +3,19 @@
 require 'rails_helper'
 
 describe 'Job API' do
+  let(:valid_headers) do
+    { Authorization: '0123456789' }
+  end
+
+  let(:invalid_headers) do
+    { Authorization: '' }
+  end
+
   context 'GET /api/v1/jobs/1' do
     it 'with sucess' do
       job = create(:job)
 
-      get "/api/v1/jobs/#{job.id}"
+      get "/api/v1/jobs/#{job.id}", headers: valid_headers, as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -21,7 +29,7 @@ describe 'Job API' do
     end
 
     it "and fail because can't find the job" do
-      get '/api/v1/jobs/99999999'
+      get '/api/v1/jobs/99999999', headers: valid_headers, as: :json
       expect(response.status).to eq 404
     end
   end
@@ -31,7 +39,7 @@ describe 'Job API' do
     let!(:job2) { create(:job, title: 'Job Opening Test 456') }
 
     it 'with sucess' do
-      get '/api/v1/jobs/'
+      get '/api/v1/jobs/', headers: valid_headers, as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -44,7 +52,7 @@ describe 'Job API' do
     end
 
     it 'with sucess - using search' do
-      get '/api/v1/jobs?term=123'
+      get '/api/v1/jobs?term=123', headers: valid_headers, as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -58,7 +66,7 @@ describe 'Job API' do
 
   context 'GET /api/v1/jobs' do
     it "return empty - there aren't jobs" do
-      get '/api/v1/jobs/'
+      get '/api/v1/jobs/', headers: valid_headers, as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -70,7 +78,7 @@ describe 'Job API' do
     it 'without sucess - internal error' do
       allow(Job).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
 
-      get '/api/v1/jobs/'
+      get '/api/v1/jobs/', headers: valid_headers, as: :json
 
       expect(response).to have_http_status(500)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -86,7 +94,7 @@ describe 'Job API' do
                             skills: 'Nam mattis, felis ut adipiscing.', salary: '99', company_id: company.id.to_s,
                             level: :junior, country_id: country.id.to_s, city: 'Remote Job',
                             date: 1.month.from_now } }
-      post '/api/v1/jobs/', params: job_params
+      post '/api/v1/jobs/', params: job_params, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -107,7 +115,7 @@ describe 'Job API' do
       job_params = { job: { title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet',
                             skills: '', salary: '', company: '', level: '', place: '',
                             date: '' } }
-      post '/api/v1/jobs/', params: job_params
+      post '/api/v1/jobs/', params: job_params, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(412)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -129,7 +137,7 @@ describe 'Job API' do
                             level: 'Junior', country_id: country.id.to_s, city: 'Remote Job',
                             date: 1.month.from_now } }
 
-      post '/api/v1/jobs/', params: job_params
+      post '/api/v1/jobs/', params: job_params, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(500)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -143,7 +151,7 @@ describe 'Job API' do
       job_params = { job: { title: 'Test title', description: 'Test description',
                             skills: 'Test skills', salary: '66', level: :junior, city: 'Test place',
                             date: 1.month.from_now } }
-      put "/api/v1/jobs/#{job.id}", params: job_params
+      put "/api/v1/jobs/#{job.id}", params: job_params, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(200)
       expect(response.body).to include('Test title')
@@ -154,7 +162,7 @@ describe 'Job API' do
       job_params = { job: { title: 'Test title', description: 'Test description',
                             skills: '', salary: '', company: '', level: '', city: '',
                             date: '' } }
-      put "/api/v1/jobs/#{job.id}", params: job_params
+      put "/api/v1/jobs/#{job.id}", params: job_params, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(412)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -172,13 +180,13 @@ describe 'Job API' do
     let(:job) { create(:job) }
 
     it 'with sucess' do
-      delete "/api/v1/jobs/#{job.id}"
+      delete "/api/v1/jobs/#{job.id}", headers: valid_headers, as: :json
 
       expect(response.status).to eq 204
     end
 
     it 'without sucess - no job' do
-      delete '/api/v1/jobs/999999'
+      delete '/api/v1/jobs/999999', headers: valid_headers, as: :json
 
       expect(response.status).to eq 404
       expect(response.content_type).to eq('application/json; charset=utf-8')
