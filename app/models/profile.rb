@@ -12,9 +12,15 @@ class Profile < ApplicationRecord
             presence: true
   validates :user_id, uniqueness: true
 
+  scope :find_by_user_id, ->(user_id) { where(user_id: user_id) }
+
   def legal_age
     return if birthdate.present? && birthdate < Date.today - 18.years
 
     errors.add(:birthdate, 'must meet the legal age of majority, be 18+.')
+  end
+
+  def send_mail_success(action, path)
+    SendMailSuccessUserJob.perform_async(id, "#{action} your profile", path)
   end
 end
