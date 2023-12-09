@@ -2,11 +2,6 @@ name: Ruby
 
 on: [push, pull_request]
 
-env:
-  POSTGRES_DB: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: password
-
 jobs:
   test:
     name: Test
@@ -16,7 +11,7 @@ jobs:
     services:
       postgres:
         image: postgres:12
-        ports: ['5432:5439']
+        ports: ['5432:5432']
         env:
           POSTGRES_PASSWORD: password
         options: >-
@@ -46,8 +41,11 @@ jobs:
 
       - name: Run tests
         env:
+          PGHOST: localhost
           DISABLE_SPRING: 1
         run: |
+          cp config/database.ci.yml config/database.yml
+          bundle exec rails db:schema:load
           bundle exec rspec --format progress
 
       - name: Publish code coverage
