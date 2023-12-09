@@ -16,7 +16,7 @@ jobs:
     services:
       postgres:
         image: postgres:12
-        ports: ['5439:5439']
+        ports: ['5432:5439']
         env:
           POSTGRES_PASSWORD: password
         options: >-
