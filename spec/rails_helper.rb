@@ -12,11 +12,10 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 SimpleCov.start do
   add_group 'Config', 'config'
   add_group 'Controllers', 'app/controllers'
+  add_group 'API', 'app/controllers/api'
   add_group 'Helpers', 'app/helpers'
   add_group 'Jobs', 'app/jobs'
-  add_group 'Libs', 'lib'
   add_group 'Models', 'app/models'
-  add_group 'Specs', 'spec'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
