@@ -39,10 +39,12 @@ jobs:
           ruby-version: 3.0.5
           bundler-cache: true
 
-      - name: Install dependencies
+      - name: Install dependencies and adjust database configuration
         run: |
           sudo apt-get update && sudo apt-get -yqq install libpq-dev
           bundle install --jobs 4 --retry 3
+          cp config/database.ci.yml config/database.yml
+          bundle exec rails db:schema:load
 
       - name: Analyze code
         run: |
@@ -54,8 +56,6 @@ jobs:
           PGHOST: localhost
           DISABLE_SPRING: 1
         run: |
-          cp config/database.ci.yml config/database.yml
-          bundle exec rails db:schema:load
           bundle exec rspec --format progress
 
       - name: Publish code coverage
