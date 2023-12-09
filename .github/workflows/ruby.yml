@@ -16,7 +16,7 @@ jobs:
     services:
       postgres:
         image: postgres:12
-        ports: ['5432:5432']
+        ports: ['5439:5432']
         env:
           POSTGRES_PASSWORD: password
         options: >-
@@ -46,12 +46,8 @@ jobs:
 
       - name: Run tests
         env:
-          RAILS_ENV: test
-          PGHOST: localhost
           DISABLE_SPRING: 1
         run: |
-          cp config/database.ci.yml config/database.yml
-          bundle exec rails db:schema:load
           bundle exec rspec --format progress
 
       - name: Publish code coverage
