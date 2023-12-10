@@ -4,15 +4,17 @@ require 'rails_helper'
 require 'sidekiq/testing'
 
 RSpec.describe Job, type: :model do
-  it { is_expected.to validate_presence_of :title }
-  it { is_expected.to validate_presence_of :description }
-  it { is_expected.to validate_presence_of :skills }
-  it { is_expected.to validate_presence_of :salary }
-  it { is_expected.to validate_presence_of :level }
-  it { is_expected.to validate_presence_of :company }
-  it { is_expected.to validate_presence_of :country }
-  it { is_expected.to validate_presence_of :city }
-  it { is_expected.to validate_presence_of :date }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of :title }
+    it { is_expected.to validate_presence_of :description }
+    it { is_expected.to validate_presence_of :skills }
+    it { is_expected.to validate_presence_of :salary }
+    it { is_expected.to validate_presence_of :level }
+    it { is_expected.to validate_presence_of :company }
+    it { is_expected.to validate_presence_of :country }
+    it { is_expected.to validate_presence_of :city }
+    it { is_expected.to validate_presence_of :date }
+  end
 
   let(:country) { build(:country) }
   let(:company) { build(:company) }
