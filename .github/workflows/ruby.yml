@@ -6,11 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  POSTGRES_DB: postgres
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: password
-
 jobs:
   test:
     name: Test
@@ -54,8 +49,6 @@ jobs:
           PGHOST: localhost
           DISABLE_SPRING: 1
         run: |
-          cp config/database.ci.yml config/database.yml
-          bundle exec rails db:schema:load
           bundle exec rspec --format progress
 
       - name: Publish code coverage
