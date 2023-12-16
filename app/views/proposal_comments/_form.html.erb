@@ -5,6 +5,7 @@
 <% end %>
 
 <%= form_with(model: [@apply, @proposal, @proposal_comment]) do |form| %>
+    <%= form.hidden_field :proposal_id, value: @proposal.id %>
     <div>
       <%= form.text_area :body %>
     </div>
