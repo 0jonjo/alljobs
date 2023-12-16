@@ -6,6 +6,5 @@ class Comment < ApplicationRecord
 
   validates :body, :profile_id, :headhunter_id, presence: true
 
-
   scope :comments_by_headhunter, ->(headhunter, profile) { where(headhunter: headhunter, profile: profile) }
 end
