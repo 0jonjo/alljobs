@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class ProposalCommentsController < ApplicationController
+  include Author
   before_action :proposal_comment, only: %i[show edit update destroy]
   before_action :apply, only: %i[show new create edit]
   before_action :proposal, only: %i[index show new create edit update destroy]
-  before_action :author, only: %i[index create show]
+  before_action :author, only: %i[index create]
 
   def index
     @proposal_comments = ProposalComment.by_proposal_id(@proposal.id).page(params[:page])
@@ -46,16 +47,6 @@ class ProposalCommentsController < ApplicationController
 
   def apply
     @apply = Apply.find(params[:apply_id])
-  end
-
-  def author
-    if headhunter_signed_in?
-      @author_id = current_headhunter.id
-      @author_type = current_headhunter.class.to_s
-    else
-      @author_id = current_user.id
-      @author_type = current_user.class.to_s
-    end
   end
 
   def proposal
