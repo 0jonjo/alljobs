@@ -4,13 +4,9 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
   before_action :profile, only: %i[show edit update destroy]
 
-  def index
-    @comments = @profile.comments.all
-  end
-
-  def show
-    @comments = Comment.all
-  end
+  # def show
+    # @comments = comments_by_headhunter(current_headhunter) if headhunter_signed_in?
+  # end
 
   def new
     @comment = Comment.new

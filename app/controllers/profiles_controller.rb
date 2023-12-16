@@ -39,8 +39,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    current_headhunter.id if headhunter_signed_in?
-    @comments = @profile.comments.all
+    @comments = Comment.comments_by_headhunter(current_headhunter, @profile) if headhunter_signed_in?
     @comment = @profile.comments.build
   end
 
