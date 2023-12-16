@@ -6,6 +6,8 @@
 
 <%= form_with(model: [@apply, @proposal, @proposal_comment]) do |form| %>
     <%= form.hidden_field :proposal_id, value: @proposal.id %>
+    <%= form.hidden_field :author_id, value: @author_id if @author_id %>
+    <%= form.hidden_field :author_type, value: @author_type if @author_type %>
     <div>
       <%= form.text_area :body %>
     </div>

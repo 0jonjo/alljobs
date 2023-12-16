@@ -5,7 +5,7 @@ class ProposalCommentsController < ApplicationController
   before_action :proposal_comment, only: %i[show edit update destroy]
   before_action :apply, only: %i[show new create edit]
   before_action :proposal, only: %i[index show new create edit update destroy]
-  before_action :author, only: %i[index create]
+  before_action :author, only: %i[index new create]
 
   def index
     @proposal_comments = ProposalComment.by_proposal_id(@proposal.id).page(params[:page])
@@ -22,8 +22,6 @@ class ProposalCommentsController < ApplicationController
 
   def create
     @proposal_comment = ProposalComment.new(proposal_comment_params)
-    @proposal_comment.author_id = @author_id
-    @proposal_comment.author_type = @author_type
     return redirect_to apply_proposal_proposal_comments_path, notice: 'Comment created.' if @proposal_comment.save
 
     redirect_to request.referrer, notice: "Comment can't be created."
