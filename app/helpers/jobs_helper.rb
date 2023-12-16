@@ -16,4 +16,12 @@ module JobsHelper
   def statuses
     Job.job_statuses.keys.map { |status| [I18n.t("activerecord.attributes.job.job_statuses.keys.#{status}"), status] }
   end
+
+  def translate_level(level)
+    I18n.t("activerecord.attributes.job.levels.keys.#{level}")
+  end
+
+  def translate_job_status(status)
+    I18n.t("activerecord.attributes.job.job_statuses.keys.#{status}")
+  end
 end

@@ -4,14 +4,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
   before_action :profile, only: %i[show edit update destroy]
 
-  def index
-    @comments = @profile.comments.all
-  end
-
-  def show
-    @comments = Comment.all
-  end
-
   def new
     @comment = Comment.new
   end
