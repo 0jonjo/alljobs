@@ -1,7 +1,7 @@
 <% if @apply.errors.any? %>
   <% @apply.errors.full_messages.each do |message|%>
     <p><%= message %></p>
-  <% end %>  
+  <% end %>
 <% end %>
 
 <%= form_with model: apply do |form| %>
