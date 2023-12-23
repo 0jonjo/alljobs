@@ -49,4 +49,20 @@ RSpec.describe Proposal, type: :model do
       expect(proposal.errors.include?(:expected_start)).to be false
     end
   end
+
+  describe 'scopes' do
+    describe '.by_apply_id' do
+      let!(:apply) { create(:apply) }
+
+      subject { Proposal.by_apply_id(apply.id) }
+
+      it 'returns proposals with matching apply_id' do
+        proposal1 = create(:proposal, apply_id: apply.id)
+        proposal2 = create(:proposal)
+
+        expect(subject).to include(proposal1)
+        expect(subject).not_to include(proposal2)
+      end
+    end
+  end
 end

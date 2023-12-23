@@ -7,7 +7,7 @@ class Job < ApplicationRecord
   has_many :users, through: :applies
   validates :title, :description, :skills, :salary, :company, :level, :country, :city, :date, presence: true
   validates :salary, numericality: { only_decimal: true }
-  validates :code, uniqueness: true
+  validates :code, uniqueness: true, length: { is: 8 }
   validate :job_date_is_future
 
   before_validation :generate_code, on: :create

@@ -10,21 +10,32 @@ RSpec.describe Profile, type: :model do
   it { should validate_presence_of(:country_id) }
   it { should validate_presence_of(:user_id) }
 
+  describe 'scopes' do
+    describe '.find_by_user_id' do
+      let!(:profile1) { create(:profile) }
+      let!(:profile2) { create(:profile) }
+
+      it 'returns profile with matching user_id' do
+        expect(Profile.find_by_user_id(profile1.user_id)).to contain_exactly(profile1)
+      end
+
+      it 'does not return profile with non-matching user_id' do
+        expect(Profile.find_by_user_id(9_999_999_999)).to be_empty
+      end
+    end
+  end
+
   context 'Custom validation of' do
     let(:profile) { create(:profile) }
 
-    it 'user_id is uniquess' do
-      profile2 = Profile.new(name: 'Teste', social_name: 'Just a test 2', birthdate: '21/03/1977',
-                             educacional_background: 'Test 3', experience: 'Test 4',
-                             user_id: profile.user_id, country: profile.country)
+    it 'user_id is uniqueness' do
+      profile2 = build(:profile, user_id: profile.user_id)
       profile2.valid?
       expect(profile2.errors.include?(:user_id)).to be true
     end
 
-    it 'birthdate meet legal age' do
-      profile2 = Profile.new(name: 'Teste', social_name: 'Just a test 2', birthdate: 17.years.ago,
-                             educacional_background: 'Test 3', experience: 'Test 4',
-                             user_id: profile.user_id, country: profile.country)
+    it 'birthdate meets legal age' do
+      profile2 = build(:profile, birthdate: 17.years.ago)
       profile2.valid?
       expect(profile2.errors.include?(:birthdate)).to be true
     end
