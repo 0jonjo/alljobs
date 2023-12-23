@@ -7,6 +7,7 @@ ruby '3.0.5'
 
 gem 'active_model_serializers', '~> 0.10.14'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem "cssbundling-rails", "~> 1.3"
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
@@ -43,3 +44,4 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
