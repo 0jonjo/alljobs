@@ -12,6 +12,8 @@ describe 'Job API' do
   end
 
   context 'GET /api/v1/jobs/1' do
+    subject { JSON.parse(response.body) }
+
     it 'with sucess' do
       job = create(:job)
 
@@ -20,12 +22,10 @@ describe 'Job API' do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      json_response = JSON.parse(response.body)
-
-      expect(json_response['title']).to include(job.title)
-      expect(json_response['description']).to include(job.description)
-      expect(json_response.keys).not_to include('created_at')
-      expect(json_response.keys).not_to include('updated_at')
+      expect(subject['title']).to include(job.title)
+      expect(subject['description']).to include(job.description)
+      expect(subject.keys).not_to include('created_at')
+      expect(subject.keys).not_to include('updated_at')
     end
 
     it "and fail because can't find the job" do
@@ -86,6 +86,8 @@ describe 'Job API' do
   end
 
   context 'POST /api/v1/jobs/1' do
+    subject { JSON.parse(response.body) }
+
     let(:country) { create(:country) }
     let(:company) { create(:company) }
 
@@ -99,16 +101,14 @@ describe 'Job API' do
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      json_response = JSON.parse(response.body)
-
-      expect(json_response['title']).to include('Job Opening Test 123')
-      expect(json_response['description']).to include('Lorem ipsum dolor sit amet')
-      expect(json_response['skills']).to include('Nam mattis, felis ut adipiscing.')
-      expect(json_response['salary']).to eq('99.0')
-      expect(json_response['company_id']).to eq(company.id)
-      expect(json_response['level']).to include('junior')
-      expect(json_response['country_id']).to eq(country.id)
-      expect(json_response['city']).to include('Remote Job')
+      expect(subject['title']).to include('Job Opening Test 123')
+      expect(subject['description']).to include('Lorem ipsum dolor sit amet')
+      expect(subject['skills']).to include('Nam mattis, felis ut adipiscing.')
+      expect(subject['salary']).to eq('99.0')
+      expect(subject['company_id']).to eq(company.id)
+      expect(subject['level']).to include('junior')
+      expect(subject['country_id']).to eq(country.id)
+      expect(subject['city']).to include('Remote Job')
     end
 
     it 'without sucess - imcomplete parameters' do

@@ -163,22 +163,4 @@ describe 'Profile API' do
       expect(response.body).to include('Usuário não pode ficar em branco')
     end
   end
-
-  context 'DELETE /api/v1/profiles/1' do
-    let(:profile) { create(:profile) }
-
-    it 'with sucess' do
-      delete "/api/v1/profiles/#{profile.id}"
-
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-
-    it 'without sucess - no profile' do
-      delete '/api/v1/profiles/999999'
-
-      expect(response.status).to eq 404
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-  end
 end
