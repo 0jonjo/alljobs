@@ -52,7 +52,7 @@ describe 'Job API' do
     end
 
     it 'with sucess - using search' do
-      get '/api/v1/jobs?term=123', headers: valid_headers, as: :json
+      get '/api/v1/jobs?title=123', headers: valid_headers, as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')

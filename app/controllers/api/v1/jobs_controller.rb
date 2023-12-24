@@ -14,7 +14,7 @@ module Api
       end
 
       def index
-        @jobs = Job.search(params[:term]).sorted_id
+        @jobs = Job.search(params[:title]).sorted_id
         render status: 200, json: @jobs
       end
 
