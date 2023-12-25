@@ -7,13 +7,13 @@ describe 'Profile API' do
 
   let!(:country) { create(:country) }
   let!(:user) { create(:user) }
-  let(:profile_valid_attributes) { { profile: attributes_for(:profile, country_id: country.id, user_id: user.id) } }
+  let(:profile_valid_attributes) { attributes_for(:profile, country_id: country.id, user_id: user.id) }
 
   context 'GET /api/v1/profiles/1' do
     it 'with sucess' do
       profile = create(:profile)
 
-      get api_v1_profile_path(profile.id)
+      get api_v1_profile_path(profile.id), as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -24,7 +24,7 @@ describe 'Profile API' do
     end
 
     it "and fail because can't find the profile" do
-      get api_v1_profile_path(99_999_999)
+      get api_v1_profile_path(99_999_999), as: :json
       expect(response.status).to eq 404
     end
   end
@@ -34,7 +34,7 @@ describe 'Profile API' do
       profile1 = create(:profile)
       profile2 = create(:profile)
 
-      get api_v1_profiles_path
+      get api_v1_profiles_path, as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -44,7 +44,7 @@ describe 'Profile API' do
     end
 
     it "return empty - there aren't profiles" do
-      get api_v1_profiles_path
+      get api_v1_profiles_path, as: :json
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -54,7 +54,7 @@ describe 'Profile API' do
     it 'without sucess - internal error' do
       allow(Profile).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
 
-      get api_v1_profiles_path
+      get api_v1_profiles_path, as: :json
 
       expect(response).to have_http_status(500)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -63,17 +63,17 @@ describe 'Profile API' do
 
   context 'POST /api/v1/profiles/1' do
     it 'with sucess' do
-      post api_v1_profiles_path, params: profile_valid_attributes
+      post api_v1_profiles_path, params: profile_valid_attributes, as: :json
 
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(subject['name']).to include(profile_valid_attributes.values[0][:name])
-      expect(subject['social_name']).to include(profile_valid_attributes.values[0][:social_name])
-      expect(subject['birthdate']).to include(profile_valid_attributes.values[0][:birthdate].to_s[0..9])
-      expect(subject['description']).to include(profile_valid_attributes.values[0][:description])
-      expect(subject['educacional_background']).to include(profile_valid_attributes.values[0][:educacional_background])
-      expect(subject['experience']).to include(profile_valid_attributes.values[0][:experience])
-      expect(subject['city']).to include(profile_valid_attributes.values[0][:city])
+      expect(subject['name']).to include(profile_valid_attributes[:name])
+      expect(subject['social_name']).to include(profile_valid_attributes[:social_name])
+      expect(subject['birthdate']).to include(profile_valid_attributes[:birthdate].to_s[0..9])
+      expect(subject['description']).to include(profile_valid_attributes[:description])
+      expect(subject['educacional_background']).to include(profile_valid_attributes[:educacional_background])
+      expect(subject['experience']).to include(profile_valid_attributes[:experience])
+      expect(subject['city']).to include(profile_valid_attributes[:city])
       expect(subject['country_id']).to eq(country.id)
       expect(subject['user_id']).to eq(user.id)
     end
@@ -99,7 +99,7 @@ describe 'Profile API' do
 
     it 'without sucess - internal error' do
       allow(Profile).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
-      post api_v1_profiles_path, params: profile_valid_attributes
+      post api_v1_profiles_path, params: profile_valid_attributes, as: :json
 
       expect(response).to have_http_status(500)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -110,10 +110,10 @@ describe 'Profile API' do
     let(:profile) { create(:profile) }
 
     it 'with sucess' do
-      put api_v1_profile_path(profile.id), params: profile_valid_attributes
+      put api_v1_profile_path(profile.id), params: profile_valid_attributes, as: :json
 
       expect(response).to have_http_status(200)
-      expect(response.body).to include(profile_valid_attributes.values[0][:name])
+      expect(response.body).to include(profile_valid_attributes[:name])
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 
