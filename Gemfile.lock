@@ -362,7 +362,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
-  factory_bot_rails
+  factory_bot_rails (~> 6.2)
   faker
   jbuilder (~> 2.7)
   kaminari (~> 1.2, >= 1.2.1)
