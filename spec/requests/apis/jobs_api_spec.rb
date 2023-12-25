@@ -12,14 +12,10 @@ RSpec.describe 'Job API', type: :request do
   let(:invalid_headers) do
     { Authorization: '' }
   end
+
   let(:country) { create(:country) }
   let(:company) { create(:company) }
-  let(:job_attributes_valid) do
-    { job: { title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet',
-             skills: 'Nam mattis, felis ut adipiscing.', salary: '99', company_id: company.id.to_s,
-             level: :junior, country_id: country.id.to_s, city: 'Remote Job',
-             date: 1.month.from_now } }
-  end
+  let(:job_attributes_valid) { attributes_for(:job, company_id: company.id, country_id: country.id) }
   let(:job_attributes_invalid) do
     { job: { title: 'Job Opening Test 123', description: 'Lorem ipsum dolor sit amet',
              skills: '', salary: '', company_id: '',
@@ -100,14 +96,14 @@ RSpec.describe 'Job API', type: :request do
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(subject['title']).to include('Job Opening Test 123')
-      expect(subject['description']).to include('Lorem ipsum dolor sit amet')
-      expect(subject['skills']).to include('Nam mattis, felis ut adipiscing.')
-      expect(subject['salary']).to eq('99.0')
+      expect(subject['title']).to include(job_attributes_valid[:title])
+      expect(subject['description']).to include(job_attributes_valid[:description])
+      expect(subject['skills']).to include(job_attributes_valid[:skills])
+      expect(subject['salary'].to_f).to eq(job_attributes_valid[:salary])
       expect(subject['company_id']).to eq(company.id)
       expect(subject['level']).to include('junior')
       expect(subject['country_id']).to eq(country.id)
-      expect(subject['city']).to include('Remote Job')
+      expect(subject['city']).to include(job_attributes_valid[:city])
     end
 
     it 'without sucess - imcomplete parameters' do
@@ -136,13 +132,13 @@ RSpec.describe 'Job API', type: :request do
   end
 
   context 'PUT /api/v1/jobs/1' do
-    let(:job) { create(:job, title: 'Job Opening Test 456') }
+    let(:job) { create(:job) }
 
     it 'with sucess' do
       put api_v1_job_path(job.id), params: job_attributes_valid, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(200)
-      expect(response.body).to include('Job Opening Test 123')
+      expect(subject['title']).to include(job_attributes_valid[:title])
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 
@@ -162,13 +158,13 @@ RSpec.describe 'Job API', type: :request do
   end
 
   context 'PATCH /api/v1/jobs/1' do
-    let(:job) { create(:job, title: 'Job Opening Test 456') }
+    let(:job) { create(:job) }
 
     it 'with sucess' do
       patch api_v1_job_path(job.id), params: job_attributes_valid, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(200)
-      expect(response.body).to include('Job Opening Test 123')
+      expect(subject['title']).to include(job_attributes_valid[:title])
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 

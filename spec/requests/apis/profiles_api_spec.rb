@@ -3,28 +3,28 @@
 require 'rails_helper'
 
 describe 'Profile API' do
-  let(:country) { create(:country) }
-  let(:user) { create(:user) }
+  subject { JSON.parse(response.body) }
+
+  let!(:country) { create(:country) }
+  let!(:user) { create(:user) }
+  let(:profile_valid_attributes) { { profile: attributes_for(:profile, country_id: country.id, user_id: user.id) } }
 
   context 'GET /api/v1/profiles/1' do
     it 'with sucess' do
       profile = create(:profile)
 
-      get "/api/v1/profiles/#{profile.id}"
+      get api_v1_profile_path(profile.id)
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      json_response = JSON.parse(response.body)
-
-      expect(json_response['name']).to include(profile.name)
-      expect(json_response['description']).to include(profile.description)
-      expect(json_response.keys).not_to include('created_at')
-      expect(json_response.keys).not_to include('updated_at')
+      expect(subject['name']).to include(profile.name)
+      expect(subject['description']).to include(profile.description)
+      expect(subject.keys).not_to include('created_at')
+      expect(subject.keys).not_to include('updated_at')
     end
 
     it "and fail because can't find the profile" do
-      get '/api/v1/profiles/99999999'
+      get api_v1_profile_path(99_999_999)
       expect(response.status).to eq 404
     end
   end
@@ -34,32 +34,27 @@ describe 'Profile API' do
       profile1 = create(:profile)
       profile2 = create(:profile)
 
-      get '/api/v1/profiles/'
+      get api_v1_profiles_path
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      json_response = JSON.parse(response.body)
-
-      expect(json_response.length).to eq 2
-      expect(json_response.first['name']).to eq(profile1.name)
-      expect(json_response.last['name']).to eq(profile2.name)
+      expect(subject.length).to eq 2
+      expect(subject.first['name']).to eq(profile1.name)
+      expect(subject.last['name']).to eq(profile2.name)
     end
 
     it "return empty - there aren't profiles" do
-      get '/api/v1/profiles/'
+      get api_v1_profiles_path
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      json_response = JSON.parse(response.body)
-      expect(json_response).to eq []
+      expect(subject).to eq []
     end
 
     it 'without sucess - internal error' do
       allow(Profile).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
 
-      get '/api/v1/profiles/'
+      get api_v1_profiles_path
 
       expect(response).to have_http_status(500)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -68,34 +63,26 @@ describe 'Profile API' do
 
   context 'POST /api/v1/profiles/1' do
     it 'with sucess' do
-      profile_params = { profile: { name: 'Profile Tester', social_name: 'Social Name Test',
-                                    birthdate: '1970-01-01', description: 'Lorem ipsum dolor sit amet',
-                                    educacional_background: 'Nam mattis, felis ut adipiscing.',
-                                    experience: 'Test Experience', city: 'Test City', country_id: country.id.to_s,
-                                    user_id: user.id.to_s } }
-      post '/api/v1/profiles/', params: profile_params
+      post api_v1_profiles_path, params: profile_valid_attributes
 
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      json_response = JSON.parse(response.body)
-
-      expect(json_response['name']).to include('Profile Tester')
-      expect(json_response['social_name']).to include('Social Name Test')
-      expect(json_response['birthdate']).to include('1970-01-01')
-      expect(json_response['description']).to include('Lorem ipsum dolor sit amet')
-      expect(json_response['educacional_background']).to include('Nam mattis, felis ut adipiscing.')
-      expect(json_response['experience']).to include('Test Experience')
-      expect(json_response['city']).to include('Test City')
-      expect(json_response['country_id']).to eq(country.id)
-      expect(json_response['user_id']).to eq(user.id)
+      expect(subject['name']).to include(profile_valid_attributes.values[0][:name])
+      expect(subject['social_name']).to include(profile_valid_attributes.values[0][:social_name])
+      expect(subject['birthdate']).to include(profile_valid_attributes.values[0][:birthdate].to_s[0..9])
+      expect(subject['description']).to include(profile_valid_attributes.values[0][:description])
+      expect(subject['educacional_background']).to include(profile_valid_attributes.values[0][:educacional_background])
+      expect(subject['experience']).to include(profile_valid_attributes.values[0][:experience])
+      expect(subject['city']).to include(profile_valid_attributes.values[0][:city])
+      expect(subject['country_id']).to eq(country.id)
+      expect(subject['user_id']).to eq(user.id)
     end
 
     it 'without sucess - imcomplete parameters' do
       profile_params = { profile: { name: 'Profile Tester', social_name: '',
                                     birthdate: '', description: '', educacional_background: '',
                                     experience: '', city: '', country_id: '', user_id: '' } }
-      post '/api/v1/profiles/', params: profile_params
+      post api_v1_profiles_path, params: profile_params
 
       expect(response).to have_http_status(412)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -112,14 +99,7 @@ describe 'Profile API' do
 
     it 'without sucess - internal error' do
       allow(Profile).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
-
-      profile_params = { profile: { name: 'Profile Tester', social_name: 'Social Name Test',
-                                    birthdate: '1970-01-01', description: 'Lorem ipsum dolor sit amet',
-                                    educacional_background: 'Nam mattis, felis ut adipiscing.',
-                                    experience: 'Test Experience', city: 'Test City', country_id: country.id.to_s,
-                                    user_id: user.id.to_s } }
-
-      post '/api/v1/profiles/', params: profile_params
+      post api_v1_profiles_path, params: profile_valid_attributes
 
       expect(response).to have_http_status(500)
       expect(response.content_type).to eq('application/json; charset=utf-8')
@@ -130,25 +110,18 @@ describe 'Profile API' do
     let(:profile) { create(:profile) }
 
     it 'with sucess' do
-      profile_params = { profile: { name: 'Profile Tester', social_name: 'Social Name Test',
-                                    birthdate: '1970-01-01', description: 'Lorem ipsum dolor sit amet',
-                                    educacional_background: 'Nam mattis, felis ut adipiscing.',
-                                    experience: 'Test Experience', city: 'Test City', country_id: country.id.to_s,
-                                    user_id: user.id.to_s } }
-      put "/api/v1/profiles/#{profile.id}", params: profile_params
+      put api_v1_profile_path(profile.id), params: profile_valid_attributes
 
       expect(response).to have_http_status(200)
-      expect(response.body).to include('Profile Tester')
+      expect(response.body).to include(profile_valid_attributes.values[0][:name])
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      JSON.parse(response.body)
     end
 
     it 'without sucess - imcomplete parameters' do
       profile_params = { profile: { name: 'Profile Tester', social_name: '',
                                     birthdate: '', description: '', educacional_background: '',
                                     experience: '', city: '', country_id: '', user_id: '' } }
-      put "/api/v1/profiles/#{profile.id}", params: profile_params
+      put api_v1_profile_path(profile.id), params: profile_params
 
       expect(response).to have_http_status(412)
       expect(response.content_type).to eq('application/json; charset=utf-8')
