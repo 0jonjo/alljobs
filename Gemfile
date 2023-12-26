@@ -13,7 +13,7 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'puma', '~> 6.0'
 gem 'rails', '~> 7.0'
-gem 'rubocop', require: false
+gem 'rubocop-rails', require: false
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'turbolinks', '~> 5'

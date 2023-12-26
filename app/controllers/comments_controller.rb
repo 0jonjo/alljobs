@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show edit update destroy]
-  before_action :profile, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[edit update destroy]
+  before_action :profile, only: %i[edit update destroy]
 
   def new
     @comment = Comment.new
@@ -13,9 +13,9 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.headhunter_id = current_headhunter.id
-    return redirect_to request.referrer, notice: 'Comment created.' if @comment.save
+    return redirect_to request.referer, notice: 'Comment created.' if @comment.save
 
-    redirect_to request.referrer, notice: "Comment can't be created."
+    redirect_to request.referer, notice: "Comment can't be created."
   end
 
   def update
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to request.referrer, notice: 'Comment deleted.'
+    redirect_to request.referer, notice: 'Comment deleted.'
   end
 
   private

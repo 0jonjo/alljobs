@@ -138,14 +138,14 @@ RSpec.describe Job, type: :model do
 
   describe 'date' do
     it "can't be in past" do
-      job = build(:job, date: 10.day.ago)
+      job = build(:job, date: 10.days.ago)
       job.valid?
       expect(job.errors.include?(:date)).to be true
       expect(job.errors[:date]).to include(" date can't be in past or today.")
     end
 
     it "can't be today" do
-      job = build(:job, date: Date.today)
+      job = build(:job, date: Time.zone.today)
       job.valid?
       expect(job.errors.include?(:date)).to be true
       expect(job.errors[:date]).to include(" date can't be in past or today.")

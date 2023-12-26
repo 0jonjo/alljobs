@@ -29,7 +29,7 @@ class StarsController < ApplicationController
         flash[:alert] = "You can't starred this apply."
       end
     end
-    redirect_to request.referrer
+    redirect_to request.referer
   end
 
   private
@@ -42,6 +42,6 @@ class StarsController < ApplicationController
     return unless Star.filtered_by_ids(params[:headhunter_id], params[:apply_id]).exists?
 
     flash[:alert] = "You're already starred this apply."
-    redirect_to request.referrer
+    redirect_to request.referer
   end
 end

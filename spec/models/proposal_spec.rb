@@ -37,7 +37,7 @@ RSpec.describe Proposal, type: :model do
 
   describe 'expected_start' do
     it "can't be in past" do
-      proposal = Proposal.new(expected_start: 10.day.ago)
+      proposal = Proposal.new(expected_start: 10.days.ago)
       proposal.valid?
       expect(proposal.errors.include?(:expected_start)).to be true
       expect(proposal.errors[:expected_start]).to include(" expected start can't be in past.")

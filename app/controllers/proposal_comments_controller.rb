@@ -24,7 +24,7 @@ class ProposalCommentsController < ApplicationController
     @proposal_comment = ProposalComment.new(proposal_comment_params)
     return redirect_to apply_proposal_proposal_comments_path, notice: 'Comment created.' if @proposal_comment.save
 
-    redirect_to request.referrer, notice: "Comment can't be created."
+    redirect_to request.referer, notice: "Comment can't be created."
   end
 
   def update

@@ -8,38 +8,38 @@ module Api
       before_action :set_job, only: %i[show update destroy]
 
       def show
-        render status: 200, json: @job
+        render status: :ok, json: @job
       rescue StandardError
-        render status: 404, json: @job
+        render status: :not_found, json: @job
       end
 
       def index
         @jobs = Job.search(params[:title]).sorted_id
-        render status: 200, json: @jobs
+        render status: :ok, json: @jobs
       end
 
       def create
         @job = Job.new(job_params)
         if @job.save
-          render status: 201, json: @job, location: api_v1_job_path(@job)
+          render status: :created, json: @job, location: api_v1_job_path(@job)
         else
-          render status: 412, json: { errors: @job.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @job.errors.full_messages }
         end
       end
 
       def update
         if @job.update(job_params)
-          render status: 200, json: @job
+          render status: :ok, json: @job
         else
-          render status: 412, json: { errors: @job.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @job.errors.full_messages }
         end
       end
 
       def destroy
         if @job.destroy
-          render status: 204, json: {}
+          render status: :no_content, json: {}
         else
-          render status: 412, json: { errors: @job.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @job.errors.full_messages }
         end
       end
 

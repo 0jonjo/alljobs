@@ -3,11 +3,11 @@
 class Job < ApplicationRecord
   belongs_to :country
   belongs_to :company
-  has_many :applies
+  has_many :applies, dependent: :destroy
   has_many :users, through: :applies
   validates :title, :description, :skills, :salary, :company, :level, :country, :city, :date, presence: true
   validates :salary, numericality: { only_decimal: true }
-  validates :code, uniqueness: true, length: { is: 8 }
+  validates :code, length: { is: 8 }
   validate :job_date_is_future
 
   before_validation :generate_code, on: :create
@@ -25,11 +25,15 @@ class Job < ApplicationRecord
                      }
 
   def generate_code
-    self.code = SecureRandom.alphanumeric(8).capitalize
+    generated_code = SecureRandom.alphanumeric(8).capitalize
+
+    check_duplicated_code(generated_code)
+
+    self.code = generated_code
   end
 
   def job_date_is_future
-    return unless date.present? && date <= Date.today
+    return unless date.present? && date <= Time.zone.today
 
     errors.add(:date, " date can't be in past or today.")
   end
@@ -38,5 +42,13 @@ class Job < ApplicationRecord
     return unless draft?
 
     ApplyListJob.perform_async(id)
+  end
+
+  private
+
+  def check_duplicated_code(generated_code)
+    return generated_code unless Job.find_by(code: generated_code)
+
+    errors.add(:code, ' have to be unique.') if Job.find_by(code: generated_code)
   end
 end

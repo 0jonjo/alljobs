@@ -23,7 +23,7 @@ class AppliesController < ApplicationController
   end
 
   def create
-    return redirect_to request.referrer if Apply.applied_by_user(params[:job_id], params[:user_id]).exists?
+    return redirect_to request.referer if Apply.applied_by_user(params[:job_id], params[:user_id]).exists?
 
     @apply = Apply.new(job_id: params[:job_id], user_id: params[:user_id])
     redirect_to @apply if @apply.save

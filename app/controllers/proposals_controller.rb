@@ -55,7 +55,7 @@ class ProposalsController < ApplicationController
 
   def accept
     if @proposal.update(user_accepted: true)
-      @proposal.send_mail_success(Profile.find_by_user_id(current_user.id).first.id,
+      @proposal.send_mail_success(Profile.find_by(user_id: current_user.id).id,
                                   apply_proposal_path(@apply.id, @proposal.id))
       flash[:notice] = 'You successfully accepted this proposal.'
     else
