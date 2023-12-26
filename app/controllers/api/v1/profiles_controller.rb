@@ -7,38 +7,38 @@ module Api
 
       def show
         @profile = Profile.find(params[:id])
-        render status: 200, json: @profile.as_json(except: %i[created_at updated_at])
+        render status: :ok, json: @profile.as_json(except: %i[created_at updated_at])
       rescue StandardError
-        render status: 404, json: @profile
+        render status: :not_found, json: @profile
       end
 
       def index
         @profiles = Profile.all
-        render status: 200, json: @profiles.as_json(except: %i[created_at updated_at])
+        render status: :ok, json: @profiles.as_json(except: %i[created_at updated_at])
       end
 
       def create
         @profile = Profile.new(profile_params)
         if @profile.save
-          render status: 201, json: @profile
+          render status: :created, json: @profile
         else
-          render status: 412, json: { errors: @profile.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @profile.errors.full_messages }
         end
       end
 
       def update
         if @profile.update(profile_params)
-          render status: 200, json: @profile
+          render status: :ok, json: @profile
         else
-          render status: 412, json: { errors: @profile.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @profile.errors.full_messages }
         end
       end
 
       def destroy
         if @profile.destroy
-          render status: 200, json: @profile
+          render status: :ok, json: @profile
         else
-          render status: 412, json: { errors: @profile.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @profile.errors.full_messages }
         end
       end
 

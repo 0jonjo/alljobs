@@ -10,11 +10,11 @@ module Api
       private
 
       def return404
-        render status: 404, json: @job
+        render status: :not_found, json: @job
       end
 
       def return500
-        render status: 500, json: @job
+        render status: :internal_server_error, json: @job
       end
     end
   end

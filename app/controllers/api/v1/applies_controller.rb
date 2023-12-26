@@ -4,35 +4,35 @@ module Api
   module V1
     # ApplyController of API
     class AppliesController < Api::V1::ApiController
-      before_action :apply, only: %i[update destroy]
-      before_action :job, only: %i[update destroy]
+      before_action :apply, only: %i[destroy]
+      before_action :job, only: %i[destroy]
 
       def show
         @apply = Apply.find(params[:id])
-        render status: 200, json: @apply.as_json(except: %i[created_at updated_at])
+        render status: :ok, json: @apply.as_json(except: %i[created_at updated_at])
       rescue StandardError
-        render status: 404, json: @apply
+        render status: :not_found, json: @apply
       end
 
       def index
         @applies = Apply.all.sorted_id
-        render status: 200, json: @applies
+        render status: :ok, json: @applies
       end
 
       def create
         @apply = Apply.new(apply_params)
         if @apply.save
-          render status: 201, json: @apply, location: api_v1_job_apply_path(@apply.job_id, @apply.id)
+          render status: :created, json: @apply, location: api_v1_job_apply_path(@apply.job_id, @apply.id)
         else
-          render status: 412, json: { errors: @apply.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @apply.errors.full_messages }
         end
       end
 
       def destroy
         if @apply.destroy
-          render status: 200, json: {}
+          render status: :ok, json: {}
         else
-          render status: 412, json: { errors: @apply.errors.full_messages }
+          render status: :precondition_failed, json: { errors: @apply.errors.full_messages }
         end
       end
 
