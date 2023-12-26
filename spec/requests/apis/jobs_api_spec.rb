@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Job API', type: :request do
-  subject { JSON.parse(response.body) }
-
   let(:valid_headers) do
     { Authorization: '0123456789' }
   end
@@ -32,10 +30,10 @@ RSpec.describe 'Job API', type: :request do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(subject['title']).to include(job.title)
-      expect(subject['description']).to include(job.description)
-      expect(subject.keys).not_to include('created_at')
-      expect(subject.keys).not_to include('updated_at')
+      expect(json_response['title']).to include(job.title)
+      expect(json_response['description']).to include(job.description)
+      expect(json_response.keys).not_to include('created_at')
+      expect(json_response.keys).not_to include('updated_at')
     end
 
     it "and fail because can't find the job" do
@@ -54,9 +52,9 @@ RSpec.describe 'Job API', type: :request do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(subject.length).to eq 2
-      expect(subject.first['title']).to eq(job1.title)
-      expect(subject.last['title']).to eq(job2.title)
+      expect(json_response.length).to eq 2
+      expect(json_response.first['title']).to eq(job1.title)
+      expect(json_response.last['title']).to eq(job2.title)
     end
 
     it 'with sucess - using search' do
@@ -65,8 +63,8 @@ RSpec.describe 'Job API', type: :request do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(subject.length).to eq 1
-      expect(subject.first['title']).to eq(job1.title)
+      expect(json_response.length).to eq 1
+      expect(json_response.first['title']).to eq(job1.title)
     end
   end
 
@@ -76,7 +74,7 @@ RSpec.describe 'Job API', type: :request do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(subject).to eq []
+      expect(json_response).to eq []
     end
 
     it 'without sucess - internal error' do
@@ -96,14 +94,14 @@ RSpec.describe 'Job API', type: :request do
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(subject['title']).to include(job_attributes_valid[:title])
-      expect(subject['description']).to include(job_attributes_valid[:description])
-      expect(subject['skills']).to include(job_attributes_valid[:skills])
-      expect(subject['salary'].to_f).to eq(job_attributes_valid[:salary])
-      expect(subject['company_id']).to eq(company.id)
-      expect(subject['level']).to include('junior')
-      expect(subject['country_id']).to eq(country.id)
-      expect(subject['city']).to include(job_attributes_valid[:city])
+      expect(json_response['title']).to include(job_attributes_valid[:title])
+      expect(json_response['description']).to include(job_attributes_valid[:description])
+      expect(json_response['skills']).to include(job_attributes_valid[:skills])
+      expect(json_response['salary'].to_f).to eq(job_attributes_valid[:salary])
+      expect(json_response['company_id']).to eq(company.id)
+      expect(json_response['level']).to include('junior')
+      expect(json_response['country_id']).to eq(country.id)
+      expect(json_response['city']).to include(job_attributes_valid[:city])
     end
 
     it 'without sucess - imcomplete parameters' do
@@ -138,7 +136,7 @@ RSpec.describe 'Job API', type: :request do
       put api_v1_job_path(job.id), params: job_attributes_valid, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(200)
-      expect(subject['title']).to include(job_attributes_valid[:title])
+      expect(json_response['title']).to include(job_attributes_valid[:title])
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 
@@ -164,7 +162,7 @@ RSpec.describe 'Job API', type: :request do
       patch api_v1_job_path(job.id), params: job_attributes_valid, headers: valid_headers, as: :json
 
       expect(response).to have_http_status(200)
-      expect(subject['title']).to include(job_attributes_valid[:title])
+      expect(json_response['title']).to include(job_attributes_valid[:title])
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 

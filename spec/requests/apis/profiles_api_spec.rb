@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 describe 'Profile API' do
-  subject { JSON.parse(response.body) }
-
   let!(:country) { create(:country) }
   let!(:user) { create(:user) }
   let(:profile_valid_attributes) { attributes_for(:profile, country_id: country.id, user_id: user.id) }
@@ -17,10 +15,10 @@ describe 'Profile API' do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(subject['name']).to include(profile.name)
-      expect(subject['description']).to include(profile.description)
-      expect(subject.keys).not_to include('created_at')
-      expect(subject.keys).not_to include('updated_at')
+      expect(json_response['name']).to include(profile.name)
+      expect(json_response['description']).to include(profile.description)
+      expect(json_response.keys).not_to include('created_at')
+      expect(json_response.keys).not_to include('updated_at')
     end
 
     it "and fail because can't find the profile" do
@@ -38,9 +36,9 @@ describe 'Profile API' do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(subject.length).to eq 2
-      expect(subject.first['name']).to eq(profile1.name)
-      expect(subject.last['name']).to eq(profile2.name)
+      expect(json_response.length).to eq 2
+      expect(json_response.first['name']).to eq(profile1.name)
+      expect(json_response.last['name']).to eq(profile2.name)
     end
 
     it "return empty - there aren't profiles" do
@@ -48,7 +46,7 @@ describe 'Profile API' do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(subject).to eq []
+      expect(json_response).to eq []
     end
 
     it 'without sucess - internal error' do
@@ -67,15 +65,15 @@ describe 'Profile API' do
 
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(subject['name']).to include(profile_valid_attributes[:name])
-      expect(subject['social_name']).to include(profile_valid_attributes[:social_name])
-      expect(subject['birthdate']).to include(profile_valid_attributes[:birthdate].to_s[0..9])
-      expect(subject['description']).to include(profile_valid_attributes[:description])
-      expect(subject['educacional_background']).to include(profile_valid_attributes[:educacional_background])
-      expect(subject['experience']).to include(profile_valid_attributes[:experience])
-      expect(subject['city']).to include(profile_valid_attributes[:city])
-      expect(subject['country_id']).to eq(country.id)
-      expect(subject['user_id']).to eq(user.id)
+      expect(json_response['name']).to include(profile_valid_attributes[:name])
+      expect(json_response['social_name']).to include(profile_valid_attributes[:social_name])
+      expect(json_response['birthdate']).to include(profile_valid_attributes[:birthdate].to_s[0..9])
+      expect(json_response['description']).to include(profile_valid_attributes[:description])
+      expect(json_response['educacional_background']).to include(profile_valid_attributes[:educacional_background])
+      expect(json_response['experience']).to include(profile_valid_attributes[:experience])
+      expect(json_response['city']).to include(profile_valid_attributes[:city])
+      expect(json_response['country_id']).to eq(country.id)
+      expect(json_response['user_id']).to eq(user.id)
     end
 
     it 'without sucess - imcomplete parameters' do
