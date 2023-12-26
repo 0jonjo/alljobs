@@ -30,9 +30,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :jobs, only: %i[show index create update destroy] do
-        resources :applies, only: %i[show index create update destroy]
+        resources :applies, only: %i[show index create destroy]
       end
-      resources :profiles, only: %i[show index create update destroy]
+      resources :profiles, only: %i[show index create update]
     end
   end
 

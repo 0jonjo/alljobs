@@ -2,7 +2,6 @@
 
 module Api
   module V1
-    # ProfileController of API
     class ProfilesController < Api::V1::ApiController
       before_action :find_id_profile, only: %i[update destroy]
 

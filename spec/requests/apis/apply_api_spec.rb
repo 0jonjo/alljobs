@@ -14,8 +14,6 @@ describe 'Apply API' do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      json_response = JSON.parse(response.body)
-
       expect(json_response['user_id']).to eq(apply.user_id)
       expect(json_response['job_id']).to eq(job.id)
       expect(json_response['feedback_headhunter']).to include(apply.feedback_headhunter)
@@ -39,8 +37,6 @@ describe 'Apply API' do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      json_response = JSON.parse(response.body)
-
       expect(json_response.length).to eq 2
       expect(json_response.first['user_id']).to eq(apply1.user_id)
       expect(json_response.last['user_id']).to eq(apply2.user_id)
@@ -52,7 +48,6 @@ describe 'Apply API' do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      json_response = JSON.parse(response.body)
       expect(json_response).to eq []
     end
 
@@ -77,8 +72,6 @@ describe 'Apply API' do
       expect(response).to have_http_status(201)
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      json_response = JSON.parse(response.body)
-
       expect(json_response['user_id']).to eq(user.id)
       expect(json_response['job_id']).to eq(job.id)
       expect(json_response['feedback_headhunter']).to include('test')
@@ -91,7 +84,6 @@ describe 'Apply API' do
 
       expect(response).to have_http_status(412)
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
       expect(response.body).not_to include('Job não pode ficar em branco')
       expect(response.body).to include('User é obrigatório')
     end
@@ -104,30 +96,6 @@ describe 'Apply API' do
 
       expect(response).to have_http_status(500)
       expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-  end
-
-  context 'PUT /api/v1/jobs/1' do
-    let(:apply) { create(:apply) }
-
-    it 'with sucess' do
-      apply_params = { apply: { feedback_headhunter: 'test' } }
-      put "/api/v1/jobs/#{job.id}/applies/#{apply.id}", params: apply_params
-
-      expect(response).to have_http_status(200)
-      expect(response.body).to include('test')
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-
-    it 'without sucess when try change user_id or job_id' do
-      apply_params = { apply: { user_id: 999_999, job_id: 999_999 } }
-      put "/api/v1/jobs/#{job.id}/applies/#{apply.id}", params: apply_params
-
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      json_response = JSON.parse(response.body)
-      expect(json_response['user_id']).to eq(apply.user_id)
-      expect(json_response['job_id']).to eq(apply.job_id)
     end
   end
 

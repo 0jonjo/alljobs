@@ -28,14 +28,6 @@ module Api
         end
       end
 
-      def update
-        if @apply.update(apply_update_params)
-          render status: 200, json: @apply
-        else
-          render status: 412, json: { errors: @apply.errors.full_messages }
-        end
-      end
-
       def destroy
         if @apply.destroy
           render status: 200, json: {}

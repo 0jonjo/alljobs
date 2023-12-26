@@ -9,9 +9,6 @@ describe 'API' do
 
       expect(response.status).to eq 401
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      json_response = JSON.parse(response.body)
-
       expect(json_response).to include('errors' => 'Provide an valid Authorization header.')
     end
 
@@ -20,9 +17,6 @@ describe 'API' do
 
       expect(response.status).to eq 401
       expect(response.content_type).to eq('application/json; charset=utf-8')
-
-      json_response = JSON.parse(response.body)
-
       expect(json_response).to include('errors' => 'Provide an valid Authorization header.')
     end
   end

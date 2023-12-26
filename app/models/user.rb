@@ -10,5 +10,4 @@ class User < ApplicationRecord
   has_many :applies
   has_many :jobs, through: :applies
   has_many :proposal_comments, as: :author
-  # has_many :feedbacks, through: :applies
 end
