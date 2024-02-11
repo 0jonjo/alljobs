@@ -31,7 +31,7 @@ describe 'Headhunter' do
       click_on 'Atualizar Vaga'
 
       expect(page).to have_content 'Job Opening Test 123'
-      expect(page).to have_content '9999'
+      expect(page).to have_content 'R$ 9.999,00'
       expect(page).to have_content 'Pleno'
       expect(page).to have_content company.name
       expect(page).to have_content country.acronym

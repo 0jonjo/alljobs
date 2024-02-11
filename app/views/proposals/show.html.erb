@@ -13,15 +13,15 @@
 
 <div>
   <dt><%= Proposal.human_attribute_name(:salary) %></dt>
-  <dd><%= @proposal.salary %></dd>
+  <dd><%= number_to_currency(@proposal.salary) %></dd>
   <dt><%= Proposal.human_attribute_name(:benefits) %>
   <dd><%= @proposal.benefits %></dd>
-    <dt><%= Proposal.human_attribute_name(:expectations) %></dt>
+  <dt><%= Proposal.human_attribute_name(:expectations) %></dt>
   <dd><%= @proposal.expectations %></dd>
   <dt><%= Proposal.human_attribute_name(:expected_start) %></dt>
   <dd><%= I18n.l(@proposal.expected_start, format: :default) %></dd>
   <dt><%= Proposal.human_attribute_name(:updated_at) %></dt>
-  <dd><%= format_datetime(@proposal.updated_at) %></dd>
+  <dd><%= I18n.l(@proposal.updated_at, format: :short) %></dd>
 </div>
 
 <div>

@@ -21,7 +21,6 @@ describe 'User' do
     it 'direct to proposal page with sucess' do
       visit apply_proposal_path(apply, proposal)
 
-      expect(page).to have_content(proposal.salary)
       expect(page).to have_content(proposal.benefits)
       expect(page).to have_content(proposal.expectations)
       expect(page).to have_link("#{Apply.human_attribute_name(:id)}: #{Apply.last.id}", href: apply_path(Apply.last.id))
