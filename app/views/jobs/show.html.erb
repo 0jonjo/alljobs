@@ -8,7 +8,7 @@
   <dt><%= Job.human_attribute_name(:skills) %></dt>
   <dd><%= @job.skills %></dd>
   <dt><%= Job.human_attribute_name(:salary) %></dt>
-  <dd><%= @job.salary %></dd>
+  <dd><%= number_to_currency(@job.salary) %></dd>
   <dt><%= Job.human_attribute_name(:level) %></dt>
   <dd><%= translate_level(@job.level) %></dd>
   <dt><%= Job.human_attribute_name(:date) %></dt>
@@ -22,7 +22,7 @@
   <dt><%= Job.human_attribute_name(:job_status) %></dt>
   <dd><%= translate_job_status(@job.job_status) %></dd>
   <dt><%= Job.human_attribute_name(:updated_at) %></dt>
-  <dd><%= format_datetime(@job.updated_at) %></dd>
+  <dd><%= I18n.l(@job.updated_at, format: :short) %></dd>
 </div>
 
 <% if user_signed_in? %>
