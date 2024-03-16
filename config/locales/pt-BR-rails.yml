@@ -43,7 +43,7 @@ pt-BR:
       long: "%d de %B de %Y"
       short: "%d de %B"
     month_names:
-    - 
+    -
     - janeiro
     - fevereiro
     - março
@@ -120,6 +120,7 @@ pt-BR:
       greater_than_or_equal_to: deve ser maior ou igual a %{count}
       inclusion: não está incluído na lista
       invalid: não é válido
+      invalid_page: "Página inválida"
       less_than: deve ser menor que %{count}
       less_than_or_equal_to: deve ser menor ou igual a %{count}
       model_invalid: 'A validação falhou: %{errors}'
