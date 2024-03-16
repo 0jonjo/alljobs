@@ -56,6 +56,6 @@ class ProposalCommentsController < ApplicationController
   end
 
   def proposal_comment_params
-    params.require(:proposal_comment).permit(:id, :proposal_id, :author_id, :author_type, :body)
+    params.require(:proposal_comment).permit(:proposal_id, :author_id, :author_type, :body)
   end
 end
