@@ -5,7 +5,7 @@ This is a study project to a job opening website using Ruby on Rails in a TDD wa
 
 [Project Board](https://github.com/users/0jonjo/projects/3)
 
-Side repository to test API: [Seejobs](https://github.com/0jonjo/seejobs/)
+Side repository: [alljobs-api](https://github.com/0jonjo/alljobs-api/)
 
 - Ruby: 3.0.5
 - Rails: 7.1
