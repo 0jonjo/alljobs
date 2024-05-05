@@ -33,20 +33,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get -yqq install libpq-dev
+
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.4.0
         with:
           ruby-version: 3.0.5
           bundler-cache: true
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update && sudo apt-get -yqq install libpq-dev
-          bundle install --jobs 4 --retry 3
+      - name: Install Ruby dependencies
+        run: bundle install --jobs 4 --retry 3
 
       - name: Analyze code
-        run: |
-          bundle exec rubocop
+        run: bundle exec rubocop
 
       - name: Run tests
         env:
