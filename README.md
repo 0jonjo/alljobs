@@ -1,17 +1,20 @@
-# ALLJOBS ![Tests](https://github.com/0jonjo/alljobs/actions/workflows/ruby.yml/badge.svg) [![Maintainability](https://api.codeclimate.com/v1/badges/ab338714ffa9065409de/maintainability)](https://codeclimate.com/github/0jonjo/alljobs/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ab338714ffa9065409de/test_coverage)](https://codeclimate.com/github/0jonjo/alljobs/test_coverage)
+# ALLJOBS
 
+[![Tests](https://github.com/0jonjo/alljobs/actions/workflows/ruby.yml/badge.svg)](https://github.com/0jonjo/alljobs/actions/workflows/ruby.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ab338714ffa9065409de/maintainability)](https://codeclimate.com/github/0jonjo/alljobs/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ab338714ffa9065409de/test_coverage)](https://codeclimate.com/github/0jonjo/alljobs/test_coverage)
 
-This is a study project to a job opening website using Ruby on Rails in a TDD way. Alljobs focuses on job search, management of applications, proposals and communication. It has 2 roles: headhunter (job opening creation, candidate management, feedback, proposal) and user (profile creation, job search and application).
+Welcome to ALLJOBS, a study project for a job opening website built using Ruby on Rails. This project follows a Test-Driven Development (TDD) and Continuous Integration/Continuous Deployment (CI/CD) approach.
 
-[Project Board](https://github.com/users/0jonjo/projects/3)
+## Project Overview
 
-Side repository: [alljobs-api](https://github.com/0jonjo/alljobs-api/)
+ALLJOBS focuses on job search, application management, and proposal submission. It supports two roles: headhunter (responsible for job opening creation, candidate management, feedback, and proposal) and user (responsible for profile creation, job search, and application).
 
-- Ruby: 3.0.5
-- Rails: 7.1
-- Relevant technologies: Postgres, Docker, Devise, Rspec, Capybara, Sidekiq, Shoulda Matchers, SimpleCov, Rubocop, Kaminari and Faraday.
+To get an overview of the project's progress, you can check the [Project Board](https://github.com/users/0jonjo/projects/3).
 
-## Install
+## Installation
+
+To set up the project locally, follow these steps:
 
 ### Clone the repository
 
@@ -51,4 +54,3 @@ To use the containerized version, uncomment line 5 (url) in database.yml. After 
 ```shell
 docker compose up
 ```
-
