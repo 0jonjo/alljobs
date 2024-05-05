@@ -50,7 +50,7 @@ jobs:
 
       - name: Run tests
         env:
-          RAILS_ENV: production
+          RAILS_ENV: test
           PGHOST: localhost
           DISABLE_SPRING: 1
         run: |
