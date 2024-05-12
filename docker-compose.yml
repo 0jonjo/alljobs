@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   redis:
-    image: redis:7
+    image: redis:7.0.0-alpine
     ports:
       - '6379:6379'
     environment:
       - TERM=xterm-256color
 
   db:
-    image: postgres:14
+    image: postgres:14.1-alpine
     environment:
       - TZ=America/Fortaleza
       - POSTGRES_PASSWORD=postgres
@@ -35,15 +35,3 @@ services:
       - .:/home/app/web
     ports:
       - '3000:3000'
-
-  worker:
-    build:
-      context: .
-      dockerfile: worker/Dockerfile
-    environment:
-      - TZ=America/Fortaleza
-      - TERM=xterm-256color
-    env_file:
-      - .env.development
-    volumes:
-      - .:/home/app/web
