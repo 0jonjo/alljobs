@@ -1,4 +1,4 @@
-name: Ruby
+name: Rspec and Rubocop CI
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
 
 jobs:
   test:
-    name: Test
+    name: Lint and tests
     environment: alljobs
     runs-on: ubuntu-latest
 
