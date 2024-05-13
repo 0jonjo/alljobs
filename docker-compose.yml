@@ -1,51 +1,36 @@
-version: '1.0.0'
+version: '3.8'
 
 services:
   redis:
-    image: redis:7
+    image: redis:7.0.0-alpine
     ports:
-     - '6379:6379'
-    expose:
-     - '6379'
+      - '6379:6379'
     environment:
-      TERM: xterm-256color
+      - TERM=xterm-256color
 
   db:
-    image: postgres:14
+    image: postgres:14.1-alpine
     environment:
-      TZ: America/Fortaleza
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      TERM: xterm-256color
+      - TZ=America/Fortaleza
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - TERM=xterm-256color
     ports:
-     - '5432:5432'
-    expose:
-     - '5432'
+      - '5432:5432'
 
   web:
-    build: .
-    stdin_open: true
-    tty: true
-    entrypoint: config/setup_app.sh
-    command: bash -c "rails s -p 3000 -b '0.0.0.0'"
-    environment:
-      TZ: America/Fortaleza
-      TERM: xterm-256color
-    env_file:
-     - ./.env.development
-    volumes:
-     - .:/home/app/web
-    ports:
-     - '3000:3000'
-
-  worker:
     build:
       context: .
-      dockerfile: ./worker/Dockerfile
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    command: bash -c "rails s -p 3000 -b '0.0.0.0'"
     environment:
-      TZ: America/Fortaleza
-      TERM: xterm-256color
+      - TZ=America/Fortaleza
+      - TERM=xterm-256color
     env_file:
-     - ./.env.development
+      - .env.development
     volumes:
-     - .:/home/app/web
+      - .:/home/app/web
+    ports:
+      - '3000:3000'

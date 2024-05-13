@@ -1,4 +1,4 @@
-from ruby:3.0.5
+FROM ruby:3.0.5-alpine
 
 RUN apt update
 RUN apt upgrade -y
