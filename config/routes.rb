@@ -33,6 +33,8 @@ Rails.application.routes.draw do
         resources :applies, only: %i[show index create destroy]
       end
       resources :profiles, only: %i[show index create update]
+      post 'auth_user', to: 'tokens#auth_user'
+      post 'auth_headhunter', to: 'tokens#auth_headhunter'
     end
   end
 
