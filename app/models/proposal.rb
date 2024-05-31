@@ -15,6 +15,6 @@ class Proposal < ApplicationRecord
   end
 
   def send_mail_success(profile_id, path)
-    SendMailSuccessUserJob.perform_async(profile_id, 'accepted this proposal', path)
+    SendMailSuccessUserJob.perform_async(profile_id, "accepted this proposal", path)
   end
 end

@@ -13,14 +13,14 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.headhunter_id = current_headhunter.id
-    return redirect_to request.referer, notice: 'Comment created.' if @comment.save
+    return redirect_to request.referer, notice: "Comment created." if @comment.save
 
     redirect_to request.referer, notice: "Comment can't be created."
   end
 
   def update
     if @comment.update(comment_params)
-      redirect_to @profile, notice: 'Comment updated.'
+      redirect_to @profile, notice: "Comment updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to request.referer, notice: 'Comment deleted.'
+    redirect_to request.referer, notice: "Comment deleted."
   end
 
   private

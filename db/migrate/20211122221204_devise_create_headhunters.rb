@@ -8,7 +8,7 @@ class DeviseCreateHeadhunters < ActiveRecord::Migration[6.1]
       t.text :encrypted_password, null: false, default: ''
 
       ## Recoverable
-      t.text   :reset_password_token
+      t.text :reset_password_token
       t.datetime :reset_password_sent_at
 
       ## Rememberable

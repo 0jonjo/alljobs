@@ -13,8 +13,8 @@ RSpec.describe Star, type: :model do
       it 'returns stars filtered by headhunter_id and apply_id' do
         star1 = create(:star, headhunter: headhunter, apply: apply)
         star2 = create(:star, headhunter: headhunter)
-        expect(subject).to eq([star1])
-        expect(subject).not_to eq([star2])
+        expect(subject).to eq([ star1 ])
+        expect(subject).not_to eq([ star2 ])
       end
     end
 

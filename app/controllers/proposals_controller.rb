@@ -18,34 +18,34 @@ class ProposalsController < ApplicationController
 
   def update
     if @proposal.update(proposal_params)
-      flash[:notice] = 'You successfully edited this proposal.'
+      flash[:notice] = "You successfully edited this proposal."
       redirect_to @apply
     else
-      flash[:alert] = 'You do not edit this proposal.'
+      flash[:alert] = "You do not edit this proposal."
       redirect_to edit_apply_proposal_path(@proposal)
     end
   end
 
   def destroy
     if @proposal.destroy
-      flash[:alert] = 'You removed the proposal from the apply.'
+      flash[:alert] = "You removed the proposal from the apply."
       redirect_to @apply
     else
-      flash[:alert] = 'You do not remove the proposal from the apply.'
+      flash[:alert] = "You do not remove the proposal from the apply."
     end
   end
 
   def show
     return unless user_signed_in? && @proposal.apply.user != current_user
 
-    flash[:alert] = 'You do not have access to this proposal.'
+    flash[:alert] = "You do not have access to this proposal."
     redirect_to root_path
   end
 
   def create
     proposal = @apply.build_proposal(proposal_params)
     if proposal.save
-      flash[:notice] = 'You successfully create a proposal for this apply.'
+      flash[:notice] = "You successfully create a proposal for this apply."
       redirect_to @apply
     else
       flash[:alert] = "You can't create a proposal for this apply."
@@ -57,7 +57,7 @@ class ProposalsController < ApplicationController
     if @proposal.update(user_accepted: true)
       @proposal.send_mail_success(Profile.find_by(user_id: current_user.id).id,
                                   apply_proposal_path(@apply.id, @proposal.id))
-      flash[:notice] = 'You successfully accepted this proposal.'
+      flash[:notice] = "You successfully accepted this proposal."
     else
       flash[:alert] = "You can't accept this proposal."
     end
@@ -67,7 +67,7 @@ class ProposalsController < ApplicationController
   def reject
     @proposal.user_accepted = false
     if @proposal.save
-      flash[:notice] = 'You successfully rejected this proposal.'
+      flash[:notice] = "You successfully rejected this proposal."
     else
       flash[:alert] = "You can't reject to this proposal."
     end
@@ -93,7 +93,7 @@ class ProposalsController < ApplicationController
   def already_proposal
     return unless Proposal.by_apply_id(params[:apply_id]).exists?
 
-    flash[:alert] = 'There is already a proposal for this apply.'
+    flash[:alert] = "There is already a proposal for this apply."
     redirect_to @apply
   end
 end

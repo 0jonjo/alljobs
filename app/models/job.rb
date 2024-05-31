@@ -16,7 +16,7 @@ class Job < ApplicationRecord
   enum job_status: { draft: 0, published: 1, archived: 9 }
   enum level: { junior: 0, mid_level: 1, senior: 7, specialist: 9 }
 
-  scope :search, ->(title) { where('LOWER(title) LIKE ?', "%#{title.downcase}%") if title.present? }
+  scope :search, ->(title) { where("LOWER(title) LIKE ?", "%#{title.downcase}%") if title.present? }
   scope :sorted_id, -> { order(:id) }
   scope :indexed, ->(status) { where(job_status: status).sorted_id }
   scope :search_web, lambda { |term|
@@ -49,6 +49,6 @@ class Job < ApplicationRecord
   def check_duplicated_code(generated_code)
     return generated_code unless Job.find_by(code: generated_code)
 
-    errors.add(:code, ' have to be unique.') if Job.find_by(code: generated_code)
+    errors.add(:code, " have to be unique.") if Job.find_by(code: generated_code)
   end
 end
