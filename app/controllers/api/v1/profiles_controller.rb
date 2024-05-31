@@ -3,6 +3,8 @@
 module Api
   module V1
     class ProfilesController < Api::V1::ApiController
+      include Authenticable
+      before_action :authenticate_with_token
       before_action :find_id_profile, only: %i[update destroy]
 
       def show

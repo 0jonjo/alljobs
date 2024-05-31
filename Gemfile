@@ -9,6 +9,7 @@ gem 'active_model_serializers', '~> 0.10.14'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
+gem 'jwt', '>= 2.8.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'puma', '~> 6.4'
@@ -17,7 +18,6 @@ gem 'rubocop-rails', require: false
 gem 'sass-rails', '>= 6'
 gem 'sidekiq'
 gem 'turbolinks', '~> 5'
-gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

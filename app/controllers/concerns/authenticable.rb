@@ -8,7 +8,7 @@ module Authenticable
   end
 
   def valid_token?
-    @token.present? && @token.size >= 10
+    JsonWebToken.decode(@token)
   end
 
   def render_unauthorized
