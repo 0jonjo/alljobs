@@ -7,6 +7,10 @@ describe 'Profile API' do
   let!(:user) { create(:user) }
   let(:profile_valid_attributes) { attributes_for(:profile, country_id: country.id, user_id: user.id) }
 
+  before do
+    allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
+  end
+
   context 'GET /api/v1/profiles/1' do
     it 'with sucess' do
       profile = create(:profile)

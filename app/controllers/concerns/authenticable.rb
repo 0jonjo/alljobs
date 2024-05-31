@@ -9,8 +9,6 @@ module Authenticable
 
   def valid_token?
     JsonWebToken.decode(@token)
-  rescue StandardError
-    nil
   end
 
   def render_unauthorized

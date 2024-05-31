@@ -5,6 +5,10 @@ require 'rails_helper'
 describe 'Apply API' do
   let(:job) { create(:job) }
 
+  before do
+    allow_any_instance_of(Api::V1::AppliesController).to receive(:authenticate_with_token).and_return(true)
+  end
+
   context 'GET /api/v1/jobs/1/applies/1' do
     it 'with sucess' do
       apply = create(:apply, job_id: job.id, feedback_headhunter: 'test')
