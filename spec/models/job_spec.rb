@@ -53,7 +53,7 @@ RSpec.describe Job, type: :model do
         job2 = create(:job)
         job3 = create(:job)
 
-        expect(Job.sorted_id).to eq([job1, job2, job3])
+        expect(Job.sorted_id).to eq([ job1, job2, job3 ])
       end
     end
 

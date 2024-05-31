@@ -2,7 +2,7 @@
 
 module Authenticable
   def authenticate_with_token
-    @token ||= request.headers['Authorization']
+    @token ||= request.headers["Authorization"]
 
     render_unauthorized unless valid_token?
   end
@@ -12,7 +12,7 @@ module Authenticable
   end
 
   def render_unauthorized
-    render json: { errors: 'Provide an valid Authorization header.' },
+    render json: { errors: "Provide an valid Authorization header." },
            status: :unauthorized
   end
 end

@@ -16,7 +16,7 @@ class Profile < ApplicationRecord
   def legal_age
     return if birthdate.present? && birthdate < Time.zone.today - 18.years
 
-    errors.add(:birthdate, 'must meet the legal age of majority, be 18+.')
+    errors.add(:birthdate, "must meet the legal age of majority, be 18+.")
   end
 
   def send_mail_success(action, path)

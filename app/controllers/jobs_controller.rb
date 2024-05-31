@@ -11,12 +11,12 @@ class JobsController < ApplicationController
 
   def index_draft
     which_index(:draft)
-    render 'jobs/index'
+    render "jobs/index"
   end
 
   def index_archived
     which_index(:archived)
-    render 'jobs/index'
+    render "jobs/index"
   end
 
   def new
@@ -39,7 +39,7 @@ class JobsController < ApplicationController
   end
 
   def search
-    @term = params['query']
+    @term = params["query"]
     @jobs = Job.search_web(@term)
   end
 

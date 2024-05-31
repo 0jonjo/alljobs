@@ -2,7 +2,7 @@
 
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :authenticate_headhunter!, only: [:index]
+  before_action :authenticate_headhunter!, only: [ :index ]
   before_action :set_profile_check_user, only: %i[show update edit]
 
   def index
@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
     if @profile.save
-      @profile.send_mail_success('created', profile_path(@profile.id))
+      @profile.send_mail_success("created", profile_path(@profile.id))
       redirect_to @profile
     else
       render :new
@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      @profile.send_mail_success('updated', profile_path(@profile.id))
+      @profile.send_mail_success("updated", profile_path(@profile.id))
       redirect_to @profile
     else
       render :edit
