@@ -8,11 +8,12 @@ module Authenticable
   end
 
   def valid_token?
-    JsonWebToken.decode(@token)
+    body = JsonWebToken.decode(@token)
+    body[0]["exp"] < Time.now.to_i if body
   end
 
   def render_unauthorized
-    render json: { errors: "Provide an valid Authorization header." },
+    render json: { error: I18n.t("auth.unauthorized") },
            status: :unauthorized
   end
 end

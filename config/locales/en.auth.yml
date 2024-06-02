@@ -1,0 +1,7 @@
+en:
+  auth:
+    incorrect_data: "%{class_name} with incorrect email and/or password."
+    unauthorized: "Provide an valid Authorization header."
+    log:
+      auth_request_success: "%{class_name} with email '%{email}' successfully obtained token."
+      auth_request_fail: "Failed to generate token for %{class_name} with email '%{email}'."

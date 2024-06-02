@@ -1,0 +1,7 @@
+pt-BR:
+  auth:
+    incorrect_data: "%{class_name} com email e/ou senha incorretos."
+    unauthorized: "Forneça um cabeçalho de Autorização válido."
+    log:
+      auth_request_success: "%{class_name} com email '%{email}' obteve token com sucesso."
+      auth_request_fail: "Falha ao gerar token para %{class_name} com email '%{email}'."

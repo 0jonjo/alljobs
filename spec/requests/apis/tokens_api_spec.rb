@@ -22,6 +22,7 @@ describe 'Tokens API' do
       post api_v1_auth_user_path, params: { email: '', password: '' }, as: :json
 
       expect(response.status).to eq 404
+      expect(json_response['error']).to include(I18n.t('auth.incorrect_data', class_name: User.model_name.human))
     end
   end
 
@@ -44,6 +45,7 @@ describe 'Tokens API' do
       post api_v1_auth_headhunter_path, params: { email: '', password: '' }, as: :json
 
       expect(response.status).to eq 404
+      expect(json_response['error']).to include(I18n.t('auth.incorrect_data', class_name: Headhunter.model_name.human))
     end
   end
 end
