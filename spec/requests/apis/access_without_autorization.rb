@@ -25,13 +25,11 @@ describe 'API' do
       let(:token) { JsonWebToken.encode(user_id: user.id, exp: 1.second.ago) }
 
       it 'and receive the correct error' do
-        travel 1.second do
-          get '/api/v1/jobs', headers: { Authorization: token }, as: :json
+        get '/api/v1/jobs', headers: { Authorization: token }, as: :json
 
-          # expect(response.status).to eq 401
-          expect(response.content_type).to eq('application/json; charset=utf-8')
-          expect(json_response).to include('error' => I18n.t('auth.unauthorized'))
-        end
+        expect(response.status).to eq 401
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(json_response).to include('error' => I18n.t('auth.unauthorized'))
       end
     end
   end
