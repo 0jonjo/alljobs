@@ -8,7 +8,10 @@ module Authenticable
   end
 
   def valid_token?
-    JsonWebToken.decode(@token)
+    body = JsonWebToken.decode(@token)
+    return false if body.nil?
+    return false if body[0]["exp"] < Time.now.to_i
+    true
   end
 
   def render_unauthorized
