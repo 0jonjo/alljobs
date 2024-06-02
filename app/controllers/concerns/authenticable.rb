@@ -15,7 +15,7 @@ module Authenticable
   end
 
   def render_unauthorized
-    render json: { errors: "Provide an valid Authorization header." },
+    render json: { errors: I18n.t("auth.unauthorized") },
            status: :unauthorized
   end
 end
