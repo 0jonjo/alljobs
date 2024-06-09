@@ -9,7 +9,7 @@ module Authenticable
 
   def valid_token?
     body = JsonWebToken.decode(@token)
-    body[0]["exp"] < Time.now.to_i if body
+    body[0]["exp"] > Time.now.to_i if body
   end
 
   def render_unauthorized

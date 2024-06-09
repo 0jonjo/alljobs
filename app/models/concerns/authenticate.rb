@@ -1,34 +1,34 @@
 # frozen_string_literal: true
 
 class Authenticate
-  def initialize(email, password)
+  def initialize(email, password, account_type)
     @email = email
     @password = password
+    @account_type = account_type
   end
 
-  def call_user
-    JsonWebToken.encode(user_id: user.id) if user
-  end
+  def call
+    authenticate!
 
-  def call_headhunter
-    JsonWebToken.encode(headhunter_id: headhunter.id) if headhunter
+    JsonWebToken.encode(@payload)
   end
 
   private
 
   attr_reader :email, :password
 
-  def user
-    user ||= User.find_by(email: email)
-    return user if user&.valid_password?(password)
+  def authenticate!
+    @account = @account_type.constantize.find_by(email: email)
+    raise ActiveRecord::RecordNotFound unless @account&.valid_password?(password)
 
-    raise ActiveRecord::RecordNotFound
+    @account_type == "User" ? user_payload : headhunter_payload
   end
 
-  def headhunter
-    headhunter ||= Headhunter.find_by(email: email)
-    return headhunter if headhunter&.valid_password?(password)
+  def user_payload
+    @payload = { user_id: @account.id }
+  end
 
-    raise ActiveRecord::RecordNotFound
+  def headhunter_payload
+    @payload = { headhunter_id: @account.id }
   end
 end
