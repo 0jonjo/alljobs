@@ -8,47 +8,53 @@ Welcome to ALLJOBS, a job opening website built using Ruby on Rails. This projec
 
 ## Project Overview
 
-ALLJOBS focuses on job search, application management, and proposal submission. It supports two roles: headhunter (responsible for job opening creation, candidate management, feedback, and proposal) and user (responsible for profile creation, job search, and application).
+ALLJOBS is a platform that focuses on job search, application management, and proposal submission. It supports two roles: headhunter and user. The headhunter is responsible for job opening creation, candidate management, feedback, and proposal. The user is responsible for profile creation, job search, and application.
 
 To get an overview of the project's progress, you can check the [Project Board](https://github.com/users/0jonjo/projects/3).
+
+Alljobs has a side project built in Spring Boot called [Alljobs Meetings](https://github.com/0jonjo/alljobs-meetings), which serves as a meeting scheduling platform for headhunters and users.
 
 ## Installation
 
 To set up the project locally, follow these steps:
 
-### Clone the repository
+Clone the repository:
 
 ```shell
 git clone git@github.com:0jonjo/alljobs.git
 cd alljobs
 ```
 
-### Install dependencies
+Install dependencies:
 
 ```shell
 bundle install
 ```
 
-## Create, migrate and seed database
+Create, migrate, and seed the database:
 
 ```shell
 rails db:prepare
 ```
 
-## Serve
+Serve the application:
 
 ```shell
 rails server
 ```
 
-## Run tests
+Run tests:
 
 ```shell
 rspec
 ```
 
-# Containers
+## Containers
+
+To run the application using containers, use the following command:
 
 ```shell
 docker compose up
 ```
+
+Feel free to explore the features and functionalities of ALLJOBS. Happy job hunting!
