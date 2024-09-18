@@ -10,7 +10,7 @@ RSpec.describe Apply, type: :model do
         apply2 = create(:apply)
         apply3 = create(:apply)
 
-        expect(Apply.sorted_id).to eq([ apply1, apply2, apply3 ])
+        expect(Apply.sorted_id).to eq([apply1, apply2, apply3])
       end
     end
 
@@ -19,10 +19,10 @@ RSpec.describe Apply, type: :model do
       let(:user) { create(:user) }
 
       it 'returns the applies applied by the specified user for the specified job' do
-        apply1 = create(:apply, job: job, user: user)
+        apply1 = create(:apply, job:, user:)
         create(:apply)
 
-        expect(Apply.applied_by_user(job.id, user.id)).to eq([ apply1 ])
+        expect(Apply.applied_by_user(job.id, user.id)).to eq([apply1])
       end
     end
   end

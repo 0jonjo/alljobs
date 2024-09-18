@@ -6,7 +6,7 @@ describe 'Headhunter' do
   context 'edit a proposal to a candidate' do
     let!(:headhunter) { create(:headhunter) }
     let!(:apply) { create(:apply) }
-    let!(:proposal) { create(:proposal, apply: apply) }
+    let!(:proposal) { create(:proposal, apply:) }
 
     before do
       login_as(headhunter, scope: :headhunter)
@@ -29,7 +29,7 @@ describe 'Headhunter' do
     context 'without sucess -' do
       let!(:headhunter) { create(:headhunter) }
       let!(:apply) { create(:apply) }
-      let!(:proposal) { create(:proposal, apply: apply) }
+      let!(:proposal) { create(:proposal, apply:) }
 
       before do
         login_as(headhunter, scope: :headhunter)
@@ -53,7 +53,7 @@ describe 'Headhunter' do
   context 'delete a proposal to a cadindidate' do
     let!(:headhunter) { create(:headhunter) }
     let!(:apply) { create(:apply) }
-    let!(:proposal) { create(:proposal, apply: apply) }
+    let!(:proposal) { create(:proposal, apply:) }
 
     before do
       login_as(headhunter, scope: :headhunter)

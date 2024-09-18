@@ -11,8 +11,8 @@ describe 'Headhunter view applies to a specific job' do
   end
 
   it 'with sucess' do
-    apply1 = create(:apply, job: job)
-    apply2 = create(:apply, job: job)
+    apply1 = create(:apply, job:)
+    apply2 = create(:apply, job:)
 
     visit root_path
     within('nav') do

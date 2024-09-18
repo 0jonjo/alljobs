@@ -6,7 +6,7 @@ describe 'User' do
   let(:profile) { create(:profile) }
   let(:profile2) { create(:profile) }
   let(:apply) { create(:apply, user: profile2.user) }
-  let(:proposal) { create(:proposal, apply: apply) }
+  let(:proposal) { create(:proposal, apply:) }
 
   context 'try to acess an proposal of other user' do
     before do

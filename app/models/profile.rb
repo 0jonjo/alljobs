@@ -11,12 +11,12 @@ class Profile < ApplicationRecord
   validates :name, :birthdate, :educacional_background, :description, :experience, :city, :user_id, :country_id,
             presence: true
 
-  scope :find_by_user_id, ->(user_id) { where(user_id: user_id) }
+  scope :find_by_user_id, ->(user_id) { where(user_id:) }
 
   def legal_age
     return if birthdate.present? && birthdate < Time.zone.today - 18.years
 
-    errors.add(:birthdate, "must meet the legal age of majority, be 18+.")
+    errors.add(:birthdate, 'must meet the legal age of majority, be 18+.')
   end
 
   def send_mail_success(action, path)

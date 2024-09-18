@@ -28,7 +28,7 @@ job = Job.create(title: 'Test 123', description: 'Lorem ipsum dolor sit amet',
                  skills: 'Nam mattis, felis ut adipiscing.', salary: 99, level: :junior,
                  company_id: company.id, country_id: country.id, city: 'Test City', date: 10.years.from_now)
 # Default Apply
-apply = Apply.create(job: job, user: user)
+apply = Apply.create(job:, user:)
 
 # Default Star
 Star.create(headhunter_id: headhunter.id, apply_id: apply.id)
@@ -37,7 +37,7 @@ Star.create(headhunter_id: headhunter.id, apply_id: apply.id)
 FeedbackApply.create(headhunter_id: headhunter.id, apply_id: apply.id, body: 'Just a text Feedback')
 
 # Default Proposal
-proposal = Proposal.create(apply: apply, salary: 999, benefits: 'some benefits',
+proposal = Proposal.create(apply:, salary: 999, benefits: 'some benefits',
                            expectations: 'some expectations', expected_start: 1.month.from_now,
                            user_accepted: true)
 

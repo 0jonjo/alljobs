@@ -18,10 +18,10 @@ class Authenticate
   attr_reader :email, :password
 
   def authenticate!
-    @account = @account_type.constantize.find_by(email: email)
+    @account = @account_type.constantize.find_by(email:)
     raise ActiveRecord::RecordNotFound unless @account&.valid_password?(password)
 
-    @account_type == "User" ? user_payload : headhunter_payload
+    @account_type == 'User' ? user_payload : headhunter_payload
   end
 
   def user_payload

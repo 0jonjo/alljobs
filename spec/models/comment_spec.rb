@@ -10,15 +10,15 @@ RSpec.describe Comment, type: :model do
     let(:profile) { create(:profile) }
 
     before do
-      create(:comment, headhunter: headhunter, profile: profile)
-      create(:comment, headhunter: headhunter, profile: profile)
-      create(:comment, headhunter: headhunter)
+      create(:comment, headhunter:, profile:)
+      create(:comment, headhunter:, profile:)
+      create(:comment, headhunter:)
     end
 
     it 'returns comments by the specified headhunter and profile' do
       comments = Comment.comments_by_headhunter(headhunter, profile)
       expect(comments.count).to eq(2)
-      expect(comments).to all(have_attributes(headhunter: headhunter, profile: profile))
+      expect(comments).to all(have_attributes(headhunter:, profile:))
     end
   end
 end

@@ -6,6 +6,6 @@ class Star < ApplicationRecord
 
   validates :headhunter_id, :apply_id, presence: true
 
-  scope :filtered_by_ids, ->(headhunter_id, apply_id) { where(headhunter_id: headhunter_id, apply_id: apply_id) }
-  scope :filtered_by_headhunter, ->(headhunter_id) { where(headhunter_id: headhunter_id) }
+  scope :filtered_by_ids, ->(headhunter_id, apply_id) { where(headhunter_id:, apply_id:) }
+  scope :filtered_by_headhunter, ->(headhunter_id) { where(headhunter_id:) }
 end
