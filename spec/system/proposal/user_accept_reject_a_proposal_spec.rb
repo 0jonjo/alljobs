@@ -7,7 +7,7 @@ describe 'User' do
   context 'access a proposal' do
     let!(:profile) { create(:profile) }
     let!(:apply) { create(:apply, user: profile.user) }
-    let!(:proposal) { create(:proposal, apply: apply) }
+    let!(:proposal) { create(:proposal, apply:) }
 
     before do
       login_as(profile.user, scope: :user)

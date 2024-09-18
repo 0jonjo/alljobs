@@ -25,7 +25,7 @@ describe 'User' do
     end
 
     it 'without sucess - already applied' do
-      Apply.create!(job: job, user: profile.user)
+      Apply.create!(job:, user: profile.user)
 
       visit job_path(job)
 
@@ -35,7 +35,7 @@ describe 'User' do
 
     context 'and remove his apply' do
       it 'with sucess' do
-        apply = Apply.create!(job: job, user: profile.user)
+        apply = Apply.create!(job:, user: profile.user)
 
         visit apply_path(apply)
 

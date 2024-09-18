@@ -30,7 +30,7 @@ describe 'Headhunter' do
   context 'edit a comment on a profile' do
     let(:headhunter) { create(:headhunter) }
     let!(:profile) { create(:profile) }
-    let!(:comment) { create(:comment, profile: profile, headhunter: headhunter) }
+    let!(:comment) { create(:comment, profile:, headhunter:) }
 
     before do
       login_as(headhunter, scope: :headhunter)
@@ -49,7 +49,7 @@ describe 'Headhunter' do
   context 'delete a comment on a profile' do
     let(:headhunter) { create(:headhunter) }
     let!(:profile) { create(:profile) }
-    let!(:comment) { create(:comment, profile: profile, headhunter: headhunter) }
+    let!(:comment) { create(:comment, profile:, headhunter:) }
 
     before do
       login_as(headhunter, scope: :headhunter)

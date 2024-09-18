@@ -6,7 +6,7 @@ describe 'Headhunter' do
   context 'makes a' do
     let(:headhunter) { create(:headhunter) }
     let(:apply) { create(:apply) }
-    let(:proposal) { create(:proposal, apply: apply) }
+    let(:proposal) { create(:proposal, apply:) }
 
     before do
       login_as(headhunter, scope: :headhunter)

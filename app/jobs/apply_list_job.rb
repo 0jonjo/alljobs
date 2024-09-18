@@ -4,6 +4,6 @@ class ApplyListJob
   include Sidekiq::Job
 
   def perform(job_id)
-    Apply.where(job_id: job_id).map { |apply| ApplyCleanupJob.perform_async(apply.id) }
+    Apply.where(job_id:).map { |apply| ApplyCleanupJob.perform_async(apply.id) }
   end
 end

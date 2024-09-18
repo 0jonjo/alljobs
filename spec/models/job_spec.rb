@@ -53,7 +53,7 @@ RSpec.describe Job, type: :model do
         job2 = create(:job)
         job3 = create(:job)
 
-        expect(Job.sorted_id).to eq([ job1, job2, job3 ])
+        expect(Job.sorted_id).to eq([job1, job2, job3])
       end
     end
 
@@ -162,7 +162,7 @@ RSpec.describe Job, type: :model do
     it 'on queue with sucess' do
       expect(ApplyListJob.jobs.size).to eq(0)
       job = create(:job)
-      create(:apply, job: job)
+      create(:apply, job:)
       job.draft!
       expect(ApplyListJob.jobs.size).to eq(1)
     end

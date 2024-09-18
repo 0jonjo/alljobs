@@ -41,7 +41,7 @@ describe 'Headhunter' do
   end
 
   context 'send a proposal to a cadindidate' do
-    let!(:proposal) { create(:proposal, apply: apply) }
+    let!(:proposal) { create(:proposal, apply:) }
 
     before do
       login_as(headhunter, scope: :headhunter)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "active_record"
+require 'active_record'
 
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_page
@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
 
   def invalid_page
     logger.error "Attempt to access invalid page: #{request.url}"
-    redirect_to root_url, notice: I18n.t("errors.messages.invalid_page")
+    redirect_to root_url, notice: I18n.t('errors.messages.invalid_page')
   end
 end

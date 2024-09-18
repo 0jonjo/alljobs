@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProposalCommentAuthorBePolimorphic < ActiveRecord::Migration[7.1]
   def change
     remove_column :proposal_comments, :author

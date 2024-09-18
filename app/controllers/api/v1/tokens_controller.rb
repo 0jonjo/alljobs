@@ -4,11 +4,11 @@ module Api
   module V1
     class TokensController < Api::V1::ApiController
       def auth_user
-        authenticate("User")
+        authenticate('User')
       end
 
       def auth_headhunter
-        authenticate("Headhunter")
+        authenticate('Headhunter')
       end
 
       private
@@ -31,15 +31,15 @@ module Api
       end
 
       def log_auth_request_success(class_name, email)
-        logger.info(I18n.t("auth.log.auth_request_success", class_name: class_name, email: email))
+        logger.info(I18n.t('auth.log.auth_request_success', class_name:, email:))
       end
 
       def log_auth_request_fail(class_name, email)
-        logger.info(I18n.t("auth.log.auth_request_fail", class_name: class_name, email: email))
+        logger.info(I18n.t('auth.log.auth_request_fail', class_name:, email:))
       end
 
       def incorrect_data(class_name)
-        I18n.t("auth.incorrect_data", class_name: class_name)
+        I18n.t('auth.incorrect_data', class_name:)
       end
     end
   end

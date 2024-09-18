@@ -2,7 +2,7 @@
 
 class StarsController < ApplicationController
   before_action :authenticate_headhunter!
-  before_action :already_star, only: [ :create ]
+  before_action :already_star, only: [:create]
 
   def index
     @stars = Star.filtered_by_headhunter(current_headhunter.id).page(params[:page])
@@ -15,7 +15,7 @@ class StarsController < ApplicationController
   def destroy
     @star = Star.find(params[:id])
     @star.destroy
-    flash[:alert] = "You have removed the star from the apply"
+    flash[:alert] = 'You have removed the star from the apply'
     redirect_to stars_path
   end
 
@@ -24,7 +24,7 @@ class StarsController < ApplicationController
   def create
     if (@star = Star.new(headhunter_id: params[:headhunter_id], apply_id: params[:apply_id]))
       if @star.save
-        flash[:notice] = "You successfully starred this apply."
+        flash[:notice] = 'You successfully starred this apply.'
       else
         flash[:alert] = "You can't starred this apply."
       end

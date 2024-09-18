@@ -6,7 +6,7 @@ describe 'User' do
   context 'makes a' do
     let(:profile) { create(:profile) }
     let(:apply) { create(:apply, user_id: profile.user_id) }
-    let(:proposal) { create(:proposal, apply: apply) }
+    let(:proposal) { create(:proposal, apply:) }
 
     before do
       login_as(profile.user, scope: :user)
