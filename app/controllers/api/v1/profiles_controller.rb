@@ -5,10 +5,9 @@ module Api
     class ProfilesController < Api::V1::ApiController
       include Authenticable
       before_action :authenticate_with_token
-      before_action :find_id_profile, only: %i[update destroy]
+      before_action :find_id_profile, only: %i[show update destroy]
 
       def show
-        @profile = Profile.find(params[:id])
         render status: :ok, json: @profile.as_json(except: %i[created_at updated_at])
       rescue StandardError
         render status: :not_found, json: @profile
