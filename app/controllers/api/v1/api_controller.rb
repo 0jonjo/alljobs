@@ -10,11 +10,11 @@ module Api
       private
 
       def return404
-        render status: :not_found, json: @job
+        render status: :not_found, json: { errors: 'Not found' }
       end
 
       def return500
-        render status: :internal_server_error, json: @job
+        render status: :internal_server_error, json: { errors: 'Internal Server Error' }
       end
     end
   end
