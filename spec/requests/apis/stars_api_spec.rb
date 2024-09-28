@@ -47,4 +47,43 @@ describe 'Profile API' do
       end
     end
   end
+
+  context 'DELETE /api/v1/job/apply/stars/:id' do
+    let(:star) { create(:star, headhunter:, apply:) }
+    let(:star_another_headhunter) { create(:star, apply:) }
+
+    context 'when with sucess' do
+      it 'delete the star' do
+        delete api_v1_job_apply_star_path(apply.job_id, apply.id, star.id)
+
+        expect(response).to have_http_status(204)
+      end
+    end
+
+    context 'when without sucess' do
+      it 'return error when star does not exist' do
+        delete api_v1_job_apply_star_path(apply.job_id, apply.id, 99_999_999)
+
+        expect(response).to have_http_status(404)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
+
+      it 'return error when headhunter is not the owner' do
+        delete api_v1_job_apply_star_path(apply.job_id, apply.id, star_another_headhunter.id)
+
+        expect(response).to have_http_status(401)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(json_response['error']).to eq('Unauthorized')
+      end
+
+      it 'return internal error' do
+        allow(Star).to receive(:find).and_raise(ActiveRecord::QueryCanceled)
+
+        delete api_v1_job_apply_star_path(apply.job_id, apply.id, star.id)
+
+        expect(response).to have_http_status(500)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
+    end
+  end
 end
