@@ -6,8 +6,8 @@ module Api
     class AppliesController < Api::V1::ApiController
       include Authenticable
       before_action :authenticate_with_token
-      before_action :apply, only: %i[destroy]
-      before_action :job, only: %i[destroy]
+      before_action :set_apply, only: %i[destroy]
+      before_action :set_job, only: %i[destroy]
 
       def show
         @apply = Apply.find(params[:id])
@@ -46,14 +46,6 @@ module Api
 
       def apply_update_params
         params.require(:apply).permit(:feedback_headhunter)
-      end
-
-      def apply
-        @apply = Apply.find(params[:id])
-      end
-
-      def job
-        @job = Job.find(params[:job_id])
       end
     end
   end

@@ -5,7 +5,7 @@ module Api
     class ProfilesController < Api::V1::ApiController
       include Authenticable
       before_action :authenticate_with_token
-      before_action :find_id_profile, only: %i[show update destroy]
+      before_action :set_profile, only: %i[show update destroy]
 
       def show
         render status: :ok, json: @profile.as_json(except: %i[created_at updated_at])
@@ -48,10 +48,6 @@ module Api
       def profile_params
         params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background,
                                         :experience, :city, :user_id, :country_id)
-      end
-
-      def find_id_profile
-        @profile = Profile.find(params[:id])
       end
     end
   end

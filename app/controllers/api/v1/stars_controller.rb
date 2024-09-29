@@ -6,7 +6,6 @@ module Api
       include Authenticable
       before_action :authenticate_with_token
       before_action :headhunter_id
-      before_action :find_id_star, only: %i[destroy]
 
       def index
         @stars = Star.filtered_by_headhunter(@headhunter_id)
@@ -15,6 +14,8 @@ module Api
       end
 
       def destroy
+        set_star
+
         return render status: :unauthorized, json: { error: 'Unauthorized' } unless @star.headhunter_id == @headhunter_id
 
         return render status: :no_content, json: {} if @star.destroy
@@ -32,12 +33,9 @@ module Api
 
       private
 
-      def find_id_star
-        @star = Star.find(params[:id])
-      end
-
       def headhunter_id
         @headhunter_id = current_headhunter_id
+        @headhunter_id || render_unauthorized
       end
     end
   end
