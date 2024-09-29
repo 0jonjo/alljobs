@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'Profile API' do
+describe 'Stars API' do
   let(:apply) { create(:apply) }
   let(:headhunter) { create(:headhunter) }
 
@@ -11,8 +11,6 @@ describe 'Profile API' do
     allow_any_instance_of(Api::V1::StarsController).to receive(:authenticate_with_token).and_return(true)
     allow_any_instance_of(Api::V1::StarsController).to receive(:current_headhunter_id).and_return(headhunter.id)
   end
-
-  # Create route to headhunter get all stars of applies of a specific Job
 
   context 'POST /api/v1/job/apply/stars' do
     context 'when with sucess' do

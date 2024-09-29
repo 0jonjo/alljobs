@@ -24,6 +24,10 @@ class Job < ApplicationRecord
                                  LIKE :search', search: "%#{term.downcase}%")
                      }
 
+  def stars(headhunter_id)
+    applies.map { |apply| apply.stars.where(headhunter_id:) }.flatten
+  end
+
   def generate_code
     generated_code = SecureRandom.alphanumeric(8).capitalize
 

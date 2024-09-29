@@ -5,7 +5,7 @@ module Api
     class JobsController < Api::V1::ApiController
       include Authenticable
       before_action :authenticate_with_token
-      before_action :set_job, only: %i[show update destroy]
+      before_action :set_job, only: %i[show update destroy stars]
 
       def show
         render status: :ok, json: @job
@@ -41,6 +41,17 @@ module Api
         else
           render status: :precondition_failed, json: { errors: @job.errors.full_messages }
         end
+      end
+
+      def stars
+        headhunter_id = current_headhunter_id
+
+        return render_unauthorized unless headhunter_id
+
+        stars = @job.stars(headhunter_id)
+        render status: :ok, json: stars
+      rescue StandardError
+        render status: :not_found, json: stars
       end
 
       private

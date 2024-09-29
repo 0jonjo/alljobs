@@ -20,8 +20,6 @@ module Authenticable
   def current_headhunter_id
     body = JsonWebToken.decode(@token)
 
-    render_unauthorized unless body[0]['headhunter_id']
-
-    body[0]['headhunter_id']
+    body[0]['headhunter_id'] if body[0]['headhunter_id']
   end
 end
