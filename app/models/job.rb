@@ -13,8 +13,8 @@ class Job < ApplicationRecord
   before_validation :generate_code, on: :create
   after_update :clean_up
 
-  enum job_status: { draft: 0, published: 1, archived: 9 }
-  enum level: { junior: 0, mid_level: 1, senior: 7, specialist: 9 }
+  enum :job_status, %i[draft published archived]
+  enum :level, %i[junior mid_level senior specialist]
 
   scope :search, ->(title) { where('LOWER(title) LIKE ?', "%#{title.downcase}%") if title.present? }
   scope :sorted_id, -> { order(:id) }
@@ -23,6 +23,10 @@ class Job < ApplicationRecord
                        where('LOWER(code) LIKE :search OR LOWER(title) LIKE :search OR LOWER(description)
                                  LIKE :search', search: "%#{term.downcase}%")
                      }
+
+  def stars(headhunter_id)
+    applies.map { |apply| apply.stars.where(headhunter_id:) }.flatten
+  end
 
   def generate_code
     generated_code = SecureRandom.alphanumeric(8).capitalize

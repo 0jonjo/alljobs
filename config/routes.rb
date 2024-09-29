@@ -30,7 +30,11 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :jobs, only: %i[show index create update destroy] do
-        resources :applies, only: %i[show index create destroy]
+        resources :applies, only: %i[show index create destroy] do
+          resources :stars, only: %i[index create update destroy]
+        end
+
+        get 'stars', on: :member
       end
       resources :profiles, only: %i[show index create update]
       post 'auth_user', to: 'tokens#auth_user'

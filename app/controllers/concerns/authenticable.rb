@@ -16,4 +16,10 @@ module Authenticable
     render json: { error: I18n.t('auth.unauthorized') },
            status: :unauthorized
   end
+
+  def current_headhunter_id
+    body = JsonWebToken.decode(@token)
+
+    body[0]['headhunter_id'] if body[0]['headhunter_id']
+  end
 end
