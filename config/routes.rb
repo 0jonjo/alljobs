@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'sidekiq/web'
-
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :headhunters, :users
@@ -43,5 +41,4 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#index'
-  mount Sidekiq::Web => '/sidekiq'
 end

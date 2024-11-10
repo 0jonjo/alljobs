@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
+ActiveRecord::Schema[7.2].define(version: 20_231_104_135_128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -36,6 +36,16 @@ ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
     t.datetime 'updated_at', null: false
     t.index ['job_id'], name: 'index_applies_on_job_id'
     t.index ['user_id'], name: 'index_applies_on_user_id'
+  end
+
+  create_table 'available_times', id: :bigint, default: nil, force: :cascade do |t|
+    t.datetime 'created_at'
+    t.integer 'day_of_week'
+    t.time 'end_time_range', precision: 6
+    t.bigint 'referenceid'
+    t.string 'reference_type', limit: 255
+    t.time 'start_time_range', precision: 6
+    t.datetime 'updated_at'
   end
 
   create_table 'comments', force: :cascade do |t|
@@ -118,6 +128,17 @@ ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
     t.string 'city'
     t.index ['company_id'], name: 'index_jobs_on_company_id'
     t.index ['country_id'], name: 'index_jobs_on_country_id'
+  end
+
+  create_table 'meetings', primary_key: 'id_meeting', id: :uuid, default: nil, force: :cascade do |t|
+    t.datetime 'created_at'
+    t.datetime 'end_meeting'
+    t.bigint 'headhunter_id'
+    t.string 'link', limit: 255
+    t.datetime 'start_meeting'
+    t.string 'status', limit: 255
+    t.datetime 'updated_at'
+    t.bigint 'user_id'
   end
 
   create_table 'profiles', force: :cascade do |t|
