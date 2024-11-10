@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'sidekiq/testing'
 
 describe 'User' do
+  include ActiveJob::TestHelper
   let!(:user) { create(:user) }
   let!(:country) { create(:country) }
 
   before do
+    ActiveJob::Base.queue_adapter = :test
     login_as(user, scope: :user)
   end
 
@@ -39,7 +40,7 @@ describe 'User' do
       expect(page).to have_content 'Test 3'
       expect(page).to have_content 'Test 4'
       expect(page).to have_content country.name
-      expect(SendMailSuccessUserJob.jobs.size).to eq(1)
+      expect(SendMailSuccessUserJob).to have_been_enqueued
     end
 
     it 'without sucess - forget some items' do
@@ -67,7 +68,6 @@ describe 'User' do
     end
 
     it 'with sucess' do
-      Sidekiq::Worker.clear_all
       visit root_path
       click_on Profile.model_name.human
       click_on I18n.t('edit')
@@ -87,7 +87,8 @@ describe 'User' do
       expect(page).to have_content 'Test 6'
       expect(page).to have_content 'Test 7'
       expect(page).to have_content 'Test 8'
-      expect(SendMailSuccessUserJob.jobs.size).to eq(1)
+
+      expect(SendMailSuccessUserJob).to have_been_enqueued
     end
 
     it 'without sucess - forget some items' do

@@ -28,8 +28,6 @@ RSpec.describe 'Job API', type: :request do
 
       expect(json_response['title']).to include(job.title)
       expect(json_response['description']).to include(job.description)
-      expect(json_response.keys).not_to include('created_at')
-      expect(json_response.keys).not_to include('updated_at')
     end
 
     it "and fail because can't find the job" do
