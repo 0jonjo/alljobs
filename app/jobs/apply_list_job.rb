@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-class ApplyListJob
-  include Sidekiq::Job
-
+class ApplyListJob < ApplicationJob
   def perform(job_id)
-    Apply.where(job_id:).map { |apply| ApplyCleanupJob.perform_async(apply.id) }
+    Apply.where(job_id:).map { |apply| ApplyCleanupJob.new.perform(apply.id) }
   end
 end
