@@ -45,7 +45,7 @@ class Job < ApplicationRecord
   def clean_up
     return unless draft?
 
-    ApplyListJob.perform_async(id)
+    ApplyListJob.perform_later(id)
   end
 
   private

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'sidekiq/testing'
 
 RSpec.describe Job, type: :model do
   describe 'validations' do
@@ -159,12 +158,13 @@ RSpec.describe Job, type: :model do
   end
 
   describe 'cleanup one job' do
-    it 'on queue with sucess' do
-      expect(ApplyListJob.jobs.size).to eq(0)
-      job = create(:job)
-      create(:apply, job:)
-      job.draft!
-      expect(ApplyListJob.jobs.size).to eq(1)
+    it 'queues the job successfully' do
+      ActiveJob::Base.queue_adapter = :test
+      expect do
+        job = create(:job)
+        create(:apply, job: job)
+        job.draft!
+      end.to have_enqueued_job(ApplyListJob)
     end
   end
 end

@@ -12,21 +12,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
+ActiveRecord::Schema[7.2].define(version: 20_241_115_191_706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
-
-  create_table 'admins', force: :cascade do |t|
-    t.text 'email', default: '', null: false
-    t.text 'encrypted_password', default: '', null: false
-    t.text 'reset_password_token'
-    t.datetime 'reset_password_sent_at', precision: nil
-    t.datetime 'remember_created_at', precision: nil
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['email'], name: 'index_admins_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_admins_on_reset_password_token', unique: true
-  end
 
   create_table 'applies', force: :cascade do |t|
     t.bigint 'job_id', null: false
@@ -36,6 +24,16 @@ ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
     t.datetime 'updated_at', null: false
     t.index ['job_id'], name: 'index_applies_on_job_id'
     t.index ['user_id'], name: 'index_applies_on_user_id'
+  end
+
+  create_table 'available_times', id: :bigint, default: nil, force: :cascade do |t|
+    t.datetime 'created_at'
+    t.integer 'day_of_week'
+    t.time 'end_time_range', precision: 6
+    t.bigint 'referenceid'
+    t.string 'reference_type', limit: 255
+    t.time 'start_time_range', precision: 6
+    t.datetime 'updated_at'
   end
 
   create_table 'comments', force: :cascade do |t|
@@ -63,21 +61,6 @@ ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
     t.text 'name'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-  end
-
-  create_table 'delayed_jobs', force: :cascade do |t|
-    t.integer 'priority', default: 0, null: false
-    t.integer 'attempts', default: 0, null: false
-    t.text 'handler', null: false
-    t.text 'last_error'
-    t.datetime 'run_at', precision: nil
-    t.datetime 'locked_at', precision: nil
-    t.datetime 'failed_at', precision: nil
-    t.string 'locked_by'
-    t.string 'queue'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
-    t.index %w[priority run_at], name: 'delayed_jobs_priority'
   end
 
   create_table 'feedback_applies', force: :cascade do |t|
@@ -118,6 +101,17 @@ ActiveRecord::Schema[7.1].define(version: 20_231_104_135_128) do
     t.string 'city'
     t.index ['company_id'], name: 'index_jobs_on_company_id'
     t.index ['country_id'], name: 'index_jobs_on_country_id'
+  end
+
+  create_table 'meetings', primary_key: 'id_meeting', id: :uuid, default: nil, force: :cascade do |t|
+    t.datetime 'created_at'
+    t.datetime 'end_meeting'
+    t.bigint 'headhunter_id'
+    t.string 'link', limit: 255
+    t.datetime 'start_meeting'
+    t.string 'status', limit: 255
+    t.datetime 'updated_at'
+    t.bigint 'user_id'
   end
 
   create_table 'profiles', force: :cascade do |t|

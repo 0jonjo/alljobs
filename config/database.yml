@@ -16,7 +16,13 @@ test:
   password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 production:
-  <<: *default
-  database: alljobs_production
-  username: alljobs
-  password: <%= ENV['ALLJOBS_DATABASE_PASSWORD'] %>
+  primary:
+    <<: *default
+    database: alljobs_production
+    username: alljobs
+    password: <%= ENV['ALLJOBS_DATABASE_PASSWORD'] %>
+  queue:
+    <<: *default
+    database: alljobs_production_queue
+    migrations_paths: db/queue_migrate
+

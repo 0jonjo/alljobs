@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 
 module Alljobs
   class Application < Rails::Application
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :solid_queue
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.autoload_paths += %W[#{config.root}/lib]

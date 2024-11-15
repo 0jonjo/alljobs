@@ -20,6 +20,6 @@ class Profile < ApplicationRecord
   end
 
   def send_mail_success(action, path)
-    SendMailSuccessUserJob.perform_async(id, "#{action} your profile", path)
+    SendMailSuccessUserJob.perform_later(id, "#{action} your profile", path)
   end
 end
