@@ -12,21 +12,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 20_231_104_135_128) do
+ActiveRecord::Schema[7.2].define(version: 20_241_115_191_706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
-
-  create_table 'admins', force: :cascade do |t|
-    t.text 'email', default: '', null: false
-    t.text 'encrypted_password', default: '', null: false
-    t.text 'reset_password_token'
-    t.datetime 'reset_password_sent_at', precision: nil
-    t.datetime 'remember_created_at', precision: nil
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['email'], name: 'index_admins_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_admins_on_reset_password_token', unique: true
-  end
 
   create_table 'applies', force: :cascade do |t|
     t.bigint 'job_id', null: false
@@ -73,21 +61,6 @@ ActiveRecord::Schema[7.2].define(version: 20_231_104_135_128) do
     t.text 'name'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-  end
-
-  create_table 'delayed_jobs', force: :cascade do |t|
-    t.integer 'priority', default: 0, null: false
-    t.integer 'attempts', default: 0, null: false
-    t.text 'handler', null: false
-    t.text 'last_error'
-    t.datetime 'run_at', precision: nil
-    t.datetime 'locked_at', precision: nil
-    t.datetime 'failed_at', precision: nil
-    t.string 'locked_by'
-    t.string 'queue'
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
-    t.index %w[priority run_at], name: 'delayed_jobs_priority'
   end
 
   create_table 'feedback_applies', force: :cascade do |t|
