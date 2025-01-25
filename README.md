@@ -31,6 +31,12 @@ Install dependencies:
 bundle install
 ```
 
+Set up the database, comment out lines 18-20 and uncomment lines 16-17 in `config/database.yml` . Then start the database in container, run:
+
+```shell
+docker run -d --hostname localhost -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres
+```
+
 Create, migrate, and seed the database:
 
 ```shell
