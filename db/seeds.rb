@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# Default Admin
-Admin.create(email: 'admin@test.com',
-             password: 'test123')
 # Default Headhunter
 headhunter = Headhunter.create(email: 'headhunter@test.com',
                                password: 'test123')
