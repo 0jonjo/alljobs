@@ -10,7 +10,7 @@ describe 'Headhunter' do
   end
 
   context 'access job openings' do
-    it 'see published jobs with sucess' do
+    it 'see published jobs with success' do
       jobtosee1 = create(:job)
       jobtosee2 = create(:job)
       job_archived = create(:job, job_status: :archived)
@@ -32,7 +32,7 @@ describe 'Headhunter' do
   end
 
   context 'access job openings' do
-    it 'see draft jobs with sucess' do
+    it 'see draft jobs with success' do
       jobtosee1 = create(:job, job_status: :draft)
       jobtosee2 = create(:job, job_status: :draft)
       job_archived = create(:job, job_status: :archived)
@@ -56,7 +56,7 @@ describe 'Headhunter' do
   end
 
   context 'access job openings' do
-    it 'see archived jobs with sucess' do
+    it 'see archived jobs with success' do
       jobtosee1 = create(:job, job_status: :archived)
       jobtosee2 = create(:job, job_status: :archived)
       job_archived = create(:job, job_status: :draft)

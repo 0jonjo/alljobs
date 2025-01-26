@@ -12,7 +12,7 @@ describe 'Headhunter see his stars' do
     login_as(headhunter1, scope: :headhunter)
   end
 
-  it 'with sucess' do
+  it 'with success' do
     Star.create(headhunter: headhunter1, apply: apply1)
     Star.create(headhunter: headhunter2, apply: apply2)
 
@@ -26,12 +26,12 @@ describe 'Headhunter see his stars' do
     expect(page).not_to have_link(apply2.id.to_s, href: apply_path(apply2))
   end
 
-  it 'without sucess because there arent any star profile' do
+  it 'without success because there arent any star profile' do
     visit stars_path
     expect(page).to have_content(I18n.t('no_stars'))
   end
 
-  it 'without sucess because there arent any star profile to this headhunter' do
+  it 'without success because there arent any star profile to this headhunter' do
     Star.create(headhunter: headhunter2, apply: apply2)
 
     visit stars_path

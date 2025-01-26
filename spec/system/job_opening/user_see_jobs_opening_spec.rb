@@ -10,7 +10,7 @@ describe 'User' do
       login_as(profile.user, scope: :user)
     end
 
-    it 'with sucess - only published' do
+    it 'with success - only published' do
       job_published1 = create(:job, job_status: :published)
       job_published2 = create(:job, job_status: :published)
       job_archived = create(:job, job_status: :archived)
@@ -22,7 +22,7 @@ describe 'User' do
       expect(page).not_to have_content(job_archived.title)
     end
 
-    it 'without sucess - no one job' do
+    it 'without success - no one job' do
       visit jobs_path
 
       expect(page).to have_content(I18n.t('no_jobs'))

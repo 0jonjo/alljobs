@@ -13,7 +13,7 @@ describe 'Headhunter' do
   end
 
   context 'edit a job opening' do
-    it 'with sucess' do
+    it 'with success' do
       visit jobs_path
       click_on job.title
       click_on I18n.t('edit')
@@ -38,7 +38,7 @@ describe 'Headhunter' do
       expect(current_path).to eq job_path(job.id.to_s)
     end
 
-    it 'without sucess' do
+    it 'without success' do
       visit edit_job_path(job.id.to_s)
 
       fill_in Job.human_attribute_name(:title), with: ''

@@ -13,7 +13,7 @@ describe 'User' do
   end
 
   context 'create a profile' do
-    it 'with sucess' do
+    it 'with success' do
       visit root_path
       within('nav') do
         click_on Profile.model_name.human
@@ -43,7 +43,7 @@ describe 'User' do
       expect(SendMailSuccessUserJob).to have_been_enqueued
     end
 
-    it 'without sucess - forget some items' do
+    it 'without success - forget some items' do
       visit root_path
       click_on Profile.model_name.human
 
@@ -67,7 +67,7 @@ describe 'User' do
       login_as(profile.user, scope: :user)
     end
 
-    it 'with sucess' do
+    it 'with success' do
       visit root_path
       click_on Profile.model_name.human
       click_on I18n.t('edit')
@@ -91,7 +91,7 @@ describe 'User' do
       expect(SendMailSuccessUserJob).to have_been_enqueued
     end
 
-    it 'without sucess - forget some items' do
+    it 'without success - forget some items' do
       visit edit_profile_path(profile.id)
 
       fill_in Profile.human_attribute_name(:name), with: ''

@@ -10,7 +10,7 @@ describe 'Headhunter view applies to a specific job' do
     login_as(headhunter, scope: :headhunter)
   end
 
-  it 'with sucess' do
+  it 'with success' do
     apply1 = create(:apply, job:)
     apply2 = create(:apply, job:)
 
@@ -28,7 +28,7 @@ describe 'Headhunter view applies to a specific job' do
     expect(page).to have_content(apply2.user_email)
   end
 
-  it 'without sucess - no applies to this job' do
+  it 'without success - no applies to this job' do
     visit job_path(job.id.to_s)
     expect(page).not_to have_content(I18n.t('all_applies'))
   end

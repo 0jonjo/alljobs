@@ -13,7 +13,7 @@ describe 'Headhunter' do
   end
 
   context 'remove an apply to job opening using Async Job' do
-    it 'with sucess' do
+    it 'with success' do
       apply = create(:apply)
 
       visit job_path(apply.job_id)

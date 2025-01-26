@@ -10,7 +10,7 @@ describe 'Headhunter stars an apply' do
     login_as(headhunter, scope: :headhunter)
   end
 
-  it 'with sucess and try again' do
+  it 'with success and try again' do
     visit job_path(apply.job_id)
 
     click_on apply.id.to_s
@@ -21,7 +21,7 @@ describe 'Headhunter stars an apply' do
     expect(page).to have_content("You're already starred this apply.")
   end
 
-  it 'remove a star with sucess' do
+  it 'remove a star with success' do
     Star.create!(headhunter_id: headhunter.id, apply_id: apply.id)
 
     visit root_path

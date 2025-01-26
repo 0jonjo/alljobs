@@ -11,7 +11,7 @@ describe 'Headhunter' do
   end
 
   context 'when access the a job opening' do
-    it 'can change status to draft with sucess ' do
+    it 'can change status to draft with success ' do
       visit root_path
 
       click_on I18n.t('openings')
@@ -24,7 +24,7 @@ describe 'Headhunter' do
       expect(page).to have_content('Rascunho')
     end
 
-    it 'can change stauts to archived with sucess ' do
+    it 'can change stauts to archived with success ' do
       visit job_path(job)
 
       expect(page).not_to have_button I18n.t('published')

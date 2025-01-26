@@ -123,7 +123,7 @@ RSpec.describe Job, type: :model do
   describe 'generate a code' do
     let(:job) { build(:job) }
 
-    it 'when create a job with sucess' do
+    it 'when create a job with success' do
       expect(job.code.length).to eq 8
     end
 

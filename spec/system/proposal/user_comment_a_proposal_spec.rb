@@ -13,7 +13,7 @@ describe 'User' do
     end
 
     context ' comment on a proposal' do
-      it 'with sucess' do
+      it 'with success' do
         visit new_apply_proposal_proposal_comment_path(apply, proposal)
 
         fill_in 'proposal_comment[body]', with: 'Test Comment'
@@ -23,7 +23,7 @@ describe 'User' do
         expect(current_path).to eq(apply_proposal_proposal_comments_path(apply.id, proposal.id))
       end
 
-      it 'without sucess - blank comment' do
+      it 'without success - blank comment' do
         visit new_apply_proposal_proposal_comment_path(apply, proposal)
 
         fill_in 'proposal_comment[body]', with: ''
@@ -40,7 +40,7 @@ describe 'User' do
                                   author_type: 'User', author_id: profile.user_id)
       end
 
-      it 'with sucess' do
+      it 'with success' do
         visit apply_proposal_proposal_comments_path(apply, proposal)
 
         click_on I18n.t('edit').to_s
@@ -51,7 +51,7 @@ describe 'User' do
         expect(current_path).to eq(apply_proposal_proposal_comments_path(apply.id, proposal.id))
       end
 
-      it 'without sucess - blank comment' do
+      it 'without success - blank comment' do
         visit apply_proposal_proposal_comments_path(apply, proposal)
 
         click_on I18n.t('edit').to_s
@@ -67,7 +67,7 @@ describe 'User' do
     context 'n edit to a comment on a proposal' do
       let!(:proposal_comment) { create(:proposal_comment, proposal_id: proposal.id) }
 
-      it 'without sucess - not his comment' do
+      it 'without success - not his comment' do
         visit apply_proposal_proposal_comments_path(apply, proposal)
 
         expect(page).not_to have_content(I18n.t('edit').to_s)

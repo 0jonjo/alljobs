@@ -10,7 +10,7 @@ describe 'User' do
       login_as(profile.user, scope: :user)
     end
 
-    it 'with sucess' do
+    it 'with success' do
       visit root_path
       click_on Profile.model_name.human
       expect(current_path).to eq(profile_path(profile.id))
@@ -24,7 +24,7 @@ describe 'User' do
       login_as(user, scope: :user)
     end
 
-    it 'without sucess because do not have a profile' do
+    it 'without success because do not have a profile' do
       visit root_path
 
       click_on Profile.model_name.human
@@ -40,7 +40,7 @@ describe 'User' do
       login_as(user, scope: :user)
     end
 
-    it 'without sucess because is not his profile' do
+    it 'without success because is not his profile' do
       visit profile_path(profile.id)
       expect(current_path).to eq(root_path)
     end

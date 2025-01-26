@@ -10,7 +10,7 @@ describe 'Apply API' do
   end
 
   context 'GET /api/v1/jobs/1/applies/1' do
-    it 'with sucess' do
+    it 'with success' do
       apply = create(:apply, job_id: job.id, feedback_headhunter: 'test')
 
       get "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
@@ -32,7 +32,7 @@ describe 'Apply API' do
   end
 
   context 'GET /api/v1/jobs/1/applies/' do
-    it 'with sucess' do
+    it 'with success' do
       apply1 = create(:apply, job_id: job.id)
       apply2 = create(:apply, job_id: job.id)
 
@@ -55,7 +55,7 @@ describe 'Apply API' do
       expect(json_response).to eq []
     end
 
-    it 'without sucess - internal error' do
+    it 'without success - internal error' do
       allow(Apply).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
 
       get "/api/v1/jobs/#{job.id}/applies"
@@ -68,7 +68,7 @@ describe 'Apply API' do
   context 'POST /api/v1/jobs/1/applies' do
     let(:user) { create(:user) }
 
-    it 'with sucess' do
+    it 'with success' do
       apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
                                 feedback_headhunter: 'test' } }
       post "/api/v1/jobs/#{job.id}/applies", params: apply_params
@@ -81,7 +81,7 @@ describe 'Apply API' do
       expect(json_response['feedback_headhunter']).to include('test')
     end
 
-    it 'without sucess - imcomplete parameters' do
+    it 'without success - incomplete parameters' do
       apply_params = { apply: { job_id: job.id.to_s, user_id: '',
                                 feedback_headhunter: 'test' } }
       post "/api/v1/jobs/#{job.id}/applies", params: apply_params
@@ -92,7 +92,7 @@ describe 'Apply API' do
       expect(response.body).to include('User é obrigatório')
     end
 
-    it 'without sucess - internal error' do
+    it 'without success - internal error' do
       allow(Apply).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
       apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
                                 feedback_headhunter: 'test' } }
@@ -106,14 +106,14 @@ describe 'Apply API' do
   context 'DELETE /api/v1/jobs/1' do
     let(:apply) { create(:apply) }
 
-    it 'with sucess' do
+    it 'with success' do
       delete "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 
-    it 'without sucess - no job' do
+    it 'without success - no job' do
       delete "/api/v1/jobs/#{job.id}/applies/999999"
 
       expect(response.status).to eq 404

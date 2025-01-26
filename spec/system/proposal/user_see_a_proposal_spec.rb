@@ -12,13 +12,13 @@ describe 'User' do
       login_as(profile.user, scope: :user)
     end
 
-    it 'using apply link to proposal with sucess' do
+    it 'using apply link to proposal with success' do
       visit apply_path(apply)
 
       expect(page).to have_link(I18n.t('view_proposal'), href: apply_proposal_path(apply, proposal))
     end
 
-    it 'direct to proposal page with sucess' do
+    it 'direct to proposal page with success' do
       visit apply_proposal_path(apply, proposal)
 
       expect(page).to have_content(proposal.benefits)
@@ -37,13 +37,13 @@ describe 'User' do
       login_as(profile2.user, scope: :user)
     end
 
-    it 'using apply link to proposal without sucess' do
+    it 'using apply link to proposal without success' do
       visit apply_path(apply)
 
       expect(page).not_to have_link(I18n.t('view_proposal'), href: apply_proposal_path(apply, proposal))
     end
 
-    it 'direct to proposal page without sucess' do
+    it 'direct to proposal page without success' do
       visit apply_proposal_path(apply, proposal)
 
       expect(page).to have_content('You do not have access to this proposal.')

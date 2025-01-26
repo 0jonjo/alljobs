@@ -18,7 +18,7 @@ RSpec.describe 'Job API', type: :request do
   end
 
   context 'GET /api/v1/jobs/1' do
-    it 'with sucess' do
+    it 'with success' do
       job = create(:job)
 
       get api_v1_job_path(job.id), headers:, as: :json
@@ -40,7 +40,7 @@ RSpec.describe 'Job API', type: :request do
     let!(:job1) { create(:job, title: 'Job Opening Test 123') }
     let!(:job2) { create(:job, title: 'Job Opening Test 456') }
 
-    it 'with sucess' do
+    it 'with success' do
       get api_v1_jobs_path, headers:, as: :json
 
       expect(response.status).to eq 200
@@ -51,7 +51,7 @@ RSpec.describe 'Job API', type: :request do
       expect(json_response.last['title']).to eq(job2.title)
     end
 
-    it 'with sucess - using search' do
+    it 'with success - using search' do
       get '/api/v1/jobs?title=123', headers:, as: :json
 
       expect(response.status).to eq 200
@@ -71,7 +71,7 @@ RSpec.describe 'Job API', type: :request do
       expect(json_response).to eq []
     end
 
-    it 'without sucess - internal error' do
+    it 'without success - internal error' do
       allow(Job).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
 
       get api_v1_jobs_path, headers:, as: :json
@@ -82,7 +82,7 @@ RSpec.describe 'Job API', type: :request do
   end
 
   context 'POST /api/v1/jobs/1' do
-    it 'with sucess' do
+    it 'with success' do
       post api_v1_jobs_path, params: job_attributes_valid, headers:, as: :json
 
       expect(response).to have_http_status(201)
@@ -98,7 +98,7 @@ RSpec.describe 'Job API', type: :request do
       expect(json_response['city']).to include(job_attributes_valid[:city])
     end
 
-    it 'without sucess - imcomplete parameters' do
+    it 'without success - incomplete parameters' do
       post api_v1_jobs_path, params: job_attributes_invalid, headers:, as: :json
 
       expect(response).to have_http_status(412)
@@ -113,7 +113,7 @@ RSpec.describe 'Job API', type: :request do
       expect(response.body).to include('Salário não pode ficar em branco')
     end
 
-    it 'without sucess - internal error' do
+    it 'without success - internal error' do
       allow(Job).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
 
       post api_v1_jobs_path, params: job_attributes_valid, headers:, as: :json
@@ -126,7 +126,7 @@ RSpec.describe 'Job API', type: :request do
   context 'PUT /api/v1/jobs/1' do
     let(:job) { create(:job) }
 
-    it 'with sucess' do
+    it 'with success' do
       put api_v1_job_path(job.id), params: job_attributes_valid, headers:, as: :json
 
       expect(response).to have_http_status(200)
@@ -134,7 +134,7 @@ RSpec.describe 'Job API', type: :request do
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 
-    it 'without sucess - imcomplete parameters' do
+    it 'without success - incomplete parameters' do
       put api_v1_job_path(job.id), params: job_attributes_invalid, headers:, as: :json
 
       expect(response).to have_http_status(412)
@@ -152,7 +152,7 @@ RSpec.describe 'Job API', type: :request do
   context 'PATCH /api/v1/jobs/1' do
     let(:job) { create(:job) }
 
-    it 'with sucess' do
+    it 'with success' do
       patch api_v1_job_path(job.id), params: job_attributes_valid, headers:, as: :json
 
       expect(response).to have_http_status(200)
@@ -160,7 +160,7 @@ RSpec.describe 'Job API', type: :request do
       expect(response.content_type).to eq('application/json; charset=utf-8')
     end
 
-    it 'without sucess - imcomplete parameters' do
+    it 'without success - incomplete parameters' do
       patch api_v1_job_path(job.id), params: job_attributes_invalid, headers:, as: :json
 
       expect(response).to have_http_status(412)
@@ -178,13 +178,13 @@ RSpec.describe 'Job API', type: :request do
   context 'DELETE /api/v1/jobs/1' do
     let(:job) { create(:job) }
 
-    it 'with sucess' do
+    it 'with success' do
       delete api_v1_job_path(job.id), headers:, as: :json
 
       expect(response.status).to eq 204
     end
 
-    it 'without sucess - no job' do
+    it 'without success - no job' do
       delete api_v1_job_path(99_999_999), headers:, as: :json
 
       expect(response.status).to eq 404
@@ -207,7 +207,7 @@ RSpec.describe 'Job API - Stars', type: :request do
   end
 
   context 'GET /api/v1/jobs/1/stars' do
-    context 'with sucess' do
+    context 'with success' do
       it 'and correct status' do
         get stars_api_v1_job_path(job.id)
 
@@ -224,7 +224,7 @@ RSpec.describe 'Job API - Stars', type: :request do
       end
     end
 
-    context 'without sucess' do
+    context 'without success' do
       it 'and there no star' do
         star.destroy
 

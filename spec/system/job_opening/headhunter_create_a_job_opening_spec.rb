@@ -12,7 +12,7 @@ describe 'Headhunter' do
   end
 
   context 'create a job opening' do
-    it 'with sucess - status published' do
+    it 'with success - status published' do
       allow(SecureRandom).to receive(:alphanumeric).and_return('12345678')
 
       visit root_path
@@ -42,7 +42,7 @@ describe 'Headhunter' do
       expect(current_path).to eq job_path(Job.last.id)
     end
 
-    it 'with sucess - status archived' do
+    it 'with success - status archived' do
       visit new_job_path
 
       fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
@@ -63,7 +63,7 @@ describe 'Headhunter' do
       expect(current_path).to eq job_path(Job.last.id)
     end
 
-    it 'with sucess - status draft' do
+    it 'with success - status draft' do
       visit new_job_path
 
       fill_in Job.human_attribute_name(:title), with: 'Job Opening Test'
@@ -84,7 +84,7 @@ describe 'Headhunter' do
       expect(current_path).to eq job_path(Job.last.id)
     end
 
-    it 'without sucess' do
+    it 'without success' do
       visit new_job_path
 
       fill_in Job.human_attribute_name(:title), with: ''

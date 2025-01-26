@@ -10,7 +10,7 @@ describe 'Tokens API' do
       user
     end
 
-    it 'with sucess' do
+    it 'with success' do
       post api_v1_auth_user_path, params: { email: user.email, password: user.password }, as: :json
 
       expect(response.status).to eq 200
@@ -33,7 +33,7 @@ describe 'Tokens API' do
       headhunter
     end
 
-    it 'with sucess' do
+    it 'with success' do
       post api_v1_auth_headhunter_path, params: { email: headhunter.email, password: headhunter.password }, as: :json
 
       expect(response.status).to eq 200
