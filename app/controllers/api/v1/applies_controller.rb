@@ -6,11 +6,13 @@ module Api
     class AppliesController < Api::V1::ApiController
       include Authenticable
       before_action :authenticate_with_token
-      before_action :set_apply, only: %i[destroy]
+      before_action :set_apply, only: %i[show destroy]
       before_action :set_job, only: %i[destroy]
+      before_action :not_owner_apply, only: %i[show destroy]
+      before_action :not_owner_params_apply, only: %i[create]
+
 
       def show
-        @apply = Apply.find(params[:id])
         render status: :ok, json: @apply.as_json(except: %i[created_at updated_at])
       rescue StandardError
         render status: :not_found, json: @apply

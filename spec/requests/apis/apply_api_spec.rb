@@ -3,31 +3,66 @@
 require 'rails_helper'
 
 describe 'Apply API' do
+  let(:headhunter) { create(:headhunter) }
+  let(:user) { create(:user) }
   let(:job) { create(:job) }
+  let(:apply) { create(:apply, job_id: job.id, feedback_headhunter: 'test') }
 
   before do
     allow_any_instance_of(Api::V1::AppliesController).to receive(:authenticate_with_token).and_return(true)
+    allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(headhunter.id)
   end
 
   context 'GET /api/v1/jobs/1/applies/1' do
-    it 'with success' do
-      apply = create(:apply, job_id: job.id, feedback_headhunter: 'test')
+    context 'when headhunter' do
+      it 'with success' do
+        get "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
 
-      get "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
+        expect(response.status).to eq 200
+        expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(json_response['user_id']).to eq(apply.user_id)
+        expect(json_response['job_id']).to eq(job.id)
+        expect(json_response['feedback_headhunter']).to include(apply.feedback_headhunter)
+        expect(json_response.keys).not_to include('created_at')
+        expect(json_response.keys).not_to include('updated_at')
+      end
 
-      expect(json_response['user_id']).to eq(apply.user_id)
-      expect(json_response['job_id']).to eq(job.id)
-      expect(json_response['feedback_headhunter']).to include(apply.feedback_headhunter)
-      expect(json_response.keys).not_to include('created_at')
-      expect(json_response.keys).not_to include('updated_at')
+      it "and fail because can't find the job" do
+        get "/api/v1/jobs/#{job.id}/applies/99999999"
+        expect(response.status).to eq 404
+      end
     end
 
-    it "and fail because can't find the job" do
-      get "/api/v1/jobs/#{job.id}/applies/99999999"
-      expect(response.status).to eq 404
+    context 'when owner' do
+      before do
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id)
+      end
+
+      it 'with success' do
+        get "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
+
+        expect(response.status).to eq 200
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+
+        expect(json_response['user_id']).to eq(apply.user_id)
+        expect(json_response['job_id']).to eq(job.id)
+        expect(json_response['feedback_headhunter']).to include(apply.feedback_headhunter)
+      end
+    end
+
+    context 'when not owner' do
+      before do
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(nil)
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id + 99)
+      end
+
+      it 'with unauthorized' do
+        get "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
+
+        expect(response.status).to eq 401
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
     end
   end
 
@@ -68,44 +103,61 @@ describe 'Apply API' do
   context 'POST /api/v1/jobs/1/applies' do
     let(:user) { create(:user) }
 
-    it 'with success' do
-      apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
-                                feedback_headhunter: 'test' } }
-      post "/api/v1/jobs/#{job.id}/applies", params: apply_params
+    context 'when owner or headhunter' do
+      it 'with success' do
+        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
+                                  feedback_headhunter: 'test' } }
+        post "/api/v1/jobs/#{job.id}/applies", params: apply_params
 
-      expect(response).to have_http_status(201)
-      expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(response).to have_http_status(201)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(json_response['user_id']).to eq(user.id)
-      expect(json_response['job_id']).to eq(job.id)
-      expect(json_response['feedback_headhunter']).to include('test')
+        expect(json_response['user_id']).to eq(user.id)
+        expect(json_response['job_id']).to eq(job.id)
+        expect(json_response['feedback_headhunter']).to include('test')
+      end
+
+      it 'without success - incomplete parameters' do
+        apply_params = { apply: { job_id: job.id.to_s, user_id: '',
+                                  feedback_headhunter: 'test' } }
+        post "/api/v1/jobs/#{job.id}/applies", params: apply_params
+
+        expect(response).to have_http_status(412)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(response.body).not_to include('Job não pode ficar em branco')
+        expect(response.body).to include('User é obrigatório')
+      end
+
+      it 'without success - internal error' do
+        allow(Apply).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
+        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
+                                  feedback_headhunter: 'test' } }
+        post "/api/v1/jobs/#{job.id}/applies", params: apply_params
+
+        expect(response).to have_http_status(500)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
     end
 
-    it 'without success - incomplete parameters' do
-      apply_params = { apply: { job_id: job.id.to_s, user_id: '',
-                                feedback_headhunter: 'test' } }
-      post "/api/v1/jobs/#{job.id}/applies", params: apply_params
+    context 'when do not owner' do
+      before do
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(nil)
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id + 99)
+      end
 
-      expect(response).to have_http_status(412)
-      expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(response.body).not_to include('Job não pode ficar em branco')
-      expect(response.body).to include('User é obrigatório')
-    end
+      it 'with unauthorized' do
+        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
+                                  feedback_headhunter: 'test' } }
+        post "/api/v1/jobs/#{job.id}/applies", params: apply_params
 
-    it 'without success - internal error' do
-      allow(Apply).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
-      apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
-                                feedback_headhunter: 'test' } }
-      post "/api/v1/jobs/#{job.id}/applies", params: apply_params
-
-      expect(response).to have_http_status(500)
-      expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(response).to have_http_status(401)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
     end
   end
 
   context 'DELETE /api/v1/jobs/1' do
-    let(:apply) { create(:apply) }
-
+    context 'when headhunter'
     it 'with success' do
       delete "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
 
@@ -118,6 +170,20 @@ describe 'Apply API' do
 
       expect(response.status).to eq 404
       expect(response.content_type).to eq('application/json; charset=utf-8')
+    end
+
+    context 'when not owner' do
+      before do
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(nil)
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id + 99)
+      end
+
+      it 'with unauthorized' do
+        delete "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
+
+        expect(response.status).to eq 401
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
     end
   end
 end
