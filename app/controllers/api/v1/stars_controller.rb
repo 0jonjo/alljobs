@@ -4,8 +4,7 @@ module Api
   module V1
     class StarsController < Api::V1::ApiController
       include Authenticable
-      before_action :authenticate_with_token
-      before_action :headhunter_id
+      before_action :not_headhunter, only: %i[index create destroy]
 
       def index
         @stars = Star.filtered_by_headhunter(@headhunter_id)
@@ -16,26 +15,19 @@ module Api
       def destroy
         set_star
 
-        return render status: :unauthorized, json: { error: 'Unauthorized' } unless @star.headhunter_id == @headhunter_id
+        return render_unauthorized if not_owner_headhunter(@star.headhunter_id)
 
-        return render status: :no_content, json: {} if @star.destroy
+        return render status: :precondition_failed, json: { errors: @star.errors.full_messages } if @star.errors.any?
 
-        render status: :precondition_failed, json: { errors: @profile.errors.full_messages }
+        render status: :no_content, json: {} if @star.destroy
       end
 
       def create
-        @star = Star.new(headhunter_id: @headhunter_id, apply_id: params[:apply_id])
+        @star = Star.new(headhunter_id: current_headhunter_id, apply_id: params[:apply_id])
 
         return render status: :created, json: @star if @star.save
 
         render status: :precondition_failed, json: { errors: @star.errors.full_messages }
-      end
-
-      private
-
-      def headhunter_id
-        @headhunter_id = current_headhunter_id
-        @headhunter_id || render_unauthorized
       end
     end
   end

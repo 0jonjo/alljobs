@@ -71,7 +71,7 @@ describe 'Stars API' do
 
         expect(response).to have_http_status(401)
         expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(json_response['error']).to eq('Unauthorized')
+        expect(json_response['error']).to eq(I18n.t('auth.unauthorized'))
       end
 
       it 'return internal error' do

@@ -33,6 +33,10 @@ module Authenticable
     render_unauthorized unless current_headhunter_id
   end
 
+  def not_owner_headhunter(headhunter_id)
+    current_headhunter_id != headhunter_id
+  end
+
   def check_authorized(user_id)
     render_unauthorized unless current_headhunter_id || (current_user_id && current_user_id == user_id)
   end
