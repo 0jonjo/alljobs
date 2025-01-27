@@ -48,6 +48,14 @@ module Api
 
       private
 
+      def not_owner
+        check_authorized(@profile.user_id)
+      end
+
+      def not_owner_params
+        check_authorized(params[:profile][:user_id])
+      end
+
       def profile_params
         params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background,
                                         :experience, :city, :user_id, :country_id)

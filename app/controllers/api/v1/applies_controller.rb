@@ -8,9 +8,8 @@ module Api
       before_action :authenticate_with_token
       before_action :set_apply, only: %i[show destroy]
       before_action :set_job, only: %i[destroy]
-      before_action :not_owner_apply, only: %i[show destroy]
-      before_action :not_owner_params_apply, only: %i[create]
-
+      before_action :not_owner, only: %i[show destroy]
+      before_action :not_owner_params, only: %i[create]
 
       def show
         render status: :ok, json: @apply.as_json(except: %i[created_at updated_at])
@@ -41,6 +40,14 @@ module Api
       end
 
       private
+
+      def not_owner
+        check_authorized(@apply.user_id)
+      end
+
+      def not_owner_params
+        check_authorized(params[:apply][:user_id])
+      end
 
       def apply_params
         params.require(:apply).permit(:job_id, :user_id, :feedback_headhunter)

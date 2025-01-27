@@ -33,22 +33,6 @@ module Authenticable
     render_unauthorized unless current_headhunter_id
   end
 
-  def not_owner
-    check_authorized(@profile.user_id)
-  end
-
-  def not_owner_apply
-    check_authorized(@apply.user_id)
-  end
-
-  def not_owner_params_apply
-    check_authorized(params[:apply][:user_id])
-  end
-
-  def not_owner_params
-    check_authorized(params[:profile][:user_id])
-  end
-
   def check_authorized(user_id)
     render_unauthorized unless current_headhunter_id || (current_user_id && current_user_id == user_id)
   end
