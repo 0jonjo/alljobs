@@ -60,10 +60,6 @@ module Api
         params.require(:job).permit(:title, :description, :skills, :salary, :company_id,
                                     :level, :country_id, :city, :date, :job_status)
       end
-
-      def set_job
-        @job = Job.find(params[:id])
-      end
     end
   end
 end

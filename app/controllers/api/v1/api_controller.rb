@@ -8,22 +8,30 @@ module Api
       rescue_from ActiveRecord::RecordNotFound, with: :return404
 
       def set_apply
-        @apply = Apply.find(params[:id])
+        set_resource(:apply)
+      end
+
+      def set_job_id
+        set_resource(:job, :job_id)
       end
 
       def set_job
-        @job = Job.find(params[:job_id])
+        set_resource(:job)
       end
 
       def set_profile
-        @profile = Profile.find(params[:id])
+        set_resource(:profile)
       end
 
       def set_star
-        @star = Star.find(params[:id])
+        set_resource(:star)
       end
 
       private
+
+      def set_resource(resource, param_key = :id)
+        instance_variable_set("@#{resource}", resource.to_s.classify.constantize.find(params[param_key]))
+      end
 
       def return404
         render status: :not_found, json: { errors: 'Not found' }

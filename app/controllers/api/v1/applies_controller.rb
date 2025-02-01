@@ -7,7 +7,7 @@ module Api
       include Authenticable
       before_action :authenticate_with_token
       before_action :set_apply, only: %i[show destroy]
-      before_action :set_job, only: %i[destroy]
+      before_action :set_job_id, only: %i[destroy]
       before_action :not_owner, only: %i[show destroy]
       before_action :not_owner_params, only: %i[create]
 
