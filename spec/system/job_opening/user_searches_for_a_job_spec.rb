@@ -10,7 +10,7 @@ describe 'User' do
       login_as(profile.user, scope: :user)
     end
 
-    it 'search with sucess, only a result' do
+    it 'search with success, only a result' do
       job = create(:job)
 
       visit root_path
@@ -22,7 +22,7 @@ describe 'User' do
       expect(page).to have_link(job.title)
     end
 
-    it 'search with sucess, no one result' do
+    it 'search with success, no one result' do
       visit root_path
       fill_in I18n.t('search_job'), with: 'ZZZZZZZ'
       click_on I18n.t('search')

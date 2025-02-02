@@ -11,7 +11,7 @@ describe 'Headhunter' do
       login_as(headhunter, scope: :headhunter)
     end
 
-    it 'with sucess' do
+    it 'with success' do
       visit apply_path(apply)
       click_on I18n.t('send_proposal')
       expect(current_path).to eq(new_apply_proposal_path(apply))
@@ -26,7 +26,7 @@ describe 'Headhunter' do
       expect(current_path).to eq(apply_path(apply))
     end
 
-    it 'without sucess - imcomplete' do
+    it 'without success - incomplete' do
       visit new_apply_proposal_path(apply)
 
       fill_in Proposal.human_attribute_name(:salary), with: ''
@@ -47,7 +47,7 @@ describe 'Headhunter' do
       login_as(headhunter, scope: :headhunter)
     end
 
-    it 'without sucess - already have a proposal' do
+    it 'without success - already have a proposal' do
       visit apply_path(apply)
 
       expect(page).not_to have_link(I18n.t('send_proposal'))

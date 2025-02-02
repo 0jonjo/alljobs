@@ -11,7 +11,7 @@ describe 'User' do
       login_as(profile.user, scope: :user)
     end
 
-    it 'with sucess' do
+    it 'with success' do
       visit root_path
       within('nav') do
         click_on I18n.t('openings')
@@ -24,7 +24,7 @@ describe 'User' do
       expect(page).to have_content(job.title)
     end
 
-    it 'without sucess - already applied' do
+    it 'without success - already applied' do
       Apply.create!(job:, user: profile.user)
 
       visit job_path(job)
@@ -34,7 +34,7 @@ describe 'User' do
     end
 
     context 'and remove his apply' do
-      it 'with sucess' do
+      it 'with success' do
         apply = Apply.create!(job:, user: profile.user)
 
         visit apply_path(apply)

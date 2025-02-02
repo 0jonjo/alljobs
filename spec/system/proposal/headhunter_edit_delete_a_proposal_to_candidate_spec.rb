@@ -12,7 +12,7 @@ describe 'Headhunter' do
       login_as(headhunter, scope: :headhunter)
     end
 
-    it 'with sucess' do
+    it 'with success' do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('edit')
 
@@ -26,7 +26,7 @@ describe 'Headhunter' do
       expect(current_path).to eq(apply_path(apply))
     end
 
-    context 'without sucess -' do
+    context 'without success -' do
       let!(:headhunter) { create(:headhunter) }
       let!(:apply) { create(:apply) }
       let!(:proposal) { create(:proposal, apply:) }
@@ -59,7 +59,7 @@ describe 'Headhunter' do
       login_as(headhunter, scope: :headhunter)
     end
 
-    it 'with sucess' do
+    it 'with success' do
       visit apply_proposal_path(apply, proposal)
       click_on I18n.t('delete')
 

@@ -13,7 +13,7 @@ describe 'Stars API' do
   end
 
   context 'POST /api/v1/job/apply/stars' do
-    context 'when with sucess' do
+    context 'when with success' do
       it 'create and return the star' do
         post api_v1_job_apply_stars_path(apply.job_id, apply.id), as: :json
 
@@ -24,7 +24,7 @@ describe 'Stars API' do
       end
     end
 
-    context 'when without sucess' do
+    context 'when without success' do
       it 'return error when star already exists' do
         create(:star, headhunter:, apply:)
 
@@ -50,7 +50,7 @@ describe 'Stars API' do
     let(:star) { create(:star, headhunter:, apply:) }
     let(:star_another_headhunter) { create(:star, apply:) }
 
-    context 'when with sucess' do
+    context 'when with success' do
       it 'delete the star' do
         delete api_v1_job_apply_star_path(apply.job_id, apply.id, star.id)
 
@@ -58,7 +58,7 @@ describe 'Stars API' do
       end
     end
 
-    context 'when without sucess' do
+    context 'when without success' do
       it 'return error when star does not exist' do
         delete api_v1_job_apply_star_path(apply.job_id, apply.id, 99_999_999)
 
@@ -71,7 +71,7 @@ describe 'Stars API' do
 
         expect(response).to have_http_status(401)
         expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(json_response['error']).to eq('Unauthorized')
+        expect(json_response['error']).to eq(I18n.t('auth.unauthorized'))
       end
 
       it 'return internal error' do

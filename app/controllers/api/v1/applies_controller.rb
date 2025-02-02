@@ -4,13 +4,14 @@ module Api
   module V1
     # ApplyController of API
     class AppliesController < Api::V1::ApiController
-      include Authenticable
+      include Token
       before_action :authenticate_with_token
-      before_action :set_apply, only: %i[destroy]
-      before_action :set_job, only: %i[destroy]
+      before_action :set_apply, only: %i[show destroy]
+      before_action :set_job_id, only: %i[destroy]
+      before_action :not_owner, only: %i[show destroy]
+      before_action :not_owner_params, only: %i[create]
 
       def show
-        @apply = Apply.find(params[:id])
         render status: :ok, json: @apply.as_json(except: %i[created_at updated_at])
       rescue StandardError
         render status: :not_found, json: @apply
@@ -39,6 +40,14 @@ module Api
       end
 
       private
+
+      def not_owner
+        check_authorized(@apply.user_id)
+      end
+
+      def not_owner_params
+        check_authorized(params[:apply][:user_id])
+      end
 
       def apply_params
         params.require(:apply).permit(:job_id, :user_id, :feedback_headhunter)

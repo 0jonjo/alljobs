@@ -3,9 +3,12 @@
 module Api
   module V1
     class ProfilesController < Api::V1::ApiController
-      include Authenticable
+      include Token
       before_action :authenticate_with_token
       before_action :set_profile, only: %i[show update destroy]
+      before_action :not_headhunter, only: %i[index destroy]
+      before_action :not_owner, only: %i[show update]
+      before_action :not_owner_params, only: %i[create]
 
       def show
         render status: :ok, json: @profile.as_json(except: %i[created_at updated_at])
@@ -44,6 +47,14 @@ module Api
       end
 
       private
+
+      def not_owner
+        check_authorized(@profile.user_id)
+      end
+
+      def not_owner_params
+        check_authorized(params[:profile][:user_id])
+      end
 
       def profile_params
         params.require(:profile).permit(:name, :social_name, :birthdate, :description, :educacional_background,

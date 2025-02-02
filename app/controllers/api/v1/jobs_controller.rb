@@ -3,7 +3,7 @@
 module Api
   module V1
     class JobsController < Api::V1::ApiController
-      include Authenticable
+      include Token
       before_action :authenticate_with_token
       before_action :set_job, only: %i[show update destroy stars]
 
@@ -59,10 +59,6 @@ module Api
       def job_params
         params.require(:job).permit(:title, :description, :skills, :salary, :company_id,
                                     :level, :country_id, :city, :date, :job_status)
-      end
-
-      def set_job
-        @job = Job.find(params[:id])
       end
     end
   end

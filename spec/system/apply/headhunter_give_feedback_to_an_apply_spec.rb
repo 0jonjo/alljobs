@@ -10,7 +10,7 @@ describe 'Headhunter gives feedback to an apply' do
     login_as(headhunter, scope: :headhunter)
   end
 
-  it 'with sucess' do
+  it 'with success' do
     visit apply_path(apply.id.to_s)
 
     click_on I18n.t('feedback')
@@ -21,7 +21,7 @@ describe 'Headhunter gives feedback to an apply' do
     expect(page).to have_content('You need more experience to this job.')
   end
 
-  it 'and edit with sucess' do
+  it 'and edit with success' do
     apply.feedback_headhunter = 'Just a comment.'
     visit apply_path(apply)
 
