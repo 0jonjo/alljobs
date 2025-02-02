@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
-module Authenticable
+module Token
   def authenticate_with_token
     @token ||= request.headers['Authorization']
 
     render_unauthorized unless valid_token?
-  end
-
-  def valid_token?
-    body = JsonWebToken.decode(@token)
-    body[0]['exp'] > Time.now.to_i if body
   end
 
   def render_unauthorized
@@ -18,15 +13,11 @@ module Authenticable
   end
 
   def current_headhunter_id
-    body = JsonWebToken.decode(@token)
-
-    body[0]['headhunter_id'] if body && body[0] && body[0]['headhunter_id']
+    get_id('headhunter')
   end
 
   def current_user_id
-    body = JsonWebToken.decode(@token)
-
-    body[0]['user_id'] if body && body[0] && body[0]['user_id']
+    get_id('user')
   end
 
   def not_headhunter
@@ -39,5 +30,21 @@ module Authenticable
 
   def check_authorized(user_id)
     render_unauthorized unless current_headhunter_id || (current_user_id && current_user_id == user_id)
+  end
+
+  private
+
+  def get_id(user_type)
+    return unless decoded_token&.first
+
+    decoded_token.first["#{user_type}_id".to_sym]
+  end
+
+  def decoded_token
+    JsonWebToken.decode(@token)
+  end
+
+  def valid_token?
+    decoded_token.first['exp'] > Time.now.to_i if decoded_token
   end
 end

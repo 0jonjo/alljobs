@@ -3,7 +3,7 @@
 module Api
   module V1
     class StarsController < Api::V1::ApiController
-      include Authenticable
+      include Token
       before_action :not_headhunter, only: %i[index create destroy]
 
       def index

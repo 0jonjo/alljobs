@@ -3,7 +3,7 @@
 module Api
   module V1
     class JobsController < Api::V1::ApiController
-      include Authenticable
+      include Token
       before_action :authenticate_with_token
       before_action :set_job, only: %i[show update destroy stars]
 

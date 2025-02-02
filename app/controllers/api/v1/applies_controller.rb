@@ -4,7 +4,7 @@ module Api
   module V1
     # ApplyController of API
     class AppliesController < Api::V1::ApiController
-      include Authenticable
+      include Token
       before_action :authenticate_with_token
       before_action :set_apply, only: %i[show destroy]
       before_action :set_job_id, only: %i[destroy]
