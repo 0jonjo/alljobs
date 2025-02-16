@@ -3,7 +3,6 @@ pt-BR:
     models:
       job: 'Vaga'
       profile: 'Perfil'
-      proposal: 'Proposta'
       star: 'Favorito'
       apply: 'Inscrição'
       comment: 'Comentário'
@@ -11,7 +10,6 @@ pt-BR:
       user: 'Usuário'
       country: 'País'
       company: 'Empresa'
-      proposal_comment: 'Comentário da Proposta'
     attributes:
       headhunter:
         password: 'Senha'
@@ -53,16 +51,6 @@ pt-BR:
         country: 'País'
         city: 'Cidade'
         user_id: 'Usuário'
-      proposal:
-        apply_id: 'Número da Inscrição'
-        salary: 'Salário'
-        benefits: 'Benefícios'
-        description: 'Descrição'
-        expectations: 'Expectativas da Vaga'
-        expected_start: 'Expectativa de Início'
-        created_at: 'Criando em'
-        updated_at: 'Atualizado em'
-        user_accepted: 'Proposta aceita pelo usuário'
       apply:
         id: 'Aplicação ID'
         job_id: 'Vaga ID'
