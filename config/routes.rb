@@ -1,21 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :admins
+  # devise_for :admins
   devise_for :headhunters, :users
 
-  resources :pages, only: [:index]
+  # resources :pages, only: [:index]
   resources :stars, only: %i[index destroy create]
   resources :profiles, only: %i[index show new create edit update] do
     resources :comments
   end
-  resources :applies do
-    resources :proposals do
-      resources :proposal_comments
-      post 'accept', on: :member
-      post 'reject', on: :member
-    end
-  end
+  resources :applies
   resources :jobs do
     get 'index_draft', on: :collection
     get 'index_archived', on: :collection

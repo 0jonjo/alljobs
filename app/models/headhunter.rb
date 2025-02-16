@@ -8,7 +8,6 @@ class Headhunter < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :profiles, through: :comments
-  has_many :proposal_comments, as: :author, dependent: :destroy
   has_many :stars, dependent: :destroy
   has_many :profiles, through: :stars
 end

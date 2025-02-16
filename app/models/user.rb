@@ -9,5 +9,4 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :applies, dependent: :destroy
   has_many :jobs, through: :applies
-  has_many :proposal_comments, as: :author, dependent: :destroy
 end

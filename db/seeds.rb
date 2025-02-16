@@ -65,21 +65,3 @@ FeedbackApply.create(
   apply_id: apply.id,
   body: comment_body
 )
-
-# Default Proposal
-proposal = Proposal.create(
-  apply: apply,
-  salary:,
-  benefits: 'Benefits',
-  expectations: 'Expectations',
-  expected_start: 1.month.from_now,
-  user_accepted: true
-)
-
-# Default Proposal Comment
-ProposalComment.create(
-  proposal: proposal,
-  author_id: headhunter.id,
-  author_type: headhunter.class,
-  body: comment_body
-)
