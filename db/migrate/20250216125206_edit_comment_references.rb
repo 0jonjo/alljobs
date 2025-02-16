@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EditCommentReferences < ActiveRecord::Migration[7.2]
   def change
     remove_reference :comments, :profile, foreign_key: true
