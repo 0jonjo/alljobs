@@ -58,10 +58,3 @@ apply = Apply.create(job: job, user: user)
 
 # Default Star
 Star.create(headhunter_id: headhunter.id, apply_id: apply.id)
-
-# Default Feedback Apply
-FeedbackApply.create(
-  headhunter_id: headhunter.id,
-  apply_id: apply.id,
-  body: comment_body
-)
