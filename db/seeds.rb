@@ -22,14 +22,6 @@ profile = Profile.create!(
   city: 'City'
 )
 
-# Default Comment on Profile
-comment_body = 'Just a text'
-Comment.create(
-  body: comment_body,
-  profile_id: profile.id,
-  headhunter_id: headhunter.id
-)
-
 # Default Company
 company = Company.create(
   name: 'Company',
@@ -55,6 +47,12 @@ job = Job.create(
 
 # Default Apply
 apply = Apply.create(job: job, user: user)
+
+# Default Comment on Apply
+Comment.create(body: 'Comment body',
+               apply_id: apply.id,
+               author_id: headhunter.id,
+               author_type: 'Headhunter')
 
 # Default Star
 Star.create(headhunter_id: headhunter.id, apply_id: apply.id)
