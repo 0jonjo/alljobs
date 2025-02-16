@@ -50,11 +50,7 @@ module Api
       end
 
       def apply_params
-        params.require(:apply).permit(:job_id, :user_id, :feedback_headhunter)
-      end
-
-      def apply_update_params
-        params.require(:apply).permit(:feedback_headhunter)
+        params.require(:apply).permit(:job_id, :user_id)
       end
     end
   end

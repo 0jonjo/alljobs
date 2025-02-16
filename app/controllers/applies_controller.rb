@@ -43,7 +43,7 @@ class AppliesController < ApplicationController
   private
 
   def apply_params
-    params.require(:apply).permit(:feedback_headhunter, :user_id, :job_id)
+    params.require(:apply).permit(:user_id, :job_id)
   end
 
   def apply_find

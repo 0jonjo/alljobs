@@ -55,6 +55,5 @@ pt-BR:
         id: 'Aplicação ID'
         job_id: 'Vaga ID'
         user_id: 'Usuário ID'
-        feedback_headhunter: 'Retorno do Recrutador'
       comment:
         body: 'Comentário'
