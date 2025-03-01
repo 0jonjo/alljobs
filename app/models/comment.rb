@@ -2,16 +2,15 @@
 
 class Comment < ApplicationRecord
   belongs_to :apply
-  belongs_to :headhunter
+  belongs_to :author, polymorphic: true
 
   validates :body, presence: true
   validates :author_id, :author_type, presence: true
 
-  enum status: { open: 0, restrict: 1, closed: 2 }
+  enum :status, %i[open restrict closed]
 
-  scope :open, -> { where(status: :open) }
-  scope :restrict, -> { where(status: :restrict) }
-  scope :closed, ->(author_id) { where(author_type: 'Headhunter', author_id:, status: :private) }
+  scope :by_apply, ->(apply_id) { where(apply_id: apply_id).where.not(status: :closed) }
+  scope :for_headhunter, ->(headhunter_id) { where(status: :closed, author_type: 'Headhunter', author_id: headhunter_id) }
 
   def author_name
     author.name

@@ -4,6 +4,7 @@ class Apply < ApplicationRecord
   belongs_to :job
   belongs_to :user
   has_many :stars, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :job_id, :user_id, presence: true
 
