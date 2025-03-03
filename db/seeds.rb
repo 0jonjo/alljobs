@@ -10,7 +10,7 @@ country = Country.create(acronym: 'US', name: 'United States')
 # Default User and Profile
 user = User.create(email: 'user@test.com', password: password)
 description = 'Description'
-profile = Profile.create!(
+Profile.create!(
   name: 'Tester',
   social_name: 'Tester Social Name',
   birthdate: '21/03/1977',

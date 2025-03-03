@@ -28,8 +28,20 @@ module Token
     current_headhunter_id != headhunter_id
   end
 
+  def not_owner_user(user_id)
+    current_user_id != user_id
+  end
+
+  def check_existence
+    render_unauthorized unless current_headhunter_id || current_user_id
+  end
+
   def check_authorized(user_id)
     render_unauthorized unless current_headhunter_id || (current_user_id && current_user_id == user_id)
+  end
+
+  def check_user_owner(user_id)
+    current_user_id == user_id if current_user_id
   end
 
   private
