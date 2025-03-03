@@ -5,6 +5,7 @@ module Api
     class JobsController < Api::V1::ApiController
       include Token
       before_action :authenticate_with_token
+      before_action :requester, only: %i[create destroy stars]
       before_action :set_job, only: %i[show update destroy stars]
 
       def show
@@ -44,7 +45,7 @@ module Api
       end
 
       def stars
-        headhunter_id = current_headhunter_id
+        headhunter_id = @requester_id && @requester_type == 'Headhunter'
 
         return render_unauthorized unless headhunter_id
 

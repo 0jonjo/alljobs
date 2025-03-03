@@ -7,7 +7,7 @@ describe 'User' do
   let(:profile2) { create(:profile) }
   let(:apply) { create(:apply, user: profile2.user) }
 
-  context 'try to acess an apply of other user' do
+  context 'try to access an apply of other user' do
     before do
       login_as(profile.user, scope: :user)
     end
