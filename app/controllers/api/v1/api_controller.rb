@@ -7,6 +7,8 @@ module Api
       rescue_from ActiveRecord::ActiveRecordError, with: :return500
       rescue_from ActiveRecord::RecordNotFound, with: :return404
 
+      before_action :requester, except: %i[auth_user auth_headhunter]
+
       def set_apply
         set_resource(:apply)
       end

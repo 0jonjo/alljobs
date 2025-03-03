@@ -15,7 +15,7 @@ module Api
       def destroy
         set_star
 
-        return render_unauthorized if not_owner_headhunter(@star.headhunter_id)
+        return render_unauthorized if @requester_id != @star.headhunter_id || @requester_type != 'Headhunter'
 
         return render status: :precondition_failed, json: { errors: @star.errors.full_messages } if @star.errors.any?
 
