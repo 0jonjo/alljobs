@@ -1,4 +1,0 @@
-  <% if user_signed_in? %>
-    <%= button_to I18n.t('to_accept_proposal'), accept_apply_proposal_path(@proposal), method: :post unless @proposal.user_accepted? %>
-    <%= button_to I18n.t('to_reject_proposal'), reject_apply_proposal_path(@proposal), method: :post if @proposal.user_accepted? || @proposal.user_accepted.nil?  %>
-  <% end %>

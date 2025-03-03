@@ -12,38 +12,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 20_241_115_191_706) do
+ActiveRecord::Schema[7.2].define(version: 20_250_216_143_722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
   create_table 'applies', force: :cascade do |t|
     t.bigint 'job_id', null: false
     t.bigint 'user_id', null: false
-    t.text 'feedback_headhunter'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['job_id'], name: 'index_applies_on_job_id'
     t.index ['user_id'], name: 'index_applies_on_user_id'
   end
 
-  create_table 'available_times', id: :bigint, default: nil, force: :cascade do |t|
-    t.datetime 'created_at'
-    t.integer 'day_of_week'
-    t.time 'end_time_range', precision: 6
-    t.bigint 'referenceid'
-    t.string 'reference_type', limit: 255
-    t.time 'start_time_range', precision: 6
-    t.datetime 'updated_at'
-  end
-
   create_table 'comments', force: :cascade do |t|
     t.text 'body'
-    t.bigint 'profile_id', null: false
-    t.bigint 'headhunter_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['headhunter_id'], name: 'index_comments_on_headhunter_id'
-    t.index ['profile_id'], name: 'index_comments_on_profile_id'
+    t.string 'author_type'
+    t.bigint 'author_id'
+    t.integer 'status', default: 0
+    t.text 'title'
+    t.bigint 'apply_id'
+    t.index ['apply_id'], name: 'index_comments_on_apply_id'
+    t.index %w[author_type author_id], name: 'index_comments_on_author'
   end
 
   create_table 'companies', force: :cascade do |t|
@@ -61,16 +53,6 @@ ActiveRecord::Schema[7.2].define(version: 20_241_115_191_706) do
     t.text 'name'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-  end
-
-  create_table 'feedback_applies', force: :cascade do |t|
-    t.text 'body'
-    t.bigint 'headhunter_id', null: false
-    t.bigint 'apply_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['apply_id'], name: 'index_feedback_applies_on_apply_id'
-    t.index ['headhunter_id'], name: 'index_feedback_applies_on_headhunter_id'
   end
 
   create_table 'headhunters', force: :cascade do |t|
@@ -103,17 +85,6 @@ ActiveRecord::Schema[7.2].define(version: 20_241_115_191_706) do
     t.index ['country_id'], name: 'index_jobs_on_country_id'
   end
 
-  create_table 'meetings', primary_key: 'id_meeting', id: :uuid, default: nil, force: :cascade do |t|
-    t.datetime 'created_at'
-    t.datetime 'end_meeting'
-    t.bigint 'headhunter_id'
-    t.string 'link', limit: 255
-    t.datetime 'start_meeting'
-    t.string 'status', limit: 255
-    t.datetime 'updated_at'
-    t.bigint 'user_id'
-  end
-
   create_table 'profiles', force: :cascade do |t|
     t.text 'name'
     t.text 'social_name'
@@ -128,29 +99,6 @@ ActiveRecord::Schema[7.2].define(version: 20_241_115_191_706) do
     t.string 'city'
     t.index ['country_id'], name: 'index_profiles_on_country_id'
     t.index ['user_id'], name: 'index_profiles_on_user_id'
-  end
-
-  create_table 'proposal_comments', force: :cascade do |t|
-    t.text 'body'
-    t.bigint 'proposal_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.string 'author_type'
-    t.bigint 'author_id'
-    t.index %w[author_type author_id], name: 'index_proposal_comments_on_author'
-    t.index ['proposal_id'], name: 'index_proposal_comments_on_proposal_id'
-  end
-
-  create_table 'proposals', force: :cascade do |t|
-    t.bigint 'apply_id', null: false
-    t.decimal 'salary'
-    t.text 'benefits'
-    t.text 'expectations'
-    t.date 'expected_start'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.boolean 'user_accepted'
-    t.index ['apply_id'], name: 'index_proposals_on_apply_id'
   end
 
   create_table 'stars', force: :cascade do |t|
@@ -176,16 +124,11 @@ ActiveRecord::Schema[7.2].define(version: 20_241_115_191_706) do
 
   add_foreign_key 'applies', 'jobs'
   add_foreign_key 'applies', 'users'
-  add_foreign_key 'comments', 'headhunters'
-  add_foreign_key 'comments', 'profiles'
-  add_foreign_key 'feedback_applies', 'applies'
-  add_foreign_key 'feedback_applies', 'headhunters'
+  add_foreign_key 'comments', 'applies'
   add_foreign_key 'jobs', 'companies'
   add_foreign_key 'jobs', 'countries'
   add_foreign_key 'profiles', 'countries'
   add_foreign_key 'profiles', 'users'
-  add_foreign_key 'proposal_comments', 'proposals'
-  add_foreign_key 'proposals', 'applies'
   add_foreign_key 'stars', 'applies'
   add_foreign_key 'stars', 'headhunters'
 end

@@ -6,7 +6,7 @@ describe 'Apply API' do
   let(:headhunter) { create(:headhunter) }
   let(:user) { create(:user) }
   let(:job) { create(:job) }
-  let(:apply) { create(:apply, job_id: job.id, feedback_headhunter: 'test') }
+  let(:apply) { create(:apply, job_id: job.id) }
 
   before do
     allow_any_instance_of(Api::V1::AppliesController).to receive(:authenticate_with_token).and_return(true)
@@ -23,7 +23,6 @@ describe 'Apply API' do
 
         expect(json_response['user_id']).to eq(apply.user_id)
         expect(json_response['job_id']).to eq(job.id)
-        expect(json_response['feedback_headhunter']).to include(apply.feedback_headhunter)
         expect(json_response.keys).not_to include('created_at')
         expect(json_response.keys).not_to include('updated_at')
       end
@@ -47,7 +46,6 @@ describe 'Apply API' do
 
         expect(json_response['user_id']).to eq(apply.user_id)
         expect(json_response['job_id']).to eq(job.id)
-        expect(json_response['feedback_headhunter']).to include(apply.feedback_headhunter)
       end
     end
 
@@ -105,8 +103,7 @@ describe 'Apply API' do
 
     context 'when owner or headhunter' do
       it 'with success' do
-        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
-                                  feedback_headhunter: 'test' } }
+        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s } }
         post "/api/v1/jobs/#{job.id}/applies", params: apply_params
 
         expect(response).to have_http_status(201)
@@ -114,12 +111,10 @@ describe 'Apply API' do
 
         expect(json_response['user_id']).to eq(user.id)
         expect(json_response['job_id']).to eq(job.id)
-        expect(json_response['feedback_headhunter']).to include('test')
       end
 
       it 'without success - incomplete parameters' do
-        apply_params = { apply: { job_id: job.id.to_s, user_id: '',
-                                  feedback_headhunter: 'test' } }
+        apply_params = { apply: { job_id: job.id.to_s, user_id: '' } }
         post "/api/v1/jobs/#{job.id}/applies", params: apply_params
 
         expect(response).to have_http_status(412)
@@ -130,8 +125,7 @@ describe 'Apply API' do
 
       it 'without success - internal error' do
         allow(Apply).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
-        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
-                                  feedback_headhunter: 'test' } }
+        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s } }
         post "/api/v1/jobs/#{job.id}/applies", params: apply_params
 
         expect(response).to have_http_status(500)
@@ -146,8 +140,7 @@ describe 'Apply API' do
       end
 
       it 'with unauthorized' do
-        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s,
-                                  feedback_headhunter: 'test' } }
+        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s } }
         post "/api/v1/jobs/#{job.id}/applies", params: apply_params
 
         expect(response).to have_http_status(401)

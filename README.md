@@ -8,7 +8,7 @@ Welcome to ALLJOBS, a job opening website built using Ruby on Rails. This projec
 
 ## Project Overview
 
-ALLJOBS is a platform that focuses on job search, application management, and proposal submission. It supports two roles: headhunter and user. The headhunter is responsible for job opening creation, candidate management, feedback, and proposal. The user is responsible for profile creation, job search, and application.
+ALLJOBS is a platform that focuses on job search and application management. It supports two roles: headhunter and user. The headhunter is responsible for job opening creation and candidate management. The user is responsible for profile creation, job search, and application.
 
 To get an overview of the project's progress, you can check the [Project Board](https://github.com/users/0jonjo/projects/3).
 

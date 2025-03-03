@@ -10,7 +10,7 @@ country = Country.create(acronym: 'US', name: 'United States')
 # Default User and Profile
 user = User.create(email: 'user@test.com', password: password)
 description = 'Description'
-profile = Profile.create!(
+Profile.create!(
   name: 'Tester',
   social_name: 'Tester Social Name',
   birthdate: '21/03/1977',
@@ -20,14 +20,6 @@ profile = Profile.create!(
   user_id: user.id,
   country_id: country.id,
   city: 'City'
-)
-
-# Default Comment on Profile
-comment_body = 'Just a text'
-Comment.create(
-  body: comment_body,
-  profile_id: profile.id,
-  headhunter_id: headhunter.id
 )
 
 # Default Company
@@ -56,30 +48,11 @@ job = Job.create(
 # Default Apply
 apply = Apply.create(job: job, user: user)
 
+# Default Comment on Apply
+Comment.create(body: 'Comment body',
+               apply_id: apply.id,
+               author_id: headhunter.id,
+               author_type: 'Headhunter')
+
 # Default Star
 Star.create(headhunter_id: headhunter.id, apply_id: apply.id)
-
-# Default Feedback Apply
-FeedbackApply.create(
-  headhunter_id: headhunter.id,
-  apply_id: apply.id,
-  body: comment_body
-)
-
-# Default Proposal
-proposal = Proposal.create(
-  apply: apply,
-  salary:,
-  benefits: 'Benefits',
-  expectations: 'Expectations',
-  expected_start: 1.month.from_now,
-  user_accepted: true
-)
-
-# Default Proposal Comment
-ProposalComment.create(
-  proposal: proposal,
-  author_id: headhunter.id,
-  author_type: headhunter.class,
-  body: comment_body
-)
