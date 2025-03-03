@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe 'Comments API' do
   let(:apply) { create(:apply) }
+  let(:another_user) { create(:user) }
   let(:headhunter) { create(:headhunter) }
   let(:comment) { create(:comment, author_id: headhunter.id, author_type: headhunter.class, apply_id: apply.id) }
   let(:comment_closed) { create(:comment, author_id: headhunter.id, author_type: headhunter.class, apply_id: apply.id, status: :closed) }
@@ -105,7 +106,6 @@ describe 'Comments API' do
 
       context 'user tries to comment in another user apply' do
         let(:params) { { comment: { body: comment.body } } }
-        let(:another_user) { create(:user) }
 
         before do
           allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
@@ -121,6 +121,42 @@ describe 'Comments API' do
         it 'and receive the correct response' do
           expect(json_response['error']).to eq('Forneça um cabeçalho de Autorização válido.')
         end
+      end
+    end
+  end
+
+  context 'DELETE /api/v1/job/apply/comments/:id' do
+    context 'with success' do
+      before do
+        comment
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:current_headhunter_id).and_return(headhunter.id)
+        delete api_v1_job_apply_comment_path(apply.job_id, apply.id, comment.id)
+      end
+
+      it 'and correct status' do
+        expect(response.status).to eq 204
+      end
+
+      it 'and remove the comment' do
+        expect(Comment.all.count).to eq(0)
+      end
+    end
+
+    context 'with error - is not the author' do
+      before do
+        comment
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:current_user_id).and_return(another_user.id)
+        delete api_v1_job_apply_comment_path(apply.job_id, apply.id, comment.id)
+      end
+
+      it 'and receive the correct status' do
+        expect(response.status).to eq 401
+      end
+
+      it 'and receive the correct response' do
+        expect(json_response['error']).to eq('Forneça um cabeçalho de Autorização válido.')
       end
     end
   end

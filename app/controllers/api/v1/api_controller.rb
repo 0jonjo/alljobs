@@ -27,6 +27,10 @@ module Api
         set_resource(:star)
       end
 
+      def set_comment
+        set_resource(:comment)
+      end
+
       def requester
         if current_headhunter_id
           @requester_id = current_headhunter_id
