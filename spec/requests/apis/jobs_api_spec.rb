@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Job API', type: :request do
+  let(:headhunter) { create(:headhunter) }
   let(:country) { create(:country) }
   let(:company) { create(:company) }
   let(:job_attributes_valid) { attributes_for(:job, company_id: company.id, country_id: country.id) }
@@ -14,7 +15,9 @@ RSpec.describe 'Job API', type: :request do
   end
 
   before do
-    allow_any_instance_of(Api::V1::JobsController).to receive(:authenticate_with_token).and_return(true)
+    allow_any_instance_of(Api::V1::JobsController).to receive(:valid_token?).and_return(true)
+    allow_any_instance_of(Api::V1::JobsController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+    allow_any_instance_of(Api::V1::JobsController).to receive(:requester_exists?).and_return(true)
   end
 
   context 'GET /api/v1/jobs/1' do
