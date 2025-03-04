@@ -42,8 +42,9 @@ describe 'Comments API' do
       before do
         comment
         comment_closed
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:current_user_id).and_return(apply.user_id)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => apply.user_id }])
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'and correct status' do
@@ -152,8 +153,9 @@ describe 'Comments API' do
     context 'with error - is not the author' do
       before do
         comment
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:current_user_id).and_return(another_user.id)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => headhunter.id }])
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
         delete api_v1_job_apply_comment_path(apply.job_id, apply.id, comment.id)
       end
 
