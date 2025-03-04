@@ -15,7 +15,6 @@ gem 'rails', '~> 7.1'
 gem 'sass-rails', '>= 6'
 gem 'solid_queue'
 
-
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2'
