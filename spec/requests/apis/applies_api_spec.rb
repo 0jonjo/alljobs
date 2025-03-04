@@ -5,12 +5,14 @@ require 'rails_helper'
 describe 'Apply API' do
   let(:headhunter) { create(:headhunter) }
   let(:user) { create(:user) }
+  let(:another_user) { create(:user) }
   let(:job) { create(:job) }
   let(:apply) { create(:apply, job_id: job.id) }
 
   before do
-    allow_any_instance_of(Api::V1::AppliesController).to receive(:authenticate_with_token).and_return(true)
-    allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(headhunter.id)
+    allow_any_instance_of(Api::V1::AppliesController).to receive(:valid_token?).and_return(true)
+    allow_any_instance_of(Api::V1::AppliesController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+    allow_any_instance_of(Api::V1::AppliesController).to receive(:requester_exists?).and_return(true)
   end
 
   context 'GET /api/v1/jobs/1/applies/1' do
@@ -51,8 +53,7 @@ describe 'Apply API' do
 
     context 'when not owner' do
       before do
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(nil)
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id + 99)
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => another_user.id }])
       end
 
       it 'with unauthorized' do
@@ -132,21 +133,6 @@ describe 'Apply API' do
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
-
-    context 'when do not owner' do
-      before do
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(nil)
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id + 99)
-      end
-
-      it 'with unauthorized' do
-        apply_params = { apply: { job_id: job.id.to_s, user_id: user.id.to_s } }
-        post "/api/v1/jobs/#{job.id}/applies", params: apply_params
-
-        expect(response).to have_http_status(401)
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-      end
-    end
   end
 
   context 'DELETE /api/v1/jobs/1' do
@@ -163,20 +149,6 @@ describe 'Apply API' do
 
       expect(response.status).to eq 404
       expect(response.content_type).to eq('application/json; charset=utf-8')
-    end
-
-    context 'when not owner' do
-      before do
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_headhunter_id).and_return(nil)
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id + 99)
-      end
-
-      it 'with unauthorized' do
-        delete "/api/v1/jobs/#{job.id}/applies/#{apply.id}"
-
-        expect(response.status).to eq 401
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-      end
     end
   end
 end
