@@ -2,9 +2,17 @@
 
 module Token
   def authenticate_with_token
-    @token ||= request.headers['Authorization']
+    token ||= request.headers['Authorization']
+
+    @decoded_token = decode(token)
 
     render_unauthorized unless valid_token?
+
+    @requester_type = @decoded_token.first['requester_type']
+
+    @requester_id = @decoded_token.first['requester_id']
+
+    render_unauthorized unless requester_exists?
   end
 
   def render_unauthorized
@@ -16,12 +24,16 @@ module Token
     @requester_id if @requester_type == 'Headhunter'
   end
 
+  def requester_exists?
+    @requester_type.constantize.find(@requester_id)
+  end
+
   def current_user_id
     @requester_id if @requester_type == 'User'
   end
 
   def not_headhunter
-    render_unauthorized unless current_headhunter_id
+    render_unauthorized if @requester_type != 'Headhunter'
   end
 
   def check_authorized(user_id)
@@ -30,11 +42,13 @@ module Token
 
   private
 
-  def decoded_token
-    JsonWebToken.decode(@token)
+  def decode(token)
+    JsonWebToken.decode(token)
   end
 
   def valid_token?
-    decoded_token.first['exp'] > Time.now.to_i if decoded_token
+    @decoded_token.first['exp'] > Time.now.to_i if @decoded_token
+  rescue StandardError
+    false
   end
 end
