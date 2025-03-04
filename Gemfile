@@ -15,7 +15,7 @@ gem 'puma', '~> 6.4'
 gem 'rails', '~> 7.1'
 gem 'sass-rails', '>= 6'
 gem 'solid_queue'
-gem 'turbolinks', '~> 5'
+
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -34,7 +34,6 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 3.36'
   gem 'selenium-webdriver', '~> 4.1'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', '~> 0.22.0', require: false
