@@ -10,8 +10,9 @@ RSpec.describe 'Job API - Stars', type: :request do
   let(:star) { create(:star, apply_id: apply.id, headhunter_id: headhunter.id) }
 
   before do
-    allow_any_instance_of(Api::V1::JobsController).to receive(:authenticate_with_token).and_return(true)
-    allow_any_instance_of(Api::V1::JobsController).to receive(:current_headhunter_id).and_return(headhunter.id)
+    allow_any_instance_of(Api::V1::JobsController).to receive(:valid_token?).and_return(true)
+    allow_any_instance_of(Api::V1::JobsController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+    allow_any_instance_of(Api::V1::JobsController).to receive(:requester_exists?).and_return(true)
     star
   end
 

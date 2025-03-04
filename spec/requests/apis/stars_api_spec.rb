@@ -7,9 +7,9 @@ describe 'Stars API' do
   let(:headhunter) { create(:headhunter) }
 
   before do
-    headhunter
-    allow_any_instance_of(Api::V1::StarsController).to receive(:authenticate_with_token).and_return(true)
-    allow_any_instance_of(Api::V1::StarsController).to receive(:current_headhunter_id).and_return(headhunter.id)
+    allow_any_instance_of(Api::V1::StarsController).to receive(:valid_token?).and_return(true)
+    allow_any_instance_of(Api::V1::StarsController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+    allow_any_instance_of(Api::V1::StarsController).to receive(:requester_exists?).and_return(true)
   end
 
   context 'POST /api/v1/job/apply/stars' do
