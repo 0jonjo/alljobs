@@ -20,10 +20,6 @@ module Token
            status: :unauthorized
   end
 
-  def current_headhunter_id
-    @requester_id if @requester_type == 'Headhunter'
-  end
-
   def requester_exists?
     @requester_type.constantize.find(@requester_id)
   end
