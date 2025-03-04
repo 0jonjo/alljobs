@@ -1,8 +1,0 @@
-<h4><%= I18n.t('all_results')%>: <%= @term %></h4>
-
-<% if @jobs.any? %>
-    <p><%= @jobs.count %>  <%= I18n.t('jobs_found') %></p>
-    <%= render @jobs %>
-<% else %>
-    <p><%= I18n.t('no_jobs') %></p> 
-<% end %>

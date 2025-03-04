@@ -103,6 +103,7 @@ describe 'Profile API' do
         allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
         allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => user.id }])
         allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
+        allow_any_instance_of(Profile).to receive(:send_mail_success).and_return(true)
       end
 
       it 'with success' do
