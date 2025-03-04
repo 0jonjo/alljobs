@@ -4,12 +4,10 @@ module Api
   module V1
     class CommentsController < Api::V1::ApiController
       include Token
-      before_action :authenticate_with_token, only: %i[index create destroy]
-      before_action :requester, only: %i[create destroy]
       before_action :set_comment, only: %i[destroy]
 
       def index
-        @comments = current_user_id ? Comment.by_apply(params[:apply_id]).open : Comment.by_apply(params[:apply_id]) + Comment.for_headhunter(current_headhunter_id)
+        @comments = @requester_type == 'User' ? Comment.by_apply(params[:apply_id]).open : Comment.by_apply(params[:apply_id]) + Comment.for_headhunter(@requester_id)
 
         render status: :ok, json: @comments.as_json
       end

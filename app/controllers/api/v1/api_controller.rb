@@ -4,8 +4,12 @@ module Api
   module V1
     # API Controller
     class ApiController < ActionController::API
+      include Token
+
       rescue_from ActiveRecord::ActiveRecordError, with: :return500
       rescue_from ActiveRecord::RecordNotFound, with: :return404
+
+      before_action :authenticate_with_token, except: %i[auth_user auth_headhunter]
 
       def set_apply
         set_resource(:apply)
@@ -29,16 +33,6 @@ module Api
 
       def set_comment
         set_resource(:comment)
-      end
-
-      def requester
-        if current_headhunter_id
-          @requester_id = current_headhunter_id
-          @requester_type = 'Headhunter'
-        elsif current_user_id
-          @requester_id = current_user_id
-          @requester_type = 'User'
-        end
       end
 
       private
