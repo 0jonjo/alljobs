@@ -129,6 +129,26 @@ describe 'Comments API' do
         end
       end
     end
+
+    context 'with error - another user' do
+      let(:params) { { comment: { body: comment.body } } }
+
+      before do
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => another_user.id }])
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
+        post api_v1_job_apply_comments_path(apply.job_id, apply.id), params: params, as: :json
+      end
+
+      it 'and receive the correct status' do
+        expect(response.status).to eq 401
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+      end
+
+      it 'and receive the correct response' do
+        expect(json_response['error']).to eq('Forneça um cabeçalho de Autorização válido.')
+      end
+    end
   end
 
   context 'DELETE /api/v1/job/apply/comments/:id' do
