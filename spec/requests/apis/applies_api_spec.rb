@@ -37,7 +37,9 @@ describe 'Apply API' do
 
     context 'when owner' do
       before do
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:current_user_id).and_return(user.id)
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => apply.user_id }])
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'with success' do
@@ -53,7 +55,9 @@ describe 'Apply API' do
 
     context 'when not owner' do
       before do
-        allow_any_instance_of(Api::V1::AppliesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => another_user.id }])
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => user.id + 99 }])
+        allow_any_instance_of(Api::V1::AppliesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'with unauthorized' do
