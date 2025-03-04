@@ -28,10 +28,6 @@ module Token
     @requester_type.constantize.find(@requester_id)
   end
 
-  def current_user_id
-    @requester_id if @requester_type == 'User'
-  end
-
   def not_headhunter
     render_unauthorized if @requester_type != 'Headhunter'
   end
