@@ -1,6 +1,0 @@
-<h4><%= I18n.t('profiles') %></h4>
-
-<%= render @profiles if @profiles.any? %>
-<p><%= I18n.t('no_profiles') if @profiles.empty? %></p>
-
-<%= paginate @profiles %>

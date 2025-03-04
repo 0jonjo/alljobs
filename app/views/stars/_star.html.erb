@@ -1,5 +1,0 @@
-
-<p><%= Apply.model_name.human %>: <%= link_to star.apply_id, apply_path(star.apply_id) %></p>
-<%= button_to I18n.t('delete'), star_path(star),
-                              method: :delete,
-                              data: { confirm: I18n.t('sure') } %>
