@@ -18,6 +18,4 @@ Rails.application.routes.draw do
       post 'auth_headhunter', to: 'tokens#auth_headhunter'
     end
   end
-
-  root to: 'pages#index'
 end
