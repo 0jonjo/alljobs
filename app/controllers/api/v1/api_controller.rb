@@ -4,10 +4,12 @@ module Api
   module V1
     # API Controller
     class ApiController < ActionController::API
+      include Token
+
       rescue_from ActiveRecord::ActiveRecordError, with: :return500
       rescue_from ActiveRecord::RecordNotFound, with: :return404
 
-      before_action :requester, except: %i[auth_user auth_headhunter]
+      before_action :authenticate_with_token, except: %i[auth_user auth_headhunter]
 
       def set_apply
         set_resource(:apply)

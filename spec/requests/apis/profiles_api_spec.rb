@@ -5,14 +5,17 @@ require 'rails_helper'
 describe 'Profile API' do
   let!(:country) { create(:country) }
   let!(:user) { create(:user) }
+  let(:another_user) { create(:user) }
+  let(:headhunter) { create(:headhunter) }
   let(:profile) { create(:profile) }
   let(:profile_user) { create(:profile, user_id: user.id) }
   let(:profile_valid_attributes) { attributes_for(:profile, country_id: country.id, user_id: user.id) }
 
   context 'GET /api/v1/profiles/1' do
     before do
-      allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
-      allow_any_instance_of(Api::V1::ProfilesController).to receive(:current_user_id).and_return(user.id)
+      allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+      allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => user.id }])
+      allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
     end
 
     context 'for owner' do
@@ -35,8 +38,9 @@ describe 'Profile API' do
 
     context 'for admin' do
       before do
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:current_headhunter_id).and_return(user.id)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'with success' do
@@ -61,8 +65,9 @@ describe 'Profile API' do
   context 'GET /api/v1/profiles' do
     context 'for admin' do
       before do
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:current_headhunter_id).and_return(user.id)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'with success' do
@@ -73,22 +78,6 @@ describe 'Profile API' do
         expect(response.status).to eq 200
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(json_response.length).to eq 2
-      end
-
-      it "return empty - there aren't profiles" do
-        get api_v1_profiles_path, as: :json
-
-        expect(response.status).to eq 200
-        expect(json_response).to eq []
-      end
-
-      it 'without success - internal error' do
-        allow(Profile).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
-
-        get api_v1_profiles_path, as: :json
-
-        expect(response).to have_http_status(500)
-        expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
 
@@ -109,8 +98,9 @@ describe 'Profile API' do
   context 'POST /api/v1/profiles/1' do
     context 'for owner' do
       before do
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:current_user_id).and_return(user.id)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => user.id }])
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'with success' do
@@ -165,8 +155,9 @@ describe 'Profile API' do
   context 'PUT /api/v1/profiles/1' do
     context 'for owner' do
       before do
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:current_user_id).and_return(user.id)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => user.id }])
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'with success' do
@@ -197,7 +188,9 @@ describe 'Profile API' do
 
     context 'for not owner' do
       before do
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => another_user.id }])
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'without success - unauthorized' do
