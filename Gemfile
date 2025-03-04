@@ -9,7 +9,6 @@ gem 'bootsnap', '>= 1.16.0', require: false
 gem 'devise', '~> 4.9'
 gem 'jbuilder', '~> 2.11'
 gem 'jwt', '>= 2.8.0'
-gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem 'pg', '~> 1.4', '>= 1.4.0'
 gem 'puma', '~> 6.4'
 gem 'rails', '~> 7.1'
