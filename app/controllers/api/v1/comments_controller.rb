@@ -4,7 +4,6 @@ module Api
   module V1
     class CommentsController < Api::V1::ApiController
       include Token
-      before_action :authenticate_with_token, only: %i[index create destroy]
       before_action :set_comment, only: %i[destroy]
 
       def index

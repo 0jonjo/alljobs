@@ -4,7 +4,6 @@ module Api
   module V1
     class ProfilesController < Api::V1::ApiController
       include Token
-      before_action :authenticate_with_token
       before_action :set_profile, only: %i[show update destroy]
       before_action :not_headhunter, only: %i[index destroy]
       before_action :not_owner, only: %i[show update]

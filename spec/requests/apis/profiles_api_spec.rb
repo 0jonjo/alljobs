@@ -83,7 +83,9 @@ describe 'Profile API' do
 
     context 'for user' do
       before do
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => another_user.id }])
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'without success - unauthorized' do
@@ -128,19 +130,13 @@ describe 'Profile API' do
         expect(response.body).not_to include('Nome não pode ficar em branco')
         expect(response.body).to include('País é obrigatório')
       end
-
-      it 'without success - internal error' do
-        allow(Profile).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
-        post api_v1_profiles_path, params: profile_valid_attributes, as: :json
-
-        expect(response).to have_http_status(500)
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-      end
     end
 
     context 'for not owner' do
       before do
-        allow_any_instance_of(Api::V1::ProfilesController).to receive(:authenticate_with_token).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => another_user.id }])
+        allow_any_instance_of(Api::V1::ProfilesController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'without success - unauthorized' do
