@@ -3,18 +3,6 @@
 Rails.application.routes.draw do
   devise_for :headhunters, :users
 
-  resources :stars, only: %i[index destroy create]
-  resources :profiles, only: %i[index show new create edit update]
-  resources :applies
-  resources :jobs do
-    get 'index_draft', on: :collection
-    get 'index_archived', on: :collection
-    get 'search', on: :collection
-    post 'drafted', on: :member
-    post 'archived', on: :member
-    post 'published', on: :member
-  end
-
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :jobs, only: %i[show index create update destroy] do

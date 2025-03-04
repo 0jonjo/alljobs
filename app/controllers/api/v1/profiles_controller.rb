@@ -23,6 +23,7 @@ module Api
       def create
         @profile = Profile.new(profile_params)
         if @profile.save
+          @profile.send_mail_success('created', api_v1_profile_url(@profile.id))
           render status: :created, json: @profile
         else
           render status: :precondition_failed, json: { errors: @profile.errors.full_messages }
