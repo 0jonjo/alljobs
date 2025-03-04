@@ -17,8 +17,9 @@ describe 'Comments API' do
         comment
         comment_closed
         comment_closed_another_headhunter
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:current_headhunter_id).and_return(headhunter.id)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
       end
 
       it 'and correct status' do
@@ -67,8 +68,9 @@ describe 'Comments API' do
       let(:params) { { comment: { body: comment.body } } }
 
       before do
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:current_headhunter_id).and_return(headhunter.id)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
         post api_v1_job_apply_comments_path(apply.job_id, apply.id), params: params, as: :json
       end
 
@@ -89,8 +91,9 @@ describe 'Comments API' do
         let(:params) { { comment: { body: '' } } }
 
         before do
-          allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
-          allow_any_instance_of(Api::V1::CommentsController).to receive(:current_headhunter_id).and_return(headhunter.id)
+          allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+          allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+          allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
           post api_v1_job_apply_comments_path(apply.job_id, apply.id), params:, as: :json
         end
 
@@ -105,11 +108,13 @@ describe 'Comments API' do
       end
 
       context 'user tries to comment in another user apply' do
+        let(:user) { create(:user) }
         let(:params) { { comment: { body: comment.body } } }
 
         before do
-          allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
-          allow_any_instance_of(Api::V1::CommentsController).to receive(:current_user_id).and_return(another_user.id)
+          allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+          allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'User', 'requester_id' => user.id + 99 }])
+          allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
           post api_v1_job_apply_comments_path(apply.job_id, apply.id), params: params, as: :json
         end
 
@@ -129,8 +134,9 @@ describe 'Comments API' do
     context 'with success' do
       before do
         comment
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:authenticate_with_token).and_return(true)
-        allow_any_instance_of(Api::V1::CommentsController).to receive(:current_headhunter_id).and_return(headhunter.id)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:valid_token?).and_return(true)
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:decode).and_return([{ 'requester_type' => 'Headhunter', 'requester_id' => headhunter.id }])
+        allow_any_instance_of(Api::V1::CommentsController).to receive(:requester_exists?).and_return(true)
         delete api_v1_job_apply_comment_path(apply.job_id, apply.id, comment.id)
       end
 
