@@ -6,11 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  POSTGRES_DB: alljobs_test
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-
 jobs:
   test:
     name: Lint and tests
