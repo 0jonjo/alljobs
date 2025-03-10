@@ -13,8 +13,7 @@ development:
 
 test:
   <<: *default
-  # database: alljobs_test
-  # host: localhost
+  host: localhost
   database: <%= ENV["POSTGRES_DB"] %>
   username: <%= ENV['POSTGRES_USER'] %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
