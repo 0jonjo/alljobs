@@ -1,8 +1,5 @@
 # ALLJOBS
-
-[![Rspec and Rubocop CI](https://github.com/0jonjo/alljobs/actions/workflows/rspec_and_rubocop_ci.yml/badge.svg)](https://github.com/0jonjo/alljobs/actions/workflows/rspec_and_rubocop_ci.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab338714ffa9065409de/maintainability)](https://codeclimate.com/github/0jonjo/alljobs/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ab338714ffa9065409de/test_coverage)](https://codeclimate.com/github/0jonjo/alljobs/test_coverage)
 
 ## Project Overview
 
