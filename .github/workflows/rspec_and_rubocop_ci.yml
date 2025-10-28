@@ -1,4 +1,6 @@
 name: Rspec and Rubocop CI
+permissions:
+  contents: read
 
 on:
   push:
