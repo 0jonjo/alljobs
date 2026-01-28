@@ -380,8 +380,8 @@ var disableLinkElement = function(element) {
   }
   const replacement = element.getAttribute("data-disable-with");
   if (replacement != null) {
-    setData(element, "ujs:enable-with", element.innerHTML);
-    element.innerHTML = replacement;
+    setData(element, "ujs:enable-with", element.textContent);
+    element.textContent = replacement;
   }
   element.addEventListener("click", stopEverything);
   return setData(element, "ujs:disabled", true);
@@ -390,7 +390,7 @@ var disableLinkElement = function(element) {
 var enableLinkElement = function(element) {
   const originalText = getData(element, "ujs:enable-with");
   if (originalText != null) {
-    element.innerHTML = originalText;
+    element.textContent = originalText;
     setData(element, "ujs:enable-with", null);
   }
   element.removeEventListener("click", stopEverything);
