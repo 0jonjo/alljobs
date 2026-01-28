@@ -8,8 +8,8 @@ module Api
 
       def show
         render status: :ok, json: @job
-      rescue StandardError
-        render status: :not_found, json: @job
+      rescue ActiveRecord::RecordNotFound
+        render status: :not_found, json: { errors: 'Job not found' }
       end
 
       def index
@@ -49,8 +49,8 @@ module Api
 
         stars = @job.stars(headhunter_id)
         render status: :ok, json: stars
-      rescue StandardError
-        render status: :not_found, json: stars
+      rescue ActiveRecord::RecordNotFound
+        render status: :not_found, json: { errors: 'Stars not found' }
       end
 
       private

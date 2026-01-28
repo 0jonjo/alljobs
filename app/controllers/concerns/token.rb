@@ -21,6 +21,10 @@ module Token
   end
 
   def requester_exists?
+    # Security: Use allowlist to prevent arbitrary class instantiation
+    allowed_types = ['User', 'Headhunter']
+    return false unless allowed_types.include?(@requester_type)
+    
     @requester_type.constantize.find(@requester_id)
   end
 

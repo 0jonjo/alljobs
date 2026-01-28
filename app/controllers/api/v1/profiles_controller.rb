@@ -11,8 +11,8 @@ module Api
 
       def show
         render status: :ok, json: @profile.as_json(except: %i[created_at updated_at])
-      rescue StandardError
-        render status: :not_found, json: @profile
+      rescue ActiveRecord::RecordNotFound
+        render status: :not_found, json: { errors: 'Profile not found' }
       end
 
       def index

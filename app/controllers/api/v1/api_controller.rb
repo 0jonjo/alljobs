@@ -38,7 +38,19 @@ module Api
       private
 
       def set_resource(resource, param_key = :id)
-        instance_variable_set("@#{resource}", resource.to_s.classify.constantize.find(params[param_key]))
+        # Security: Use allowlist to prevent arbitrary class instantiation
+        allowed_resources = {
+          'apply' => 'Apply',
+          'job' => 'Job',
+          'profile' => 'Profile',
+          'star' => 'Star',
+          'comment' => 'Comment'
+        }
+        
+        class_name = allowed_resources[resource.to_s]
+        raise ArgumentError, "Invalid resource type: #{resource}" unless class_name
+        
+        instance_variable_set("@#{resource}", class_name.constantize.find(params[param_key]))
       end
 
       def return404

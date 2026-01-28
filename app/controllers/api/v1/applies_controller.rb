@@ -13,8 +13,8 @@ module Api
 
       def show
         render status: :ok, json: @apply.as_json(except: %i[created_at updated_at])
-      rescue StandardError
-        render status: :not_found, json: @apply
+      rescue ActiveRecord::RecordNotFound
+        render status: :not_found, json: { errors: 'Apply not found' }
       end
 
       def index
