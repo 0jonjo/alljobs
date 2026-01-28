@@ -46,10 +46,10 @@ module Api
           'star' => 'Star',
           'comment' => 'Comment'
         }
-        
+
         class_name = allowed_resources[resource.to_s]
         raise ArgumentError, "Invalid resource type: #{resource}" unless class_name
-        
+
         instance_variable_set("@#{resource}", class_name.constantize.find(params[param_key]))
       end
 

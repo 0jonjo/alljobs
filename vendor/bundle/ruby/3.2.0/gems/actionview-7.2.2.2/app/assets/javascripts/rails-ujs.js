@@ -339,8 +339,8 @@ Released under the MIT license
     }
     const replacement = element.getAttribute("data-disable-with");
     if (replacement != null) {
-      setData(element, "ujs:enable-with", element.textContent);
-      element.textContent = replacement;
+      setData(element, "ujs:enable-with", element.innerHTML);
+      element.innerHTML = replacement;
     }
     element.addEventListener("click", stopEverything);
     return setData(element, "ujs:disabled", true);
@@ -348,7 +348,7 @@ Released under the MIT license
   var enableLinkElement = function(element) {
     const originalText = getData(element, "ujs:enable-with");
     if (originalText != null) {
-      element.textContent = originalText;
+      element.innerHTML = originalText;
       setData(element, "ujs:enable-with", null);
     }
     element.removeEventListener("click", stopEverything);
@@ -362,8 +362,8 @@ Released under the MIT license
     const replacement = element.getAttribute("data-disable-with");
     if (replacement != null) {
       if (matches(element, "button")) {
-        setData(element, "ujs:enable-with", element.textContent);
-        element.textContent = replacement;
+        setData(element, "ujs:enable-with", element.innerHTML);
+        element.innerHTML = replacement;
       } else {
         setData(element, "ujs:enable-with", element.value);
         element.value = replacement;

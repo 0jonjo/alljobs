@@ -27,10 +27,10 @@ creating extconf.h
 creating Makefile
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/pg-1.5.9/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-fe3vy8 sitelibdir\=./.gem.20260128-4301-fe3vy8 clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-3fwatf sitelibdir\=./.gem.20260128-4903-3fwatf clean
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/pg-1.5.9/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-fe3vy8 sitelibdir\=./.gem.20260128-4301-fe3vy8
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-3fwatf sitelibdir\=./.gem.20260128-4903-3fwatf
 compiling gvl_wrappers.c
 compiling pg.c
 compiling pg_binary_decoder.c
@@ -55,9 +55,9 @@ compiling pg_util.c
 linking shared-object pg_ext.so
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/pg-1.5.9/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-fe3vy8 sitelibdir\=./.gem.20260128-4301-fe3vy8 install
-/usr/bin/install -c -m 0755 pg_ext.so ./.gem.20260128-4301-fe3vy8
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-3fwatf sitelibdir\=./.gem.20260128-4903-3fwatf install
+/usr/bin/install -c -m 0755 pg_ext.so ./.gem.20260128-4903-3fwatf
 installing pg_ext libraries
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/pg-1.5.9/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-fe3vy8 sitelibdir\=./.gem.20260128-4301-fe3vy8 clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-3fwatf sitelibdir\=./.gem.20260128-4903-3fwatf clean

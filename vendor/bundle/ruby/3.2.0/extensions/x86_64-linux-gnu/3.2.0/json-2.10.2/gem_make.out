@@ -9,16 +9,16 @@ checking for whether -std=c99 is accepted as CFLAGS... yes
 creating Makefile
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/json-2.10.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-9kkmks sitelibdir\=./.gem.20260128-4301-9kkmks clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-edi363 sitelibdir\=./.gem.20260128-4903-edi363 clean
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/json-2.10.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-9kkmks sitelibdir\=./.gem.20260128-4301-9kkmks
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-edi363 sitelibdir\=./.gem.20260128-4903-edi363
 compiling parser.c
 linking shared-object json/ext/parser.so
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/json-2.10.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-9kkmks sitelibdir\=./.gem.20260128-4301-9kkmks install
-/usr/bin/install -c -m 0755 parser.so ./.gem.20260128-4301-9kkmks/json/ext
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-edi363 sitelibdir\=./.gem.20260128-4903-edi363 install
+/usr/bin/install -c -m 0755 parser.so ./.gem.20260128-4903-edi363/json/ext
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/json-2.10.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-9kkmks sitelibdir\=./.gem.20260128-4301-9kkmks clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-edi363 sitelibdir\=./.gem.20260128-4903-edi363 clean

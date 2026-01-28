@@ -200,10 +200,10 @@
   // Enables functionality to toggle between `_path` and `_url` helper suffixes
   function setupRouteToggleHelperLinks() {
 
-    // Sets content for each element as plain text (avoid interpreting as HTML)
+    // Sets content for each element
     function setValOn(elems, val) {
       elems.forEach(function(elem) {
-        elem.textContent = val;
+        elem.innerHTML = val;
       });
     }
 

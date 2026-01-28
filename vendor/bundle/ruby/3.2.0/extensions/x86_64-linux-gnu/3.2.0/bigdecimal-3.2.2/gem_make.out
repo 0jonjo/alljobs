@@ -28,17 +28,17 @@ checking for RB_WARN_CATEGORY_DEPRECATED in ruby.h... yes
 creating Makefile
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-yf2cky sitelibdir\=./.gem.20260128-4301-yf2cky clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-lal61l sitelibdir\=./.gem.20260128-4903-lal61l clean
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-yf2cky sitelibdir\=./.gem.20260128-4301-yf2cky
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-lal61l sitelibdir\=./.gem.20260128-4903-lal61l
 compiling bigdecimal.c
 compiling missing.c
 linking shared-object bigdecimal.so
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-yf2cky sitelibdir\=./.gem.20260128-4301-yf2cky install
-/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20260128-4301-yf2cky
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-lal61l sitelibdir\=./.gem.20260128-4903-lal61l install
+/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20260128-4903-lal61l
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-yf2cky sitelibdir\=./.gem.20260128-4301-yf2cky clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-lal61l sitelibdir\=./.gem.20260128-4903-lal61l clean

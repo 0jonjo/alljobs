@@ -7,16 +7,16 @@ checking for whether -std=c99 is accepted as CFLAGS... yes
 creating Makefile
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.18.4/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-8kg74s sitelibdir\=./.gem.20260128-4301-8kg74s clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-soalsc sitelibdir\=./.gem.20260128-4903-soalsc clean
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.18.4/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-8kg74s sitelibdir\=./.gem.20260128-4301-8kg74s
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-soalsc sitelibdir\=./.gem.20260128-4903-soalsc
 compiling bootsnap.c
 linking shared-object bootsnap/bootsnap.so
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.18.4/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-8kg74s sitelibdir\=./.gem.20260128-4301-8kg74s install
-/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20260128-4301-8kg74s/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-soalsc sitelibdir\=./.gem.20260128-4903-soalsc install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20260128-4903-soalsc/bootsnap
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.18.4/ext/bootsnap
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-8kg74s sitelibdir\=./.gem.20260128-4301-8kg74s clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-soalsc sitelibdir\=./.gem.20260128-4903-soalsc clean

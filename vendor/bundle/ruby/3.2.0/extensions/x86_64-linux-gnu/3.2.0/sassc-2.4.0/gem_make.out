@@ -3,10 +3,10 @@ current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/ge
 creating Makefile
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/sassc-2.4.0/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-du0bpz sitelibdir\=./.gem.20260128-4301-du0bpz clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-jvues0 sitelibdir\=./.gem.20260128-4903-jvues0 clean
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/sassc-2.4.0/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-du0bpz sitelibdir\=./.gem.20260128-4301-du0bpz
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-jvues0 sitelibdir\=./.gem.20260128-4903-jvues0
 compiling ./libsass/src/memory/allocator.cpp
 compiling ./libsass/src/ast.cpp
 compiling ./libsass/src/ast2c.cpp
@@ -76,8 +76,8 @@ compiling ./libsass/src/values.cpp
 linking shared-object sassc/libsass.so
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/sassc-2.4.0/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-du0bpz sitelibdir\=./.gem.20260128-4301-du0bpz install
-/usr/bin/install -c -m 0755 libsass.so ./.gem.20260128-4301-du0bpz/sassc
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-jvues0 sitelibdir\=./.gem.20260128-4903-jvues0 install
+/usr/bin/install -c -m 0755 libsass.so ./.gem.20260128-4903-jvues0/sassc
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/sassc-2.4.0/ext
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-du0bpz sitelibdir\=./.gem.20260128-4301-du0bpz clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-jvues0 sitelibdir\=./.gem.20260128-4903-jvues0 clean

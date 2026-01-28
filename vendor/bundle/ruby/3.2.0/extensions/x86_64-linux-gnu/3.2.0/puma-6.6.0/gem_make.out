@@ -24,18 +24,18 @@ checking for Random.bytes... yes
 creating Makefile
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-o2wayj sitelibdir\=./.gem.20260128-4301-o2wayj clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-mzbvej sitelibdir\=./.gem.20260128-4903-mzbvej clean
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-o2wayj sitelibdir\=./.gem.20260128-4301-o2wayj
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-mzbvej sitelibdir\=./.gem.20260128-4903-mzbvej
 compiling http11_parser.c
 compiling mini_ssl.c
 compiling puma_http11.c
 linking shared-object puma/puma_http11.so
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-o2wayj sitelibdir\=./.gem.20260128-4301-o2wayj install
-/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20260128-4301-o2wayj/puma
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-mzbvej sitelibdir\=./.gem.20260128-4903-mzbvej install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20260128-4903-mzbvej/puma
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/puma-6.6.0/ext/puma_http11
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-o2wayj sitelibdir\=./.gem.20260128-4301-o2wayj clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-mzbvej sitelibdir\=./.gem.20260128-4903-mzbvej clean

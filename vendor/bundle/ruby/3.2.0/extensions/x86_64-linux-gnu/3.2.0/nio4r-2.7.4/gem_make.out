@@ -13,10 +13,10 @@ checking for sys/resource.h... yes
 creating Makefile
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-x3wm86 sitelibdir\=./.gem.20260128-4301-x3wm86 clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-a8ks sitelibdir\=./.gem.20260128-4903-a8ks clean
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-x3wm86 sitelibdir\=./.gem.20260128-4301-x3wm86
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-a8ks sitelibdir\=./.gem.20260128-4903-a8ks
 compiling bytebuffer.c
 compiling monitor.c
 compiling nio4r_ext.c
@@ -46,8 +46,8 @@ selector.c:525:5: warning: ignoring return value of ‘write’ declared with at
 linking shared-object nio4r_ext.so
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-x3wm86 sitelibdir\=./.gem.20260128-4301-x3wm86 install
-/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20260128-4301-x3wm86
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-a8ks sitelibdir\=./.gem.20260128-4903-a8ks install
+/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20260128-4903-a8ks
 
 current directory: /home/runner/work/alljobs/alljobs/vendor/bundle/ruby/3.2.0/gems/nio4r-2.7.4/ext/nio4r
-make DESTDIR\= sitearchdir\=./.gem.20260128-4301-x3wm86 sitelibdir\=./.gem.20260128-4301-x3wm86 clean
+make DESTDIR\= sitearchdir\=./.gem.20260128-4903-a8ks sitelibdir\=./.gem.20260128-4903-a8ks clean
