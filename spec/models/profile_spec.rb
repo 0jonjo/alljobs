@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Profile, type: :model do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:birthdate) }
-  it { should validate_presence_of(:educacional_background) }
+  it { should validate_presence_of(:educational_background) }
   it { should validate_presence_of(:experience) }
   it { should belong_to(:country) }
   it { should belong_to(:user) }

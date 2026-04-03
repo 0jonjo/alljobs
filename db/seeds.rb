@@ -15,7 +15,7 @@ Profile.create!(
   social_name: 'Tester Social Name',
   birthdate: '21/03/1977',
   description:,
-  educacional_background: 'Educational Background',
+  educational_background: 'Educational Background',
   experience: 'Experience',
   user_id: user.id,
   country_id: country.id,

@@ -9,8 +9,9 @@ module Api
       before_action :not_owner_params, only: %i[create]
 
       def index
-        @profiles = Profile.all
-        render status: :ok, json: @profiles.as_json(except: %i[created_at updated_at])
+        @pagy, @profiles = pagy(Profile.order(:id))
+        render status: :ok,
+               json: { data: @profiles.as_json(except: %i[created_at updated_at]), pagination: pagy_metadata(@pagy) }
       end
 
       def show
@@ -48,7 +49,7 @@ module Api
       end
 
       def profile_params
-        params.expect(profile: %i[name social_name birthdate description educacional_background
+        params.expect(profile: %i[name social_name birthdate description educational_background
                                   experience city user_id country_id])
       end
     end

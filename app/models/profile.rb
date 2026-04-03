@@ -10,7 +10,7 @@ class Profile < ApplicationRecord
   has_many :starring_headhunters, through: :stars, source: :headhunter
   validate :legal_age
 
-  validates :name, :birthdate, :educacional_background, :description, :experience, :city, presence: true
+  validates :name, :birthdate, :educational_background, :description, :experience, :city, presence: true
 
   scope :find_by_user_id, ->(user_id) { where(user_id:) }
 

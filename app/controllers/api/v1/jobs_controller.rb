@@ -6,8 +6,8 @@ module Api
       before_action :set_job, only: %i[show update destroy stars]
 
       def index
-        @jobs = Job.search(params[:title]).sorted_id
-        render status: :ok, json: @jobs
+        @pagy, @jobs = pagy(filtered_jobs)
+        render status: :ok, json: { data: @jobs, pagination: pagy_metadata(@pagy) }
       end
 
       def show
@@ -37,13 +37,22 @@ module Api
 
       private
 
+      def filtered_jobs
+        Job.published
+           .search(params[:title])
+           .by_level(params[:level])
+           .by_work_mode(params[:work_mode])
+           .by_country(params[:country_id])
+           .sorted_id
+      end
+
       def set_job
         @job = Job.find(params[:id])
       end
 
       def job_params
         params.expect(job: %i[title description skills salary company_id
-                              level country_id city date job_status])
+                              level country_id city date job_status work_mode contract_type])
       end
     end
   end

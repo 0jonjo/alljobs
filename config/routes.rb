@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :jobs, only: %i[show index create update destroy] do
-        resources :applies, only: %i[show index create destroy] do
+        resources :applies, only: %i[show index create update destroy] do
           resources :stars, only: %i[index create update destroy]
           resources :comments, only: %i[index create update destroy]
         end
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         get 'stars', on: :member
       end
       resources :profiles, only: %i[show index create update]
+      resources :companies, only: %i[show index create update]
+      resources :countries, only: %i[index]
       post 'auth_user', to: 'tokens#auth_user'
       post 'auth_headhunter', to: 'tokens#auth_headhunter'
     end

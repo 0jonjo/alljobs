@@ -49,9 +49,11 @@ RSpec.describe 'Job API', type: :request do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(json_response.length).to eq 2
-      expect(json_response.first['title']).to eq(job1.title)
-      expect(json_response.last['title']).to eq(job2.title)
+      data = json_response['data']
+      expect(data.length).to eq 2
+      expect(data.first['title']).to eq(job1.title)
+      expect(data.last['title']).to eq(job2.title)
+      expect(json_response['pagination']).to be_present
     end
 
     it 'with success - using search' do
@@ -60,8 +62,9 @@ RSpec.describe 'Job API', type: :request do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(json_response.length).to eq 1
-      expect(json_response.first['title']).to eq(job1.title)
+      data = json_response['data']
+      expect(data.length).to eq 1
+      expect(data.first['title']).to eq(job1.title)
     end
   end
 
@@ -71,11 +74,11 @@ RSpec.describe 'Job API', type: :request do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
-      expect(json_response).to eq []
+      expect(json_response['data']).to eq []
     end
 
     it 'without success - internal error' do
-      allow(Job).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
+      allow(Job).to receive(:published).and_raise(ActiveRecord::QueryCanceled)
 
       get api_v1_jobs_path, headers:, as: :json
 
