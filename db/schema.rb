@@ -12,13 +12,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 20_260_403_004_844) do
+ActiveRecord::Schema[8.1].define(version: 20_260_403_010_108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
   create_table 'applies', force: :cascade do |t|
     t.datetime 'created_at', null: false
     t.bigint 'job_id', null: false
+    t.integer 'status', default: 0, null: false
     t.datetime 'updated_at', null: false
     t.bigint 'user_id', null: false
     t.index ['job_id'], name: 'index_applies_on_job_id'
@@ -71,6 +72,7 @@ ActiveRecord::Schema[8.1].define(version: 20_260_403_004_844) do
     t.string 'city'
     t.string 'code'
     t.bigint 'company_id'
+    t.integer 'contract_type', default: 0
     t.bigint 'country_id'
     t.datetime 'created_at', null: false
     t.date 'date'
@@ -81,6 +83,7 @@ ActiveRecord::Schema[8.1].define(version: 20_260_403_004_844) do
     t.text 'skills'
     t.text 'title'
     t.datetime 'updated_at', null: false
+    t.integer 'work_mode', default: 0
     t.index ['code'], name: 'index_jobs_on_code', unique: true
     t.index ['company_id'], name: 'index_jobs_on_company_id'
     t.index ['country_id'], name: 'index_jobs_on_country_id'
@@ -92,7 +95,7 @@ ActiveRecord::Schema[8.1].define(version: 20_260_403_004_844) do
     t.bigint 'country_id'
     t.datetime 'created_at', null: false
     t.text 'description'
-    t.text 'educacional_background'
+    t.text 'educational_background'
     t.text 'experience'
     t.text 'name'
     t.text 'social_name'

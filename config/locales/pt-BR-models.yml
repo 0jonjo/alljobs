@@ -45,7 +45,7 @@ pt-BR:
         social_name: 'Nome Social'
         birthdate: 'Data de Nascimento'
         description: 'Descrição'
-        educacional_background: 'Educação'
+        educational_background: 'Educação'
         experience: 'Experiência'
         country_id: 'País'
         country: 'País'

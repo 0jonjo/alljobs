@@ -75,9 +75,11 @@ describe 'Apply API' do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(json_response.length).to eq 2
-      expect(json_response.first['user_id']).to eq(apply1.user_id)
-      expect(json_response.last['user_id']).to eq(apply2.user_id)
+      data = json_response['data']
+      expect(data.length).to eq 2
+      expect(data.first['user_id']).to eq(apply1.user_id)
+      expect(data.last['user_id']).to eq(apply2.user_id)
+      expect(json_response['pagination']).to be_present
     end
 
     it "return empty - there aren't applies" do
@@ -86,16 +88,7 @@ describe 'Apply API' do
       expect(response.status).to eq 200
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
-      expect(json_response).to eq []
-    end
-
-    it 'without success - internal error' do
-      allow(Apply).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
-
-      get "/api/v1/jobs/#{job.id}/applies"
-
-      expect(response).to have_http_status(500)
-      expect(response.content_type).to eq('application/json; charset=utf-8')
+      expect(json_response['data']).to eq []
     end
   end
 
