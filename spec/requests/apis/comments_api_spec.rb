@@ -99,7 +99,7 @@ describe 'Comments API' do
         end
 
         it 'and correct status' do
-          expect(response.status).to eq 412
+          expect(response.status).to eq 422
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
 
@@ -166,7 +166,7 @@ describe 'Comments API' do
       end
 
       it 'and remove the comment' do
-        expect(Comment.all.count).to eq(0)
+        expect(Comment.count).to eq(0)
       end
     end
 

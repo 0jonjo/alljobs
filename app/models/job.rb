@@ -5,16 +5,16 @@ class Job < ApplicationRecord
   belongs_to :company
   has_many :applies, dependent: :destroy
   has_many :users, through: :applies
-  validates :title, :description, :skills, :salary, :company, :level, :country, :city, :date, presence: true
+  validates :title, :description, :skills, :salary, :level, :city, :date, presence: true
   validates :salary, numericality: { only_decimal: true }
-  validates :code, length: { is: 8 }
+  validates :code, length: { is: 8 }, uniqueness: true
   validate :job_date_is_future
 
   before_validation :generate_code, on: :create
   after_update :clean_up
 
-  enum :job_status, %i[draft published archived]
-  enum :level, %i[junior mid_level senior specialist]
+  enum :job_status, { draft: 0, published: 1, archived: 2 }
+  enum :level, { junior: 0, mid_level: 1, senior: 2, specialist: 3 }
 
   scope :search, ->(title) { where('LOWER(title) LIKE ?', "%#{title.downcase}%") if title.present? }
   scope :sorted_id, -> { order(:id) }
@@ -25,15 +25,7 @@ class Job < ApplicationRecord
                      }
 
   def stars(headhunter_id)
-    applies.map { |apply| apply.stars.where(headhunter_id:) }.flatten
-  end
-
-  def generate_code
-    generated_code = SecureRandom.alphanumeric(8).capitalize
-
-    check_duplicated_code(generated_code)
-
-    self.code = generated_code
+    Star.joins(:apply).where(applies: { job_id: id }, headhunter_id:)
   end
 
   def job_date_is_future
@@ -50,9 +42,7 @@ class Job < ApplicationRecord
 
   private
 
-  def check_duplicated_code(generated_code)
-    return generated_code unless Job.find_by(code: generated_code)
-
-    errors.add(:code, ' have to be unique.') if Job.find_by(code: generated_code)
+  def generate_code
+    self.code = SecureRandom.alphanumeric(8).capitalize
   end
 end

@@ -1,18 +1,22 @@
 # frozen_string_literal: true
 
 module Token
+  ALLOWED_REQUESTER_TYPES = %w[User Headhunter].freeze
+
   def authenticate_with_token
-    token ||= request.headers['Authorization']
+    token = request.headers['Authorization']
 
     @decoded_token = decode(token)
 
     render_unauthorized unless valid_token?
 
     @requester_type = @decoded_token.first['requester_type']
-
-    @requester_id = @decoded_token.first['requester_id']
+    @requester_id   = @decoded_token.first['requester_id']
 
     render_unauthorized unless requester_exists?
+
+    Current.requester_id   = @requester_id
+    Current.requester_type = @requester_type
   end
 
   def render_unauthorized
@@ -21,15 +25,18 @@ module Token
   end
 
   def requester_exists?
+    return false unless ALLOWED_REQUESTER_TYPES.include?(@requester_type)
+
     @requester_type.constantize.find(@requester_id)
   end
 
   def not_headhunter
-    render_unauthorized if @requester_type != 'Headhunter'
+    render_unauthorized if Current.requester_type != 'Headhunter'
   end
 
   def check_authorized(user_id)
-    render_unauthorized unless @requester_type == 'Headhunter' || (@requester_type == 'User' && @requester_id == user_id)
+    render_unauthorized unless Current.requester_type == 'Headhunter' ||
+                               (Current.requester_type == 'User' && Current.requester_id == user_id)
   end
 
   private

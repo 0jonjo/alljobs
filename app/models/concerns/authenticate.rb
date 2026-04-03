@@ -25,10 +25,10 @@ class Authenticate
   end
 
   def user_payload
-    @payload = { user_id: @account.id }
+    @payload = { requester_id: @account.id, requester_type: 'User' }
   end
 
   def headhunter_payload
-    @payload = { headhunter_id: @account.id }
+    @payload = { requester_id: @account.id, requester_type: 'Headhunter' }
   end
 end

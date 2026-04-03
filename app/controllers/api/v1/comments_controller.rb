@@ -3,52 +3,52 @@
 module Api
   module V1
     class CommentsController < Api::V1::ApiController
-      include Token
       before_action :set_comment, only: %i[destroy]
 
       def index
-        @comments = @requester_type == 'User' ? Comment.by_apply(params[:apply_id]).open : Comment.by_apply(params[:apply_id]) + Comment.for_headhunter(@requester_id)
+        @comments = if Current.user?
+                      Comment.by_apply(params[:apply_id]).open
+                    else
+                      Comment.by_apply(params[:apply_id]) + Comment.for_headhunter(Current.requester_id)
+                    end
 
         render status: :ok, json: @comments.as_json
-      end
-
-      def destroy
-        return render_unauthorized unless requester_is_author?
-
-        return render status: :precondition_failed, json: { errors: @comment.errors.full_messages } if @comment.errors.any?
-
-        render status: :no_content, json: {} if @comment.destroy
       end
 
       def create
         return render_unauthorized if user_not_owner_apply?
 
         @comment = Comment.new(comment_params)
+        @comment.author_id   = Current.requester_id
+        @comment.author_type = Current.requester_type
 
-        author(@comment)
+        @comment.save!
+        render status: :created, json: @comment
+      end
 
-        return render status: :created, json: @comment if @comment.save
+      def destroy
+        return render_unauthorized unless requester_is_author?
 
-        render status: :precondition_failed, json: { errors: @comment.errors.full_messages }
+        @comment.destroy!
+        head :no_content
       end
 
       private
 
-      def comment_params
-        params.require(:comment).permit(:title, :body).merge(apply_id: params[:apply_id])
+      def set_comment
+        @comment = Comment.find(params[:id])
       end
 
-      def author(comment)
-        comment.author_id = @requester_id
-        comment.author_type = @requester_type
+      def comment_params
+        params.expect(comment: %i[title body]).merge(apply_id: params[:apply_id])
       end
 
       def requester_is_author?
-        @comment.author_id == @requester_id && @comment.author_type == @requester_type
+        @comment.author_id == Current.requester_id && @comment.author_type == Current.requester_type
       end
 
       def user_not_owner_apply?
-        @requester_type == 'User' ? Apply.find(params[:apply_id]).user_id != @requester_id : false
+        Current.user? && Apply.find(params[:apply_id]).user_id != Current.requester_id
       end
     end
   end

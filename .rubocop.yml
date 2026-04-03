@@ -1,1 +1,16 @@
+require:
+  - rubocop-rails
+
 inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.4
+  Exclude:
+    - 'db/migrate/*.rb'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+
+Rails:
+  Enabled: true

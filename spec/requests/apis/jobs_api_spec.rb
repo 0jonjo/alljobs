@@ -104,7 +104,7 @@ RSpec.describe 'Job API', type: :request do
     it 'without success - incomplete parameters' do
       post api_v1_jobs_path, params: job_attributes_invalid, headers:, as: :json
 
-      expect(response).to have_http_status(412)
+      expect(response).to have_http_status(422)
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
       expect(response.body).not_to include('Título não pode ficar em branco')
@@ -140,7 +140,7 @@ RSpec.describe 'Job API', type: :request do
     it 'without success - incomplete parameters' do
       put api_v1_job_path(job.id), params: job_attributes_invalid, headers:, as: :json
 
-      expect(response).to have_http_status(412)
+      expect(response).to have_http_status(422)
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
       expect(response.body).not_to include('Título não pode ficar em branco')
@@ -166,7 +166,7 @@ RSpec.describe 'Job API', type: :request do
     it 'without success - incomplete parameters' do
       patch api_v1_job_path(job.id), params: job_attributes_invalid, headers:, as: :json
 
-      expect(response).to have_http_status(412)
+      expect(response).to have_http_status(422)
       expect(response.content_type).to eq('application/json; charset=utf-8')
 
       expect(response.body).not_to include('Título não pode ficar em branco')

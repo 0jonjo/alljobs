@@ -4,9 +4,12 @@ require 'rails_helper'
 
 RSpec.describe Job, type: :model do
   describe 'validations' do
-    %i[title description skills salary level company country city date].each do |attribute|
+    %i[title description skills salary level city date].each do |attribute|
       it { is_expected.to validate_presence_of(attribute) }
     end
+
+    it { is_expected.to belong_to(:company) }
+    it { is_expected.to belong_to(:country) }
   end
 
   let(:country) { build(:country) }
