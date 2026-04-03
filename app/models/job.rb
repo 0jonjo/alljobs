@@ -15,10 +15,16 @@ class Job < ApplicationRecord
 
   enum :job_status, { draft: 0, published: 1, archived: 2 }
   enum :level, { junior: 0, mid_level: 1, senior: 2, specialist: 3 }
+  enum :work_mode, { on_site: 0, remote: 1, hybrid: 2 }
+  enum :contract_type, { full_time: 0, part_time: 1, contract: 2, freelance: 3 }
 
   scope :search, ->(title) { where('LOWER(title) LIKE ?', "%#{title.downcase}%") if title.present? }
   scope :sorted_id, -> { order(:id) }
   scope :indexed, ->(status) { where(job_status: status).sorted_id }
+  scope :by_level, ->(level) { where(level:) if level.present? }
+  scope :by_work_mode, ->(work_mode) { where(work_mode:) if work_mode.present? }
+  scope :by_country, ->(country_id) { where(country_id:) if country_id.present? }
+  scope :published, -> { where(job_status: :published) }
   scope :search_web, lambda { |term|
                        where('LOWER(code) LIKE :search OR LOWER(title) LIKE :search OR LOWER(description)
                                  LIKE :search', search: "%#{term.downcase}%")

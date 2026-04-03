@@ -77,7 +77,8 @@ describe 'Profile API' do
 
         expect(response.status).to eq 200
         expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(json_response.length).to eq 2
+        expect(json_response['data'].length).to eq 2
+        expect(json_response['pagination']).to be_present
       end
     end
 
@@ -115,7 +116,7 @@ describe 'Profile API' do
         expect(json_response['social_name']).to include(profile_valid_attributes[:social_name])
         expect(json_response['birthdate']).to include(profile_valid_attributes[:birthdate].to_s[0..9])
         expect(json_response['description']).to include(profile_valid_attributes[:description])
-        expect(json_response['educacional_background']).to include(profile_valid_attributes[:educacional_background])
+        expect(json_response['educational_background']).to include(profile_valid_attributes[:educational_background])
         expect(json_response['experience']).to include(profile_valid_attributes[:experience])
         expect(json_response['city']).to include(profile_valid_attributes[:city])
         expect(json_response['country_id']).to eq(country.id)
@@ -167,7 +168,7 @@ describe 'Profile API' do
 
       it 'without success - incomplete parameters' do
         profile_params = { profile: { name: 'Profile Tester', social_name: '',
-                                      birthdate: '', description: '', educacional_background: '',
+                                      birthdate: '', description: '', educational_background: '',
                                       experience: '', city: '', country_id: '', user_id: '' } }
         put api_v1_profile_path(profile_user.id), params: profile_params
 

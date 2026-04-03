@@ -6,7 +6,7 @@ FactoryBot.define do
     social_name { Faker::Name.name }
     birthdate { Faker::Date.birthday(min_age: 18) }
     description { Faker::Adjective.positive }
-    educacional_background { Faker::Educator.degree }
+    educational_background { Faker::Educator.degree }
     experience { Faker::Job.title }
     city { Faker::Address.city }
     association :country
