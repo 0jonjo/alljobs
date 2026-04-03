@@ -7,6 +7,7 @@ require 'active_model/railtie'
 require 'active_job/railtie'
 require 'active_record/railtie'
 require 'active_storage/engine'
+require 'action_cable/engine'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'rails/test_unit/railtie'
@@ -21,7 +22,7 @@ module Alljobs
     config.active_job.queue_adapter = :solid_queue
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
-    config.autoload_paths << Rails.root.join('lib')
+    config.paths.add 'lib', eager_load: true
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
