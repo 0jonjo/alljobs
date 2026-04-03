@@ -7,6 +7,8 @@ class Headhunter < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :comments, as: :author, dependent: :destroy
-  has_many :profiles, through: :stars
   has_many :stars, dependent: :destroy
+  has_many :applies, through: :stars
+  has_many :users, through: :applies
+  has_many :profiles, through: :users
 end

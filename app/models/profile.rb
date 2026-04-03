@@ -3,9 +3,11 @@
 class Profile < ApplicationRecord
   belongs_to :user
   belongs_to :country
-  has_many :comments, dependent: :destroy
-  has_many :commenting_headhunters, through: :comments, source: :headhunter
-  has_many :starring_headhunters, through: :applies, source: :headhunter
+  has_many :applies, through: :user
+  has_many :comments, through: :applies
+  has_many :commenting_headhunters, through: :comments, source: :author, source_type: 'Headhunter'
+  has_many :stars, through: :applies
+  has_many :starring_headhunters, through: :stars, source: :headhunter
   validate :legal_age
 
   validates :name, :birthdate, :educacional_background, :description, :experience, :city, presence: true

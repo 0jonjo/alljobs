@@ -8,12 +8,12 @@ module Token
 
     @decoded_token = decode(token)
 
-    render_unauthorized unless valid_token?
+    return render_unauthorized unless valid_token?
 
     @requester_type = @decoded_token.first['requester_type']
     @requester_id   = @decoded_token.first['requester_id']
 
-    render_unauthorized unless requester_exists?
+    return render_unauthorized unless requester_exists?
 
     Current.requester_id   = @requester_id
     Current.requester_type = @requester_type
@@ -27,7 +27,7 @@ module Token
   def requester_exists?
     return false unless ALLOWED_REQUESTER_TYPES.include?(@requester_type)
 
-    @requester_type.constantize.find(@requester_id)
+    @requester_type.constantize.exists?(@requester_id)
   end
 
   def not_headhunter

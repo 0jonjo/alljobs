@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 20_250_216_143_722) do
+ActiveRecord::Schema[8.1].define(version: 20_260_403_004_844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
@@ -81,6 +81,7 @@ ActiveRecord::Schema[8.1].define(version: 20_250_216_143_722) do
     t.text 'skills'
     t.text 'title'
     t.datetime 'updated_at', null: false
+    t.index ['code'], name: 'index_jobs_on_code', unique: true
     t.index ['company_id'], name: 'index_jobs_on_company_id'
     t.index ['country_id'], name: 'index_jobs_on_country_id'
   end
@@ -107,6 +108,7 @@ ActiveRecord::Schema[8.1].define(version: 20_250_216_143_722) do
     t.bigint 'headhunter_id', null: false
     t.datetime 'updated_at', null: false
     t.index ['apply_id'], name: 'index_stars_on_apply_id'
+    t.index %w[headhunter_id apply_id], name: 'index_stars_on_headhunter_id_and_apply_id', unique: true
     t.index ['headhunter_id'], name: 'index_stars_on_headhunter_id'
   end
 
