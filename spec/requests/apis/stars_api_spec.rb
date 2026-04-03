@@ -30,7 +30,7 @@ describe 'Stars API' do
 
         post api_v1_job_apply_stars_path(apply.job_id, apply.id), as: :json
 
-        expect(response).to have_http_status(412)
+        expect(response).to have_http_status(422)
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(json_response['errors'].first).to eq('Headhunter has already been taken for this application')
       end

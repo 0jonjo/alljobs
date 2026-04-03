@@ -6,13 +6,8 @@ class Apply < ApplicationRecord
   has_many :stars, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  validates :job_id, :user_id, presence: true
-
   scope :sorted_id, -> { order(:id) }
   scope :applied_by_user, ->(job_id, user_id) { where(job_id:, user_id:) }
 
-  def user_email
-    @user = User.find(user_id)
-    @user.email.to_s
-  end
+  delegate :email, to: :user, prefix: true
 end

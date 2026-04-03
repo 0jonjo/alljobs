@@ -6,8 +6,9 @@ class Headhunter < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :comments, dependent: :destroy
-  has_many :profiles, through: :comments
+  has_many :comments, as: :author, dependent: :destroy
   has_many :stars, dependent: :destroy
-  has_many :profiles, through: :stars
+  has_many :applies, through: :stars
+  has_many :users, through: :applies
+  has_many :profiles, through: :users
 end

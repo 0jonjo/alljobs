@@ -126,7 +126,7 @@ describe 'Profile API' do
         profile_params = attributes_for(:profile, country_id: nil, user_id: user.id)
         post api_v1_profiles_path, params: profile_params, as: :json
 
-        expect(response).to have_http_status(412)
+        expect(response).to have_http_status(422)
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(response.body).not_to include('Nome não pode ficar em branco')
         expect(response.body).to include('País é obrigatório')
@@ -171,7 +171,7 @@ describe 'Profile API' do
                                       experience: '', city: '', country_id: '', user_id: '' } }
         put api_v1_profile_path(profile_user.id), params: profile_params
 
-        expect(response).to have_http_status(412)
+        expect(response).to have_http_status(422)
         expect(response.content_type).to eq('application/json; charset=utf-8')
 
         expect(response.body).not_to include('Nome não pode ficar em branco')

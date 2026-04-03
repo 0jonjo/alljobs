@@ -118,7 +118,7 @@ describe 'Apply API' do
         apply_params = { apply: { job_id: job.id.to_s, user_id: '' } }
         post "/api/v1/jobs/#{job.id}/applies", params: apply_params
 
-        expect(response).to have_http_status(412)
+        expect(response).to have_http_status(422)
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(response.body).not_to include('Job não pode ficar em branco')
         expect(response.body).to include('User é obrigatório')

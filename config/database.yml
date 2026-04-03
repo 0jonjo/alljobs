@@ -2,28 +2,32 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV["DATABASE_URL"] %>
+  host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
+  port: <%= ENV.fetch("DATABASE_PORT") { 5433 } %>
   username: postgres
   password: postgres
 
 development:
   <<: *default
   database: alljobs_development
-  host: localhost
 
 test:
   <<: *default
   database: alljobs_test
-  host: localhost
 
 production:
   primary:
     <<: *default
+    host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
+    port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
     database: alljobs_production
-    username: alljobs
-    password: <%= ENV['ALLJOBS_DATABASE_PASSWORD'] %>
+    username: <%= ENV["DATABASE_USER"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
   queue:
     <<: *default
+    host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
+    port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
     database: alljobs_production_queue
+    username: <%= ENV["DATABASE_USER"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
     migrations_paths: db/queue_migrate
-

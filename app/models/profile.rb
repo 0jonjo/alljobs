@@ -3,13 +3,14 @@
 class Profile < ApplicationRecord
   belongs_to :user
   belongs_to :country
-  has_many :comments, dependent: :destroy
-  has_many :headhunters, through: :comments
-  has_many :headhunters, through: :applies
+  has_many :applies, through: :user
+  has_many :comments, through: :applies
+  has_many :commenting_headhunters, through: :comments, source: :author, source_type: 'Headhunter'
+  has_many :stars, through: :applies
+  has_many :starring_headhunters, through: :stars, source: :headhunter
   validate :legal_age
 
-  validates :name, :birthdate, :educacional_background, :description, :experience, :city, :user_id, :country_id,
-            presence: true
+  validates :name, :birthdate, :educacional_background, :description, :experience, :city, presence: true
 
   scope :find_by_user_id, ->(user_id) { where(user_id:) }
 

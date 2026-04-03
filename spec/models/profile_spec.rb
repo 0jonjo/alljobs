@@ -7,8 +7,8 @@ RSpec.describe Profile, type: :model do
   it { should validate_presence_of(:birthdate) }
   it { should validate_presence_of(:educacional_background) }
   it { should validate_presence_of(:experience) }
-  it { should validate_presence_of(:country_id) }
-  it { should validate_presence_of(:user_id) }
+  it { should belong_to(:country) }
+  it { should belong_to(:user) }
 
   describe 'scopes' do
     describe '.find_by_user_id' do

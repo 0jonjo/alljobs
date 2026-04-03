@@ -5,6 +5,8 @@ module Api
     class TokensController < Api::V1::ApiController
       include Log
 
+      skip_before_action :authenticate_with_token, only: %i[auth_user auth_headhunter]
+
       def auth_user
         authenticate('User')
       end

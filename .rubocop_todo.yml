@@ -50,3 +50,13 @@ Style/IfUnlessModifier:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 198
+
+# TODO: add DB migration for unique index on jobs.code
+# TODO: add DB migration for unique index on stars (headhunter_id, apply_id)
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+# TODO: move Star uniqueness message to config/locales
+Rails/I18nLocaleTexts:
+  Exclude:
+    - 'app/models/star.rb'
