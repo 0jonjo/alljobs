@@ -10,4 +10,12 @@ class Apply < ApplicationRecord
   scope :applied_by_user, ->(job_id, user_id) { where(job_id:, user_id:) }
 
   delegate :email, to: :user, prefix: true
+
+  after_create_commit :send_apply_confirmed_email
+
+  private
+
+  def send_apply_confirmed_email
+    SendApplyConfirmedEmailJob.perform_later(id)
+  end
 end

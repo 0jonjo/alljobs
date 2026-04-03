@@ -5,7 +5,6 @@ class ProfileMailer < ApplicationMailer
     @profile = Profile.find(profile_id)
     @url = url
     @action = action
-    email = User.find(@profile.user_id).email
-    mail(to: email, subject: "Alljobs: You #{action}")
+    mail(to: @profile.user.email, subject: "Alljobs: You #{action}")
   end
 end

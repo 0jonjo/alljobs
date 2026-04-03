@@ -1,0 +1,10 @@
+en:
+  mailers:
+    user:
+      welcome:
+        subject: "Welcome to Alljobs!"
+      apply_confirmed:
+        subject: "Alljobs: Application confirmed for %{job_title}"
+    headhunter:
+      welcome:
+        subject: "Welcome to Alljobs!"
