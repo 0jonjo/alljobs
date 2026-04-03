@@ -9,4 +9,12 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :applies, dependent: :destroy
   has_many :jobs, through: :applies
+
+  after_create_commit :send_welcome_email
+
+  private
+
+  def send_welcome_email
+    SendWelcomeEmailJob.perform_later('User', id)
+  end
 end
