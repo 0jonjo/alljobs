@@ -33,7 +33,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it 'includes the job title in the body' do
-      expect(mail.body.encoded).to match(apply.job.title)
+      expect(mail.text_part.decoded).to include(apply.job.title)
     end
   end
 end
