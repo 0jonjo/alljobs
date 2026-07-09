@@ -13,6 +13,6 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^5.2.5"
+    "webpack-dev-server": "^6.0.0"
   }
 }
