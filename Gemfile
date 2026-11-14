@@ -11,7 +11,7 @@ gem 'jbuilder', '~> 2.11'
 gem 'jwt', '>= 2.8.0'
 gem 'pagy', '~> 9.0'
 gem 'pg', '~> 1.4', '>= 1.4.0'
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 7.2'
 gem 'rails', '~> 8.0'
 gem 'solid_queue'
 
