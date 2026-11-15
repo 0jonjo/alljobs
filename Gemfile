@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.4'
+ruby '~> 3.4.4'
 
 gem 'bootsnap', '>= 1.16.0', require: false
 gem 'devise', '~> 5.0'
@@ -11,7 +11,7 @@ gem 'jbuilder', '~> 2.11'
 gem 'jwt', '>= 2.8.0'
 gem 'pagy', '~> 9.0'
 gem 'pg', '~> 1.4', '>= 1.4.0'
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 8.0', '>= 8.0.3'
 gem 'rails', '~> 8.0'
 gem 'solid_queue'
 
